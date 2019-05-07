@@ -5,16 +5,16 @@
   "main": "index.js",
   "scripts": {
     "start": "http-server -c-1 -o",
-    "start-ssh": "http-server -c-1 -o -S"
+    "start:ssh": "http-server -c-1 -o -S"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/mnemoscene/23-digital-ar.git"
+    "url": "git+https://gitlab.com/mnemoscene/place-based-narratives-web.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://gitlab.com/mnemoscene/23-digital-ar/issues"
+    "url": "https://gitlab.com/mnemoscene/place-based-narratives-web/issues"
   },
-  "homepage": "https://gitlab.com/mnemoscene/23-digital-ar#readme"
+  "homepage": "https://gitlab.com/mnemoscene/place-based-narratives-web#readme"
 }
