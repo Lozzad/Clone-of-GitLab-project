@@ -1,0 +1,97 @@
+<html>
+
+<head>
+    <title>place-based narratives</title>
+	<script src="https://aframe.io/releases/0.9.1/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.js"></script>
+    <script src="https://unpkg.com/xstate@4.5.0/dist/xstate.js"></script>
+    <style>
+    body{
+        margin : 0px;
+        overflow: hidden;
+        font-family: sans-serif;
+    }
+    </style>
+</head>
+
+<body>
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false" renderer="colorManagement: true;">
+        <a-assets>
+            <a-asset-item id="house-model" src="assets/model-house.glb"></a-asset-item>
+        </a-assets>
+
+        <a-marker preset="hiro">
+            <a-light type="ambient" color="#fff" position="0 1 0" intensity="1"></a-light>
+            <a-light type="spot" position="0 2 4" rotation="0 0 0" intensity="2.5"></a-light>
+            <a-entity id="house" animation-mixer="clip: closed" rotation="0 270 0" position="0 0 -0.25" scale="5 5 5" gltf-model="#house-model"></a-entity>      
+        </a-marker>
+
+        <a-entity camera></a-entity>
+    </a-scene>
+
+    <script>
+        var scene = document.querySelector("a-scene");
+        var house = document.querySelector("#house");
+
+        var state = {
+            CLOSED: "closed",
+            OPENING: "opening",
+            OPENED: "opened",
+            CLOSING: "closing"
+        }
+
+        var transition = {
+            OPEN: "open",
+            OPENED: "opened",
+            CLOSE: "close",
+            CLOSED: "closed"
+        }
+
+        var currentState = state.CLOSED;
+
+        var houseMachine = XState.Machine({
+            id: "house",
+            initial: currentState,
+            states: {
+                [state.CLOSED]: { on: { [transition.OPEN]: state.OPENING } },
+                [state.OPENING]: { on: { [transition.OPENED]: state.OPENED } },
+                [state.OPENED]: { on: { [transition.CLOSE]: state.CLOSING } },
+                [state.CLOSING]: { on: { [transition.CLOSED]: state.CLOSED } }
+            }
+        });
+
+        var houseService = XState.interpret(houseMachine).onTransition(state => handleState(state.value)).start();
+
+        function handleState(s) {
+            currentState = s;
+            if (s === state.OPENING || s === state.CLOSING) {
+                house.setAttribute("animation-mixer", "clip: " + s + "; clampWhenFinished: true; loop: once;");
+            }
+        }
+
+        house.addEventListener("animation-finished", function() {
+            switch (currentState) {
+                case state.OPENING:
+                    houseService.send(transition.OPENED);
+                    break;
+                case state.CLOSING:
+                    houseService.send(transition.CLOSED);
+                    break;
+            }
+        });
+
+        scene.addEventListener("click", function() {
+            switch (currentState) {
+                case state.CLOSED:
+                    houseService.send(transition.OPEN);
+                    break;
+                case state.OPENED:
+                    houseService.send(transition.CLOSE);
+                    break;
+            }
+        });
+    </script>
+</body>
+
+</html>
