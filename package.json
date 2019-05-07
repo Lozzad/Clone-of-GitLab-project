@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "http-server -c-1 -o",
-    "start:ssh": "http-server -c-1 -o -S"
+    "start:ssl": "http-server -c-1 -o -S"
   },
   "repository": {
     "type": "git",
