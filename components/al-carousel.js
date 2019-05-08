@@ -36,11 +36,12 @@ AFRAME.registerComponent("al-carousel", {
         this.ringGeometry = new THREE.TorusGeometry(
             this.data.radius,
             this.data.thickness,
-            20,
-            6
+            6,
+            40
         );
         this.ringMaterial = new THREE.MeshBasicMaterial({
-            visible: this.data.ringVisible
+            visible: this.data.ringVisible,
+            color: 0x0000ff
         });
         this.ringMesh = new THREE.Mesh(this.ringGeometry, this.ringMaterial);
     },
@@ -64,7 +65,7 @@ AFRAME.registerComponent("al-carousel", {
     },
 
     addChildren() {
-        var position = this.el.getObject3D("mesh").position;
+        var position = this.el.object3D.position;
 
         var intervalRad = (Math.PI * 2) / this.data.items;
 
@@ -74,12 +75,14 @@ AFRAME.registerComponent("al-carousel", {
                 this.data.radius / 5,
                 this.data.radius / 5
             );
-            var mat = new THREE.MeshBasicMaterial();
+            var mat = new THREE.MeshBasicMaterial({
+                color: 0x00ff00
+            });
             var placeHolder = new THREE.Mesh(geom, mat);
 
             var x = this.data.radius * Math.cos(i * intervalRad) + position.x;
-            var y = this.data.radius * Math.sin(i * intervalRad) + position.y;
-            placeHolder.position.set(x, y, position.z);
+            var y = this.data.radius * Math.sin(i * intervalRad);
+            placeHolder.position.set(x, y, 0);
 
             // Add as a child of the ring mesh
             this.ringMesh.add(placeHolder);
@@ -107,9 +110,10 @@ AFRAME.registerComponent("al-carousel", {
     },
 
     tick() {       
+        var children = this.el.object3DMap.mesh.children;
         // For each item, make them look at the camera's position
         for(var i = 0; i < this.data.items; i++) {
-            this.el.getObject3D("mesh").children[i].object3D.lookAt(this.el.sceneEl.camera.position);
+            children[i].lookAt(this.el.sceneEl.camera.position);
         }
     },
 
