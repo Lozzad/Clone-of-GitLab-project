@@ -1,5 +1,5 @@
 AFRAME.registerComponent("al-carousel", {
-    schema:{
+    schema: {
         items: {type: "number", default: 6},
         radius: {type: "number", default: 1},
         thickness: {type: "number", default: 0.25}
@@ -18,7 +18,7 @@ AFRAME.registerComponent("al-carousel", {
         this.ringMaterial = new THREE.MeshBasicMaterial();
         this.ringMesh = new THREE.Mesh(this.ringGeometry, this.ringMaterial);
 
-        this.el.setObject3D("mesh", ringMesh);
+        this.el.setObject3D("mesh", this.ringMesh);
     },
 
     bindMethods() {
@@ -47,4 +47,4 @@ AFRAME.registerComponent("al-carousel", {
         this.ringGeometry.dispose();
         this.ringMaterial.dispose();
     }
-})
+});
