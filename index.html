@@ -57,25 +57,29 @@ vr-mode-ui="enabled: false"  -->
                 position="0 0 -0.25" 
                 scale="5 5 5"
                 gltf-model="#house-model"
-            ></a-entity>      
-
-            <a-entity
-                rotation="90 0 0"
-                position="0 0.8 -0.25" 
-                id="carousel-controller"
             >
-                <a-entity 
-                    id="carousel"
-                    al-carousel="items: 6; radius: 1; thickness: 0.01; ringVisible: true;"
-                    animation="property: rotation; from: '90 0 0'; to: '90 0 180'; dur: 30000; loop: true; autoplay: true; easing: linear;"
-                ></a-entity>  
-            </a-entity>
+                <a-entity
+                    rotation="90 0 0"
+                    id="carousel-controller"
+                    position="0 0.1 0"
+                    scale="0.01 0.01 0.01"
+                >
+                    <a-entity 
+                        id="carousel"
+                        al-carousel="items: 6; radius: 1; thickness: 0.01; ringVisible: true;"
+                        animation="property: rotation; from: '90 0 0'; to: '90 0 180'; dur: 30000; loop: true; easing: linear; autoplay: true;"
+                    >
+                    </a-entity>  
+                </a-entity>
+            </a-entity>      
+
         <!-- </a-marker> -->
     </a-scene>
 
     <script>
         var scene = document.querySelector("a-scene");
         var house = document.querySelector("#house");
+        var carousel = document.querySelector("#carousel-controller");
 
         var state = {
             CLOSED: "closed",
@@ -113,7 +117,7 @@ vr-mode-ui="enabled: false"  -->
             }
         }
 
-        house.addEventListener("animation-finished", function() {
+        house.addEventListener("click", function() {
             switch (currentState) {
                 case state.OPENING:
                     houseService.send(transition.OPENED);
@@ -128,9 +132,13 @@ vr-mode-ui="enabled: false"  -->
             switch (currentState) {
                 case state.CLOSED:
                     houseService.send(transition.OPEN);
+                    carousel.setAttribute("animation__scale", "property: scale; from: '0.01 0.01 0.01'; to: '1 1 1'; dur: 6000; loop: once; autoplay: true;");
+                    carousel.setAttribute("animation__scale", "property: position; from: '0 0.1 0'; to: '0 0.3 0'; dur: 6000; loop: once; autoplay: true;");
                     break;
                 case state.OPENED:
                     houseService.send(transition.CLOSE);
+                    carousel.setAttribute("animation__scale", "property: scale; from: '1 1 1'; to: '0.01 0.01 0.01'; dur: 6000; loop: once; autoplay: true;");
+                    carousel.setAttribute("animation__scale", "property: position; from: '0 0.3 0'; to: '0 0.1 0'; dur: 6000; loop: once; autoplay: true;");
                     break;
             }
         });
