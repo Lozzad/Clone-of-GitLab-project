@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Viewer</title>
+    <script src="https://aframe.io/releases/0.9.1/aframe.min.js"></script>
+    <script src="https://unpkg.com/three@0.102.1/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://unpkg.com/@universalviewer/aleph@0.0.1-pre.20/dist/aleph.js"></script>
+    <style>
+    html{
+        width: 100%;
+        height: 100%;
+    }
+    body{
+        width: 100%;
+        height: 100%;
+        margin : 0px;
+        padding: 0px;
+        overflow: hidden;
+        font-family: sans-serif;
+    }
+    #menu{
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+    #close{
+        float: right;
+    }
+    </style>
+</head>
+<body>
+
+    <uv-aleph width="100%" height="100%"></uv-aleph>
+
+    <div id="menu"><button id="close">close</button></div>
+
+    <script>
+    
+        var al, close;
+
+        window.addEventListener("DOMContentLoaded", (event) => {
+            al = document.querySelector("uv-aleph");
+            close = document.querySelector("#close");
+
+            window.addEventListener("message", function(event) {
+                al.load(event.data.src);
+            }, false);
+
+            close.addEventListener("click", function() {
+                window.parent.postMessage("close", window.location.href);
+            });
+            // window.addEventListener("hashchange", function() {
+            //     al.load(location.hash.substr(1));
+            // }, false);
+        });
+
+        
+    </script>
+</body>
+</html>
