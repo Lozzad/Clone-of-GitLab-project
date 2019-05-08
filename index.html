@@ -21,6 +21,7 @@
 </head>
 
 <body>
+
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false" renderer="colorManagement: true;">
         <a-assets>
             <a-asset-item id="house-model" src="assets/model-house.glb"></a-asset-item>
@@ -29,10 +30,14 @@
         <a-marker preset="hiro">
             <a-light type="ambient" color="#fff" position="0 1 0" intensity="1"></a-light>
             <a-light type="spot" position="0 2 4" rotation="0 0 0" intensity="2.5"></a-light>
-            <a-entity id="house" animation-mixer="clip: closed" rotation="0 270 0" position="0 0 -0.25" scale="5 5 5" gltf-model="#house-model"></a-entity>      
+            <a-entity id="house" class="collidable" animation-mixer="clip: closed" rotation="0 270 0" position="0 0 -0.25" scale="5 5 5" gltf-model="#house-model"></a-entity>      
         </a-marker>
 
-        <a-entity camera></a-entity>
+        <a-entity 
+            camera
+            cursor="rayOrigin: mouse"
+            raycaster="objects: .collidable;"
+        ></a-entity>
 
         <three-ar-js-aframe/>
     </a-scene>
@@ -40,6 +45,19 @@
     <script>
         var scene = document.querySelector("a-scene");
         var house = document.querySelector("#house");
+
+        house.addEventListener("click", houseClicked);
+
+        function houseClicked() {
+            switch (currentState) {
+                case state.CLOSED:
+                    houseService.send(transition.OPEN);
+                    break;
+                case state.OPENED:
+                    houseService.send(transition.CLOSE);
+                    break;
+            }
+        }
 
         var state = {
             CLOSED: "closed",
@@ -88,16 +106,6 @@
             }
         });
 
-        scene.addEventListener("click", function() {
-            switch (currentState) {
-                case state.CLOSED:
-                    houseService.send(transition.OPEN);
-                    break;
-                case state.OPENED:
-                    houseService.send(transition.CLOSE);
-                    break;
-            }
-        });
     </script>
 </body>
 
