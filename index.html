@@ -3,7 +3,7 @@
 <head>
     <title>place-based narratives</title>
 	<script src="https://aframe.io/releases/0.9.1/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
+    <!-- <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script> -->
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.js"></script>
     <script src="https://unpkg.com/xstate@4.5.0/dist/xstate.js"></script>
 
@@ -16,11 +16,13 @@
     }
     </style>
 </head>
+
+<!-- arjs="sourceType: webcam; debugUIEnabled: false;" 
+vr-mode-ui="enabled: false"  -->
 <body>
     <a-scene 
         embedded 
-        arjs="sourceType: webcam; debugUIEnabled: false;" 
-        vr-mode-ui="enabled: false" 
+
         renderer="colorManagement: true;"
     >
         <a-assets>
@@ -29,9 +31,11 @@
 
         <a-entity 
             camera
+            look-controls
+            wasd-controls
         ></a-entity>
 
-        <a-marker preset="hiro">
+        <!-- <a-marker preset="hiro"> -->
             <a-light 
                 type="ambient" 
                 color="#fff" 
@@ -55,12 +59,18 @@
                 gltf-model="#house-model"
             ></a-entity>      
 
-            <a-entity 
-                position="0 0.8 -0.25" 
+            <a-entity
                 rotation="90 0 0"
-                al-carousel="items: 6; radius: 1; thickness: 0.01; ringVisible: true;"
-            ></a-entity>  
-        </a-marker>
+                position="0 0.8 -0.25" 
+                id="carousel-controller"
+            >
+                <a-entity 
+                    id="carousel"
+                    al-carousel="items: 6; radius: 1; thickness: 0.01; ringVisible: true;"
+                    animation="property: rotation; from: '90 0 0'; to: '90 0 180'; dur: 30000; loop: true; autoplay: true; easing: linear;"
+                ></a-entity>  
+            </a-entity>
+        <!-- </a-marker> -->
     </a-scene>
 
     <script>
