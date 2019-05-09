@@ -12,7 +12,7 @@ const scale_small = "0.01 0.01 0.01";
 const position_small = "0 0.1 0";
 
 const scale_large = "0.3 0.3 0.3";
-const position_large = "0 0.3 0";
+const position_large = "0 0.25 0";
 // =============================================================
 
 // Create the animation strings
