@@ -1,6 +1,5 @@
 AFRAME.registerComponent("al-carousel", {
     schema: {
-        items: {type: "number", default: 6},
         radius: {type: "number", default: 1},
         thickness: {type: "number", default: 0.25},
         ringVisible: {type: "boolean", default: true}
@@ -95,11 +94,12 @@ AFRAME.registerComponent("al-carousel", {
 
     positionChildren() {
         var position = this.el.object3D.position;
+        var children = this.el.children;
+        var numChildren = children.length;
+        var intervalRad = (Math.PI * 2) / numChildren;
 
-        var intervalRad = (Math.PI * 2) / this.data.items;
-
-        for (var i = 0; i < this.data.items; i++) {
-            let child = this.el.children[i];
+        for (var i = 0; i < numChildren; i++) {
+            let child = children[i];
             var x = this.data.radius * Math.cos(i * intervalRad) + position.x;
             var y = this.data.radius * Math.sin(i * intervalRad);
             child.setAttribute("position", "" + x + " " + y + " "  + "0");

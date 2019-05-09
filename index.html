@@ -32,6 +32,11 @@
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false" renderer="colorManagement: true;">
         <a-assets>
             <a-asset-item id="house-model" src="assets/model-house.glb"></a-asset-item>
+            <a-asset-item id="gourd-model" src="assets/gourd.gltf"></a-asset-item>
+            <a-asset-item id="headrest-model" src="assets/headrest.gltf"></a-asset-item>
+            <a-asset-item id="incense-burner-model" src="assets/incense-burner.gltf"></a-asset-item>
+            <a-asset-item id="toy-lion-model" src="assets/toy-lion.gltf"></a-asset-item>
+            <a-asset-item id="woven-bowl-model" src="assets/woven-bowl.gltf"></a-asset-item>
         </a-assets>
 
         <a-entity 
@@ -72,54 +77,46 @@
                 >
                     <a-entity 
                         id="carousel"
-                        al-carousel="items: 6; radius: 0.6; thickness: 0.01; ringVisible: true;"
+                        al-carousel="radius: 0.6; thickness: 0.01; ringVisible: true;"
                         animation="property: rotation; from: '90 0 0'; to: '90 0 180'; dur: 30000; loop: true; easing: linear; autoplay: true;"
                     >
                         <a-entity 
-                            id="house-1" 
+                            id="gourd" 
                             rotation="0 270 0" 
                             scale="1 1 1"
-                            gltf-model="#house-model"
+                            gltf-model="#gourd-model"
                             class="collidable"
                             al-look-to-camera
                         ></a-entity>
                         <a-entity 
-                            id="house-2" 
+                            id="headrest" 
                             rotation="0 270 0" 
                             scale="1 1 1"
-                            gltf-model="#house-model"
+                            gltf-model="#headrest-model"
                             class="collidable"
                             al-look-to-camera
                         ></a-entity>
                         <a-entity 
-                            id="house-3" 
+                            id="incense-burner" 
                             rotation="0 270 0" 
                             scale="1 1 1"
-                            gltf-model="#house-model"
+                            gltf-model="#incense-burner-model"
                             class="collidable"
                             al-look-to-camera
                         ></a-entity>
                         <a-entity 
-                            id="house-4" 
+                            id="toy-lion" 
                             rotation="0 270 0" 
                             scale="1 1 1"
-                            gltf-model="#house-model"
+                            gltf-model="#toy-lion-model"
                             class="collidable"
                             al-look-to-camera
                         ></a-entity>
                         <a-entity 
-                            id="house-5" 
+                            id="woven-bowl" 
                             rotation="0 270 0" 
                             scale="1 1 1"
-                            gltf-model="#house-model"
-                            class="collidable"
-                            al-look-to-camera
-                        ></a-entity>
-                        <a-entity 
-                            id="house-6" 
-                            rotation="0 270 0" 
-                            scale="1 1 1"
-                            gltf-model="#house-model"
+                            gltf-model="#woven-bowl-model"
                             class="collidable"
                             al-look-to-camera
                         ></a-entity>
