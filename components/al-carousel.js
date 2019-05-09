@@ -126,11 +126,11 @@ AFRAME.registerComponent("al-carousel", {
     },
 
     tick() {       
-        var children = this.el.object3DMap.mesh.children;
-        // For each item, make them look at the camera's position
-        for(var i = 0; i < this.data.items; i++) {
-            children[i].lookAt(this.el.sceneEl.camera.position);
-        }
+        // var children = this.el.object3DMap.mesh.children;
+        // // For each item, make them look at the camera's position
+        // for(var i = 0; i < this.data.items; i++) {
+        //     children[i].lookAt(this.el.sceneEl.camera.position);
+        // }
     },
 
     remove() {
