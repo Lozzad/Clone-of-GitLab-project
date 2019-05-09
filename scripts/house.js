@@ -1,8 +1,8 @@
-var scene = document.querySelector("a-scene");
-var house = document.querySelector("#house");
-var carousel = document.querySelector("#carousel-controller");
 
-house.addEventListener("click", houseClicked);
+window.addEventListener("DOMContentLoaded", function() {
+    house = document.querySelector("#house");
+    house.addEventListener("click", houseClicked);
+});
 
 // Define the animation constraints
 // =============================================================
@@ -46,14 +46,10 @@ function houseClicked() {
     if (!overlayVisible) {
         switch (currentHouseState) {
             case houseState.CLOSED:
-                houseService.send(houseTransition.OPEN);
-                carousel.setAttribute("animation__scale", scale_smallToLarge);
-                carousel.setAttribute("animation__position", position_smallToLarge);
+                houseService.send(houseTransition.OPEN);                
                 break;
             case houseState.OPENED:
                 houseService.send(houseTransition.CLOSE);
-                carousel.setAttribute("animation__scale", scale_largeToSmall);
-                carousel.setAttribute("animation__position", position_largeToSmall);
                 break;
         }
     }
@@ -88,10 +84,20 @@ var houseMachine = XState.Machine({
 
 var houseService = XState.interpret(houseMachine).onTransition(state => handleHouseState(state.value)).start();
 
+// todo: merge with render() in index.html
 function handleHouseState(s) {
     currentHouseState = s;
-    if (s === houseState.OPENING || s === houseState.CLOSING) {
-        house.setAttribute("animation-mixer", "clip: " + s + "; clampWhenFinished: true; loop: once;");
+    switch (currentHouseState) {
+        case houseState.OPENING :
+            house.setAttribute("animation-mixer", "clip: opening; clampWhenFinished: true; loop: once;");
+            //carousel.setAttribute("animation__scale", scale_smallToLarge);
+            //carousel.setAttribute("animation__position", position_smallToLarge);
+        break;
+        case houseState.CLOSING :
+            house.setAttribute("animation-mixer", "clip: closing; clampWhenFinished: true; loop: once;");
+            //carousel.setAttribute("animation__scale", scale_largeToSmall);
+            //carousel.setAttribute("animation__position", position_largeToSmall);
+        break;
     }
 }
 

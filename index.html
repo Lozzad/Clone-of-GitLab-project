@@ -35,8 +35,6 @@
             <a-asset-item id="gourd-model" src="assets/gourd.gltf"></a-asset-item>
             <a-asset-item id="headrest-model" src="assets/headrest.gltf"></a-asset-item>
             <a-asset-item id="incense-burner-model" src="assets/incense-burner.gltf"></a-asset-item>
-            <a-asset-item id="toy-lion-model" src="assets/toy-lion.gltf"></a-asset-item><!--
-            <a-asset-item id="woven-bowl-model" src="assets/woven-bowl.gltf"></a-asset-item> -->
         </a-assets>
 
         <a-entity 
@@ -67,9 +65,8 @@
                 position="0 0 -0.25" 
                 scale="5 5 5"
                 gltf-model="#house-model"
-                class="collidable"
             >
-                <a-entity
+                <!-- <a-entity
                     rotation="90 0 0"
                     id="carousel-controller"
                     position="0 0.1 0"
@@ -104,25 +101,8 @@
                             class="collidable"
                             al-look-to-camera
                         ></a-entity>
-                        <a-entity 
-                            id="toy-lion" 
-                            rotation="0 270 0" 
-                            scale=".1 .1 .1"
-                            gltf-model="#toy-lion-model"
-                            class="collidable"
-                            al-look-to-camera
-                        ></a-entity>
-                        <!--
-                        <a-entity 
-                            id="woven-bowl" 
-                            rotation="0 270 0" 
-                            scale="1 1 1"
-                            gltf-model="#woven-bowl-model"
-                            class="collidable"
-                            al-look-to-camera
-                        ></a-entity> -->
                     </a-entity>  
-                </a-entity>
+                </a-entity> -->
             </a-entity>      
         </a-marker>
         
@@ -176,9 +156,16 @@
 
         window.addEventListener("DOMContentLoaded", function() {
             scene = document.querySelector("a-scene");
-            //video = document.querySelector("video");
             overlay = document.querySelector("#overlay");
             viewer = document.querySelector("#viewer");
+            carousel = document.querySelector("#carousel-controller");
+
+            scene.addEventListener("loaded", function() {
+                setTimeout(() => {
+                    house.classList.add("collidable");
+                }, 2000);
+                
+            }, false);
 
             // setTimeout(() => {
             //     viewObjectInOverlay("https://nomad-project.co.uk/objects/collection/toy-lion/_toy-lion/toy-lion.gltf");
