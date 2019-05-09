@@ -35,6 +35,7 @@
             <a-asset-item id="gourd-model" src="assets/gourd.gltf"></a-asset-item>
             <a-asset-item id="headrest-model" src="assets/headrest.gltf"></a-asset-item>
             <a-asset-item id="incense-burner-model" src="assets/incense-burner.gltf"></a-asset-item>
+            <a-asset-item id="speech-bubble" src=""></a-asset-item>
         </a-assets>
 
         <a-entity 
@@ -84,7 +85,15 @@
                             gltf-model="#gourd-model"
                             class="collidable"
                             al-look-to-camera
-                        ></a-entity>
+                        >
+                            <a-entity
+                                id="gourd-text"
+                                geometry="primitive: plane; width: 1; height: 1;"
+                                position="0 0.05 0"
+                                material="src: #speech-bubble"
+                            >
+                            </a-entity>
+                        </a-entity>
                         <a-entity 
                             id="headrest" 
                             rotation="0 270 0" 
@@ -92,7 +101,15 @@
                             gltf-model="#headrest-model"
                             class="collidable"
                             al-look-to-camera
-                        ></a-entity>
+                        >
+                            <a-entity
+                                id="headrest-text"
+                                geometry="primitive: plane; width: 1; height: 1;"
+                                position="0 0.05 0"
+                                material="src: #speech-bubble"
+                            >
+                            </a-entity>
+                        </a-entity>
                         <a-entity 
                             id="incense-burner" 
                             rotation="0 270 0" 
@@ -100,7 +117,15 @@
                             gltf-model="#incense-burner-model"
                             class="collidable"
                             al-look-to-camera
-                        ></a-entity>
+                        >
+                            <a-entity
+                                id="headrest-text"
+                                geometry="primitive: plane; width: 1; height: 1;"
+                                position="0 0.05 0"
+                                material="src: #speech-bubble"
+                            >
+                            </a-entity>
+                        </a-entity>
                     </a-entity>  
                 </a-entity>
             </a-entity>      
