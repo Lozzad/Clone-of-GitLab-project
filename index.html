@@ -149,10 +149,15 @@
         }
 
         function resize() {
-            overlay.width = window.innerWidth;
-            overlay.height = window.innerHeight;
-            viewer.width = window.innerWidth;
-            viewer.height = window.innerHeight;
+            if (overlay) {
+                overlay.width = window.innerWidth;
+                overlay.height = window.innerHeight;
+            }
+            
+            if (viewer) {
+                viewer.width = window.innerWidth;
+                viewer.height = window.innerHeight;
+            }            
         }
 
         window.addEventListener("resize", function() {

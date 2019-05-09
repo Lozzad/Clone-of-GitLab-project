@@ -4,7 +4,7 @@ AFRAME.registerComponent("al-look-to-camera", {
     init() {
       this.tickFunction = AFRAME.utils.throttle(
         this.tickFunction,
-        Constants.minFrameMS,
+        15,
         this
       );
     },
