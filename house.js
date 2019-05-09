@@ -1,5 +1,6 @@
 var scene = document.querySelector("a-scene");
 var house = document.querySelector("#house");
+var carousel = document.querySelector("#carousel-controller");
 
 house.addEventListener("click", houseClicked);
 
