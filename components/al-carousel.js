@@ -13,15 +13,18 @@ AFRAME.registerComponent("al-carousel", {
         this.bindMethods();
         this.addEventListeners();
         this.createRing();
-        this.addChildren();
+        //this.addDebugChildren();
+        this.positionChildren();
     },
 
     bindMethods() {
-        this.removeChildren = this.removeChildren.bind(this);
-        this.addChildren = this.addChildren.bind(this);
+        this.removeDebugChildren = this.removeDebugChildren.bind(this);
+        this.addDebugChildren = this.addDebugChildren.bind(this);
+
         this.addEventListeners = this.addEventListeners.bind(this);
         this.removeEventListeners = this.removeEventListeners.bind(this);
         this.createRing = this.createRing.bind(this);
+        this.positionChildren = this.positionChildren.bind(this);
     },
 
     addEventListeners() {
@@ -46,7 +49,7 @@ AFRAME.registerComponent("al-carousel", {
         this.ringMesh = new THREE.Mesh(this.ringGeometry, this.ringMaterial);
     },
 
-    removeChildren() {
+    removeDebugChildren() {
         // Dispose of each child object
         for(var i = 0; i < this.data.items; i++) {
             var child = this.ringMesh.children[i].object3D;
@@ -64,7 +67,7 @@ AFRAME.registerComponent("al-carousel", {
         this.el.setObject3D("mesh", this.ringMesh);
     },
 
-    addChildren() {
+    addDebugChildren() {
         var position = this.el.object3D.position;
 
         var intervalRad = (Math.PI * 2) / this.data.items;
@@ -90,14 +93,27 @@ AFRAME.registerComponent("al-carousel", {
         this.el.setObject3D("mesh", this.ringMesh);
     },
 
+    positionChildren() {
+        var position = this.el.object3D.position;
+
+        var intervalRad = (Math.PI * 2) / this.data.items;
+
+        for (var i = 0; i < this.data.items; i++) {
+            let child = this.el.children[i];
+            var x = this.data.radius * Math.cos(i * intervalRad) + position.x;
+            var y = this.data.radius * Math.sin(i * intervalRad);
+            child.setAttribute("position", "" + x + " " + y + " "  + "0");
+        }
+    },
+
     update(oldData) {
         // Check & Change the number of tiems
         if (oldData && 
             oldData.items 
             && oldData.items !== this.data.items
         ) {
-            this.removeChildren();
-            this.addChildren();
+            this.removeDebugChildren();
+            this.addDebugChildren();
         }
 
         // Check & Change Visibility of the Ring
@@ -118,7 +134,7 @@ AFRAME.registerComponent("al-carousel", {
     },
 
     remove() {
-        this.removeChildren();
+        //this.removeDebugChildren();
         
         this.el.removeObject3D("mesh");
         this.ringMesh = null;
