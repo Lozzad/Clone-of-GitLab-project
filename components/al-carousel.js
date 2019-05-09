@@ -104,6 +104,18 @@ AFRAME.registerComponent("al-carousel", {
             var y = this.data.radius * Math.sin(i * intervalRad);
             child.setAttribute("position", "" + x + " " + y + " "  + "0");
 
+            let mesh = child.object3DMap.mesh;
+            mesh.geometry.computeBoundingSphere();
+            let rad = mesh.geometry.boundingSphere.radius;
+
+            let geom = new THREE.PlaneGeometry(rad, rad, 1, 1);
+            let mat = new THREE.MeshBasicMaterial({
+                visible: true
+            });
+            let m2 = new THREE.Mesh(geom, mat);
+            mesh.add(m2);
+            child.setObject3D("mesh", mesh);
+
             child.addEventListener("click", () => {
                 this.el.sceneEl.emit("al-carousel-item-clicked", {id: child.id}, false);
                 console.log("Click!: " + child.id);
