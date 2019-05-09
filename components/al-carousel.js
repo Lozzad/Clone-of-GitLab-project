@@ -13,7 +13,7 @@ AFRAME.registerComponent("al-carousel", {
         this.addEventListeners();
         this.createRing();
         //this.addDebugChildren();
-        this.positionChildren();
+        this.setupChildren();
     },
 
     bindMethods() {
@@ -23,7 +23,7 @@ AFRAME.registerComponent("al-carousel", {
         this.addEventListeners = this.addEventListeners.bind(this);
         this.removeEventListeners = this.removeEventListeners.bind(this);
         this.createRing = this.createRing.bind(this);
-        this.positionChildren = this.positionChildren.bind(this);
+        this.setupChildren = this.setupChildren.bind(this);
     },
 
     addEventListeners() {
@@ -92,7 +92,7 @@ AFRAME.registerComponent("al-carousel", {
         this.el.setObject3D("mesh", this.ringMesh);
     },
 
-    positionChildren() {
+    setupChildren() {
         var position = this.el.object3D.position;
         var children = this.el.children;
         var numChildren = children.length;
@@ -103,6 +103,10 @@ AFRAME.registerComponent("al-carousel", {
             var x = this.data.radius * Math.cos(i * intervalRad) + position.x;
             var y = this.data.radius * Math.sin(i * intervalRad);
             child.setAttribute("position", "" + x + " " + y + " "  + "0");
+
+            child.addEventListener("click", () => {
+                this.el.scene.emit("al-carousel-item-clicked", {id: child.id}, false);
+            }, false);
         }
     },
 
