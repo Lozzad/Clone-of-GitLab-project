@@ -31,10 +31,10 @@
 
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false" renderer="colorManagement: true;">
         <a-assets>
-            <a-asset-item id="house-model" src="assets/model-house.glb"></a-asset-item>
-            <a-asset-item id="gourd-model" src="assets/gourd.gltf"></a-asset-item>
-            <a-asset-item id="headrest-model" src="assets/headrest.gltf"></a-asset-item>
-            <a-asset-item id="incense-burner-model" src="assets/incense-burner.gltf"></a-asset-item>
+            <a-asset-item id="house-asset" src="assets/model-house.glb"></a-asset-item>
+            <a-asset-item id="gourd-asset" src="assets/gourd.gltf"></a-asset-item>
+            <a-asset-item id="headrest-asset" src="assets/headrest.gltf"></a-asset-item>
+            <a-asset-item id="incense-burner-asset" src="assets/incense-burner.gltf"></a-asset-item>
             <a-asset-item id="speech-bubble" src=""></a-asset-item>
         </a-assets>
 
@@ -61,11 +61,12 @@
 
             <a-entity 
                 id="house" 
+                class="collidable"
                 animation-mixer="clip: closed" 
                 rotation="0 270 0" 
                 position="0 0 -0.25" 
                 scale="5 5 5"
-                gltf-model="#house-model"
+                gltf-model="#house-asset"
             >
                 <a-entity
                     rotation="90 0 0"
@@ -82,7 +83,7 @@
                             id="gourd" 
                             rotation="0 270 0" 
                             scale=".01 .01 .01"
-                            gltf-model="#gourd-model"
+                            gltf-model="#gourd-asset"
                             class="collidable"
                             al-look-to-camera
                         >
@@ -98,7 +99,7 @@
                             id="headrest" 
                             rotation="0 270 0" 
                             scale=".01 .01 .01"
-                            gltf-model="#headrest-model"
+                            gltf-model="#headrest-asset"
                             class="collidable"
                             al-look-to-camera
                         >
@@ -114,7 +115,7 @@
                             id="incense-burner" 
                             rotation="0 270 0" 
                             scale=".01 .01 .01"
-                            gltf-model="#incense-burner-model"
+                            gltf-model="#incense-burner-asset"
                             class="collidable"
                             al-look-to-camera
                         >
@@ -185,16 +186,14 @@
             viewer = document.querySelector("#viewer");
             carousel = document.querySelector("#carousel-controller");
 
-            scene.addEventListener("loaded", function() {
-                setTimeout(() => {
-                    house.classList.add("collidable");
-                }, 2000);
-                
-            }, false);
+            scene.addEventListener("al-carousel-item-clicked", function(event) {
+                var id = event.detail.id;
+                var asset = document.getElementById(id + "-asset");
 
-            // setTimeout(() => {
-            //     viewObjectInOverlay("https://nomad-project.co.uk/objects/collection/toy-lion/_toy-lion/toy-lion.gltf");
-            // }, 5000);
+                if (asset) {
+                    viewObjectInOverlay(asset.getAttribute("src"));
+                }
+            }, false);
 
             window.addEventListener("message", function(event) {
                 if (event.data === "close") {
