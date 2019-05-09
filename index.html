@@ -3,11 +3,11 @@
 <head>
     <title>place-based narratives</title>
 	<script src="https://aframe.io/releases/0.9.1/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
+    <!-- <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script> -->
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.js"></script>
     <script src="https://unpkg.com/xstate@4.5.0/dist/xstate.js"></script>
 
-    <script src="./al-carousel.js"></script>
+    <script src="./components/al-carousel.js"></script>
     <style>
     body{
         margin : 0px;
@@ -17,35 +17,69 @@
     </style>
 </head>
 
+<!-- arjs="sourceType: webcam; debugUIEnabled: false;" 
+vr-mode-ui="enabled: false"  -->
 <body>
+    <a-scene 
+        embedded 
 
-    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false" renderer="colorManagement: true;">
+        renderer="colorManagement: true;"
+    >
         <a-assets>
             <a-asset-item id="house-model" src="assets/model-house.glb"></a-asset-item>
         </a-assets>
 
-        <a-marker preset="hiro">
-            <a-light type="ambient" color="#fff" position="0 1 0" intensity="1"></a-light>
-            <a-light type="spot" position="0 2 4" rotation="0 0 0" intensity="2.5"></a-light>
-            <a-entity id="house" class="collidable" animation-mixer="clip: closed" rotation="0 270 0" position="0 0 -0.25" scale="5 5 5" gltf-model="#house-model"></a-entity>      
-        </a-marker>
-
         <a-entity 
             camera
-            cursor="rayOrigin: mouse"
-            raycaster="objects: .collidable;"
+            look-controls
+            wasd-controls
         ></a-entity>
 
-        <al-carousel
-            items="6"
-            radius="5"
-            thickness="1"
-        />
+        <!-- <a-marker preset="hiro"> -->
+            <a-light 
+                type="ambient" 
+                color="#fff" 
+                position="0 1 0" 
+                intensity="1"
+            ></a-light>
+
+            <a-light 
+                type="spot" 
+                position="0 2 4" 
+                rotation="0 0 0" 
+                intensity="2.5"
+            ></a-light>
+
+            <a-entity 
+                id="house" 
+                animation-mixer="clip: closed" 
+                rotation="0 270 0" 
+                position="0 0 -0.25" 
+                scale="5 5 5"
+                gltf-model="#house-model"
+            >
+                <a-entity
+                    rotation="90 0 0"
+                    id="carousel-controller"
+                    position="0 0.1 0"
+                    scale="0.01 0.01 0.01"
+                >
+                    <a-entity 
+                        id="carousel"
+                        al-carousel="items: 6; radius: 1; thickness: 0.01; ringVisible: true;"
+                        animation="property: rotation; from: '90 0 0'; to: '90 0 180'; dur: 30000; loop: true; easing: linear; autoplay: true;"
+                    >
+                    </a-entity>  
+                </a-entity>
+            </a-entity>      
+
+        <!-- </a-marker> -->
     </a-scene>
 
     <script>
         var scene = document.querySelector("a-scene");
         var house = document.querySelector("#house");
+        var carousel = document.querySelector("#carousel-controller");
 
         house.addEventListener("click", houseClicked);
 
@@ -96,7 +130,7 @@
             }
         }
 
-        house.addEventListener("animation-finished", function() {
+        house.addEventListener("click", function() {
             switch (currentState) {
                 case state.OPENING:
                     houseService.send(transition.OPENED);
@@ -107,6 +141,58 @@
             }
         });
 
+        // Define the animation constraints
+        // =============================================================
+        const duration = "6000";
+
+        const scale_small = "0.01 0.01 0.01";
+        const position_small = "0 0.1 0";
+
+        const scale_large = "0.3 0.3 0.3";
+        const position_large = "0 0.3 0";
+        // =============================================================
+
+        // Create the animation strings
+        // =============================================================
+        const scale_smallToLarge = "property: scale" +
+        "; from: " + scale_small +
+        "; to: " + scale_large +
+        "; dur: " + duration +
+        "; loop: once; autoplay: true;";
+
+        const scale_largeToSmall = "property: scale" +
+        "; from: " + scale_large +
+        "; to: " + scale_small +
+        "; dur: " + duration +
+        "; loop: once; autoplay: true;";
+
+        const position_smallToLarge = "property: position" +
+        "; from: " + position_small +
+        "; to: " + position_large +
+        "; dur: " + duration +
+        "; loop: once; autoplay: true;";
+
+        const position_largeToSmall = "property: position" +
+        "; from: " + position_large +
+        "; to: " + position_small +
+        "; dur: " + duration +
+        "; loop: once; autoplay: true;";
+        // =============================================================
+
+        scene.addEventListener("click", function() {
+            switch (currentState) {
+                case state.CLOSED:
+                    houseService.send(transition.OPEN);
+                    carousel.setAttribute("animation__scale", scale_smallToLarge);
+                    carousel.setAttribute("animation__position", position_smallToLarge);
+                    break;
+                case state.OPENED:
+                    houseService.send(transition.CLOSE);
+                    carousel.setAttribute("animation__scale", scale_largeToSmall);
+                    carousel.setAttribute("animation__position", position_largeToSmall);
+                    break;
+            }
+        });
     </script>
 </body>
 
