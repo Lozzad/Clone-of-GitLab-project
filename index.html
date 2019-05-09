@@ -39,8 +39,8 @@
 
         <a-entity 
             camera
-            cursor="rayOrigin: mouse"
-            raycaster="objects: .collidable;"
+            cursor="rayOrigin: mouse; fuse: false"
+            raycaster="objects: .collidable"
         ></a-entity>
 
         <a-marker preset="hiro">
@@ -66,7 +66,7 @@
                 scale="5 5 5"
                 gltf-model="#house-model"
             >
-                <!-- <a-entity
+                <a-entity
                     rotation="90 0 0"
                     id="carousel-controller"
                     position="0 0.1 0"
@@ -75,7 +75,7 @@
                     <a-entity 
                         id="carousel"
                         al-carousel="radius: 0.6; thickness: 0.01; ringVisible: true;"
-                        animation="property: rotation; from: '90 0 0'; to: '90 0 180'; dur: 30000; loop: true; easing: linear; autoplay: true;"
+                        animation="property: rotation; from: '90 0 0'; to: '90 0 360'; dur: 30000; loop: true; easing: linear; autoplay: true;"
                     >
                         <a-entity 
                             id="gourd" 
@@ -102,7 +102,7 @@
                             al-look-to-camera
                         ></a-entity>
                     </a-entity>  
-                </a-entity> -->
+                </a-entity>
             </a-entity>      
         </a-marker>
         

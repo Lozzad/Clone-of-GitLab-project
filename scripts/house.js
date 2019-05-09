@@ -90,13 +90,13 @@ function handleHouseState(s) {
     switch (currentHouseState) {
         case houseState.OPENING :
             house.setAttribute("animation-mixer", "clip: opening; clampWhenFinished: true; loop: once;");
-            //carousel.setAttribute("animation__scale", scale_smallToLarge);
-            //carousel.setAttribute("animation__position", position_smallToLarge);
+            carousel.setAttribute("animation__scale", scale_smallToLarge);
+            carousel.setAttribute("animation__position", position_smallToLarge);
         break;
         case houseState.CLOSING :
             house.setAttribute("animation-mixer", "clip: closing; clampWhenFinished: true; loop: once;");
-            //carousel.setAttribute("animation__scale", scale_largeToSmall);
-            //carousel.setAttribute("animation__position", position_largeToSmall);
+            carousel.setAttribute("animation__scale", scale_largeToSmall);
+            carousel.setAttribute("animation__position", position_largeToSmall);
         break;
     }
 }
