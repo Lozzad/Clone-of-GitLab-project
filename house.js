@@ -3,14 +3,56 @@ var house = document.querySelector("#house");
 
 house.addEventListener("click", houseClicked);
 
+// Define the animation constraints
+// =============================================================
+const duration = "6000";
+
+const scale_small = "0.01 0.01 0.01";
+const position_small = "0 0.1 0";
+
+const scale_large = "0.3 0.3 0.3";
+const position_large = "0 0.3 0";
+// =============================================================
+
+// Create the animation strings
+// =============================================================
+const scale_smallToLarge = "property: scale" +
+"; from: " + scale_small +
+"; to: " + scale_large +
+"; dur: " + duration +
+"; loop: once; autoplay: true;";
+
+const scale_largeToSmall = "property: scale" +
+"; from: " + scale_large +
+"; to: " + scale_small +
+"; dur: " + duration +
+"; loop: once; autoplay: true;";
+
+const position_smallToLarge = "property: position" +
+"; from: " + position_small +
+"; to: " + position_large +
+"; dur: " + duration +
+"; loop: once; autoplay: true;";
+
+const position_largeToSmall = "property: position" +
+"; from: " + position_large +
+"; to: " + position_small +
+"; dur: " + duration +
+"; loop: once; autoplay: true;";
+// =============================================================
+
 function houseClicked() {
     if (!overlayVisible) {
         switch (currentHouseState) {
             case houseState.CLOSED:
                 houseService.send(houseTransition.OPEN);
+                carousel.setAttribute("animation__scale", scale_smallToLarge);
+                carousel.setAttribute("animation__position", position_smallToLarge);
                 break;
             case houseState.OPENED:
                 houseService.send(houseTransition.CLOSE);
+                carousel.setAttribute("animation__scale", scale_largeToSmall);
+                carousel.setAttribute("animation__position", position_largeToSmall);
                 break;
         }
     }
