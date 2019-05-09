@@ -14,6 +14,15 @@
         overflow: hidden;
         font-family: sans-serif;
     }
+    .hide {
+        display: none;
+    }
+    #overlay {
+        position: absolute;
+        background: #000;
+        top: 0;
+        right: 0;
+    }
     </style>
 </head>
 
@@ -71,69 +80,69 @@
         
     </a-scene>
 
+    <div id="overlay" class="hide">
+        <iframe id="viewer" src="viewer.html" frameborder="0"></iframe>
+    </div>
+
     <script>
         var scene = document.querySelector("a-scene");
         var house = document.querySelector("#house");
         var carousel = document.querySelector("#carousel-controller");
 
-        house.addEventListener("click", houseClicked);
+        var scene, video, overlay, viewer;
+        var overlayVisible = false;
 
-        function houseClicked() {
-            switch (currentState) {
-                case state.CLOSED:
-                    houseService.send(transition.OPEN);
-                    break;
-                case state.OPENED:
-                    houseService.send(transition.CLOSE);
-                    break;
-            }
+        function viewObjectInOverlay(src) {
+            viewer.contentWindow.postMessage({
+                src: src
+            }, window.location.href);
+
+            overlayVisible = true;
+
+            render();
         }
 
-        var state = {
-            CLOSED: "closed",
-            OPENING: "opening",
-            OPENED: "opened",
-            CLOSING: "closing"
+        function resize() {
+            overlay.width = window.innerWidth;
+            overlay.height = window.innerHeight;
+            viewer.width = window.innerWidth;
+            viewer.height = window.innerHeight;
         }
 
-        var transition = {
-            OPEN: "open",
-            OPENED: "opened",
-            CLOSE: "close",
-            CLOSED: "closed"
-        }
-
-        var currentState = state.CLOSED;
-
-        var houseMachine = XState.Machine({
-            id: "house",
-            initial: currentState,
-            states: {
-                [state.CLOSED]: { on: { [transition.OPEN]: state.OPENING } },
-                [state.OPENING]: { on: { [transition.OPENED]: state.OPENED } },
-                [state.OPENED]: { on: { [transition.CLOSE]: state.CLOSING } },
-                [state.CLOSING]: { on: { [transition.CLOSED]: state.CLOSED } }
-            }
+        window.addEventListener("resize", function() {
+            resize();
         });
 
-        var houseService = XState.interpret(houseMachine).onTransition(state => handleState(state.value)).start();
-
-        function handleState(s) {
-            currentState = s;
-            if (s === state.OPENING || s === state.CLOSING) {
-                house.setAttribute("animation-mixer", "clip: " + s + "; clampWhenFinished: true; loop: once;");
+        function render() {
+            if (overlayVisible) {
+                scene.classList.add("hide");
+                document.querySelector("video").classList.add("hide");
+                overlay.classList.remove("hide");
+            } else {
+                scene.classList.remove("hide");
+                document.querySelector("video").classList.remove("hide");
+                overlay.classList.add("hide");
             }
         }
 
-        house.addEventListener("click", function() {
-            switch (currentState) {
-                case state.OPENING:
-                    houseService.send(transition.OPENED);
-                    break;
-                case state.CLOSING:
-                    houseService.send(transition.CLOSED);
-                    break;
-            }
+        window.addEventListener("DOMContentLoaded", function() {
+            scene = document.querySelector("a-scene");
+            //video = document.querySelector("video");
+            overlay = document.querySelector("#overlay");
+            viewer = document.querySelector("#viewer");
+
+            setTimeout(() => {
+                viewObjectInOverlay("https://nomad-project.co.uk/objects/collection/toy-lion/_toy-lion/toy-lion.gltf");
+            }, 5000);
+
+            window.addEventListener("message", function(event) {
+                if (event.data === "close") {
+                    overlayVisible = false;
+                    render();
+                }
+            }, false);
+
+            resize();
         });
 
         // Define the animation constraints
@@ -189,6 +198,7 @@
             }
         });
     </script>
+    <script src="./house.js"></script>
 </body>
 
 </html>
