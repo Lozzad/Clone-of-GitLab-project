@@ -105,18 +105,18 @@ AFRAME.registerComponent("al-carousel", {
             child.setAttribute("position", "" + x + " " + y + " "  + "0");
 
             child.addEventListener("click", () => {
-                this.el.scene.emit("al-carousel-item-clicked", {id: child.id}, false);
+                this.el.sceneEl.emit("al-carousel-item-clicked", {id: child.id}, false);
                 console.log("Click!: " + child.id);
             }, false);
 
             child.addEventListener("raycaster-intersected", () => {
-                this.el.scene.emit("al-carousel-item-hovered", {id: child.id}, false);
+                this.el.sceneEl.emit("al-carousel-item-hovered", {id: child.id}, false);
                 child.children[0].setAttribute("visible", "true");
                 console.log("Hover!: " + child.id);
             }, false);
 
             child.addEventListener("raycaster-intersected-cleared", () => {
-                this.el.scene.emit("al-carousel-item-hovered-cleared", {id: child.id}, false);
+                this.el.sceneEl.emit("al-carousel-item-hovered-cleared", {id: child.id}, false);
                 child.children[0].setAttribute("visible", "false");
                 console.log("Clear!: " + child.id);
             }, false);
