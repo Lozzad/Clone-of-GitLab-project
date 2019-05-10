@@ -10,7 +10,8 @@
     <script src="./components/al-carousel.js"></script>
     <script src="./components/al-look-to-camera.js"></script>
     <style>
-    body{
+
+    body  {
         margin : 0px;
         padding: 0px;
         width: 100%;
@@ -18,9 +19,50 @@
         overflow: hidden;
         font-family: sans-serif;
     }
+
     .hide {
         display: none;
     }
+
+    #carousel-menu {
+        position: absolute;
+        -ms-box-orient: horizontal;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -moz-flex;
+        display: -webkit-flex;
+        display: flex;
+            
+        -webkit-justify-content: space-around;
+        justify-content: space-around;
+        -webkit-flex-flow: row wrap;
+        flex-flow: row wrap;
+        -webkit-align-items: stretch;
+        align-items: stretch;
+
+        top: 580px;
+        left: 0;
+        width: 100%;
+    }
+
+    #carousel-menu .col.prev {
+        flex-grow: 0;
+    }
+
+    #carousel-menu .col.item {
+        flex-grow: 1;
+        text-align: center;
+    }
+
+    #carousel-menu .col.next {
+        flex-grow: 0;
+    }
+
+    #prev-button {
+        float: left;
+    }
+
     #overlay {
         position: absolute;
         background: #000;
@@ -78,7 +120,7 @@
             
             <a-entity
                 rotation="90 0 0"
-                id="carousel-controller"
+                id="carousel"
                 position="0 1 -0.25"
                 scale="3 3 3"
             >
@@ -135,12 +177,24 @@
         
     </a-scene>
 
+    <div id="carousel-menu">
+        <div class="col prev">
+            <button id="carousel-prev-button">&lt;</button>
+        </div>
+        <div class="col item">
+            <button id="carousel-item-button">Item</button>
+        </div>
+        <div class="col next">
+            <button id="carousel-next-button">&gt;</button>
+        </div>
+    </div>
+
     <div id="overlay" class="hide">
         <iframe id="viewer" src="viewer.html" frameborder="0"></iframe>
     </div>
 
     <script>
-        var scene, video, overlay, viewer;
+        var scene, video, overlay, viewer, prevButton, nextButton, itemButton;
         var overlayVisible = false;
 
         function viewObjectInOverlay(src) {
@@ -183,9 +237,12 @@
 
         window.addEventListener("DOMContentLoaded", function() {
             scene = document.querySelector("a-scene");
-            overlay = document.querySelector("#overlay");
-            viewer = document.querySelector("#viewer");
-            carousel = document.querySelector("#carousel-controller");
+            overlay = document.getElementById("overlay");
+            viewer = document.getElementById("viewer");
+            carousel = document.getElementById("carousel");
+            prevButton = document.getElementById("carousel-prev-button");
+            itemButton = document.getElementById("carousel-item-button");
+            nextButton = document.getElementById("carousel-next-button");
 
             scene.addEventListener("al-carousel-item-clicked", function(event) {
                 var id = event.detail.id;
@@ -201,6 +258,18 @@
                     overlayVisible = false;
                     render();
                 }
+            }, false);
+
+            prevButton.addEventListener("click", function() {
+                console.log("prev");
+            }, false);
+
+            itemButton.addEventListener("click", function() {
+                console.log("item");
+            }, false);
+
+            nextButton.addEventListener("click", function() {
+                console.log("next");
             }, false);
 
             resize();
