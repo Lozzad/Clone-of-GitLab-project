@@ -109,11 +109,14 @@ AFRAME.registerComponent("al-carousel", {
             child.addEventListener("model-loaded", (ev) => {
                 // Get the radius of the child's bounding sphere
                 var model = ev.detail.model;
-                var mesh = model.children[0];
-                mesh.geometry.computeBoundingSphere();
-                var rad = mesh.geometry.boundingSphere.radius;
 
-                var ratio = rad / this.data.itemRadius;
+                // Compute the bounding sphere radius of the scene
+                var box3 = new THREE.Box3();
+                box3.setFromObject(model);
+                var sphere = new THREE.Sphere(1);
+                box3.getBoundingSphere(sphere);
+
+                var ratio = sphere.radius / this.data.itemRadius;
 
                 // If ratio is > 1, this means that the item is larger than the
                 // maximum item radius, thus it must be shrunk to fit
