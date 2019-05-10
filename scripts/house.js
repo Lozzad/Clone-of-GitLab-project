@@ -1,18 +1,18 @@
 
 window.addEventListener("DOMContentLoaded", function() {
     house = document.querySelector("#house");
-    house.addEventListener("click", houseClicked);
+    house.addEventListener("click", houseClicked, true);
 });
 
 // Define the animation constraints
 // =============================================================
 const duration = "6000";
 
-const scale_small = "0.01 0.01 0.01";
-const position_small = "0 0.1 0";
+const scale_small = "1 1 1";
+const position_small = "0 0.4 -0.25";
 
-const scale_large = "0.3 0.3 0.3";
-const position_large = "0 0.25 0";
+const scale_large = "3 3 3";
+const position_large = "0 0.8 -0.25";
 // =============================================================
 
 // Create the animation strings
@@ -42,7 +42,8 @@ const position_largeToSmall = "property: position" +
 "; loop: once; autoplay: true;";
 // =============================================================
 
-function houseClicked() {
+function houseClicked(ev) {
+    ev.preventDefault();
     if (!overlayVisible) {
         switch (currentHouseState) {
             case houseState.CLOSED:

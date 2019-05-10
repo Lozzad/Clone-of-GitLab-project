@@ -12,6 +12,9 @@
     <style>
     body{
         margin : 0px;
+        padding: 0px;
+        width: 100%;
+        height: 100%;
         overflow: hidden;
         font-family: sans-serif;
     }
@@ -31,18 +34,20 @@
 
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false" renderer="colorManagement: true;">
         <a-assets>
-            <a-asset-item id="house-asset" src="assets/model-house.glb"></a-asset-item>
-            <a-asset-item id="letter-asset" src="assets/letter.gltf"></a-asset-item>
-            <a-asset-item id="man-asset" src="assets/man.gltf"></a-asset-item>
-            <a-asset-item id="signpost-asset" src="assets/signpost.gltf"></a-asset-item>
+            <a-asset-item id="house-asset" src="https://place-based-narratives.netlify.com/assets/model-house.glb"></a-asset-item>
+            <a-asset-item id="letter-asset" src="https://place-based-narratives.netlify.com/assets/letter.gltf"></a-asset-item>
+            <a-asset-item id="man-asset" src="https://place-based-narratives.netlify.com/assets/man.gltf"></a-asset-item>
+            <a-asset-item id="signpost-asset" src="https://place-based-narratives.netlify.com/assets/signpost.gltf"></a-asset-item>
             <a-asset-item id="speech-bubble" src=""></a-asset-item>
         </a-assets>
 
-        <a-entity 
-            camera
-            cursor="rayOrigin: mouse; fuse: false"
-            raycaster="objects: .collidable"
-        ></a-entity>
+        <a-entity camera>
+            <a-entity cursor="fuse: false; rayOrigin: mouse"
+                      position="0 0 -1"
+                      geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+                      material="color: black; shader: flat">
+            </a-entity>
+        </a-entity>
 
         <a-marker preset="hiro">
             <a-light 
@@ -68,68 +73,63 @@
                 scale="5 5 5"
                 gltf-model="#house-asset"
             >
-                <a-entity
-                    rotation="90 0 0"
-                    id="carousel-controller"
-                    position="0 0.1 0"
-                    scale="0.01 0.01 0.01"
+            </a-entity>
+            
+            <a-entity
+                rotation="90 0 0"
+                id="carousel-controller"
+                position="0 1 -0.25"
+                scale="3 3 3"
+            >
+                <a-entity 
+                    id="carousel"
+                    al-carousel="radius: 0.6; thickness: 0.01; ringVisible: true; itemRadius: 0.1;"
                 >
+                <!--animation="property: rotation; from: '90 0 0'; to: '90 0 360'; dur: 30000; loop: true; easing: linear; autoplay: true;"-->
                     <a-entity 
-                        id="carousel"
-                        al-carousel="radius: 0.6; thickness: 0.01; ringVisible: true;"
-                        animation="property: rotation; from: '90 0 0'; to: '90 0 360'; dur: 30000; loop: true; easing: linear; autoplay: true;"
+                        id="letter" 
+                        gltf-model="#letter-asset"
+                        al-look-to-camera
                     >
-                        <a-entity 
-                            id="letter" 
-                            rotation="0 0 0" 
-                            scale="1 1 1"
-                            gltf-model="#letter-asset"
-                            class="collidable"
-                            al-look-to-camera
+                        <a-sphere class="collidable" color="yellow" radius="0.1"></a-sphere>
+                        <!-- <a-entity
+                            id="letter-text"
+                            geometry="primitive: plane; width: 1; height: 1;"
+                            position="0 0.05 0"
+                            material="src: #speech-bubble"
                         >
-                            <!-- <a-entity
-                                id="letter-text"
-                                geometry="primitive: plane; width: 1; height: 1;"
-                                position="0 0.05 0"
-                                material="src: #speech-bubble"
-                            >
-                            </a-entity> -->
-                        </a-entity>
-                        <a-entity 
-                            id="man" 
-                            rotation="0 0 0" 
-                            scale="1 1 1"
-                            gltf-model="#man-asset"
-                            class="collidable"
-                            al-look-to-camera
+                        </a-entity> -->
+                    </a-entity>
+                    <a-entity 
+                        id="man" 
+                        gltf-model="#man-asset"
+                        al-look-to-camera
+                    >
+                        <a-sphere class="collidable" color="red" radius="0.1"></a-sphere>
+                        <!-- <a-entity
+                            id="man-text"
+                            geometry="primitive: plane; width: 1; height: 1;"
+                            position="0 0.05 0"
+                            material="src: #speech-bubble"
                         >
-                            <!-- <a-entity
-                                id="man-text"
-                                geometry="primitive: plane; width: 1; height: 1;"
-                                position="0 0.05 0"
-                                material="src: #speech-bubble"
-                            >
-                            </a-entity> -->
-                        </a-entity>
-                        <a-entity 
-                            id="signpost" 
-                            rotation="0 0 0" 
-                            scale="1 1 1"
-                            gltf-model="#signpost-asset"
-                            class="collidable"
-                            al-look-to-camera
+                        </a-entity> -->
+                    </a-entity>
+                    <a-entity 
+                        id="signpost" 
+                        gltf-model="#signpost-asset"                        
+                        al-look-to-camera
+                    >
+                        <a-sphere class="collidable" color="green" radius="0.1"></a-sphere>
+                        <!-- <a-entity
+                            id="signpost-text"
+                            geometry="primitive: plane; width: 1; height: 1;"
+                            position="0 0.05 0"
+                            material="src: #speech-bubble"
                         >
-                            <!-- <a-entity
-                                id="signpost-text"
-                                geometry="primitive: plane; width: 1; height: 1;"
-                                position="0 0.05 0"
-                                material="src: #speech-bubble"
-                            >
-                            </a-entity> -->
-                        </a-entity>
-                    </a-entity>  
-                </a-entity>
-            </a-entity>      
+                        </a-entity> -->
+                    </a-entity>
+                </a-entity>  
+            </a-entity>
         </a-marker>
         
     </a-scene>
