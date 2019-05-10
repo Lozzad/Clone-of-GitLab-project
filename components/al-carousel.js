@@ -51,8 +51,8 @@ AFRAME.registerComponent("al-carousel", {
         + "; to: '0 0 360'"
         + "; dur: 30000; loop: true; easing: linear; autoplay: true";
 
-        this.el.children[this.index].setAttribute("animation__rotate", "");
-        this.el.children[this.newIndex].setAttribute("animation__rotate", animString2);
+        this.el.children[this.index].removeAttribute("animation__rotate");
+        this.el.children[newIndex].setAttribute("animation__rotate", animString2);
 
         this.currentRotation = newRotation;
         this.index = newIndex;

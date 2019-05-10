@@ -41,7 +41,6 @@
         -webkit-align-items: stretch;
         align-items: stretch;
 
-        top: 580px;
         left: 0;
         width: 100%;
     }
@@ -76,20 +75,21 @@
 
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false" renderer="colorManagement: true;">
         <a-assets>
-            <a-asset-item id="house-asset" src="https://place-based-narratives.netlify.com/assets/model-house.glb"></a-asset-item>
-            <a-asset-item id="letter-asset" src="https://place-based-narratives.netlify.com/assets/letter.gltf"></a-asset-item>
-            <a-asset-item id="man-asset" src="https://place-based-narratives.netlify.com/assets/man.gltf"></a-asset-item>
-            <a-asset-item id="signpost-asset" src="https://place-based-narratives.netlify.com/assets/signpost.gltf"></a-asset-item>
+            <a-asset-item id="house-asset" src="https://pbn.netlify.com/assets/model-house.glb"></a-asset-item>
+            <a-asset-item id="letter-asset" src="https://pbn.netlify.com/assets/letter.gltf"></a-asset-item>
+            <a-asset-item id="man-asset" src="https://pbn.netlify.com/assets/man.gltf"></a-asset-item>
+            <a-asset-item id="signpost-asset" src="https://pbn.netlify.com/assets/signpost.gltf"></a-asset-item>
             <a-asset-item id="speech-bubble" src=""></a-asset-item>
         </a-assets>
 
         <a-entity camera>
             <a-entity raycaster="objects: .collidable"
-                      cursor="fuse: false; rayOrigin: mouse">
+                cursor="fuse: false; rayOrigin: mouse">
             </a-entity>
         </a-entity>
 
         <a-marker preset="hiro">
+
             <a-light 
                 type="ambient" 
                 color="#fff" 
@@ -116,13 +116,12 @@
             </a-entity>
             
             <a-entity
-                rotation="90 30 0"
+                rotation="90 0 0"
                 id="carousel"
                 position="0 0.4 -0.25"
                 scale="0.25 0.25 0.25"
             >
                 <a-entity 
-                    id="carousel"
                     al-carousel="radius: 0.6; thickness: 0.01; ringVisible: true; itemRadius: 0.1;"
                 >
                 <!--animation="property: rotation; from: '90 0 0'; to: '90 0 360'; dur: 30000; loop: true; easing: linear; autoplay: true;"-->
@@ -132,13 +131,6 @@
                         al-look-to-camera
                         scale="1 1 1"
                     >
-                        <!-- <a-entity
-                            id="letter-text"
-                            geometry="primitive: plane; width: 1; height: 1;"
-                            position="0 0.05 0"
-                            material="src: #speech-bubble"
-                        >
-                        </a-entity> -->
                     </a-entity>
                     <a-entity 
                         id="man" 
@@ -146,13 +138,6 @@
                         al-look-to-camera
                         scale="1 1 1"
                     >
-                        <!-- <a-entity
-                            id="man-text"
-                            geometry="primitive: plane; width: 1; height: 1;"
-                            position="0 0.05 0"
-                            material="src: #speech-bubble"
-                        >
-                        </a-entity> -->
                     </a-entity>
                     <a-entity 
                         id="signpost" 
@@ -160,13 +145,6 @@
                         al-look-to-camera
                         scale="1 1 1"
                     >
-                        <!-- <a-entity
-                            id="signpost-text"
-                            geometry="primitive: plane; width: 1; height: 1;"
-                            position="0 0.05 0"
-                            material="src: #speech-bubble"
-                        >
-                        </a-entity> -->
                     </a-entity>
                 </a-entity>  
             </a-entity>
@@ -191,7 +169,7 @@
     </div>
 
     <script>
-        var scene, video, overlay, viewer, prevButton, nextButton, itemButton;
+        var scene, video, overlay, viewer, carouselMenu, prevButton, nextButton, itemButton;
         var overlayVisible = false;
 
         function viewObjectInOverlay(src) {
@@ -213,7 +191,11 @@
             if (viewer) {
                 viewer.width = window.innerWidth;
                 viewer.height = window.innerHeight;
-            }            
+            }    
+            
+            if (carouselMenu) {
+                carouselMenu.style.top = window.innerHeight - carouselMenu.clientHeight;
+            }
         }
 
         window.addEventListener("resize", function() {
@@ -237,6 +219,7 @@
             overlay = document.getElementById("overlay");
             viewer = document.getElementById("viewer");
             carousel = document.getElementById("carousel");
+            carouselMenu = document.getElementById("carousel-menu");
             prevButton = document.getElementById("carousel-prev-button");
             itemButton = document.getElementById("carousel-item-button");
             nextButton = document.getElementById("carousel-next-button");
