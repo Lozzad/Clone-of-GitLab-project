@@ -25,7 +25,7 @@ AFRAME.registerComponent("al-carousel", {
 
     // Event.detail.index: number (1 || -1)
     setAnimation(event) {
-        const newIndex = this.index + event.detail.indexl;
+        const newIndex = this.index + event.detail.index;
         const newRotation = newIndex * this.interval;
 
         const animString = "property: rotation" 
