@@ -42,7 +42,8 @@
         </a-assets>
 
         <a-entity camera>
-            <a-entity cursor="fuse: false; rayOrigin: mouse"
+            <a-entity raycaster="objects: .collidable"
+                      cursor="fuse: false; rayOrigin: mouse"
                       position="0 0 -1"
                       geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
                       material="color: black; shader: flat">
