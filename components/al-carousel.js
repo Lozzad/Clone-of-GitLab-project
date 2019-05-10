@@ -25,9 +25,11 @@ AFRAME.registerComponent("al-carousel", {
         this.index = 0;
     }, 
 
-    // Event.detail.index: number (1 || -1)
     setAnimation(event) {
-        var newIndex = this.index + event.detail.index;
+
+        var direction = event.detail.direction;
+
+        var newIndex = this.index + direction;
 
         if (newIndex < 0) {
             newIndex = this.numChildren - 1;
@@ -36,14 +38,23 @@ AFRAME.registerComponent("al-carousel", {
             newIndex = 0;
         }
 
-        const newRotation = newIndex * this.interval;
+        var newRotation;
+
+        // if the direction is positive, and the new index is 0 or greater than the current index, add an interval
+        if (direction === 1 && (newIndex === 0 || newIndex > this.index)) {
+            newRotation = this.currentRotation + this.interval;
+        } else {
+            // if the direction is negative, and the new index is the number of children or less than the current index, subtract an interval
+            newRotation = this.currentRotation - this.interval;
+        }
 
         const animString = "property: rotation" 
-        + "; from: '90 0 "+ this.currentRotation + "'"
-        + "; to: '90 0 "+ newRotation + "'"
-        + "; dur: 1500"
+        + "; from: '90 0 " + this.currentRotation + "'"
+        + "; to: '90 0 " + newRotation + "'"
+        + "; dur: 1000"
         + "; autoplay: true;"
         + "; easing: easeInOutQuad;";
+
         this.el.setAttribute("animation__rotation", animString);
 
         const animString2 = "property: rotation" 

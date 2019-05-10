@@ -75,7 +75,7 @@
 
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false" renderer="colorManagement: true;">
         <a-assets>
-            <a-asset-item id="house-asset" src="https://pbn.netlify.com/assets/model-house.glb"></a-asset-item>
+            <a-asset-item id="house-asset" src="assets/model-house.glb"></a-asset-item>
             <a-asset-item id="letter-asset" src="https://pbn.netlify.com/assets/letter.gltf"></a-asset-item>
             <a-asset-item id="man-asset" src="https://pbn.netlify.com/assets/man.gltf"></a-asset-item>
             <a-asset-item id="signpost-asset" src="https://pbn.netlify.com/assets/signpost.gltf"></a-asset-item>
@@ -242,7 +242,7 @@
 
             prevButton.addEventListener("click", function() {
                 scene.emit("rotate", {
-                    index: -1
+                    direction: -1
                 });
             }, false);
 
@@ -252,7 +252,7 @@
 
             nextButton.addEventListener("click", function() {
                 scene.emit("rotate", {
-                    index: 1
+                    direction: 1
                 });
             }, false);
 
