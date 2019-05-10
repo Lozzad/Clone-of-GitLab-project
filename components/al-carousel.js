@@ -12,20 +12,30 @@ AFRAME.registerComponent("al-carousel", {
     // interval:        number
     // currentRotation: number
     // index:           number
+    // numChildren:     number
     init() {
         this.bindMethods();
         this.addEventListeners();
         this.createRing();
         //this.addDebugChildren();
 
-        this.interval = 360 / this.el.children.length;
+        this.numChildren = this.el.children.length;
+        this.interval = 360 / this.numChildren;
         this.currentRotation = 0;
         this.index = 0;
     }, 
 
     // Event.detail.index: number (1 || -1)
     setAnimation(event) {
-        const newIndex = this.index + event.detail.index;
+        var newIndex = this.index + event.detail.index;
+
+        if (newIndex < 0) {
+            newIndex = this.numChildren - 1;
+        }
+        else if (newIndex > (this.numChildren - 1)) {
+            newIndex = 0;
+        }
+
         const newRotation = newIndex * this.interval;
 
         const animString = "property: rotation" 
@@ -35,6 +45,14 @@ AFRAME.registerComponent("al-carousel", {
         + "; autoplay: true;"
         + "; easing: easeInOutQuad;";
         this.el.setAttribute("animation__rotation", animString);
+
+        const animString2 = "property: rotation" 
+        + "; from: '0 0 0'"
+        + "; to: '0 0 360'"
+        + "; dur: 30000; loop: true; easing: linear; autoplay: true";
+
+        this.el.children[this.index].setAttribute("animation__rotate", "");
+        this.el.children[this.newIndex].setAttribute("animation__rotate", animString2);
 
         this.currentRotation = newRotation;
         this.index = newIndex;
