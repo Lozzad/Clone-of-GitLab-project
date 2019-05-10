@@ -85,10 +85,7 @@
 
         <a-entity camera>
             <a-entity raycaster="objects: .collidable"
-                      cursor="fuse: false; rayOrigin: mouse"
-                      position="0 0 -1"
-                      geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-                      material="color: black; shader: flat">
+                      cursor="fuse: false; rayOrigin: mouse">
             </a-entity>
         </a-entity>
 
@@ -119,10 +116,10 @@
             </a-entity>
             
             <a-entity
-                rotation="90 0 0"
+                rotation="90 30 0"
                 id="carousel"
-                position="0 1 -0.25"
-                scale="3 3 3"
+                position="0 0.4 -0.25"
+                scale="0.25 0.25 0.25"
             >
                 <a-entity 
                     id="carousel"
@@ -133,8 +130,8 @@
                         id="letter" 
                         gltf-model="#letter-asset"
                         al-look-to-camera
+                        scale="1 1 1"
                     >
-                        <a-sphere class="collidable" color="yellow" radius="0.1"></a-sphere>
                         <!-- <a-entity
                             id="letter-text"
                             geometry="primitive: plane; width: 1; height: 1;"
@@ -147,8 +144,8 @@
                         id="man" 
                         gltf-model="#man-asset"
                         al-look-to-camera
+                        scale="1 1 1"
                     >
-                        <a-sphere class="collidable" color="red" radius="0.1"></a-sphere>
                         <!-- <a-entity
                             id="man-text"
                             geometry="primitive: plane; width: 1; height: 1;"
@@ -161,8 +158,8 @@
                         id="signpost" 
                         gltf-model="#signpost-asset"                        
                         al-look-to-camera
+                        scale="1 1 1"
                     >
-                        <a-sphere class="collidable" color="green" radius="0.1"></a-sphere>
                         <!-- <a-entity
                             id="signpost-text"
                             geometry="primitive: plane; width: 1; height: 1;"
@@ -261,7 +258,9 @@
             }, false);
 
             prevButton.addEventListener("click", function() {
-                console.log("prev");
+                scene.emit("rotate", {
+                    index: -1
+                });
             }, false);
 
             itemButton.addEventListener("click", function() {
@@ -269,7 +268,9 @@
             }, false);
 
             nextButton.addEventListener("click", function() {
-                console.log("next");
+                scene.emit("rotate", {
+                    index: 1
+                });
             }, false);
 
             resize();

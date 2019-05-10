@@ -32,7 +32,8 @@ AFRAME.registerComponent("al-carousel", {
         + "; from: '90 0 "+ this.currentRotation + "'"
         + "; to: '90 0 "+ newRotation + "'"
         + "; dur: 1500"
-        + "; autoplay: true;";
+        + "; autoplay: true;"
+        + "; easing: easeInOutQuad;";
         this.el.setAttribute("animation__rotation", animString);
 
         this.currentRotation = newRotation;
@@ -47,10 +48,12 @@ AFRAME.registerComponent("al-carousel", {
         this.removeEventListeners = this.removeEventListeners.bind(this);
         this.createRing = this.createRing.bind(this);
         this.sceneLoaded = this.sceneLoaded.bind(this);
+        this.setAnimation = this.setAnimation.bind(this);
     },
 
     addEventListeners() {
         this.el.sceneEl.addEventListener("loaded", this.sceneLoaded, false);
+        this.el.sceneEl.addEventListener("rotate", this.setAnimation, false);
     },
 
     removeEventListeners() {
@@ -131,35 +134,35 @@ AFRAME.registerComponent("al-carousel", {
             // Add sphere when model is loaded
             child.addEventListener("model-loaded", (ev) => {
                 // Get the radius of the child's bounding sphere
-                var model = ev.detail.model;
+                //var model = ev.detail.model;
 
                 // Compute the bounding sphere radius of the scene
-                var box3 = new THREE.Box3();
-                box3.setFromObject(model);
-                var sphere = new THREE.Sphere(1);
-                box3.getBoundingSphere(sphere);
+                // var box3 = new THREE.Box3();
+                // box3.setFromObject(model);
+                // var sphere = new THREE.Sphere(1);
+                // box3.getBoundingSphere(sphere);
 
-                var ratio = sphere.radius / this.data.itemRadius;
+                // var ratio = sphere.radius / this.data.itemRadius;
 
-                // If ratio is > 1, this means that the item is larger than the
-                // maximum item radius, thus it must be shrunk to fit
-                if (ratio > 1) {
-                    model.scale.set(1 / ratio, 1 / ratio, 1 / ratio);
-                }
+                // // If ratio is > 1, this means that the item is larger than the
+                // // maximum item radius, thus it must be shrunk to fit
+                // if (ratio > 1) {
+                //     model.scale.set(1 / ratio, 1 / ratio, 1 / ratio);
+                // }
 
-                var geom = new THREE.SphereGeometry(this.data.itemRadius);
-                var mat = new THREE.MeshBasicMaterial({
-                    visible: true,
-                    side: THREE.DoubleSide
-                });
-                var sphereMesh = new THREE.Mesh(geom, mat);
+                // var geom = new THREE.SphereGeometry(this.data.itemRadius);
+                // var mat = new THREE.MeshBasicMaterial({
+                //     visible: true,
+                //     side: THREE.DoubleSide
+                // });
+                // var sphereMesh = new THREE.Mesh(geom, mat);
 
-                sphereMesh.add(model);
-                child.setObject3D("mesh", sphereMesh);
+                // sphereMesh.add(model);
+                //child.setObject3D("mesh", model);
             })
 
             child.addEventListener("click", () => {
-                this.el.sceneEl.emit("al-carousel-item-clicked", {id: child.id}, false);
+                //this.el.sceneEl.emit("al-carousel-item-clicked", {id: child.id}, false);
                 console.log("Click!: " + child.id);
             }, false);
 
