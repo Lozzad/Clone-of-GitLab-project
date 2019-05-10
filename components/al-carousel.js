@@ -130,7 +130,7 @@ AFRAME.registerComponent("al-carousel", {
 
                 sphereMesh.add(model);
                 child.setObject3D("mesh", sphereMesh);
-            })
+            });
 
             child.addEventListener("click", () => {
                 this.el.sceneEl.emit("al-carousel-item-clicked", {id: child.id}, false);
@@ -139,13 +139,13 @@ AFRAME.registerComponent("al-carousel", {
 
             child.addEventListener("raycaster-intersected", () => {
                 this.el.sceneEl.emit("al-carousel-item-hovered", {id: child.id}, false);
-                child.children[0].setAttribute("visible", "true");
+                //child.children[0].setAttribute("visible", "true");
                 console.log("Hover!: " + child.id);
             }, false);
 
             child.addEventListener("raycaster-intersected-cleared", () => {
                 this.el.sceneEl.emit("al-carousel-item-hovered-cleared", {id: child.id}, false);
-                child.children[0].setAttribute("visible", "false");
+                //child.children[0].setAttribute("visible", "false");
                 console.log("Clear!: " + child.id);
             }, false);
         }
