@@ -105,33 +105,34 @@ AFRAME.registerComponent("al-carousel", {
             var y = this.data.radius * Math.sin(i * intervalRad);
             child.setAttribute("position", "" + x + " " + y + " "  + "0");
 
-            // Get the radius of the child's bounding sphere
-            var mesh = child.object3D.children[0].children[0];
-            mesh.geometry.computeBoundingSphere();
-            var rad = mesh.geometry.boundingSphere.radius;
+            // Add sphere when model is loaded
+            child.addEventListener("model-loaded", () => {
+                // Get the radius of the child's bounding sphere
+                var mesh = child.object3D.children[0].children[0];
+                mesh.geometry.computeBoundingSphere();
+                var rad = mesh.geometry.boundingSphere.radius;
 
-            var ratio = rad / this.data.itemRadius;
+                var ratio = rad / this.data.itemRadius;
 
-            // If ratio is > 1, this means that the item is larger than the
-            // maximum item radius, thus it must be shrunk to fit
-            if (ratio > 1) {
-                mesh.scale.set(1 / ratio, 1 / ratio, 1 / ratio);
-            }
+                // If ratio is > 1, this means that the item is larger than the
+                // maximum item radius, thus it must be shrunk to fit
+                if (ratio > 1) {
+                    mesh.scale.set(1 / ratio, 1 / ratio, 1 / ratio);
+                }
 
-            var geom = new THREE.SphereGeometry(this.data.itemRadius);
-            var mat = new THREE.MeshBasicMaterial({
-                visible: true,
-                side: THREE.DoubleSide
-            });
-            var sphereMesh = new THREE.Mesh(geom, mat);
+                var geom = new THREE.SphereGeometry(this.data.itemRadius);
+                var mat = new THREE.MeshBasicMaterial({
+                    visible: true,
+                    side: THREE.DoubleSide
+                });
+                var sphereMesh = new THREE.Mesh(geom, mat);
 
 
-            var gltf = child.object3D;
+                var gltf = child.object3D;
 
-            sphereMesh.add(gltf);
-            child.setObject3D("mesh", sphereMesh);
-            // //child.object3D.add(m2);
-            // //child.setObject3D("mesh", mesh);
+                sphereMesh.add(gltf);
+                child.setObject3D("mesh", sphereMesh);
+            })
 
             child.addEventListener("click", () => {
                 this.el.sceneEl.emit("al-carousel-item-clicked", {id: child.id}, false);
