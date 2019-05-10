@@ -106,9 +106,10 @@ AFRAME.registerComponent("al-carousel", {
             child.setAttribute("position", "" + x + " " + y + " "  + "0");
 
             // Add sphere when model is loaded
-            child.addEventListener("model-loaded", () => {
+            child.addEventListener("model-loaded", (ev) => {
                 // Get the radius of the child's bounding sphere
-                var mesh = child.object3D.children[0].children[0];
+                var model = ev.detail.model;
+                var mesh = model.children[0];
                 mesh.geometry.computeBoundingSphere();
                 var rad = mesh.geometry.boundingSphere.radius;
 
@@ -117,7 +118,7 @@ AFRAME.registerComponent("al-carousel", {
                 // If ratio is > 1, this means that the item is larger than the
                 // maximum item radius, thus it must be shrunk to fit
                 if (ratio > 1) {
-                    mesh.scale.set(1 / ratio, 1 / ratio, 1 / ratio);
+                    model.scale.set(1 / ratio, 1 / ratio, 1 / ratio);
                 }
 
                 var geom = new THREE.SphereGeometry(this.data.itemRadius);
@@ -127,10 +128,7 @@ AFRAME.registerComponent("al-carousel", {
                 });
                 var sphereMesh = new THREE.Mesh(geom, mat);
 
-
-                var gltf = child.object3D;
-
-                sphereMesh.add(gltf);
+                sphereMesh.add(model);
                 child.setObject3D("mesh", sphereMesh);
             })
 
