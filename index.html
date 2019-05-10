@@ -75,8 +75,10 @@
 
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false" renderer="colorManagement: true;">
         <a-assets>
-            <a-asset-item id="house-asset" src="assets/model-house.glb"></a-asset-item>
+            <a-asset-item id="house-asset" src="assets/house.gltf"></a-asset-item>
             <a-asset-item id="letter-asset" src="https://pbn.netlify.com/assets/letter.gltf"></a-asset-item>
+            <a-asset-item id="cat1-asset" src="https://pbn.netlify.com/assets/cat1.gltf"></a-asset-item>
+            <a-asset-item id="cat2-asset" src="https://pbn.netlify.com/assets/cat2.gltf"></a-asset-item>
             <a-asset-item id="man-asset" src="https://pbn.netlify.com/assets/man.gltf"></a-asset-item>
             <a-asset-item id="signpost-asset" src="https://pbn.netlify.com/assets/signpost.gltf"></a-asset-item>
             <a-asset-item id="speech-bubble" src=""></a-asset-item>
@@ -129,21 +131,18 @@
                         id="letter" 
                         gltf-model="#letter-asset"
                         al-look-to-camera
-                        scale="1 1 1"
                     >
                     </a-entity>
                     <a-entity 
-                        id="man" 
-                        gltf-model="#man-asset"
+                        id="cat1" 
+                        gltf-model="#cat1-asset"
                         al-look-to-camera
-                        scale="1 1 1"
                     >
                     </a-entity>
                     <a-entity 
-                        id="signpost" 
-                        gltf-model="#signpost-asset"                        
+                        id="cat2" 
+                        gltf-model="#cat2-asset"                        
                         al-look-to-camera
-                        scale="1 1 1"
                     >
                     </a-entity>
                 </a-entity>  
@@ -260,7 +259,6 @@
         });
     </script>
     <script src="./scripts/house.js"></script>
-    <script src="./scripts/carousel-listeners.js"></script>
 </body>
 
 </html>
