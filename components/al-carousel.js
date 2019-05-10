@@ -13,7 +13,6 @@ AFRAME.registerComponent("al-carousel", {
         this.addEventListeners();
         this.createRing();
         //this.addDebugChildren();
-        this.setupChildren();
     },
 
     bindMethods() {
@@ -23,15 +22,15 @@ AFRAME.registerComponent("al-carousel", {
         this.addEventListeners = this.addEventListeners.bind(this);
         this.removeEventListeners = this.removeEventListeners.bind(this);
         this.createRing = this.createRing.bind(this);
-        this.setupChildren = this.setupChildren.bind(this);
+        this.sceneLoaded = this.sceneLoaded.bind(this);
     },
 
     addEventListeners() {
-
+        this.el.sceneEl.addEventListener("loaded", this.sceneLoaded, false);
     },
 
     removeEventListeners() {
-
+        this.el.sceneEl.removeEventListener("loaded", this.sceneLoaded, false);
     },
 
     createRing() {
@@ -92,7 +91,7 @@ AFRAME.registerComponent("al-carousel", {
         this.el.setObject3D("mesh", this.ringMesh);
     },
 
-    setupChildren() {
+    sceneLoaded() {
         var position = this.el.object3D.position;
         var children = this.el.children;
         var numChildren = children.length;
@@ -104,17 +103,18 @@ AFRAME.registerComponent("al-carousel", {
             var y = this.data.radius * Math.sin(i * intervalRad);
             child.setAttribute("position", "" + x + " " + y + " "  + "0");
 
-            let mesh = child.object3DMap.mesh;
+            let mesh = child.object3D.children[0].children[0];
             mesh.geometry.computeBoundingSphere();
             let rad = mesh.geometry.boundingSphere.radius;
 
-            let geom = new THREE.PlaneGeometry(rad, rad, 1, 1);
+            let geom = new THREE.BoxGeometry(0.1, 0.1, 0.1);
             let mat = new THREE.MeshBasicMaterial({
-                visible: true
+                visible: true,
+                side: THREE.DoubleSide
             });
             let m2 = new THREE.Mesh(geom, mat);
-            mesh.add(m2);
-            child.setObject3D("mesh", mesh);
+            //child.object3D.add(m2);
+            //child.setObject3D("mesh", mesh);
 
             child.addEventListener("click", () => {
                 this.el.sceneEl.emit("al-carousel-item-clicked", {id: child.id}, false);

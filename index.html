@@ -32,9 +32,9 @@
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false" renderer="colorManagement: true;">
         <a-assets>
             <a-asset-item id="house-asset" src="assets/model-house.glb"></a-asset-item>
-            <a-asset-item id="gourd-asset" src="assets/gourd.gltf"></a-asset-item>
-            <a-asset-item id="headrest-asset" src="assets/headrest.gltf"></a-asset-item>
-            <a-asset-item id="incense-burner-asset" src="assets/incense-burner.gltf"></a-asset-item>
+            <a-asset-item id="letter-asset" src="assets/letter.gltf"></a-asset-item>
+            <a-asset-item id="man-asset" src="assets/man.gltf"></a-asset-item>
+            <a-asset-item id="signpost-asset" src="assets/signpost.gltf"></a-asset-item>
             <a-asset-item id="speech-bubble" src=""></a-asset-item>
         </a-assets>
 
@@ -80,15 +80,15 @@
                         animation="property: rotation; from: '90 0 0'; to: '90 0 360'; dur: 30000; loop: true; easing: linear; autoplay: true;"
                     >
                         <a-entity 
-                            id="gourd" 
-                            rotation="0 270 0" 
-                            scale=".01 .01 .01"
-                            gltf-model="#gourd-asset"
+                            id="letter" 
+                            rotation="0 0 0" 
+                            scale="1 1 1"
+                            gltf-model="#letter-asset"
                             class="collidable"
                             al-look-to-camera
                         >
                             <a-entity
-                                id="gourd-text"
+                                id="letter-text"
                                 geometry="primitive: plane; width: 1; height: 1;"
                                 position="0 0.05 0"
                                 material="src: #speech-bubble"
@@ -96,15 +96,15 @@
                             </a-entity>
                         </a-entity>
                         <a-entity 
-                            id="headrest" 
-                            rotation="0 270 0" 
-                            scale=".01 .01 .01"
-                            gltf-model="#headrest-asset"
+                            id="man" 
+                            rotation="0 0 0" 
+                            scale="1 1 1"
+                            gltf-model="#man-asset"
                             class="collidable"
                             al-look-to-camera
                         >
                             <a-entity
-                                id="headrest-text"
+                                id="man-text"
                                 geometry="primitive: plane; width: 1; height: 1;"
                                 position="0 0.05 0"
                                 material="src: #speech-bubble"
@@ -112,15 +112,15 @@
                             </a-entity>
                         </a-entity>
                         <a-entity 
-                            id="incense-burner" 
-                            rotation="0 270 0" 
-                            scale=".01 .01 .01"
-                            gltf-model="#incense-burner-asset"
+                            id="signpost" 
+                            rotation="0 0 0" 
+                            scale="1 1 1"
+                            gltf-model="#signpost-asset"
                             class="collidable"
                             al-look-to-camera
                         >
                             <a-entity
-                                id="headrest-text"
+                                id="signpost-text"
                                 geometry="primitive: plane; width: 1; height: 1;"
                                 position="0 0.05 0"
                                 material="src: #speech-bubble"
