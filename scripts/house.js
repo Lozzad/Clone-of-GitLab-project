@@ -6,13 +6,13 @@ window.addEventListener("DOMContentLoaded", function() {
 
 // Define the animation constraints
 // =============================================================
-const duration = "3000";
+const duration = "2000";
 
-const scale_small = "1 1 1";
-const position_small = "0 0.4 -0.25";
+const scale_small = "0.25 0.25 0.25";
+const position_small = "0 0.6 -0.25";
 
 const scale_large = "2 2 2";
-const position_large = "0 0.8 -0.25";
+const position_large = "0 1.2 -0.25";
 // =============================================================
 
 // Create the animation strings
