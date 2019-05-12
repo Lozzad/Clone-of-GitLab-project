@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "clean": "rimraf -rf dist-umd dist-commonjs dist-esmodule dist-var types",
     "start": "http-server -c-1 -o",
-    "start:ssl": "http-server -c-1 -o -S"
+    "start:ssl": "http-server -c-1 -o -S",
+    "build": "npm run clean && webpack"
   },
   "repository": {
     "type": "git",
@@ -16,5 +18,12 @@
   "bugs": {
     "url": "https://gitlab.com/mnemoscene/place-based-narratives-web/issues"
   },
-  "homepage": "https://gitlab.com/mnemoscene/place-based-narratives-web#readme"
+  "homepage": "https://gitlab.com/mnemoscene/place-based-narratives-web#readme",
+  "devDependencies": {
+    "awesome-typescript-loader": "5.2.1",
+    "rimraf": "2.6.2",
+    "typescript": "3.4.5",
+    "webpack-cli": "3.1.2",
+    "webpack": "4.28.3"
+  }
 }

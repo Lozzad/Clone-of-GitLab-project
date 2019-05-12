@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "declaration": false,
+        "forceConsistentCasingInFileNames": true,
+        "lib": [ "es6", "dom" ],
+        "moduleResolution": "node",
+        "noImplicitAny": false,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "outFile": "build/index.js",
+        "strictNullChecks": true,
+        "target": "es5"
+    },
+    "include": [
+        "src/**/*"
+    ]
+}
