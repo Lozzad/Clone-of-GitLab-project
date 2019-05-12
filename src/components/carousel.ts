@@ -1,4 +1,4 @@
-import { BaseComponent } from "../basecomponent";
+import { BaseComponent } from "../BaseComponent";
 
 interface CarouselComponent extends BaseComponent {
     currentRotation: number;

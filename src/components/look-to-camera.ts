@@ -1,4 +1,4 @@
-import { BaseComponent } from "../basecomponent";
+import { BaseComponent } from "../BaseComponent";
 
 export default AFRAME.registerComponent("look-to-camera", {
     schema: {},
