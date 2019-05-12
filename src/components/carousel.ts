@@ -1,4 +1,20 @@
-AFRAME.registerComponent("al-carousel", {
+import { BaseComponent } from "../basecomponent";
+
+interface CarouselComponent extends BaseComponent {
+    currentRotation: number;
+    index: number;
+    interval: number;
+    numChildren: number;
+    ringGeometry: THREE.TorusGeometry | null;
+    ringMaterial: THREE.Material | null;
+    ringMesh: THREE.Mesh | null;
+
+    createRing: () => void;
+    sceneLoaded: () => void;
+    updateAnimation: (ev: CustomEvent) => void;
+}
+
+export default AFRAME.registerComponent("carousel", {
     schema: {
         radius: {type: "number", default: 1},
         thickness: {type: "number", default: 0.25},
@@ -6,28 +22,28 @@ AFRAME.registerComponent("al-carousel", {
         itemRadius: {type: "number", default: 1}
     },
 
-    // ringGeometry:    THREE.TorusGeometry
-    // ringMaterial:    THREE.MeshBasicMaterial
-    // ringMesh:        THREE.Mesh
-    // interval:        number
-    // currentRotation: number
-    // index:           number
-    // numChildren:     number
+    numChildren: 0,
+    interval: 0,
+    currentRotation: 0,
+    index: 0,
+    ringGeometry: null,
+    ringMaterial: null,
+    ringMesh: null,
+
     init() {
+
         this.bindMethods();
         this.addEventListeners();
         this.createRing();
         //this.addDebugChildren();
 
-        this.numChildren = this.el.children.length;
+        this.numChildren = this.el!.children!.length;
         this.interval = 360 / this.numChildren;
-        this.currentRotation = 0;
-        this.index = 0;
     }, 
 
-    setAnimation(event) {
+    updateAnimation(ev: CustomEvent) {
 
-        var direction = event.detail.direction;
+        var direction = ev.detail.direction;
 
         var newIndex = this.index + direction;
 
@@ -55,38 +71,39 @@ AFRAME.registerComponent("al-carousel", {
         + "; autoplay: true;"
         + "; easing: easeInOutQuad;";
 
-        this.el.setAttribute("animation__rotation", animString);
+        this.el!.setAttribute("animation__rotation", animString);
 
         const animString2 = "property: rotation" 
         + "; from: '0 0 0'"
         + "; to: '0 0 360'"
         + "; dur: 30000; loop: true; easing: linear; autoplay: true";
 
-        this.el.children[this.index].removeAttribute("animation__rotate");
-        this.el.children[newIndex].setAttribute("animation__rotate", animString2);
+        this.el!.children[this.index].removeAttribute("animation__rotate");
+        this.el!.children[newIndex].setAttribute("animation__rotate", animString2);
 
         this.currentRotation = newRotation;
         this.index = newIndex;
     },
 
     bindMethods() {
-        this.removeDebugChildren = this.removeDebugChildren.bind(this);
-        this.addDebugChildren = this.addDebugChildren.bind(this);
+        // this.removeDebugChildren = this.removeDebugChildren.bind(this);
+        // this.addDebugChildren = this.addDebugChildren.bind(this);
 
         this.addEventListeners = this.addEventListeners.bind(this);
         this.removeEventListeners = this.removeEventListeners.bind(this);
         this.createRing = this.createRing.bind(this);
         this.sceneLoaded = this.sceneLoaded.bind(this);
-        this.setAnimation = this.setAnimation.bind(this);
+        this.updateAnimation = this.updateAnimation.bind(this);
     },
 
     addEventListeners() {
-        this.el.sceneEl.addEventListener("loaded", this.sceneLoaded, false);
-        this.el.sceneEl.addEventListener("rotate", this.setAnimation, false);
+        this.el!.sceneEl!.addEventListener("loaded", this.sceneLoaded, false);
+        this.el!.sceneEl!.addEventListener("rotate", this.updateAnimation, false);
     },
 
     removeEventListeners() {
-        this.el.sceneEl.removeEventListener("loaded", this.sceneLoaded, false);
+        this.el!.sceneEl!.removeEventListener("loaded", this.sceneLoaded, false);
+        this.el!.sceneEl!.removeEventListener("rotate", this.updateAnimation, false);
     },
 
     createRing() {
@@ -103,53 +120,9 @@ AFRAME.registerComponent("al-carousel", {
         this.ringMesh = new THREE.Mesh(this.ringGeometry, this.ringMaterial);
     },
 
-    removeDebugChildren() {
-        // Dispose of each child object
-        for(var i = 0; i < this.data.items; i++) {
-            var child = this.ringMesh.children[i].object3D;
-
-            var geom = child.geometry;
-            if (geom) {
-                geom.dispose();
-            }
-
-            var mat = child.material;
-            if (mat) {
-                mat.dispose();
-            }
-        }
-        this.el.setObject3D("mesh", this.ringMesh);
-    },
-
-    addDebugChildren() {
-        var position = this.el.object3D.position;
-
-        var intervalRad = (Math.PI * 2) / this.data.items;
-
-        for (var i = 0; i < this.data.items; i++) {
-            var geom = new THREE.BoxGeometry(
-                this.data.radius / 5,
-                this.data.radius / 5,
-                this.data.radius / 5
-            );
-            var mat = new THREE.MeshBasicMaterial({
-                color: 0x00ff00
-            });
-            var placeHolder = new THREE.Mesh(geom, mat);
-
-            var x = this.data.radius * Math.cos(i * intervalRad) + position.x;
-            var y = this.data.radius * Math.sin(i * intervalRad);
-            placeHolder.position.set(x, y, 0);
-
-            // Add as a child of the ring mesh
-            this.ringMesh.add(placeHolder);
-        }
-        this.el.setObject3D("mesh", this.ringMesh);
-    },
-
     sceneLoaded() {
-        var position = this.el.object3D.position;
-        var children = this.el.children;
+        var position = this.el!.object3D.position;
+        var children = this.el!.children;
         var numChildren = children.length;
         var intervalRad = (Math.PI * 2) / numChildren;
 
@@ -161,7 +134,7 @@ AFRAME.registerComponent("al-carousel", {
             child.setAttribute("position", "" + x + " " + y + " "  + "0");
 
             // Add sphere when model is loaded
-            child.addEventListener("model-loaded", (ev) => {
+            child.addEventListener("model-loaded", () => {
                 // Get the radius of the child's bounding sphere
                 //var model = ev.detail.model;
 
@@ -191,18 +164,18 @@ AFRAME.registerComponent("al-carousel", {
             })
 
             child.addEventListener("click", () => {
-                //this.el.sceneEl.emit("al-carousel-item-clicked", {id: child.id}, false);
+                //this.el.sceneEl.emit("carousel-item-clicked", {id: child.id}, false);
                 console.log("Click!: " + child.id);
             }, false);
 
             child.addEventListener("raycaster-intersected", () => {
-                this.el.sceneEl.emit("al-carousel-item-hovered", {id: child.id}, false);
+                this.el!.sceneEl!.emit("carousel-item-hovered", {id: child.id}, false);
                 child.children[0].setAttribute("visible", "true");
                 console.log("Hover!: " + child.id);
             }, false);
 
             child.addEventListener("raycaster-intersected-cleared", () => {
-                this.el.sceneEl.emit("al-carousel-item-hovered-cleared", {id: child.id}, false);
+                this.el!.sceneEl!.emit("carousel-item-hovered-cleared", {id: child.id}, false);
                 child.children[0].setAttribute("visible", "false");
                 console.log("Clear!: " + child.id);
             }, false);
@@ -210,38 +183,23 @@ AFRAME.registerComponent("al-carousel", {
     },
 
     update(oldData) {
-        // Check & Change the number of tiems
-        if (oldData && 
-            oldData.items 
-            && oldData.items !== this.data.items
-        ) {
-            this.removeDebugChildren();
-            this.addDebugChildren();
-        }
-
         // Check & Change Visibility of the Ring
         if (oldData && 
             oldData.ringVisible 
             && oldData.ringVisible !== this.data.ringVisible
         ) {
-            this.ringMesh.material.visible = this.data.ringVisible;
+            (this.ringMesh!.material as THREE.Material).visible = this.data.ringVisible;
         }
     },
 
     tick() {       
-        // var children = this.el.object3DMap.mesh.children;
-        // // For each item, make them look at the camera's position
-        // for(var i = 0; i < this.data.items; i++) {
-        //     children[i].lookAt(this.el.sceneEl.camera.position);
-        // }
+
     },
 
     remove() {
-        //this.removeDebugChildren();
-        
-        this.el.removeObject3D("mesh");
+        this.el!.removeObject3D("mesh");
         this.ringMesh = null;
-        this.ringGeometry.dispose();
-        this.ringMaterial.dispose();
+        this.ringGeometry!.dispose();
+        this.ringMaterial!.dispose();
     }
-});
+} as CarouselComponent);

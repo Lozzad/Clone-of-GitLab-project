@@ -1,114 +1,114 @@
+export class House {
 
-window.addEventListener("DOMContentLoaded", function() {
-    house = document.querySelector("#house");
-    house.addEventListener("click", houseClicked, true);
-});
+    private _el: HTMLElement;
+    private _carousel: HTMLElement;
+    private _state: HouseState = HouseState.CLOSED;
+    private _stateService;
 
-// Define the animation constraints
-// =============================================================
-const duration = "2000";
+    // Define the animation constraints
+    private carouselAnimationDuration: string = "2000";
+    private carouselScaleSmall: string = "0.25 0.25 0.25";
+    private carouselPositionSmall: string = "0 0.6 -0.25";
+    private carouselScaleLarge: string = "2 2 2";
+    private carouselPositionLarge: string = "0 1.2 -0.25";
 
-const scale_small = "0.25 0.25 0.25";
-const position_small = "0 0.6 -0.25";
+    // Create the animation strings
+    private carouselScaleSmallToLargeAnimation: string = "property: scale" +
+    "; from: " + this.carouselScaleSmall +
+    "; to: " + this.carouselScaleLarge +
+    "; dur: " + this.carouselAnimationDuration +
+    "; loop: once; autoplay: true;";
 
-const scale_large = "2 2 2";
-const position_large = "0 1.2 -0.25";
-// =============================================================
+    private carouselScaleLargeToSmallAnimation: string = "property: scale" +
+    "; from: " + this.carouselScaleLarge +
+    "; to: " + this.carouselScaleSmall +
+    "; dur: " + this.carouselAnimationDuration +
+    "; loop: once; autoplay: true;";
 
-// Create the animation strings
-// =============================================================
-const scale_smallToLarge = "property: scale" +
-"; from: " + scale_small +
-"; to: " + scale_large +
-"; dur: " + duration +
-"; loop: once; autoplay: true;";
+    private carouselPositionSmallToLargeAnimation: string = "property: position" +
+    "; from: " + this.carouselPositionSmall +
+    "; to: " + this.carouselPositionLarge +
+    "; dur: " + this.carouselAnimationDuration +
+    "; loop: once; autoplay: true;";
 
-const scale_largeToSmall = "property: scale" +
-"; from: " + scale_large +
-"; to: " + scale_small +
-"; dur: " + duration +
-"; loop: once; autoplay: true;";
+    private carouselPositionLargeToSmallAnimation: string = "property: position" +
+    "; from: " + this.carouselPositionLarge +
+    "; to: " + this.carouselPositionSmall +
+    "; dur: " + this.carouselAnimationDuration +
+    "; loop: once; autoplay: true;";
 
-const position_smallToLarge = "property: position" +
-"; from: " + position_small +
-"; to: " + position_large +
-"; dur: " + duration +
-"; loop: once; autoplay: true;";
+    constructor(el: HTMLElement, carousel: HTMLElement) {
+        this._el = el;
+        this._carousel = carousel;
 
-const position_largeToSmall = "property: position" +
-"; from: " + position_large +
-"; to: " + position_small +
-"; dur: " + duration +
-"; loop: once; autoplay: true;";
-// =============================================================
+        this._el.addEventListener("animation-finished", this.animationFinished.bind(this), false);
+        this._el.addEventListener("click", this.clicked.bind(this), false);
 
-function houseClicked(ev) {
-    ev.preventDefault();
-    if (!overlayVisible) {
-        switch (currentHouseState) {
-            case houseState.CLOSED:
-                houseService.send(houseTransition.OPEN);                
+        const stateMachine = XState.Machine({
+            id: "house",
+            initial: this._state,
+            states: {
+                [HouseState.CLOSED]: { on: { [HouseTransition.OPEN]: HouseState.OPENING } },
+                [HouseState.OPENING]: { on: { [HouseTransition.OPENED]: HouseState.OPENED } },
+                [HouseState.OPENED]: { on: { [HouseTransition.CLOSE]: HouseState.CLOSING } },
+                [HouseState.CLOSING]: { on: { [HouseTransition.CLOSED]: HouseState.CLOSED } }
+            }
+        });
+        
+        this._stateService = XState.interpret(stateMachine).onTransition(state => this.stateChanged(state.value as HouseState)).start();
+    }
+
+    stateChanged(s: HouseState) {
+        this._state = s;
+        switch (this._state) {
+            case HouseState.OPENING :
+                this._el.setAttribute("animation-mixer", "clip: opening; clampWhenFinished: true; loop: once;");
+                this._carousel.setAttribute("animation__scale", this.carouselScaleSmallToLargeAnimation);
+                this._carousel.setAttribute("animation__position", this.carouselPositionSmallToLargeAnimation);
+            break;
+            case HouseState.CLOSING :
+                this._el.setAttribute("animation-mixer", "clip: closing; clampWhenFinished: true; loop: once;");
+                this._carousel.setAttribute("animation__scale", this.carouselScaleLargeToSmallAnimation);
+                this._carousel.setAttribute("animation__position", this.carouselPositionLargeToSmallAnimation);
+            break;
+        }
+    }
+
+    animationFinished() {
+        switch (this._state) {
+            case HouseState.OPENING:
+                this._stateService.send(HouseTransition.OPENED);
                 break;
-            case houseState.OPENED:
-                houseService.send(houseTransition.CLOSE);
+            case HouseState.CLOSING:
+                this._stateService.send(HouseTransition.CLOSED);
                 break;
         }
     }
-}
 
-var houseState = {
-    CLOSED: "closed",
-    OPENING: "opening",
-    OPENED: "opened",
-    CLOSING: "closing"
-}
-
-var houseTransition = {
-    OPEN: "open",
-    OPENED: "opened",
-    CLOSE: "close",
-    CLOSED: "closed"
-}
-
-var currentHouseState = houseState.CLOSED;
-
-var houseMachine = XState.Machine({
-    id: "house",
-    initial: currentHouseState,
-    states: {
-        [houseState.CLOSED]: { on: { [houseTransition.OPEN]: houseState.OPENING } },
-        [houseState.OPENING]: { on: { [houseTransition.OPENED]: houseState.OPENED } },
-        [houseState.OPENED]: { on: { [houseTransition.CLOSE]: houseState.CLOSING } },
-        [houseState.CLOSING]: { on: { [houseTransition.CLOSED]: houseState.CLOSED } }
+    clicked(ev) {
+        ev.preventDefault();
+        switch (this._state) {
+            case HouseState.CLOSED:
+                this._stateService.send(HouseTransition.OPEN);                
+                break;
+            case HouseState.OPENED:
+                this._stateService.send(HouseTransition.CLOSE);
+                break;
+        }
     }
-});
 
-var houseService = XState.interpret(houseMachine).onTransition(state => handleHouseState(state.value)).start();
-
-// todo: merge with render() in index.html
-function handleHouseState(s) {
-    currentHouseState = s;
-    switch (currentHouseState) {
-        case houseState.OPENING :
-            house.setAttribute("animation-mixer", "clip: opening; clampWhenFinished: true; loop: once;");
-            carousel.setAttribute("animation__scale", scale_smallToLarge);
-            carousel.setAttribute("animation__position", position_smallToLarge);
-        break;
-        case houseState.CLOSING :
-            house.setAttribute("animation-mixer", "clip: closing; clampWhenFinished: true; loop: once;");
-            carousel.setAttribute("animation__scale", scale_largeToSmall);
-            carousel.setAttribute("animation__position", position_largeToSmall);
-        break;
-    }
 }
 
-house.addEventListener("animation-finished", function() {
-    switch (currentHouseState) {
-        case houseState.OPENING:
-            houseService.send(houseTransition.OPENED);
-            break;
-        case houseState.CLOSING:
-            houseService.send(houseTransition.CLOSED);
-            break;
-    }
-});
+enum HouseState {
+    CLOSED = "closed",
+    OPENING = "opening",
+    OPENED = "opened",
+    CLOSING = "closing"
+}
+
+enum HouseTransition {
+    OPEN = "open",
+    OPENED = "opened",
+    CLOSE = "close",
+    CLOSED = "closed"
+}

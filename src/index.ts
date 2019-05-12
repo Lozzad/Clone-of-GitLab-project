@@ -1,7 +1,10 @@
+import "./components/carousel";
+import "./components/look-to-camera";
+import { House } from "./house";
 
 (function(){
     
-    var scene, video, overlay, viewer, carousel, carouselMenu, prevButton, nextButton, itemButton;
+    var scene, house, video, overlay, viewer, carousel, carouselMenu, prevButton, nextButton, itemButton;
 
     var state =  {
         overlayVisible: false
@@ -56,13 +59,16 @@
         scene = document.querySelector("a-scene");
         overlay = document.getElementById("overlay");
         viewer = document.getElementById("viewer");
+        house = document.querySelector("#house");
         carousel = document.getElementById("carousel");
         carouselMenu = document.getElementById("carousel-menu");
         prevButton = document.getElementById("carousel-prev-button");
         itemButton = document.getElementById("carousel-item-button");
         nextButton = document.getElementById("carousel-next-button");
 
-        scene.addEventListener("al-carousel-item-clicked", function(event) {
+        new House(house, carousel);
+
+        scene.addEventListener("carousel-item-clicked", function(event) {
             var id = event.detail.id;
             var asset = document.getElementById(id + "-asset");
 
