@@ -153,25 +153,31 @@
           rotation="90 0 0"
           id="carousel"
           position="0 0.6 -0.25"
-          rotation="30"
+          rotation="0 30 0"
           scale="0.25 0.25 0.25"
         >
           <a-entity
             carousel="radius: 0.4; thickness: 0.01; ringVisible: true; itemRadius: 0.1;"
           >
             <!--animation="property: rotation; from: '90 0 0'; to: '90 0 360'; dur: 30000; loop: true; easing: linear; autoplay: true;"-->
-            <a-entity id="letter" gltf-model="#letter-asset" look-to-camera>
+						<a-entity 
+							id="letter" 
+							gltf-model="#letter-asset"
+						>
             </a-entity>
             <a-entity
               id="cat-walking"
               gltf-model="#cat-walking-asset"
-              look-to-camera
             >
             </a-entity>
             <a-entity
               id="cat-sitting"
               gltf-model="#cat-sitting-asset"
-              look-to-camera
+            >
+						</a-entity>
+						<a-entity
+              id="signpost"
+              gltf-model="#signpost-asset"
             >
             </a-entity>
           </a-entity>

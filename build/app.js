@@ -233,7 +233,6 @@ exports.default = AFRAME.registerComponent("carousel", {
             newRotation = this.currentRotation + this.interval;
         }
         else {
-            // if the direction is negative, and the new index is the number of children or less than the current index, subtract an interval
             newRotation = this.currentRotation - this.interval;
         }
         var animString = "property: rotation" +
@@ -249,7 +248,7 @@ exports.default = AFRAME.registerComponent("carousel", {
         this.el.setAttribute("animation__rotation", animString);
         var animString2 = "property: rotation" +
             "; from: '0 0 0'" +
-            "; to: '0 0 360'" +
+            "; to: '0 360 0'" +
             "; dur: 30000; loop: true; easing: linear; autoplay: true";
         this.el.children[this.index].removeAttribute("animation__rotate");
         this.el.children[newIndex].setAttribute("animation__rotate", animString2);
@@ -287,10 +286,10 @@ exports.default = AFRAME.registerComponent("carousel", {
         var children = this.el.children;
         var numChildren = children.length;
         var intervalRad = (Math.PI * 2) / numChildren;
-        for (var i = 0; i < numChildren; i++) {
+        var _loop_1 = function (i) {
             var child = children[i];
-            var x = this.data.radius * Math.cos(i * intervalRad) + position.x;
-            var y = this.data.radius * Math.sin(i * intervalRad);
+            var x = this_1.data.radius * Math.cos(i * intervalRad) + position.x;
+            var y = this_1.data.radius * Math.sin(i * intervalRad);
             child.setAttribute("position", "" + x + " " + y + " " + "0");
             // Add sphere when model is loaded
             child.addEventListener("model-loaded", function () {
@@ -330,6 +329,10 @@ exports.default = AFRAME.registerComponent("carousel", {
                 child.children[0].setAttribute("visible", "false");
                 console.log("Clear!: " + child.id);
             }, false);
+        };
+        var this_1 = this;
+        for (var i = 0; i < numChildren; i++) {
+            _loop_1(i);
         }
     },
     update: function (oldData) {
@@ -429,7 +432,11 @@ exports.default = AFRAME.registerComponent("box", {
                 _a[BoxState.CLOSING] = { on: (_e = {}, _e[BoxTransition.CLOSED] = BoxState.CLOSED, _e) },
                 _a)
         });
-        this.animationStateService = XState.interpret(stateMachine).onTransition(function (state) { return _this.animationStateChanged(state.value); }).start();
+        this.animationStateService = XState.interpret(stateMachine)
+            .onTransition(function (state) {
+            return _this.animationStateChanged(state.value);
+        })
+            .start();
     },
     getAnimationString: function (property, from, to, duration) {
         return "property: " + property + "; from: " + from + "; to: " + to + "; dur: " + duration + "; loop: once; autoplay: true;";
@@ -485,8 +492,7 @@ exports.default = AFRAME.registerComponent("box", {
         this.animationFinished = this.animationFinished.bind(this);
         this.clicked = this.clicked.bind(this);
     },
-    tick: function () {
-    },
+    tick: function () { },
     remove: function () {
         this.el.removeObject3D("mesh");
         this.removeEventListeners();

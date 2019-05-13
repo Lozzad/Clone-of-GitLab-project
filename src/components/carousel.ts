@@ -56,11 +56,10 @@ export default AFRAME.registerComponent("carousel", {
     if (direction === 1 && (newIndex === 0 || newIndex > this.index)) {
       newRotation = this.currentRotation + this.interval;
     } else {
-      // if the direction is negative, and the new index is the number of children or less than the current index, subtract an interval
       newRotation = this.currentRotation - this.interval;
     }
 
-    const animString =
+    const animString: string =
       "property: rotation" +
       "; from: '90 0 " +
       this.currentRotation +
@@ -77,7 +76,7 @@ export default AFRAME.registerComponent("carousel", {
     const animString2 =
       "property: rotation" +
       "; from: '0 0 0'" +
-      "; to: '0 0 360'" +
+      "; to: '0 360 0'" +
       "; dur: 30000; loop: true; easing: linear; autoplay: true";
 
     this.el!.children[this.index].removeAttribute("animation__rotate");
@@ -137,7 +136,7 @@ export default AFRAME.registerComponent("carousel", {
 
       let x = this.data.radius * Math.cos(i * intervalRad) + position.x;
       let y = this.data.radius * Math.sin(i * intervalRad);
-      child.setAttribute("position", "" + x + " " + y + " " + "0");
+      child.setAttribute("position", x + " " + y + " " + "0");
 
       // Add sphere when model is loaded
       child.addEventListener("model-loaded", () => {
