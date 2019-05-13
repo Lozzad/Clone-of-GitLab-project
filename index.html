@@ -72,7 +72,7 @@
 
 <body>
 
-    <a-scene embedded arjs="patternRatio: 0.66; sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false" renderer="colorManagement: true;">
+    <a-scene embedded arjs="patternRatio: 0.6; sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false" renderer="colorManagement: true;">
         <a-assets>
             <a-asset-item id="house-asset" src="assets/house.gltf"></a-asset-item>
             <a-asset-item id="letter-asset" src="https://pbn.netlify.com/assets/letter.gltf"></a-asset-item>
@@ -106,17 +106,6 @@
             ></a-light>
 
             <a-entity 
-                id="house" 
-                class="collidable"
-                animation-mixer="clip: closed" 
-                rotation="0 270 0" 
-                position="0 0 -0.25" 
-                scale="5 5 5"
-                gltf-model="#house-asset"
-            >
-            </a-entity>
-
-            <a-entity 
                 position="-1 0 -0.25" 
                 scale="40 40 40"
                 gltf-model="#man-asset"
@@ -127,6 +116,18 @@
                 position="1 0 -0.25" 
                 scale="40 40 40"
                 gltf-model="#signpost-asset"
+            >
+            </a-entity>
+
+            <a-entity 
+                id="house" 
+                class="collidable"
+                animation-mixer="clip: closed" 
+                rotation="0 270 0" 
+                position="0 0 -0.25" 
+                scale="5 5 5"
+                gltf-model="#house-asset"
+                house="carouselId: carousel"
             >
             </a-entity>
             

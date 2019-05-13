@@ -1,1 +1,499 @@
-!function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t():"function"==typeof define&&define.amd?define("app",[],t):"object"==typeof exports?exports.app=t():e.app=t()}(window,function(){return function(e){var t={};function i(n){if(t[n])return t[n].exports;var o=t[n]={i:n,l:!1,exports:{}};return e[n].call(o.exports,o,o.exports,i),o.l=!0,o.exports}return i.m=e,i.c=t,i.d=function(e,t,n){i.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n})},i.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},i.t=function(e,t){if(1&t&&(e=i(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(i.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var o in e)i.d(n,o,function(t){return e[t]}.bind(null,o));return n},i.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return i.d(t,"a",t),t},i.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},i.p="",i(i.s=0)}([function(e,t,i){e.exports=i(1)},function(e,t,i){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),i(2),i(3);var n=i(4);!function(){var e,t,i,o,s,r,a,l,c,d,u={overlayVisible:!1};function h(){o&&(o.width=window.innerWidth,o.height=window.innerHeight),s&&(s.width=window.innerWidth,s.height=window.innerHeight),a&&(a.style.top=window.innerHeight-a.clientHeight)}function m(){i=document.querySelector("video"),u.overlayVisible?(e.classList.add("hide"),i.classList.add("hide"),o.classList.remove("hide")):(e.classList.remove("hide"),i.classList.remove("hide"),o.classList.add("hide"))}window.addEventListener("resize",function(){h()}),window.addEventListener("DOMContentLoaded",function(){e=document.querySelector("a-scene"),o=document.getElementById("overlay"),s=document.getElementById("viewer"),t=document.querySelector("#house"),r=document.getElementById("carousel"),a=document.getElementById("carousel-menu"),l=document.getElementById("carousel-prev-button"),d=document.getElementById("carousel-item-button"),c=document.getElementById("carousel-next-button"),new n.House(t,r),e.addEventListener("carousel-item-clicked",function(e){var t,i=e.detail.id,n=document.getElementById(i+"-asset");n&&(t=n.getAttribute("src"),s.contentWindow.postMessage({src:t},window.location.href),u.overlayVisible=!0,m())},!1),window.addEventListener("message",function(e){"close"===e.data&&(u.overlayVisible=!1,m())},!1),l.addEventListener("click",function(){e.emit("rotate",{direction:-1})},!1),d.addEventListener("click",function(){console.log("item")},!1),c.addEventListener("click",function(){e.emit("rotate",{direction:1})},!1),h()})}()},function(e,t,i){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=AFRAME.registerComponent("carousel",{schema:{radius:{type:"number",default:1},thickness:{type:"number",default:.25},ringVisible:{type:"boolean",default:!0},itemRadius:{type:"number",default:1}},numChildren:0,interval:0,currentRotation:0,index:0,ringGeometry:null,ringMaterial:null,ringMesh:null,init:function(){this.bindMethods(),this.addEventListeners(),this.createRing(),this.numChildren=this.el.children.length,this.interval=360/this.numChildren},updateAnimation:function(e){var t,i=e.detail.direction,n=this.index+i;n<0?n=this.numChildren-1:n>this.numChildren-1&&(n=0),t=1===i&&(0===n||n>this.index)?this.currentRotation+this.interval:this.currentRotation-this.interval;var o="property: rotation; from: '90 0 "+this.currentRotation+"'; to: '90 0 "+t+"'; dur: 1000; autoplay: true;; easing: easeInOutQuad;";this.el.setAttribute("animation__rotation",o);this.el.children[this.index].removeAttribute("animation__rotate"),this.el.children[n].setAttribute("animation__rotate","property: rotation; from: '0 0 0'; to: '0 0 360'; dur: 30000; loop: true; easing: linear; autoplay: true"),this.currentRotation=t,this.index=n},bindMethods:function(){this.addEventListeners=this.addEventListeners.bind(this),this.removeEventListeners=this.removeEventListeners.bind(this),this.createRing=this.createRing.bind(this),this.sceneLoaded=this.sceneLoaded.bind(this),this.updateAnimation=this.updateAnimation.bind(this)},addEventListeners:function(){this.el.sceneEl.addEventListener("loaded",this.sceneLoaded,!1),this.el.sceneEl.addEventListener("rotate",this.updateAnimation,!1)},removeEventListeners:function(){this.el.sceneEl.removeEventListener("loaded",this.sceneLoaded,!1),this.el.sceneEl.removeEventListener("rotate",this.updateAnimation,!1)},createRing:function(){this.ringGeometry=new THREE.TorusGeometry(this.data.radius,this.data.thickness,6,40),this.ringMaterial=new THREE.MeshBasicMaterial({visible:this.data.ringVisible,color:255}),this.ringMesh=new THREE.Mesh(this.ringGeometry,this.ringMaterial)},sceneLoaded:function(){for(var e=this,t=this.el.object3D.position,i=this.el.children,n=i.length,o=2*Math.PI/n,s=0;s<n;s++){var r=i[s],a=this.data.radius*Math.cos(s*o)+t.x,l=this.data.radius*Math.sin(s*o);r.setAttribute("position",a+" "+l+" 0"),r.addEventListener("model-loaded",function(){}),r.addEventListener("click",function(){console.log("Click!: "+r.id)},!1),r.addEventListener("raycaster-intersected",function(){e.el.sceneEl.emit("carousel-item-hovered",{id:r.id},!1),r.children[0].setAttribute("visible","true"),console.log("Hover!: "+r.id)},!1),r.addEventListener("raycaster-intersected-cleared",function(){e.el.sceneEl.emit("carousel-item-hovered-cleared",{id:r.id},!1),r.children[0].setAttribute("visible","false"),console.log("Clear!: "+r.id)},!1)}},update:function(e){e&&e.ringVisible&&e.ringVisible!==this.data.ringVisible&&(this.ringMesh.material.visible=this.data.ringVisible)},tick:function(){},remove:function(){this.el.removeObject3D("mesh"),this.ringMesh=null,this.ringGeometry.dispose(),this.ringMaterial.dispose()}})},function(e,t,i){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=AFRAME.registerComponent("look-to-camera",{schema:{},init:function(){},addEventListeners:function(){},removeEventListeners:function(){},bindMethods:function(){},tick:function(){this.el.object3D.lookAt(this.el.sceneEl.camera.position)}})},function(e,t,i){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n,o,s=function(){function e(e,t){var i,s,r,a,l,c=this;this._state=n.CLOSED,this.carouselAnimationDuration="2000",this.carouselScaleSmall="0.25 0.25 0.25",this.carouselPositionSmall="0 0.6 -0.25",this.carouselScaleLarge="2 2 2",this.carouselPositionLarge="0 1.2 -0.25",this.carouselScaleSmallToLargeAnimation="property: scale; from: "+this.carouselScaleSmall+"; to: "+this.carouselScaleLarge+"; dur: "+this.carouselAnimationDuration+"; loop: once; autoplay: true;",this.carouselScaleLargeToSmallAnimation="property: scale; from: "+this.carouselScaleLarge+"; to: "+this.carouselScaleSmall+"; dur: "+this.carouselAnimationDuration+"; loop: once; autoplay: true;",this.carouselPositionSmallToLargeAnimation="property: position; from: "+this.carouselPositionSmall+"; to: "+this.carouselPositionLarge+"; dur: "+this.carouselAnimationDuration+"; loop: once; autoplay: true;",this.carouselPositionLargeToSmallAnimation="property: position; from: "+this.carouselPositionLarge+"; to: "+this.carouselPositionSmall+"; dur: "+this.carouselAnimationDuration+"; loop: once; autoplay: true;",this._el=e,this._carousel=t,this._el.addEventListener("animation-finished",this.animationFinished.bind(this),!1),this._el.addEventListener("click",this.clicked.bind(this),!1);var d=XState.Machine({id:"house",initial:this._state,states:(i={},i[n.CLOSED]={on:(s={},s[o.OPEN]=n.OPENING,s)},i[n.OPENING]={on:(r={},r[o.OPENED]=n.OPENED,r)},i[n.OPENED]={on:(a={},a[o.CLOSE]=n.CLOSING,a)},i[n.CLOSING]={on:(l={},l[o.CLOSED]=n.CLOSED,l)},i)});this._stateService=XState.interpret(d).onTransition(function(e){return c.stateChanged(e.value)}).start()}return e.prototype.stateChanged=function(e){switch(this._state=e,this._state){case n.OPENING:this._el.setAttribute("animation-mixer","clip: opening; clampWhenFinished: true; loop: once;"),this._carousel.setAttribute("animation__scale",this.carouselScaleSmallToLargeAnimation),this._carousel.setAttribute("animation__position",this.carouselPositionSmallToLargeAnimation);break;case n.CLOSING:this._el.setAttribute("animation-mixer","clip: closing; clampWhenFinished: true; loop: once;"),this._carousel.setAttribute("animation__scale",this.carouselScaleLargeToSmallAnimation),this._carousel.setAttribute("animation__position",this.carouselPositionLargeToSmallAnimation)}},e.prototype.animationFinished=function(){switch(this._state){case n.OPENING:this._stateService.send(o.OPENED);break;case n.CLOSING:this._stateService.send(o.CLOSED)}},e.prototype.clicked=function(e){switch(e.preventDefault(),this._state){case n.CLOSED:this._stateService.send(o.OPEN);break;case n.OPENED:this._stateService.send(o.CLOSE)}},e}();t.House=s,function(e){e.CLOSED="closed",e.OPENING="opening",e.OPENED="opened",e.CLOSING="closing"}(n||(n={})),function(e){e.OPEN="open",e.OPENED="opened",e.CLOSE="close",e.CLOSED="closed"}(o||(o={}))}])});
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define("app", [], factory);
+	else if(typeof exports === 'object')
+		exports["app"] = factory();
+	else
+		root["app"] = factory();
+})(window, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(1);
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__(2);
+__webpack_require__(3);
+__webpack_require__(4);
+var scene, video, overlay, viewer, carouselMenu, prevButton, nextButton, itemButton;
+var state = {
+    overlayVisible: false
+};
+function viewObjectInOverlay(src) {
+    viewer.contentWindow.postMessage({
+        src: src
+    }, window.location.href);
+    state.overlayVisible = true;
+    render();
+}
+function resize() {
+    if (overlay) {
+        overlay.width = window.innerWidth;
+        overlay.height = window.innerHeight;
+    }
+    if (viewer) {
+        viewer.width = window.innerWidth;
+        viewer.height = window.innerHeight;
+    }
+    if (carouselMenu) {
+        carouselMenu.style.top = window.innerHeight - carouselMenu.clientHeight;
+    }
+}
+window.addEventListener("resize", function () {
+    resize();
+});
+function render() {
+    video = document.querySelector("video");
+    if (state.overlayVisible) {
+        scene.classList.add("hide");
+        video.classList.add("hide");
+        overlay.classList.remove("hide");
+    }
+    else {
+        scene.classList.remove("hide");
+        video.classList.remove("hide");
+        overlay.classList.add("hide");
+    }
+}
+window.addEventListener("DOMContentLoaded", function () {
+    scene = document.querySelector("a-scene");
+    overlay = document.getElementById("overlay");
+    viewer = document.getElementById("viewer");
+    carouselMenu = document.getElementById("carousel-menu");
+    prevButton = document.getElementById("carousel-prev-button");
+    itemButton = document.getElementById("carousel-item-button");
+    nextButton = document.getElementById("carousel-next-button");
+    scene.addEventListener("carousel-item-clicked", function (event) {
+        var id = event.detail.id;
+        var asset = document.getElementById(id + "-asset");
+        if (asset) {
+            viewObjectInOverlay(asset.getAttribute("src"));
+        }
+    }, false);
+    window.addEventListener("message", function (event) {
+        if (event.data === "close") {
+            state.overlayVisible = false;
+            render();
+        }
+    }, false);
+    prevButton.addEventListener("click", function () {
+        scene.emit("rotate", {
+            direction: -1
+        });
+    }, false);
+    itemButton.addEventListener("click", function () {
+        console.log("item");
+    }, false);
+    nextButton.addEventListener("click", function () {
+        scene.emit("rotate", {
+            direction: 1
+        });
+    }, false);
+    resize();
+});
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = AFRAME.registerComponent("carousel", {
+    schema: {
+        radius: { type: "number", default: 1 },
+        thickness: { type: "number", default: 0.25 },
+        ringVisible: { type: "boolean", default: true },
+        itemRadius: { type: "number", default: 1 }
+    },
+    numChildren: 0,
+    interval: 0,
+    currentRotation: 0,
+    index: 0,
+    ringGeometry: null,
+    ringMaterial: null,
+    ringMesh: null,
+    init: function () {
+        this.bindMethods();
+        this.addEventListeners();
+        this.createRing();
+        //this.addDebugChildren();
+        this.numChildren = this.el.children.length;
+        this.interval = 360 / this.numChildren;
+    },
+    updateAnimation: function (ev) {
+        var direction = ev.detail.direction;
+        var newIndex = this.index + direction;
+        if (newIndex < 0) {
+            newIndex = this.numChildren - 1;
+        }
+        else if (newIndex > this.numChildren - 1) {
+            newIndex = 0;
+        }
+        var newRotation;
+        // if the direction is positive, and the new index is 0 or greater than the current index, add an interval
+        if (direction === 1 && (newIndex === 0 || newIndex > this.index)) {
+            newRotation = this.currentRotation + this.interval;
+        }
+        else {
+            // if the direction is negative, and the new index is the number of children or less than the current index, subtract an interval
+            newRotation = this.currentRotation - this.interval;
+        }
+        var animString = "property: rotation" +
+            "; from: '90 0 " +
+            this.currentRotation +
+            "'" +
+            "; to: '90 0 " +
+            newRotation +
+            "'" +
+            "; dur: 1000" +
+            "; autoplay: true;" +
+            "; easing: easeInOutQuad;";
+        this.el.setAttribute("animation__rotation", animString);
+        var animString2 = "property: rotation" +
+            "; from: '0 0 0'" +
+            "; to: '0 0 360'" +
+            "; dur: 30000; loop: true; easing: linear; autoplay: true";
+        this.el.children[this.index].removeAttribute("animation__rotate");
+        this.el.children[newIndex].setAttribute("animation__rotate", animString2);
+        this.currentRotation = newRotation;
+        this.index = newIndex;
+    },
+    bindMethods: function () {
+        // this.removeDebugChildren = this.removeDebugChildren.bind(this);
+        // this.addDebugChildren = this.addDebugChildren.bind(this);
+        this.addEventListeners = this.addEventListeners.bind(this);
+        this.removeEventListeners = this.removeEventListeners.bind(this);
+        this.createRing = this.createRing.bind(this);
+        this.sceneLoaded = this.sceneLoaded.bind(this);
+        this.updateAnimation = this.updateAnimation.bind(this);
+    },
+    addEventListeners: function () {
+        this.el.sceneEl.addEventListener("loaded", this.sceneLoaded, false);
+        this.el.sceneEl.addEventListener("rotate", this.updateAnimation, false);
+    },
+    removeEventListeners: function () {
+        this.el.sceneEl.removeEventListener("loaded", this.sceneLoaded, false);
+        this.el.sceneEl.removeEventListener("rotate", this.updateAnimation, false);
+    },
+    createRing: function () {
+        this.ringGeometry = new THREE.TorusGeometry(this.data.radius, this.data.thickness, 6, 40);
+        this.ringMaterial = new THREE.MeshBasicMaterial({
+            visible: this.data.ringVisible,
+            color: 0x0000ff
+        });
+        this.ringMesh = new THREE.Mesh(this.ringGeometry, this.ringMaterial);
+    },
+    sceneLoaded: function () {
+        var _this = this;
+        var position = this.el.object3D.position;
+        var children = this.el.children;
+        var numChildren = children.length;
+        var intervalRad = (Math.PI * 2) / numChildren;
+        for (var i = 0; i < numChildren; i++) {
+            var child = children[i];
+            var x = this.data.radius * Math.cos(i * intervalRad) + position.x;
+            var y = this.data.radius * Math.sin(i * intervalRad);
+            child.setAttribute("position", "" + x + " " + y + " " + "0");
+            // Add sphere when model is loaded
+            child.addEventListener("model-loaded", function () {
+                // Get the radius of the child's bounding sphere
+                //var model = ev.detail.model;
+                // Compute the bounding sphere radius of the scene
+                // var box3 = new THREE.Box3();
+                // box3.setFromObject(model);
+                // var sphere = new THREE.Sphere(1);
+                // box3.getBoundingSphere(sphere);
+                // var ratio = sphere.radius / this.data.itemRadius;
+                // // If ratio is > 1, this means that the item is larger than the
+                // // maximum item radius, thus it must be shrunk to fit
+                // if (ratio > 1) {
+                //     model.scale.set(1 / ratio, 1 / ratio, 1 / ratio);
+                // }
+                // var geom = new THREE.SphereGeometry(this.data.itemRadius);
+                // var mat = new THREE.MeshBasicMaterial({
+                //     visible: true,
+                //     side: THREE.DoubleSide
+                // });
+                // var sphereMesh = new THREE.Mesh(geom, mat);
+                // sphereMesh.add(model);
+                //child.setObject3D("mesh", model);
+            });
+            child.addEventListener("click", function () {
+                //this.el.sceneEl.emit("carousel-item-clicked", {id: child.id}, false);
+                console.log("Click!: " + child.id);
+            }, false);
+            child.addEventListener("raycaster-intersected", function () {
+                _this.el.sceneEl.emit("carousel-item-hovered", { id: child.id }, false);
+                child.children[0].setAttribute("visible", "true");
+                console.log("Hover!: " + child.id);
+            }, false);
+            child.addEventListener("raycaster-intersected-cleared", function () {
+                _this.el.sceneEl.emit("carousel-item-hovered-cleared", { id: child.id }, false);
+                child.children[0].setAttribute("visible", "false");
+                console.log("Clear!: " + child.id);
+            }, false);
+        }
+    },
+    update: function (oldData) {
+        // Check & Change Visibility of the Ring
+        if (oldData &&
+            oldData.ringVisible &&
+            oldData.ringVisible !== this.data.ringVisible) {
+            this.ringMesh
+                .material.visible = this.data.ringVisible;
+        }
+    },
+    tick: function () { },
+    remove: function () {
+        this.el.removeObject3D("mesh");
+        this.removeEventListeners();
+        this.ringMesh = null;
+        this.ringGeometry.dispose();
+        this.ringMaterial.dispose();
+    }
+});
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = AFRAME.registerComponent("look-to-camera", {
+    schema: {},
+    init: function () { },
+    addEventListeners: function () { },
+    removeEventListeners: function () { },
+    bindMethods: function () { },
+    tick: function () {
+        this.el.object3D.lookAt(this.el.sceneEl.camera.position);
+    }
+});
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var HouseState;
+(function (HouseState) {
+    HouseState["CLOSED"] = "closed";
+    HouseState["OPENING"] = "opening";
+    HouseState["OPENED"] = "opened";
+    HouseState["CLOSING"] = "closing";
+})(HouseState || (HouseState = {}));
+var HouseTransition;
+(function (HouseTransition) {
+    HouseTransition["OPEN"] = "open";
+    HouseTransition["OPENED"] = "opened";
+    HouseTransition["CLOSE"] = "close";
+    HouseTransition["CLOSED"] = "closed";
+})(HouseTransition || (HouseTransition = {}));
+exports.default = AFRAME.registerComponent("house", {
+    schema: {
+        carouselId: { type: "string" },
+        carouselAnimationDuration: { type: "string", default: "2000" },
+        carouselScaleSmall: { type: "string", default: "0.25 0.25 0.25" },
+        carouselPositionSmall: { type: "string", default: "0 0.6 -0.25" },
+        carouselScaleLarge: { type: "string", default: "2 2 2" },
+        carouselPositionLarge: { type: "string", default: "0 1.2 -0.25" }
+    },
+    carousel: null,
+    animationStateService: null,
+    carouselPositionLargeToSmallAnimation: null,
+    carouselPositionSmallToLargeAnimation: null,
+    carouselScaleLargeToSmallAnimation: null,
+    carouselScaleSmallToLargeAnimation: null,
+    state: null,
+    init: function () {
+        var _this = this;
+        var _a, _b, _c, _d, _e;
+        this.bindMethods();
+        this.addEventListeners();
+        this.carousel = document.getElementById(this.data.carouselId);
+        this.state = HouseState.CLOSED;
+        this.carouselScaleSmallToLargeAnimation = this.getAnimationString("scale", this.data.carouselScaleSmall, this.data.carouselScaleLarge, this.data.carouselAnimationDuration);
+        this.carouselScaleLargeToSmallAnimation = this.getAnimationString("scale", this.data.carouselScaleLarge, this.data.carouselScaleSmall, this.data.carouselAnimationDuration);
+        this.carouselPositionSmallToLargeAnimation = this.getAnimationString("position", this.data.carouselPositionSmall, this.data.carouselPositionLarge, this.data.carouselAnimationDuration);
+        this.carouselPositionLargeToSmallAnimation = this.getAnimationString("position", this.data.carouselPositionLarge, this.data.carouselPositionSmall, this.data.carouselAnimationDuration);
+        var stateMachine = XState.Machine({
+            id: "house",
+            initial: this.state,
+            states: (_a = {},
+                _a[HouseState.CLOSED] = { on: (_b = {}, _b[HouseTransition.OPEN] = HouseState.OPENING, _b) },
+                _a[HouseState.OPENING] = { on: (_c = {}, _c[HouseTransition.OPENED] = HouseState.OPENED, _c) },
+                _a[HouseState.OPENED] = { on: (_d = {}, _d[HouseTransition.CLOSE] = HouseState.CLOSING, _d) },
+                _a[HouseState.CLOSING] = { on: (_e = {}, _e[HouseTransition.CLOSED] = HouseState.CLOSED, _e) },
+                _a)
+        });
+        this.animationStateService = XState.interpret(stateMachine).onTransition(function (state) { return _this.animationStateChanged(state.value); }).start();
+    },
+    getAnimationString: function (property, from, to, duration) {
+        return "property: " + property + "; from: " + from + "; to: " + to + "; dur: " + duration + "; loop: once; autoplay: true;";
+    },
+    animationStateChanged: function (s) {
+        this.state = s;
+        switch (this.state) {
+            case HouseState.OPENING:
+                this.el.setAttribute("animation-mixer", "clip: opening; clampWhenFinished: true; loop: once;");
+                this.carousel.setAttribute("animation__scale", this.carouselScaleSmallToLargeAnimation);
+                this.carousel.setAttribute("animation__position", this.carouselPositionSmallToLargeAnimation);
+                break;
+            case HouseState.CLOSING:
+                this.el.setAttribute("animation-mixer", "clip: closing; clampWhenFinished: true; loop: once;");
+                this.carousel.setAttribute("animation__scale", this.carouselScaleLargeToSmallAnimation);
+                this.carousel.setAttribute("animation__position", this.carouselPositionLargeToSmallAnimation);
+                break;
+        }
+    },
+    animationFinished: function () {
+        switch (this.state) {
+            case HouseState.OPENING:
+                this.animationStateService.send(HouseTransition.OPENED);
+                break;
+            case HouseState.CLOSING:
+                this.animationStateService.send(HouseTransition.CLOSED);
+                break;
+        }
+    },
+    clicked: function (ev) {
+        ev.preventDefault();
+        switch (this.state) {
+            case HouseState.CLOSED:
+                this.animationStateService.send(HouseTransition.OPEN);
+                break;
+            case HouseState.OPENED:
+                this.animationStateService.send(HouseTransition.CLOSE);
+                break;
+        }
+    },
+    addEventListeners: function () {
+        this.el.addEventListener("animation-finished", this.animationFinished, false);
+        this.el.addEventListener("click", this.clicked, false);
+    },
+    removeEventListeners: function () {
+        this.el.removeEventListener("animation-finished", this.animationFinished, false);
+        this.el.removeEventListener("click", this.clicked, false);
+    },
+    bindMethods: function () {
+        this.addEventListeners = this.addEventListeners.bind(this);
+        this.removeEventListeners = this.removeEventListeners.bind(this);
+        this.animationStateChanged = this.animationStateChanged.bind(this);
+        this.animationFinished = this.animationFinished.bind(this);
+        this.clicked = this.clicked.bind(this);
+    },
+    tick: function () {
+    },
+    remove: function () {
+        this.el.removeObject3D("mesh");
+        this.removeEventListeners();
+    }
+});
+
+
+/***/ })
+/******/ ]);
+});

@@ -28,7 +28,7 @@ const config = {
     // source when the user debugs the application
     //devtool: 'source-map',
     optimization: {
-        minimize: true
+        minimize: false
     },
     // Webpack doesn't understand TypeScript files and a loader is needed.
     module: {
