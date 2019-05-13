@@ -113,15 +113,19 @@ __webpack_require__(3);
 __webpack_require__(4);
 var scene, video, overlay, viewer, carouselMenu, prevButton, nextButton, itemButton;
 var state = {
-    overlayVisible: false
+    selectedItem: null,
+    boxOpened: false
 };
-function viewObjectInOverlay(src) {
-    viewer.contentWindow.postMessage({
-        src: src
-    }, window.location.href);
-    state.overlayVisible = true;
-    render();
-}
+// function viewObjectInOverlay(src) {
+//   viewer.contentWindow.postMessage(
+//     {
+//       src: src
+//     },
+//     window.location.href
+//   );
+//   state.selectedItem = src;
+//   render();
+// }
 function resize() {
     if (overlay) {
         overlay.width = window.innerWidth;
@@ -140,7 +144,7 @@ window.addEventListener("resize", function () {
 });
 function render() {
     video = document.querySelector("video");
-    if (state.overlayVisible) {
+    if (state.selectedItem) {
         scene.classList.add("hide");
         video.classList.add("hide");
         overlay.classList.remove("hide");
@@ -149,6 +153,12 @@ function render() {
         scene.classList.remove("hide");
         video.classList.remove("hide");
         overlay.classList.add("hide");
+    }
+    if (state.boxOpened) {
+        carouselMenu.classList.remove("hide");
+    }
+    else {
+        carouselMenu.classList.add("hide");
     }
 }
 window.addEventListener("DOMContentLoaded", function () {
@@ -159,16 +169,30 @@ window.addEventListener("DOMContentLoaded", function () {
     prevButton = document.getElementById("carousel-prev-button");
     itemButton = document.getElementById("carousel-item-button");
     nextButton = document.getElementById("carousel-next-button");
-    scene.addEventListener("carousel-item-clicked", function (event) {
-        var id = event.detail.id;
-        var asset = document.getElementById(id + "-asset");
-        if (asset) {
-            viewObjectInOverlay(asset.getAttribute("src"));
-        }
+    scene.addEventListener("loaded", function () {
+    });
+    scene.addEventListener("box-opened", function () {
+        state.boxOpened = true;
+        render();
     }, false);
+    scene.addEventListener("box-closing", function () {
+        state.boxOpened = false;
+        render();
+    }, false);
+    // scene.addEventListener(
+    //   "carousel-item-clicked",
+    //   function(event) {
+    //     var id = event.detail.id;
+    //     var asset = document.getElementById(id + "-asset");
+    //     if (asset) {
+    //       viewObjectInOverlay(asset.getAttribute("src"));
+    //     }
+    //   },
+    //   false
+    // );
     window.addEventListener("message", function (event) {
         if (event.data === "close") {
-            state.overlayVisible = false;
+            state.selectedItem = null;
             render();
         }
     }, false);
@@ -235,23 +259,11 @@ exports.default = AFRAME.registerComponent("carousel", {
         else {
             newRotation = this.currentRotation - this.interval;
         }
-        var animString = "property: rotation" +
-            "; from: '90 0 " +
-            this.currentRotation +
-            "'" +
-            "; to: '90 0 " +
-            newRotation +
-            "'" +
-            "; dur: 1000" +
-            "; autoplay: true;" +
-            "; easing: easeInOutQuad;";
-        this.el.setAttribute("animation__rotation", animString);
-        var animString2 = "property: rotation" +
-            "; from: '0 0 0'" +
-            "; to: '0 360 0'" +
-            "; dur: 30000; loop: true; easing: linear; autoplay: true";
+        var rotateCarouselAnim = "property: rotation; from: '90 0 " + this.currentRotation + "'; to: '90 0 " + newRotation + "'; dur: 1000; autoplay: true; easing: easeInOutQuad;";
+        this.el.setAttribute("animation__rotation", rotateCarouselAnim);
+        //const rotateObjectAnim = `property: rotation; from: '0 0 0'; to: '0 0 0'; dur: 10000; loop: true; easing: linear; autoplay: true`;
         this.el.children[this.index].removeAttribute("animation__rotate");
-        this.el.children[newIndex].setAttribute("animation__rotate", animString2);
+        //this.el!.children[newIndex].setAttribute("animation__rotate", rotateObjectAnim);
         this.currentRotation = newRotation;
         this.index = newIndex;
     },
@@ -281,16 +293,16 @@ exports.default = AFRAME.registerComponent("carousel", {
         this.ringMesh = new THREE.Mesh(this.ringGeometry, this.ringMaterial);
     },
     sceneLoaded: function () {
-        var _this = this;
         var position = this.el.object3D.position;
         var children = this.el.children;
         var numChildren = children.length;
         var intervalRad = (Math.PI * 2) / numChildren;
-        var _loop_1 = function (i) {
+        for (var i = 0; i < numChildren; i++) {
             var child = children[i];
-            var x = this_1.data.radius * Math.cos(i * intervalRad) + position.x;
-            var y = this_1.data.radius * Math.sin(i * intervalRad);
-            child.setAttribute("position", "" + x + " " + y + " " + "0");
+            var x = this.data.radius * Math.cos(i * intervalRad) + position.x;
+            var y = this.data.radius * Math.sin(i * intervalRad);
+            child.setAttribute("position", x + " " + y + " 0");
+            child.setAttribute("rotation", "-90 0 0");
             // Add sphere when model is loaded
             child.addEventListener("model-loaded", function () {
                 // Get the radius of the child's bounding sphere
@@ -315,24 +327,40 @@ exports.default = AFRAME.registerComponent("carousel", {
                 // sphereMesh.add(model);
                 //child.setObject3D("mesh", model);
             });
-            child.addEventListener("click", function () {
-                //this.el.sceneEl.emit("carousel-item-clicked", {id: child.id}, false);
-                console.log("Click!: " + child.id);
-            }, false);
-            child.addEventListener("raycaster-intersected", function () {
-                _this.el.sceneEl.emit("carousel-item-hovered", { id: child.id }, false);
-                child.children[0].setAttribute("visible", "true");
-                console.log("Hover!: " + child.id);
-            }, false);
-            child.addEventListener("raycaster-intersected-cleared", function () {
-                _this.el.sceneEl.emit("carousel-item-hovered-cleared", { id: child.id }, false);
-                child.children[0].setAttribute("visible", "false");
-                console.log("Clear!: " + child.id);
-            }, false);
-        };
-        var this_1 = this;
-        for (var i = 0; i < numChildren; i++) {
-            _loop_1(i);
+            // child.addEventListener(
+            //   "click",
+            //   () => {
+            //     this.el!.sceneEl!.emit("carousel-item-clicked", {id: child.id}, false);
+            //     console.log("Click!: " + child.id);
+            //   },
+            //   false
+            // );
+            // child.addEventListener(
+            //   "raycaster-intersected",
+            //   () => {
+            //     this.el!.sceneEl!.emit(
+            //       "carousel-item-hovered",
+            //       { id: child.id },
+            //       false
+            //     );
+            //     child.children[0].setAttribute("visible", "true");
+            //     console.log("Hover!: " + child.id);
+            //   },
+            //   false
+            // );
+            // child.addEventListener(
+            //   "raycaster-intersected-cleared",
+            //   () => {
+            //     this.el!.sceneEl!.emit(
+            //       "carousel-item-hovered-cleared",
+            //       { id: child.id },
+            //       false
+            //     );
+            //     child.children[0].setAttribute("visible", "false");
+            //     console.log("Clear!: " + child.id);
+            //   },
+            //   false
+            // );
         }
     },
     update: function (oldData) {
@@ -400,9 +428,9 @@ exports.default = AFRAME.registerComponent("box", {
         carouselId: { type: "string" },
         carouselAnimationDuration: { type: "string", default: "2000" },
         carouselScaleSmall: { type: "string", default: "0.25 0.25 0.25" },
-        carouselPositionSmall: { type: "string", default: "0 0.6 -0.25" },
+        carouselPositionSmall: { type: "string", default: "0 0.9 -0.25" },
         carouselScaleLarge: { type: "string", default: "2 2 2" },
-        carouselPositionLarge: { type: "string", default: "0 1.2 -0.25" }
+        carouselPositionLarge: { type: "string", default: "0 1.5 -0.25" }
     },
     carousel: null,
     animationStateService: null,
@@ -448,11 +476,13 @@ exports.default = AFRAME.registerComponent("box", {
                 this.el.setAttribute("animation-mixer", "clip: opening; clampWhenFinished: true; loop: once;");
                 this.carousel.setAttribute("animation__scale", this.carouselScaleSmallToLargeAnimation);
                 this.carousel.setAttribute("animation__position", this.carouselPositionSmallToLargeAnimation);
+                this.el.sceneEl.emit("box-opening", this, false);
                 break;
             case BoxState.CLOSING:
                 this.el.setAttribute("animation-mixer", "clip: closing; clampWhenFinished: true; loop: once;");
                 this.carousel.setAttribute("animation__scale", this.carouselScaleLargeToSmallAnimation);
                 this.carousel.setAttribute("animation__position", this.carouselPositionLargeToSmallAnimation);
+                this.el.sceneEl.emit("box-closing", this, false);
                 break;
         }
     },
@@ -460,9 +490,11 @@ exports.default = AFRAME.registerComponent("box", {
         switch (this.state) {
             case BoxState.OPENING:
                 this.animationStateService.send(BoxTransition.OPENED);
+                this.el.sceneEl.emit("box-opened", this, false);
                 break;
             case BoxState.CLOSING:
                 this.animationStateService.send(BoxTransition.CLOSED);
+                this.el.sceneEl.emit("box-closed", this, false);
                 break;
         }
     },

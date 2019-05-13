@@ -59,28 +59,14 @@ export default AFRAME.registerComponent("carousel", {
       newRotation = this.currentRotation - this.interval;
     }
 
-    const animString: string =
-      "property: rotation" +
-      "; from: '90 0 " +
-      this.currentRotation +
-      "'" +
-      "; to: '90 0 " +
-      newRotation +
-      "'" +
-      "; dur: 1000" +
-      "; autoplay: true;" +
-      "; easing: easeInOutQuad;";
+    const rotateCarouselAnim: string = `property: rotation; from: '90 0 ${this.currentRotation}'; to: '90 0 ${newRotation}'; dur: 1000; autoplay: true; easing: easeInOutQuad;`;
 
-    this.el!.setAttribute("animation__rotation", animString);
+    this.el!.setAttribute("animation__rotation", rotateCarouselAnim);
 
-    const animString2 =
-      "property: rotation" +
-      "; from: '0 0 0'" +
-      "; to: '0 360 0'" +
-      "; dur: 30000; loop: true; easing: linear; autoplay: true";
+    //const rotateObjectAnim = `property: rotation; from: '0 0 0'; to: '0 0 0'; dur: 10000; loop: true; easing: linear; autoplay: true`;
 
     this.el!.children[this.index].removeAttribute("animation__rotate");
-    this.el!.children[newIndex].setAttribute("animation__rotate", animString2);
+    //this.el!.children[newIndex].setAttribute("animation__rotate", rotateObjectAnim);
 
     this.currentRotation = newRotation;
     this.index = newIndex;
@@ -136,7 +122,8 @@ export default AFRAME.registerComponent("carousel", {
 
       let x = this.data.radius * Math.cos(i * intervalRad) + position.x;
       let y = this.data.radius * Math.sin(i * intervalRad);
-      child.setAttribute("position", x + " " + y + " " + "0");
+			child.setAttribute("position", `${x} ${y} 0`);
+			child.setAttribute("rotation", "-90 0 0");
 
       // Add sphere when model is loaded
       child.addEventListener("model-loaded", () => {
@@ -163,42 +150,42 @@ export default AFRAME.registerComponent("carousel", {
         //child.setObject3D("mesh", model);
       });
 
-      child.addEventListener(
-        "click",
-        () => {
-          //this.el.sceneEl.emit("carousel-item-clicked", {id: child.id}, false);
-          console.log("Click!: " + child.id);
-        },
-        false
-      );
+      // child.addEventListener(
+      //   "click",
+      //   () => {
+      //     this.el!.sceneEl!.emit("carousel-item-clicked", {id: child.id}, false);
+      //     console.log("Click!: " + child.id);
+      //   },
+      //   false
+      // );
 
-      child.addEventListener(
-        "raycaster-intersected",
-        () => {
-          this.el!.sceneEl!.emit(
-            "carousel-item-hovered",
-            { id: child.id },
-            false
-          );
-          child.children[0].setAttribute("visible", "true");
-          console.log("Hover!: " + child.id);
-        },
-        false
-      );
+      // child.addEventListener(
+      //   "raycaster-intersected",
+      //   () => {
+      //     this.el!.sceneEl!.emit(
+      //       "carousel-item-hovered",
+      //       { id: child.id },
+      //       false
+      //     );
+      //     child.children[0].setAttribute("visible", "true");
+      //     console.log("Hover!: " + child.id);
+      //   },
+      //   false
+      // );
 
-      child.addEventListener(
-        "raycaster-intersected-cleared",
-        () => {
-          this.el!.sceneEl!.emit(
-            "carousel-item-hovered-cleared",
-            { id: child.id },
-            false
-          );
-          child.children[0].setAttribute("visible", "false");
-          console.log("Clear!: " + child.id);
-        },
-        false
-      );
+      // child.addEventListener(
+      //   "raycaster-intersected-cleared",
+      //   () => {
+      //     this.el!.sceneEl!.emit(
+      //       "carousel-item-hovered-cleared",
+      //       { id: child.id },
+      //       false
+      //     );
+      //     child.children[0].setAttribute("visible", "false");
+      //     console.log("Clear!: " + child.id);
+      //   },
+      //   false
+      // );
     }
   },
 

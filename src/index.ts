@@ -12,21 +12,22 @@ var scene,
   itemButton;
 
 var state = {
-  overlayVisible: false
+	selectedItem: null,
+	boxOpened: false
 };
 
-function viewObjectInOverlay(src) {
-  viewer.contentWindow.postMessage(
-    {
-      src: src
-    },
-    window.location.href
-  );
+// function viewObjectInOverlay(src) {
+//   viewer.contentWindow.postMessage(
+//     {
+//       src: src
+//     },
+//     window.location.href
+//   );
 
-  state.overlayVisible = true;
+//   state.selectedItem = src;
 
-  render();
-}
+//   render();
+// }
 
 function resize() {
   if (overlay) {
@@ -51,7 +52,7 @@ window.addEventListener("resize", function() {
 function render() {
   video = document.querySelector("video");
 
-  if (state.overlayVisible) {
+  if (state.selectedItem) {
     scene.classList.add("hide");
     video.classList.add("hide");
     overlay.classList.remove("hide");
@@ -59,7 +60,13 @@ function render() {
     scene.classList.remove("hide");
     video.classList.remove("hide");
     overlay.classList.add("hide");
-  }
+	}
+	
+	if (state.boxOpened) {
+		carouselMenu.classList.remove("hide");
+	} else {
+		carouselMenu.classList.add("hide");
+	}
 }
 
 window.addEventListener("DOMContentLoaded", function() {
@@ -71,24 +78,38 @@ window.addEventListener("DOMContentLoaded", function() {
   itemButton = document.getElementById("carousel-item-button");
   nextButton = document.getElementById("carousel-next-button");
 
-	scene.addEventListener(
-    "carousel-item-clicked",
-    function(event) {
-      var id = event.detail.id;
-      var asset = document.getElementById(id + "-asset");
+	scene.addEventListener("loaded", function() {
+		
+	});
 
-      if (asset) {
-        viewObjectInOverlay(asset.getAttribute("src"));
-      }
-    },
-    false
-  );
+	scene.addEventListener("box-opened", function() {
+		state.boxOpened = true;
+		render();
+	}, false);
+
+	scene.addEventListener("box-closing", function() {
+		state.boxOpened = false;
+		render();
+	}, false);
+
+	// scene.addEventListener(
+  //   "carousel-item-clicked",
+  //   function(event) {
+  //     var id = event.detail.id;
+  //     var asset = document.getElementById(id + "-asset");
+
+  //     if (asset) {
+  //       viewObjectInOverlay(asset.getAttribute("src"));
+  //     }
+  //   },
+  //   false
+  // );
 
   window.addEventListener(
     "message",
     function(event) {
       if (event.data === "close") {
-        state.overlayVisible = false;
+        state.selectedItem = null;
         render();
       }
     },

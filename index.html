@@ -18,7 +18,7 @@
       }
 
       .hide {
-        display: none;
+        display: none !important;
       }
 
       #carousel-menu {
@@ -40,6 +40,11 @@
 
         left: 0;
         width: 100%;
+      }
+
+			#carousel-menu button {
+        margin: 1rem;
+				padding: 0.75rem 1rem 0.75rem 1rem;
       }
 
       #carousel-menu .col.prev {
@@ -89,10 +94,10 @@
           id="cat-walking-asset"
           src="https://pbn.netlify.com/assets/cat-walking.gltf"
         ></a-asset-item>
-        <a-asset-item
+        <!-- <a-asset-item
           id="man-asset"
           src="https://pbn.netlify.com/assets/man.gltf"
-        ></a-asset-item>
+        ></a-asset-item>-->
         <a-asset-item
           id="signpost-asset"
           src="https://pbn.netlify.com/assets/signpost.gltf"
@@ -123,19 +128,19 @@
           intensity="1"
         ></a-light>
 
-        <a-entity
+        <!-- <a-entity
           position="-1 0 -0.25"
-          scale="40 40 40"
+          scale="4 4 4"
           gltf-model="#man-asset"
         >
         </a-entity>
 
         <a-entity
           position="1 0 -0.25"
-          scale="40 40 40"
+          scale="4 4 4"
           gltf-model="#signpost-asset"
         >
-        </a-entity>
+        </a-entity> -->
 
         <a-entity
           id="house"
@@ -152,8 +157,8 @@
         <a-entity
           rotation="90 0 0"
           id="carousel"
-          position="0 0.6 -0.25"
-          rotation="0 30 0"
+          position="0 0.9 -0.25"
+          rotation="0 0 0"
           scale="0.25 0.25 0.25"
         >
           <a-entity
@@ -163,21 +168,25 @@
 						<a-entity 
 							id="letter" 
 							gltf-model="#letter-asset"
+							scale="1 1 1"
 						>
             </a-entity>
             <a-entity
               id="cat-walking"
-              gltf-model="#cat-walking-asset"
+							gltf-model="#cat-walking-asset"
+							scale="1.5 1.5 1.5"
             >
             </a-entity>
             <a-entity
               id="cat-sitting"
-              gltf-model="#cat-sitting-asset"
+							gltf-model="#cat-sitting-asset"
+							scale="1.5 1.5 1.5"
             >
 						</a-entity>
 						<a-entity
               id="signpost"
-              gltf-model="#signpost-asset"
+							gltf-model="#signpost-asset"
+							scale="3 3 3"
             >
             </a-entity>
           </a-entity>
@@ -185,12 +194,12 @@
       </a-marker>
     </a-scene>
 
-    <div id="carousel-menu">
+    <div id="carousel-menu" class="hide">
       <div class="col prev">
         <button id="carousel-prev-button">&lt;</button>
       </div>
       <div class="col item">
-        <button id="carousel-item-button">Item</button>
+        <button id="carousel-item-button">View</button>
       </div>
       <div class="col next">
         <button id="carousel-next-button">&gt;</button>

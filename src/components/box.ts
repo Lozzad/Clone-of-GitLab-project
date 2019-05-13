@@ -38,9 +38,9 @@ export default AFRAME.registerComponent("box", {
     carouselId: { type: "string" },
     carouselAnimationDuration: { type: "string", default: "2000" },
     carouselScaleSmall: { type: "string", default: "0.25 0.25 0.25" },
-    carouselPositionSmall: { type: "string", default: "0 0.6 -0.25" },
+    carouselPositionSmall: { type: "string", default: "0 0.9 -0.25" },
     carouselScaleLarge: { type: "string", default: "2 2 2" },
-    carouselPositionLarge: { type: "string", default: "0 1.2 -0.25" }
+    carouselPositionLarge: { type: "string", default: "0 1.5 -0.25" }
   },
 
   carousel: null,
@@ -125,7 +125,8 @@ export default AFRAME.registerComponent("box", {
         this.carousel!.setAttribute(
           "animation__position",
           this.carouselPositionSmallToLargeAnimation!
-        );
+		);
+		this.el!.sceneEl!.emit("box-opening", this, false);
         break;
       case BoxState.CLOSING:
         this.el!.setAttribute(
@@ -139,7 +140,8 @@ export default AFRAME.registerComponent("box", {
         this.carousel!.setAttribute(
           "animation__position",
           this.carouselPositionLargeToSmallAnimation!
-        );
+		);
+		this.el!.sceneEl!.emit("box-closing", this, false);
         break;
     }
   },
@@ -147,10 +149,12 @@ export default AFRAME.registerComponent("box", {
   animationFinished() {
     switch (this.state) {
       case BoxState.OPENING:
-        this.animationStateService.send(BoxTransition.OPENED);
+		this.animationStateService.send(BoxTransition.OPENED);
+		this.el!.sceneEl!.emit("box-opened", this, false);
         break;
       case BoxState.CLOSING:
-        this.animationStateService.send(BoxTransition.CLOSED);
+		this.animationStateService.send(BoxTransition.CLOSED);
+		this.el!.sceneEl!.emit("box-closed", this, false);
         break;
     }
   },
