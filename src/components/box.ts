@@ -8,8 +8,13 @@ interface BoxComponent extends BaseComponent {
   carouselScaleLargeToSmallAnimation: string | null;
   carouselScaleSmallToLargeAnimation: string | null;
   state: BoxState | null;
-	animationFinished: () => void;
-	getAnimationString: (property: string, from: string, to: string, duration: string) => string;
+  animationFinished: () => void;
+  getAnimationString: (
+    property: string,
+    from: string,
+    to: string,
+    duration: string
+  ) => string;
   animationStateChanged: (state: BoxState) => void;
   clicked: (ev: CustomEvent) => void;
 }
@@ -29,116 +34,169 @@ enum BoxTransition {
 }
 
 export default AFRAME.registerComponent("box", {
-	schema: {
-		carouselId: { type: "string" },
-		carouselAnimationDuration: { type: "string", default: "2000" },
-		carouselScaleSmall: { type: "string", default: "0.25 0.25 0.25" },
-		carouselPositionSmall: { type: "string", default: "0 0.6 -0.25" },
-		carouselScaleLarge: { type: "string", default: "2 2 2" },
-		carouselPositionLarge: { type: "string", default: "0 1.2 -0.25" }
-	},
+  schema: {
+    carouselId: { type: "string" },
+    carouselAnimationDuration: { type: "string", default: "2000" },
+    carouselScaleSmall: { type: "string", default: "0.25 0.25 0.25" },
+    carouselPositionSmall: { type: "string", default: "0 0.6 -0.25" },
+    carouselScaleLarge: { type: "string", default: "2 2 2" },
+    carouselPositionLarge: { type: "string", default: "0 1.2 -0.25" }
+  },
 
-	carousel: null,
-	animationStateService: null,
-	carouselPositionLargeToSmallAnimation: null,
-	carouselPositionSmallToLargeAnimation: null,
-	carouselScaleLargeToSmallAnimation: null,
-	carouselScaleSmallToLargeAnimation: null,
-	state: null,
+  carousel: null,
+  animationStateService: null,
+  carouselPositionLargeToSmallAnimation: null,
+  carouselPositionSmallToLargeAnimation: null,
+  carouselScaleLargeToSmallAnimation: null,
+  carouselScaleSmallToLargeAnimation: null,
+  state: null,
 
-	init() {
-		this.bindMethods();
-		this.addEventListeners();
+  init() {
+    this.bindMethods();
+    this.addEventListeners();
 
-		this.carousel = document.getElementById(this.data.carouselId);
-		this.state = BoxState.CLOSED;
+    this.carousel = document.getElementById(this.data.carouselId);
+    this.state = BoxState.CLOSED;
 
-		this.carouselScaleSmallToLargeAnimation = this.getAnimationString("scale", this.data.carouselScaleSmall, this.data.carouselScaleLarge, this.data.carouselAnimationDuration);
-		this.carouselScaleLargeToSmallAnimation = this.getAnimationString("scale", this.data.carouselScaleLarge, this.data.carouselScaleSmall, this.data.carouselAnimationDuration);
-		this.carouselPositionSmallToLargeAnimation = this.getAnimationString("position", this.data.carouselPositionSmall, this.data.carouselPositionLarge, this.data.carouselAnimationDuration);
-		this.carouselPositionLargeToSmallAnimation = this.getAnimationString("position", this.data.carouselPositionLarge, this.data.carouselPositionSmall, this.data.carouselAnimationDuration);
+    this.carouselScaleSmallToLargeAnimation = this.getAnimationString(
+      "scale",
+      this.data.carouselScaleSmall,
+      this.data.carouselScaleLarge,
+      this.data.carouselAnimationDuration
+    );
+    this.carouselScaleLargeToSmallAnimation = this.getAnimationString(
+      "scale",
+      this.data.carouselScaleLarge,
+      this.data.carouselScaleSmall,
+      this.data.carouselAnimationDuration
+    );
+    this.carouselPositionSmallToLargeAnimation = this.getAnimationString(
+      "position",
+      this.data.carouselPositionSmall,
+      this.data.carouselPositionLarge,
+      this.data.carouselAnimationDuration
+    );
+    this.carouselPositionLargeToSmallAnimation = this.getAnimationString(
+      "position",
+      this.data.carouselPositionLarge,
+      this.data.carouselPositionSmall,
+      this.data.carouselAnimationDuration
+    );
 
-		const stateMachine = XState.Machine({
-			id: "box",
-			initial: this.state,
-			states: {
-				[BoxState.CLOSED]: { on: { [BoxTransition.OPEN]: BoxState.OPENING } },
-				[BoxState.OPENING]: { on: { [BoxTransition.OPENED]: BoxState.OPENED } },
-				[BoxState.OPENED]: { on: { [BoxTransition.CLOSE]: BoxState.CLOSING } },
-				[BoxState.CLOSING]: { on: { [BoxTransition.CLOSED]: BoxState.CLOSED } }
-			}
-		});
-		
-		this.animationStateService = XState.interpret(stateMachine).onTransition(state => this.animationStateChanged(state.value as BoxState)).start();
-	},
-	
-	getAnimationString(property: string, from: string, to: string, duration: string): string {
-		return `property: ${property}; from: ${from}; to: ${to}; dur: ${duration}; loop: once; autoplay: true;`;
-	},
+    const stateMachine = XState.Machine({
+      id: "box",
+      initial: this.state,
+      states: {
+        [BoxState.CLOSED]: { on: { [BoxTransition.OPEN]: BoxState.OPENING } },
+        [BoxState.OPENING]: { on: { [BoxTransition.OPENED]: BoxState.OPENED } },
+        [BoxState.OPENED]: { on: { [BoxTransition.CLOSE]: BoxState.CLOSING } },
+        [BoxState.CLOSING]: { on: { [BoxTransition.CLOSED]: BoxState.CLOSED } }
+      }
+    });
 
-	animationStateChanged(s: BoxState) {
-		this.state = s;
-		switch (this.state) {
-			case BoxState.OPENING :
-				this.el!.setAttribute("animation-mixer", "clip: opening; clampWhenFinished: true; loop: once;");
-				this.carousel!.setAttribute("animation__scale", this.carouselScaleSmallToLargeAnimation!);
-				this.carousel!.setAttribute("animation__position", this.carouselPositionSmallToLargeAnimation!);
-			break;
-			case BoxState.CLOSING :
-				this.el!.setAttribute("animation-mixer", "clip: closing; clampWhenFinished: true; loop: once;");
-				this.carousel!.setAttribute("animation__scale", this.carouselScaleLargeToSmallAnimation!);
-				this.carousel!.setAttribute("animation__position", this.carouselPositionLargeToSmallAnimation!);
-			break;
-		}
-	},
+    this.animationStateService = XState.interpret(stateMachine)
+      .onTransition(state =>
+        this.animationStateChanged(state.value as BoxState)
+      )
+      .start();
+  },
 
-	animationFinished() {
-		switch (this.state) {
-			case BoxState.OPENING:
-				this.animationStateService.send(BoxTransition.OPENED);
-				break;
-			case BoxState.CLOSING:
-				this.animationStateService.send(BoxTransition.CLOSED);
-				break;
-		}
-	},
+  getAnimationString(
+    property: string,
+    from: string,
+    to: string,
+    duration: string
+  ): string {
+    return `property: ${property}; from: ${from}; to: ${to}; dur: ${duration}; loop: once; autoplay: true;`;
+  },
 
-	clicked(ev: CustomEvent) {
-		ev.preventDefault();
-		switch (this.state) {
-			case BoxState.CLOSED:
-				this.animationStateService.send(BoxTransition.OPEN);                
-				break;
-			case BoxState.OPENED:
-				this.animationStateService.send(BoxTransition.CLOSE);
-				break;
-		}
-	},
+  animationStateChanged(s: BoxState) {
+    this.state = s;
+    switch (this.state) {
+      case BoxState.OPENING:
+        this.el!.setAttribute(
+          "animation-mixer",
+          "clip: opening; clampWhenFinished: true; loop: once;"
+        );
+        this.carousel!.setAttribute(
+          "animation__scale",
+          this.carouselScaleSmallToLargeAnimation!
+        );
+        this.carousel!.setAttribute(
+          "animation__position",
+          this.carouselPositionSmallToLargeAnimation!
+        );
+        break;
+      case BoxState.CLOSING:
+        this.el!.setAttribute(
+          "animation-mixer",
+          "clip: closing; clampWhenFinished: true; loop: once;"
+        );
+        this.carousel!.setAttribute(
+          "animation__scale",
+          this.carouselScaleLargeToSmallAnimation!
+        );
+        this.carousel!.setAttribute(
+          "animation__position",
+          this.carouselPositionLargeToSmallAnimation!
+        );
+        break;
+    }
+  },
 
-	addEventListeners() {
-		this.el!.addEventListener("animation-finished", this.animationFinished, false);
-		this.el!.addEventListener("click", this.clicked, false);
-	},
+  animationFinished() {
+    switch (this.state) {
+      case BoxState.OPENING:
+        this.animationStateService.send(BoxTransition.OPENED);
+        break;
+      case BoxState.CLOSING:
+        this.animationStateService.send(BoxTransition.CLOSED);
+        break;
+    }
+  },
 
-	removeEventListeners() {
-		this.el!.removeEventListener("animation-finished", this.animationFinished, false);
-		this.el!.removeEventListener("click", this.clicked, false);
-	},
+  clicked(ev: CustomEvent) {
+    ev.preventDefault();
+    switch (this.state) {
+      case BoxState.CLOSED:
+        this.animationStateService.send(BoxTransition.OPEN);
+        break;
+      case BoxState.OPENED:
+        this.animationStateService.send(BoxTransition.CLOSE);
+        break;
+    }
+  },
 
-	bindMethods() {
-		this.addEventListeners = this.addEventListeners.bind(this);
-		this.removeEventListeners = this.removeEventListeners.bind(this);
-		this.animationStateChanged = this.animationStateChanged.bind(this);
-		this.animationFinished = this.animationFinished.bind(this);
-		this.clicked = this.clicked.bind(this);
-	},
+  addEventListeners() {
+    this.el!.addEventListener(
+      "animation-finished",
+      this.animationFinished,
+      false
+    );
+    this.el!.addEventListener("click", this.clicked, false);
+  },
 
-	tick() {
-		
-	},
+  removeEventListeners() {
+    this.el!.removeEventListener(
+      "animation-finished",
+      this.animationFinished,
+      false
+    );
+    this.el!.removeEventListener("click", this.clicked, false);
+  },
 
-	remove() {
-		this.el!.removeObject3D("mesh");
-		this.removeEventListeners();
-	}
+  bindMethods() {
+    this.addEventListeners = this.addEventListeners.bind(this);
+    this.removeEventListeners = this.removeEventListeners.bind(this);
+    this.animationStateChanged = this.animationStateChanged.bind(this);
+    this.animationFinished = this.animationFinished.bind(this);
+    this.clicked = this.clicked.bind(this);
+  },
+
+  tick() {},
+
+  remove() {
+    this.el!.removeObject3D("mesh");
+    this.removeEventListeners();
+  }
 } as BoxComponent);

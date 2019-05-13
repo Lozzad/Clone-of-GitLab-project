@@ -41,9 +41,8 @@ export default AFRAME.registerComponent("carousel", {
   },
 
   updateAnimation(ev: CustomEvent) {
-    var direction = ev.detail.direction;
-
-    var newIndex = this.index + direction;
+    let direction = ev.detail.direction;
+    let newIndex = this.index + direction;
 
     if (newIndex < 0) {
       newIndex = this.numChildren - 1;
@@ -51,7 +50,7 @@ export default AFRAME.registerComponent("carousel", {
       newIndex = 0;
     }
 
-    var newRotation;
+    let newRotation;
 
     // if the direction is positive, and the new index is 0 or greater than the current index, add an interval
     if (direction === 1 && (newIndex === 0 || newIndex > this.index)) {
@@ -128,16 +127,16 @@ export default AFRAME.registerComponent("carousel", {
   },
 
   sceneLoaded() {
-    var position = this.el!.object3D.position;
-    var children = this.el!.children;
-    var numChildren = children.length;
-    var intervalRad = (Math.PI * 2) / numChildren;
+    let position = this.el!.object3D.position;
+    let children = this.el!.children;
+    let numChildren = children.length;
+    let intervalRad = (Math.PI * 2) / numChildren;
 
-    for (var i = 0; i < numChildren; i++) {
-      var child = children[i];
+    for (let i = 0; i < numChildren; i++) {
+      let child = children[i];
 
-      var x = this.data.radius * Math.cos(i * intervalRad) + position.x;
-      var y = this.data.radius * Math.sin(i * intervalRad);
+      let x = this.data.radius * Math.cos(i * intervalRad) + position.x;
+      let y = this.data.radius * Math.sin(i * intervalRad);
       child.setAttribute("position", "" + x + " " + y + " " + "0");
 
       // Add sphere when model is loaded
