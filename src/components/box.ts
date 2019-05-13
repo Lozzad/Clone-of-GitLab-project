@@ -1,34 +1,34 @@
 import { BaseComponent } from "../BaseComponent";
 
-interface HouseComponent extends BaseComponent {
+interface BoxComponent extends BaseComponent {
   animationStateService: any; // todo: type
   carousel: HTMLElement | null;
   carouselPositionLargeToSmallAnimation: string | null;
   carouselPositionSmallToLargeAnimation: string | null;
   carouselScaleLargeToSmallAnimation: string | null;
   carouselScaleSmallToLargeAnimation: string | null;
-  state: HouseState | null;
+  state: BoxState | null;
 	animationFinished: () => void;
 	getAnimationString: (property: string, from: string, to: string, duration: string) => string;
-  animationStateChanged: (state: HouseState) => void;
+  animationStateChanged: (state: BoxState) => void;
   clicked: (ev: CustomEvent) => void;
 }
 
-enum HouseState {
+enum BoxState {
   CLOSED = "closed",
   OPENING = "opening",
   OPENED = "opened",
   CLOSING = "closing"
 }
 
-enum HouseTransition {
+enum BoxTransition {
   OPEN = "open",
   OPENED = "opened",
   CLOSE = "close",
   CLOSED = "closed"
 }
 
-export default AFRAME.registerComponent("house", {
+export default AFRAME.registerComponent("box", {
 	schema: {
 		carouselId: { type: "string" },
 		carouselAnimationDuration: { type: "string", default: "2000" },
@@ -51,7 +51,7 @@ export default AFRAME.registerComponent("house", {
 		this.addEventListeners();
 
 		this.carousel = document.getElementById(this.data.carouselId);
-		this.state = HouseState.CLOSED;
+		this.state = BoxState.CLOSED;
 
 		this.carouselScaleSmallToLargeAnimation = this.getAnimationString("scale", this.data.carouselScaleSmall, this.data.carouselScaleLarge, this.data.carouselAnimationDuration);
 		this.carouselScaleLargeToSmallAnimation = this.getAnimationString("scale", this.data.carouselScaleLarge, this.data.carouselScaleSmall, this.data.carouselAnimationDuration);
@@ -59,32 +59,32 @@ export default AFRAME.registerComponent("house", {
 		this.carouselPositionLargeToSmallAnimation = this.getAnimationString("position", this.data.carouselPositionLarge, this.data.carouselPositionSmall, this.data.carouselAnimationDuration);
 
 		const stateMachine = XState.Machine({
-			id: "house",
+			id: "box",
 			initial: this.state,
 			states: {
-				[HouseState.CLOSED]: { on: { [HouseTransition.OPEN]: HouseState.OPENING } },
-				[HouseState.OPENING]: { on: { [HouseTransition.OPENED]: HouseState.OPENED } },
-				[HouseState.OPENED]: { on: { [HouseTransition.CLOSE]: HouseState.CLOSING } },
-				[HouseState.CLOSING]: { on: { [HouseTransition.CLOSED]: HouseState.CLOSED } }
+				[BoxState.CLOSED]: { on: { [BoxTransition.OPEN]: BoxState.OPENING } },
+				[BoxState.OPENING]: { on: { [BoxTransition.OPENED]: BoxState.OPENED } },
+				[BoxState.OPENED]: { on: { [BoxTransition.CLOSE]: BoxState.CLOSING } },
+				[BoxState.CLOSING]: { on: { [BoxTransition.CLOSED]: BoxState.CLOSED } }
 			}
 		});
 		
-		this.animationStateService = XState.interpret(stateMachine).onTransition(state => this.animationStateChanged(state.value as HouseState)).start();
+		this.animationStateService = XState.interpret(stateMachine).onTransition(state => this.animationStateChanged(state.value as BoxState)).start();
 	},
 	
 	getAnimationString(property: string, from: string, to: string, duration: string): string {
 		return `property: ${property}; from: ${from}; to: ${to}; dur: ${duration}; loop: once; autoplay: true;`;
 	},
 
-	animationStateChanged(s: HouseState) {
+	animationStateChanged(s: BoxState) {
 		this.state = s;
 		switch (this.state) {
-			case HouseState.OPENING :
+			case BoxState.OPENING :
 				this.el!.setAttribute("animation-mixer", "clip: opening; clampWhenFinished: true; loop: once;");
 				this.carousel!.setAttribute("animation__scale", this.carouselScaleSmallToLargeAnimation!);
 				this.carousel!.setAttribute("animation__position", this.carouselPositionSmallToLargeAnimation!);
 			break;
-			case HouseState.CLOSING :
+			case BoxState.CLOSING :
 				this.el!.setAttribute("animation-mixer", "clip: closing; clampWhenFinished: true; loop: once;");
 				this.carousel!.setAttribute("animation__scale", this.carouselScaleLargeToSmallAnimation!);
 				this.carousel!.setAttribute("animation__position", this.carouselPositionLargeToSmallAnimation!);
@@ -94,11 +94,11 @@ export default AFRAME.registerComponent("house", {
 
 	animationFinished() {
 		switch (this.state) {
-			case HouseState.OPENING:
-				this.animationStateService.send(HouseTransition.OPENED);
+			case BoxState.OPENING:
+				this.animationStateService.send(BoxTransition.OPENED);
 				break;
-			case HouseState.CLOSING:
-				this.animationStateService.send(HouseTransition.CLOSED);
+			case BoxState.CLOSING:
+				this.animationStateService.send(BoxTransition.CLOSED);
 				break;
 		}
 	},
@@ -106,11 +106,11 @@ export default AFRAME.registerComponent("house", {
 	clicked(ev: CustomEvent) {
 		ev.preventDefault();
 		switch (this.state) {
-			case HouseState.CLOSED:
-				this.animationStateService.send(HouseTransition.OPEN);                
+			case BoxState.CLOSED:
+				this.animationStateService.send(BoxTransition.OPEN);                
 				break;
-			case HouseState.OPENED:
-				this.animationStateService.send(HouseTransition.CLOSE);
+			case BoxState.OPENED:
+				this.animationStateService.send(BoxTransition.CLOSE);
 				break;
 		}
 	},
@@ -141,4 +141,4 @@ export default AFRAME.registerComponent("house", {
 		this.el!.removeObject3D("mesh");
 		this.removeEventListeners();
 	}
-} as HouseComponent);
+} as BoxComponent);

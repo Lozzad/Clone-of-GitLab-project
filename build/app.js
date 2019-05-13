@@ -378,21 +378,21 @@ exports.default = AFRAME.registerComponent("look-to-camera", {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var HouseState;
-(function (HouseState) {
-    HouseState["CLOSED"] = "closed";
-    HouseState["OPENING"] = "opening";
-    HouseState["OPENED"] = "opened";
-    HouseState["CLOSING"] = "closing";
-})(HouseState || (HouseState = {}));
-var HouseTransition;
-(function (HouseTransition) {
-    HouseTransition["OPEN"] = "open";
-    HouseTransition["OPENED"] = "opened";
-    HouseTransition["CLOSE"] = "close";
-    HouseTransition["CLOSED"] = "closed";
-})(HouseTransition || (HouseTransition = {}));
-exports.default = AFRAME.registerComponent("house", {
+var BoxState;
+(function (BoxState) {
+    BoxState["CLOSED"] = "closed";
+    BoxState["OPENING"] = "opening";
+    BoxState["OPENED"] = "opened";
+    BoxState["CLOSING"] = "closing";
+})(BoxState || (BoxState = {}));
+var BoxTransition;
+(function (BoxTransition) {
+    BoxTransition["OPEN"] = "open";
+    BoxTransition["OPENED"] = "opened";
+    BoxTransition["CLOSE"] = "close";
+    BoxTransition["CLOSED"] = "closed";
+})(BoxTransition || (BoxTransition = {}));
+exports.default = AFRAME.registerComponent("box", {
     schema: {
         carouselId: { type: "string" },
         carouselAnimationDuration: { type: "string", default: "2000" },
@@ -414,19 +414,19 @@ exports.default = AFRAME.registerComponent("house", {
         this.bindMethods();
         this.addEventListeners();
         this.carousel = document.getElementById(this.data.carouselId);
-        this.state = HouseState.CLOSED;
+        this.state = BoxState.CLOSED;
         this.carouselScaleSmallToLargeAnimation = this.getAnimationString("scale", this.data.carouselScaleSmall, this.data.carouselScaleLarge, this.data.carouselAnimationDuration);
         this.carouselScaleLargeToSmallAnimation = this.getAnimationString("scale", this.data.carouselScaleLarge, this.data.carouselScaleSmall, this.data.carouselAnimationDuration);
         this.carouselPositionSmallToLargeAnimation = this.getAnimationString("position", this.data.carouselPositionSmall, this.data.carouselPositionLarge, this.data.carouselAnimationDuration);
         this.carouselPositionLargeToSmallAnimation = this.getAnimationString("position", this.data.carouselPositionLarge, this.data.carouselPositionSmall, this.data.carouselAnimationDuration);
         var stateMachine = XState.Machine({
-            id: "house",
+            id: "box",
             initial: this.state,
             states: (_a = {},
-                _a[HouseState.CLOSED] = { on: (_b = {}, _b[HouseTransition.OPEN] = HouseState.OPENING, _b) },
-                _a[HouseState.OPENING] = { on: (_c = {}, _c[HouseTransition.OPENED] = HouseState.OPENED, _c) },
-                _a[HouseState.OPENED] = { on: (_d = {}, _d[HouseTransition.CLOSE] = HouseState.CLOSING, _d) },
-                _a[HouseState.CLOSING] = { on: (_e = {}, _e[HouseTransition.CLOSED] = HouseState.CLOSED, _e) },
+                _a[BoxState.CLOSED] = { on: (_b = {}, _b[BoxTransition.OPEN] = BoxState.OPENING, _b) },
+                _a[BoxState.OPENING] = { on: (_c = {}, _c[BoxTransition.OPENED] = BoxState.OPENED, _c) },
+                _a[BoxState.OPENED] = { on: (_d = {}, _d[BoxTransition.CLOSE] = BoxState.CLOSING, _d) },
+                _a[BoxState.CLOSING] = { on: (_e = {}, _e[BoxTransition.CLOSED] = BoxState.CLOSED, _e) },
                 _a)
         });
         this.animationStateService = XState.interpret(stateMachine).onTransition(function (state) { return _this.animationStateChanged(state.value); }).start();
@@ -437,12 +437,12 @@ exports.default = AFRAME.registerComponent("house", {
     animationStateChanged: function (s) {
         this.state = s;
         switch (this.state) {
-            case HouseState.OPENING:
+            case BoxState.OPENING:
                 this.el.setAttribute("animation-mixer", "clip: opening; clampWhenFinished: true; loop: once;");
                 this.carousel.setAttribute("animation__scale", this.carouselScaleSmallToLargeAnimation);
                 this.carousel.setAttribute("animation__position", this.carouselPositionSmallToLargeAnimation);
                 break;
-            case HouseState.CLOSING:
+            case BoxState.CLOSING:
                 this.el.setAttribute("animation-mixer", "clip: closing; clampWhenFinished: true; loop: once;");
                 this.carousel.setAttribute("animation__scale", this.carouselScaleLargeToSmallAnimation);
                 this.carousel.setAttribute("animation__position", this.carouselPositionLargeToSmallAnimation);
@@ -451,22 +451,22 @@ exports.default = AFRAME.registerComponent("house", {
     },
     animationFinished: function () {
         switch (this.state) {
-            case HouseState.OPENING:
-                this.animationStateService.send(HouseTransition.OPENED);
+            case BoxState.OPENING:
+                this.animationStateService.send(BoxTransition.OPENED);
                 break;
-            case HouseState.CLOSING:
-                this.animationStateService.send(HouseTransition.CLOSED);
+            case BoxState.CLOSING:
+                this.animationStateService.send(BoxTransition.CLOSED);
                 break;
         }
     },
     clicked: function (ev) {
         ev.preventDefault();
         switch (this.state) {
-            case HouseState.CLOSED:
-                this.animationStateService.send(HouseTransition.OPEN);
+            case BoxState.CLOSED:
+                this.animationStateService.send(BoxTransition.OPEN);
                 break;
-            case HouseState.OPENED:
-                this.animationStateService.send(HouseTransition.CLOSE);
+            case BoxState.OPENED:
+                this.animationStateService.send(BoxTransition.CLOSE);
                 break;
         }
     },

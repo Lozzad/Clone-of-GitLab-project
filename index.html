@@ -1,29 +1,27 @@
 <html>
-
-<head>
+  <head>
     <title>place-based narratives</title>
-	<script src="https://aframe.io/releases/0.9.1/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/0.9.1/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.js"></script>
     <script src="https://unpkg.com/xstate@4.5.0/dist/xstate.js"></script>
     <script src="./build/app.js"></script>
 
     <style>
-
-    body  {
-        margin : 0px;
+      body {
+        margin: 0px;
         padding: 0px;
         width: 100%;
         height: 100%;
         overflow: hidden;
         font-family: sans-serif;
-    }
+      }
 
-    .hide {
+      .hide {
         display: none;
-    }
+      }
 
-    #carousel-menu {
+      #carousel-menu {
         position: absolute;
         -ms-box-orient: horizontal;
         display: -webkit-box;
@@ -32,7 +30,7 @@
         display: -moz-flex;
         display: -webkit-flex;
         display: flex;
-            
+
         -webkit-justify-content: space-around;
         justify-content: space-around;
         -webkit-flex-flow: row wrap;
@@ -42,146 +40,159 @@
 
         left: 0;
         width: 100%;
-    }
+      }
 
-    #carousel-menu .col.prev {
+      #carousel-menu .col.prev {
         flex-grow: 0;
-    }
+      }
 
-    #carousel-menu .col.item {
+      #carousel-menu .col.item {
         flex-grow: 1;
         text-align: center;
-    }
+      }
 
-    #carousel-menu .col.next {
+      #carousel-menu .col.next {
         flex-grow: 0;
-    }
+      }
 
-    #prev-button {
+      #prev-button {
         float: left;
-    }
+      }
 
-    #overlay {
+      #overlay {
         position: absolute;
         background: #000;
         top: 0;
         right: 0;
-    }
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
+    <a-scene
+      embedded
+      arjs="patternRatio: 0.6; sourceType: webcam; debugUIEnabled: false;"
+      vr-mode-ui="enabled: false"
+      renderer="colorManagement: true;"
+    >
+      <a-assets>
+        <a-asset-item id="house-asset" src="assets/house.gltf"></a-asset-item>
+        <a-asset-item
+          id="letter-asset"
+          src="https://pbn.netlify.com/assets/letter.gltf"
+        ></a-asset-item>
+        <a-asset-item
+          id="cat-sitting-asset"
+          src="https://pbn.netlify.com/assets/cat-sitting.gltf"
+        ></a-asset-item>
+        <a-asset-item
+          id="cat-walking-asset"
+          src="https://pbn.netlify.com/assets/cat-walking.gltf"
+        ></a-asset-item>
+        <a-asset-item
+          id="man-asset"
+          src="https://pbn.netlify.com/assets/man.gltf"
+        ></a-asset-item>
+        <a-asset-item
+          id="signpost-asset"
+          src="https://pbn.netlify.com/assets/signpost.gltf"
+        ></a-asset-item>
+        <a-asset-item id="speech-bubble" src=""></a-asset-item>
+      </a-assets>
 
-    <a-scene embedded arjs="patternRatio: 0.6; sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false" renderer="colorManagement: true;">
-        <a-assets>
-            <a-asset-item id="house-asset" src="assets/house.gltf"></a-asset-item>
-            <a-asset-item id="letter-asset" src="https://pbn.netlify.com/assets/letter.gltf"></a-asset-item>
-            <a-asset-item id="cat-sitting-asset" src="https://pbn.netlify.com/assets/cat-sitting.gltf"></a-asset-item>
-            <a-asset-item id="cat-walking-asset" src="https://pbn.netlify.com/assets/cat-walking.gltf"></a-asset-item>
-            <a-asset-item id="man-asset" src="https://pbn.netlify.com/assets/man.gltf"></a-asset-item>
-            <a-asset-item id="signpost-asset" src="https://pbn.netlify.com/assets/signpost.gltf"></a-asset-item>
-            <a-asset-item id="speech-bubble" src=""></a-asset-item>
-        </a-assets>
+      <a-entity camera>
+        <a-entity
+          raycaster="objects: .collidable"
+          cursor="fuse: false; rayOrigin: mouse"
+        >
+        </a-entity>
+      </a-entity>
 
-        <a-entity camera>
-            <a-entity raycaster="objects: .collidable"
-                cursor="fuse: false; rayOrigin: mouse">
-            </a-entity>
+      <a-marker type="pattern" url="assets/markers/marker.patt">
+        <a-light
+          type="ambient"
+          color="#fff"
+          position="0 1 0"
+          intensity="1"
+        ></a-light>
+
+        <a-light
+          type="spot"
+          position="0 2 4"
+          rotation="0 0 0"
+          intensity="1"
+        ></a-light>
+
+        <a-entity
+          position="-1 0 -0.25"
+          scale="40 40 40"
+          gltf-model="#man-asset"
+        >
         </a-entity>
 
-        <a-marker type="pattern" url="assets/markers/marker.patt">
+        <a-entity
+          position="1 0 -0.25"
+          scale="40 40 40"
+          gltf-model="#signpost-asset"
+        >
+        </a-entity>
 
-            <a-light 
-                type="ambient" 
-                color="#fff" 
-                position="0 1 0" 
-                intensity="1"
-            ></a-light>
+        <a-entity
+          id="house"
+          class="collidable"
+          animation-mixer="clip: closed"
+          rotation="0 270 0"
+          position="0 0 -0.25"
+          scale="5 5 5"
+          gltf-model="#house-asset"
+          box="carouselId: carousel"
+        >
+        </a-entity>
 
-            <a-light 
-                type="spot" 
-                position="0 2 4" 
-                rotation="0 0 0" 
-                intensity="1"
-            ></a-light>
-
-            <a-entity 
-                position="-1 0 -0.25" 
-                scale="40 40 40"
-                gltf-model="#man-asset"
-            >
+        <a-entity
+          rotation="90 0 0"
+          id="carousel"
+          position="0 0.6 -0.25"
+          rotation="30"
+          scale="0.25 0.25 0.25"
+        >
+          <a-entity
+            carousel="radius: 0.4; thickness: 0.01; ringVisible: true; itemRadius: 0.1;"
+          >
+            <!--animation="property: rotation; from: '90 0 0'; to: '90 0 360'; dur: 30000; loop: true; easing: linear; autoplay: true;"-->
+            <a-entity id="letter" gltf-model="#letter-asset" look-to-camera>
             </a-entity>
-
-            <a-entity 
-                position="1 0 -0.25" 
-                scale="40 40 40"
-                gltf-model="#signpost-asset"
-            >
-            </a-entity>
-
-            <a-entity 
-                id="house" 
-                class="collidable"
-                animation-mixer="clip: closed" 
-                rotation="0 270 0" 
-                position="0 0 -0.25" 
-                scale="5 5 5"
-                gltf-model="#house-asset"
-                house="carouselId: carousel"
-            >
-            </a-entity>
-            
             <a-entity
-                rotation="90 0 0"
-                id="carousel"
-                position="0 0.6 -0.25"
-                rotation="30"
-                scale="0.25 0.25 0.25"
+              id="cat-walking"
+              gltf-model="#cat-walking-asset"
+              look-to-camera
             >
-                <a-entity 
-                    carousel="radius: 0.4; thickness: 0.01; ringVisible: true; itemRadius: 0.1;"
-                >
-                <!--animation="property: rotation; from: '90 0 0'; to: '90 0 360'; dur: 30000; loop: true; easing: linear; autoplay: true;"-->
-                    <a-entity 
-                        id="letter" 
-                        gltf-model="#letter-asset"
-                        look-to-camera
-                    >
-                    </a-entity>
-                    <a-entity 
-                        id="cat-walking" 
-                        gltf-model="#cat-walking-asset"                        
-                        look-to-camera
-                    >
-                    </a-entity>
-                    <a-entity 
-                        id="cat-sitting" 
-                        gltf-model="#cat-sitting-asset"
-                        look-to-camera
-                    >
-                    </a-entity>
-                </a-entity>  
             </a-entity>
-        </a-marker>
-        
+            <a-entity
+              id="cat-sitting"
+              gltf-model="#cat-sitting-asset"
+              look-to-camera
+            >
+            </a-entity>
+          </a-entity>
+        </a-entity>
+      </a-marker>
     </a-scene>
 
     <div id="carousel-menu">
-        <div class="col prev">
-            <button id="carousel-prev-button">&lt;</button>
-        </div>
-        <div class="col item">
-            <button id="carousel-item-button">Item</button>
-        </div>
-        <div class="col next">
-            <button id="carousel-next-button">&gt;</button>
-        </div>
+      <div class="col prev">
+        <button id="carousel-prev-button">&lt;</button>
+      </div>
+      <div class="col item">
+        <button id="carousel-item-button">Item</button>
+      </div>
+      <div class="col next">
+        <button id="carousel-next-button">&gt;</button>
+      </div>
     </div>
 
     <div id="overlay" class="hide">
-        <iframe id="viewer" src="viewer.html" frameborder="0"></iframe>
+      <iframe id="viewer" src="viewer.html" frameborder="0"></iframe>
     </div>
-
-</body>
-
+  </body>
 </html>

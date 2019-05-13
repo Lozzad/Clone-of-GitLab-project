@@ -1,6 +1,6 @@
 import "./components/carousel";
 import "./components/look-to-camera";
-import "./components/house";
+import "./components/box";
 
 var scene,
   video,
