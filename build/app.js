@@ -254,15 +254,19 @@ exports.default = AFRAME.registerComponent("carousel", {
         var newRotation;
         // if the direction is positive, and the new index is 0 or greater than the current index, add an interval
         if (direction === 1 && (newIndex === 0 || newIndex > this.index)) {
-            newRotation = this.currentRotation + this.interval;
+            newRotation = this.currentRotation - this.interval;
         }
         else {
-            newRotation = this.currentRotation - this.interval;
+            newRotation = this.currentRotation + this.interval;
         }
         var rotateCarouselAnim = "property: rotation; from: '90 0 " + this.currentRotation + "'; to: '90 0 " + newRotation + "'; dur: 1000; autoplay: true; easing: easeInOutQuad;";
         this.el.setAttribute("animation__rotation", rotateCarouselAnim);
-        //const rotateObjectAnim = `property: rotation; from: '0 0 0'; to: '0 0 0'; dur: 10000; loop: true; easing: linear; autoplay: true`;
-        this.el.children[this.index].removeAttribute("animation__rotate");
+        //const rotateObjectAnim = `property: rotation; from: '90 90 0'; to: '90 90 360'; dur: 10000; loop: true; easing: linear; autoplay: true`;
+        this.el.children[this.index].object3D.scale.divideScalar(1.5);
+        this.el.children[newIndex].object3D.scale.multiplyScalar(1.5);
+        //this.el!.children[this.index].removeAttribute("animation__rotate");
+        //this.el!.children[this.index].setAttribute("rotation", "-90 0 0");
+        //this.el!.children[newIndex].removeAttribute("rotation");
         //this.el!.children[newIndex].setAttribute("animation__rotate", rotateObjectAnim);
         this.currentRotation = newRotation;
         this.index = newIndex;
