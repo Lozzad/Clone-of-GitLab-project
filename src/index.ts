@@ -11,23 +11,15 @@ var scene,
   nextButton,
   itemButton;
 
+interface AppState {
+	selectedItem: string | null;
+	boxOpened: boolean;
+}
+
 var state = {
 	selectedItem: null,
 	boxOpened: false
-};
-
-// function viewObjectInOverlay(src) {
-//   viewer.contentWindow.postMessage(
-//     {
-//       src: src
-//     },
-//     window.location.href
-//   );
-
-//   state.selectedItem = src;
-
-//   render();
-// }
+} as AppState;
 
 function resize() {
   if (overlay) {
@@ -55,7 +47,13 @@ function render() {
   if (state.selectedItem) {
     scene.classList.add("hide");
     video.classList.add("hide");
-    overlay.classList.remove("hide");
+		overlay.classList.remove("hide");
+		viewer.contentWindow.postMessage(
+			{
+				src: state.selectedItem
+			},
+			window.location.href
+		);
   } else {
     scene.classList.remove("hide");
     video.classList.remove("hide");
@@ -78,36 +76,35 @@ window.addEventListener("DOMContentLoaded", function() {
   itemButton = document.getElementById("carousel-item-button");
   nextButton = document.getElementById("carousel-next-button");
 
-	scene.addEventListener("loaded", function() {
+	scene.addEventListener("loaded", () => {
 		
 	});
 
-	scene.addEventListener("box-opened", function() {
+	scene.addEventListener("box-opened", () => {
 		state.boxOpened = true;
 		render();
 	}, false);
 
-	scene.addEventListener("box-closing", function() {
+	scene.addEventListener("box-closing", () => {
 		state.boxOpened = false;
 		render();
 	}, false);
 
-	// scene.addEventListener(
-  //   "carousel-item-clicked",
-  //   function(event) {
-  //     var id = event.detail.id;
-  //     var asset = document.getElementById(id + "-asset");
+	scene.addEventListener("carousel-item-selected", (ev: CustomEvent) => {
+		const id: string = ev.detail.id;
 
-  //     if (asset) {
-  //       viewObjectInOverlay(asset.getAttribute("src"));
-  //     }
-  //   },
-  //   false
-  // );
+		var asset: HTMLElement | null = document.getElementById(id + "-asset");
+
+		if (asset) {
+			state.selectedItem = asset.getAttribute("src") as string;
+		}
+
+		render();
+	}, false);
 
   window.addEventListener(
     "message",
-    function(event) {
+    (event) => {
       if (event.data === "close") {
         state.selectedItem = null;
         render();
@@ -118,8 +115,8 @@ window.addEventListener("DOMContentLoaded", function() {
 
   prevButton.addEventListener(
     "click",
-    function() {
-      scene.emit("rotate", {
+    () => {
+      scene.emit("rotate-carousel", {
         direction: -1
       });
     },
@@ -128,16 +125,16 @@ window.addEventListener("DOMContentLoaded", function() {
 
   itemButton.addEventListener(
     "click",
-    function() {
-      console.log("item");
+    () => {
+      scene.emit("select-carousel-item");
     },
     false
   );
 
   nextButton.addEventListener(
     "click",
-    function() {
-      scene.emit("rotate", {
+    () => {
+      scene.emit("rotate-carousel", {
         direction: 1
       });
     },

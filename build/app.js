@@ -116,16 +116,6 @@ var state = {
     selectedItem: null,
     boxOpened: false
 };
-// function viewObjectInOverlay(src) {
-//   viewer.contentWindow.postMessage(
-//     {
-//       src: src
-//     },
-//     window.location.href
-//   );
-//   state.selectedItem = src;
-//   render();
-// }
 function resize() {
     if (overlay) {
         overlay.width = window.innerWidth;
@@ -148,6 +138,9 @@ function render() {
         scene.classList.add("hide");
         video.classList.add("hide");
         overlay.classList.remove("hide");
+        viewer.contentWindow.postMessage({
+            src: state.selectedItem
+        }, window.location.href);
     }
     else {
         scene.classList.remove("hide");
@@ -179,17 +172,14 @@ window.addEventListener("DOMContentLoaded", function () {
         state.boxOpened = false;
         render();
     }, false);
-    // scene.addEventListener(
-    //   "carousel-item-clicked",
-    //   function(event) {
-    //     var id = event.detail.id;
-    //     var asset = document.getElementById(id + "-asset");
-    //     if (asset) {
-    //       viewObjectInOverlay(asset.getAttribute("src"));
-    //     }
-    //   },
-    //   false
-    // );
+    scene.addEventListener("carousel-item-selected", function (ev) {
+        var id = ev.detail.id;
+        var asset = document.getElementById(id + "-asset");
+        if (asset) {
+            state.selectedItem = asset.getAttribute("src");
+        }
+        render();
+    }, false);
     window.addEventListener("message", function (event) {
         if (event.data === "close") {
             state.selectedItem = null;
@@ -197,15 +187,15 @@ window.addEventListener("DOMContentLoaded", function () {
         }
     }, false);
     prevButton.addEventListener("click", function () {
-        scene.emit("rotate", {
+        scene.emit("rotate-carousel", {
             direction: -1
         });
     }, false);
     itemButton.addEventListener("click", function () {
-        console.log("item");
+        scene.emit("select-carousel-item");
     }, false);
     nextButton.addEventListener("click", function () {
-        scene.emit("rotate", {
+        scene.emit("rotate-carousel", {
             direction: 1
         });
     }, false);
@@ -271,6 +261,10 @@ exports.default = AFRAME.registerComponent("carousel", {
         this.currentRotation = newRotation;
         this.index = newIndex;
     },
+    selectItem: function () {
+        var child = this.el.children[this.index];
+        this.el.sceneEl.emit("carousel-item-selected", { id: child.id }, false);
+    },
     bindMethods: function () {
         // this.removeDebugChildren = this.removeDebugChildren.bind(this);
         // this.addDebugChildren = this.addDebugChildren.bind(this);
@@ -279,14 +273,17 @@ exports.default = AFRAME.registerComponent("carousel", {
         this.createRing = this.createRing.bind(this);
         this.sceneLoaded = this.sceneLoaded.bind(this);
         this.updateAnimation = this.updateAnimation.bind(this);
+        this.selectItem = this.selectItem.bind(this);
     },
     addEventListeners: function () {
         this.el.sceneEl.addEventListener("loaded", this.sceneLoaded, false);
-        this.el.sceneEl.addEventListener("rotate", this.updateAnimation, false);
+        this.el.sceneEl.addEventListener("rotate-carousel", this.updateAnimation, false);
+        this.el.sceneEl.addEventListener("select-carousel-item", this.selectItem, false);
     },
     removeEventListeners: function () {
         this.el.sceneEl.removeEventListener("loaded", this.sceneLoaded, false);
-        this.el.sceneEl.removeEventListener("rotate", this.updateAnimation, false);
+        this.el.sceneEl.removeEventListener("rotate-carousel", this.updateAnimation, false);
+        this.el.sceneEl.removeEventListener("select-carousel-item", this.selectItem, false);
     },
     createRing: function () {
         this.ringGeometry = new THREE.TorusGeometry(this.data.radius, this.data.thickness, 6, 40);

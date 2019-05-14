@@ -11,7 +11,8 @@ interface CarouselComponent extends BaseComponent {
 
   createRing: () => void;
   sceneLoaded: () => void;
-  updateAnimation: (ev: CustomEvent) => void;
+	updateAnimation: (ev: CustomEvent) => void;
+	selectItem: () => void;
 }
 
 export default AFRAME.registerComponent("carousel", {
@@ -77,7 +78,12 @@ export default AFRAME.registerComponent("carousel", {
 
     this.currentRotation = newRotation;
     this.index = newIndex;
-  },
+	},
+	
+	selectItem() {
+		const child  = this.el!.children[this.index];
+		this.el!.sceneEl!.emit("carousel-item-selected", {id: child.id}, false);
+	},
 
   bindMethods() {
     // this.removeDebugChildren = this.removeDebugChildren.bind(this);
@@ -87,19 +93,26 @@ export default AFRAME.registerComponent("carousel", {
     this.removeEventListeners = this.removeEventListeners.bind(this);
     this.createRing = this.createRing.bind(this);
     this.sceneLoaded = this.sceneLoaded.bind(this);
-    this.updateAnimation = this.updateAnimation.bind(this);
+		this.updateAnimation = this.updateAnimation.bind(this);
+		this.selectItem = this.selectItem.bind(this);
   },
 
   addEventListeners() {
     this.el!.sceneEl!.addEventListener("loaded", this.sceneLoaded, false);
-    this.el!.sceneEl!.addEventListener("rotate", this.updateAnimation, false);
+		this.el!.sceneEl!.addEventListener("rotate-carousel", this.updateAnimation, false);
+		this.el!.sceneEl!.addEventListener("select-carousel-item", this.selectItem, false);
   },
 
   removeEventListeners() {
     this.el!.sceneEl!.removeEventListener("loaded", this.sceneLoaded, false);
     this.el!.sceneEl!.removeEventListener(
-      "rotate",
+      "rotate-carousel",
       this.updateAnimation,
+      false
+		);
+		this.el!.sceneEl!.removeEventListener(
+      "select-carousel-item",
+      this.selectItem,
       false
     );
   },
