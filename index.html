@@ -54,7 +54,14 @@
         background: #000;
         top: 0;
         right: 0;
-      }
+			}
+			
+			.a-loader-title {
+				/*display: none !important;*/
+				font-family: sans-serif;
+				color: #fff;
+				background: #000;
+			}
     </style>
   </head>
 
@@ -63,7 +70,8 @@
       embedded
       arjs="patternRatio: 0.6; sourceType: webcam; debugUIEnabled: false;"
       vr-mode-ui="enabled: false"
-      renderer="colorManagement: true;"
+			renderer="colorManagement: true;"
+			loading-screen="dotsColor: white; backgroundColor: black"
     >
       <a-assets>
         <a-asset-item id="house-asset" src="assets/house.gltf"></a-asset-item>
