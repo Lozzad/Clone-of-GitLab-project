@@ -55,7 +55,7 @@
         top: 0;
         right: 0;
 			}
-			
+
 			.a-loader-title {
 				/*display: none !important;*/
 				font-family: sans-serif;
@@ -76,7 +76,7 @@
       <a-assets>
         <a-asset-item id="house-asset" src="assets/house.gltf"></a-asset-item>
         <a-asset-item id="cha-asset" src="assets/cha.gltf"></a-asset-item>
-        <a-asset-item
+        <!-- <a-asset-item
           id="letter-asset"
           src="https://pbn.netlify.com/assets/letter.gltf"
         ></a-asset-item>
@@ -87,15 +87,15 @@
         <a-asset-item
           id="cat-walking-asset"
           src="https://pbn.netlify.com/assets/cat-walking.gltf"
-        ></a-asset-item>
+        ></a-asset-item> -->
         <!-- <a-asset-item
           id="man-asset"
           src="https://pbn.netlify.com/assets/man.gltf"
         ></a-asset-item>-->
-        <a-asset-item
+        <!-- <a-asset-item
           id="signpost-asset"
           src="https://pbn.netlify.com/assets/signpost.gltf"
-        ></a-asset-item>
+        ></a-asset-item> -->
         <a-asset-item id="speech-bubble" src=""></a-asset-item>
       </a-assets>
 
@@ -139,7 +139,7 @@
         <a-entity
           id="house"
           class="collidable"
-          
+
           rotation="0 270 0"
           position="0 0 -0.25"
           scale="0.1 0.1 0.1"
@@ -158,8 +158,8 @@
             carousel="radius: 0.4; thickness: 0.01; ringVisible: true; itemRadius: 0.1;"
          >
             <!--animation="property: rotation; from: '90 0 0'; to: '90 0 360'; dur: 30000; loop: true; easing: linear; autoplay: true;"-->
-						<a-entity 
-							id="letter" 
+						<a-entity
+							id="letter"
 							gltf-model="#letter-asset"
 							scale="1.2 1.2 1.2"
 						>
@@ -187,7 +187,7 @@
       </a-marker>
     </a-scene>
 
-    <div id="carousel-menu" class="hide">
+    <!-- <div id="carousel-menu" class="hide">
       <div class="col prev">
         <button id="carousel-prev-button">&lt;</button>
       </div>
@@ -201,6 +201,6 @@
 
     <div id="overlay" class="hide">
       <iframe id="viewer" src="/viewer.html" frameborder="0"></iframe>
-    </div>
+    </div> -->
   </body>
 </html>
