@@ -70,13 +70,20 @@
       embedded
       arjs="patternRatio: 0.6; sourceType: webcam; debugUIEnabled: false;"
       vr-mode-ui="enabled: false"
-			renderer="colorManagement: true;"
+			renderer="colorManagement: true; logarithmicDepthBuffer: true;"
 			loading-screen="dotsColor: white; backgroundColor: black"
     >
       <a-assets>
         <a-asset-item id="house-asset" src="assets/house.gltf"></a-asset-item>
+        <a-asset-item id="af-asset" src="assets/af.gltf"></asset-item>
+        <a-asset-item id="af2-asset" src="assets/af2.gltf"></asset-item>
+        <a-asset-item id="ag-asset" src="assets/ag.gltf"></asset-item>
+        <a-asset-item id="ah-asset" src="assets/ah.gltf"></asset-item>
+        <a-asset-item id="alice-asset" src="assets/alice.gltf"></asset-item>
+        <a-asset-item id="aw-asset" src="assets/aw.gltf"></asset-item>
+        <a-asset-item id="bg-asset" src="assets/bg.gltf"></asset-item>
         <a-asset-item id="cha-asset" src="assets/cha.gltf"></a-asset-item>
-        <!-- <a-asset-item
+        <a-asset-item
           id="letter-asset"
           src="https://pbn.netlify.com/assets/letter.gltf"
         ></a-asset-item>
@@ -87,15 +94,15 @@
         <a-asset-item
           id="cat-walking-asset"
           src="https://pbn.netlify.com/assets/cat-walking.gltf"
-        ></a-asset-item> -->
+        ></a-asset-item>
         <!-- <a-asset-item
           id="man-asset"
           src="https://pbn.netlify.com/assets/man.gltf"
         ></a-asset-item>-->
-        <!-- <a-asset-item
+        <a-asset-item
           id="signpost-asset"
           src="https://pbn.netlify.com/assets/signpost.gltf"
-        ></a-asset-item> -->
+        ></a-asset-item>
         <a-asset-item id="speech-bubble" src=""></a-asset-item>
       </a-assets>
 
@@ -116,8 +123,22 @@
         ></a-light>
 
         <a-light
+          type="ambient"
+          color="#fff"
+          position="4 2 2"
+          intensity="1"
+        ></a-light>
+
+        <a-light
           type="spot"
           position="0 2 4"
+          rotation="0 0 0"
+          intensity="1"
+        ></a-light>
+
+        <a-light
+          type="spot"
+          position="4 0 2"
           rotation="0 0 0"
           intensity="1"
         ></a-light>
@@ -137,14 +158,14 @@
         </a-entity> -->
 
         <a-entity
-          id="house"
+          id="house1"
           class="collidable"
-
+          animation-mixer="clip: closed"
           rotation="0 270 0"
           position="0 0 -0.25"
-          scale="0.1 0.1 0.1"
-          gltf-model="#cha-asset"
-
+          scale="6 6 6"
+          gltf-model="#house-asset"
+          box="carouselId: carousel"
         >
         </a-entity>
 
@@ -154,9 +175,9 @@
           position="0 0.9 -0.25"
           scale="0.25 0.25 0.25"
         >
-        <a-entity
+          <a-entity
             carousel="radius: 0.4; thickness: 0.01; ringVisible: true; itemRadius: 0.1;"
-         >
+          >
             <!--animation="property: rotation; from: '90 0 0'; to: '90 0 360'; dur: 30000; loop: true; easing: linear; autoplay: true;"-->
 						<a-entity
 							id="letter"
@@ -184,10 +205,108 @@
             </a-entity>
           </a-entity>
         </a-entity>
+
+        <a-entity
+          id="house2"
+          class="collidable"
+          animation-mixer="clip: closed"
+          rotation="0 -90 0"
+          position="2 0 -0.25"
+          scale="0.1 0.1 0.1"
+          gltf-model="#cha-asset"
+          box="carouselId: carousel"
+        >
+        </a-entity>
+
+        <a-entity
+          id="house3"
+          class="collidable"
+          animation-mixer="clip: closed"
+          rotation="0 -90 0"
+          position="-2 0 -0.25"
+          scale="0.1 0.1 0.1"
+          gltf-model="#af-asset"
+          box="carouselId: carousel"
+        >
+        </a-entity>
+
+        <a-entity
+          id="house4"
+          class="collidable"
+          animation-mixer="clip: closed"
+          rotation="0 -90 0"
+          position="0 0 -2"
+          scale="0.1 0.1 0.1"
+          gltf-model="#af2-asset"
+          box="carouselId: carousel"
+        >
+        </a-entity>
+
+        <a-entity
+          id="house5"
+          class="collidable"
+          animation-mixer="clip: closed"
+          rotation="0 -90 0"
+          position="0 0 2"
+          scale="0.1 0.1 0.1"
+          gltf-model="#ag-asset"
+          box="carouselId: carousel"
+        >
+        </a-entity>
+
+
+        <a-entity
+          id="house6"
+          class="collidable"
+          animation-mixer="clip: closed"
+          rotation="0 -90 0"
+          position="2 0 2"
+          scale="0.1 0.1 0.1"
+          gltf-model="#ah-asset"
+          box="carouselId: carousel"
+        >
+        </a-entity>
+
+        <a-entity
+          id="house7"
+          class="collidable"
+          animation-mixer="clip: closed"
+          rotation="0 -90 0"
+          position="2 0 4"
+          scale="0.1 0.1 0.1"
+          gltf-model="#alice-asset"
+          box="carouselId: carousel"
+        >
+        </a-entity>
+
+        <a-entity
+          id="house8"
+          class="collidable"
+          animation-mixer="clip: closed"
+          rotation="0 -90 0"
+          position="4 0 2"
+          scale="0.1 0.1 0.1"
+          gltf-model="#aw-asset"
+          box="carouselId: carousel"
+        >
+        </a-entity>
+
+        <a-entity
+          id="house6"
+          class="collidable"
+          animation-mixer="clip: closed"
+          rotation="0 -90 0"
+          position="6 0 4"
+          scale="0.1 0.1 0.1"
+          gltf-model="#bg-asset"
+          box="carouselId: carousel"
+        >
+        </a-entity>
+
       </a-marker>
     </a-scene>
 
-    <!-- <div id="carousel-menu" class="hide">
+    <div id="carousel-menu" class="hide">
       <div class="col prev">
         <button id="carousel-prev-button">&lt;</button>
       </div>
@@ -201,6 +320,6 @@
 
     <div id="overlay" class="hide">
       <iframe id="viewer" src="/viewer.html" frameborder="0"></iframe>
-    </div> -->
+    </div>
   </body>
 </html>
