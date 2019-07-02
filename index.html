@@ -71,10 +71,11 @@
       arjs="patternRatio: 0.6; sourceType: webcam; debugUIEnabled: false;"
       vr-mode-ui="enabled: false"
 			renderer="colorManagement: true; logarithmicDepthBuffer: true;"
-			loading-screen="dotsColor: white; backgroundColor: black"
+      loading-screen="dotsColor: white; backgroundColor: black"
+      stats
     >
       <a-assets>
-        <a-asset-item id="house-asset" src="assets/house.gltf"></a-asset-item>
+        <!-- <a-asset-item id="house-asset" src="assets/house.gltf"></a-asset-item> -->
         <a-asset-item id="af-asset" src="assets/af.gltf"></asset-item>
         <a-asset-item id="af2-asset" src="assets/af2.gltf"></asset-item>
         <a-asset-item id="ag-asset" src="assets/ag.gltf"></asset-item>
@@ -155,7 +156,7 @@
           scale="4 4 4"
           gltf-model="#signpost-asset"
         >
-        </a-entity> -->
+        </a-entity> 
 
 
         <a-entity
@@ -167,7 +168,7 @@
           <a-entity
             carousel="radius: 0.4; thickness: 0.01; ringVisible: true; itemRadius: 0.1;"
           >
-            <!--animation="property: rotation; from: '90 0 0'; to: '90 0 360'; dur: 30000; loop: true; easing: linear; autoplay: true;"-->
+            animation="property: rotation; from: '90 0 0'; to: '90 0 360'; dur: 30000; loop: true; easing: linear; autoplay: true;"
 						<a-entity
 							id="letter"
 							gltf-model="#letter-asset"
@@ -193,7 +194,7 @@
             >
             </a-entity>
           </a-entity>
-        </a-entity>
+        </a-entity> -->
 
       </a-marker>
     </a-scene>
@@ -231,8 +232,6 @@
 
           marker.appendChild(entity);
         };
-
-        addEntity('house', -90, 0, 0, 6);
         addEntity('cha', -90, 2, 0);
         addEntity('af', -90, -2, 0);
         addEntity('af2', -90, 0, -2);
