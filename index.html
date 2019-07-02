@@ -65,7 +65,7 @@
     </style>
   </head>
 
-  <body>
+  <body id="body">
     <a-scene
       embedded
       arjs="patternRatio: 0.6; sourceType: webcam; debugUIEnabled: false;"
@@ -157,17 +157,6 @@
         >
         </a-entity> -->
 
-        <a-entity
-          id="house1"
-          class="collidable"
-          animation-mixer="clip: closed"
-          rotation="0 270 0"
-          position="0 0 -0.25"
-          scale="6 6 6"
-          gltf-model="#house-asset"
-          box="carouselId: carousel"
-        >
-        </a-entity>
 
         <a-entity
           rotation="90 0 90"
@@ -206,103 +195,6 @@
           </a-entity>
         </a-entity>
 
-        <a-entity
-          id="house2"
-          class="collidable"
-          animation-mixer="clip: closed"
-          rotation="0 -90 0"
-          position="2 0 -0.25"
-          scale="0.1 0.1 0.1"
-          gltf-model="#cha-asset"
-          box="carouselId: carousel"
-        >
-        </a-entity>
-
-        <a-entity
-          id="house3"
-          class="collidable"
-          animation-mixer="clip: closed"
-          rotation="0 -90 0"
-          position="-2 0 -0.25"
-          scale="0.1 0.1 0.1"
-          gltf-model="#af-asset"
-          box="carouselId: carousel"
-        >
-        </a-entity>
-
-        <a-entity
-          id="house4"
-          class="collidable"
-          animation-mixer="clip: closed"
-          rotation="0 -90 0"
-          position="0 0 -2"
-          scale="0.1 0.1 0.1"
-          gltf-model="#af2-asset"
-          box="carouselId: carousel"
-        >
-        </a-entity>
-
-        <a-entity
-          id="house5"
-          class="collidable"
-          animation-mixer="clip: closed"
-          rotation="0 -90 0"
-          position="0 0 2"
-          scale="0.1 0.1 0.1"
-          gltf-model="#ag-asset"
-          box="carouselId: carousel"
-        >
-        </a-entity>
-
-
-        <a-entity
-          id="house6"
-          class="collidable"
-          animation-mixer="clip: closed"
-          rotation="0 -90 0"
-          position="2 0 2"
-          scale="0.1 0.1 0.1"
-          gltf-model="#ah-asset"
-          box="carouselId: carousel"
-        >
-        </a-entity>
-
-        <a-entity
-          id="house7"
-          class="collidable"
-          animation-mixer="clip: closed"
-          rotation="0 -90 0"
-          position="2 0 4"
-          scale="0.1 0.1 0.1"
-          gltf-model="#alice-asset"
-          box="carouselId: carousel"
-        >
-        </a-entity>
-
-        <a-entity
-          id="house8"
-          class="collidable"
-          animation-mixer="clip: closed"
-          rotation="0 -90 0"
-          position="4 0 2"
-          scale="0.1 0.1 0.1"
-          gltf-model="#aw-asset"
-          box="carouselId: carousel"
-        >
-        </a-entity>
-
-        <a-entity
-          id="house6"
-          class="collidable"
-          animation-mixer="clip: closed"
-          rotation="0 -90 0"
-          position="6 0 4"
-          scale="0.1 0.1 0.1"
-          gltf-model="#bg-asset"
-          box="carouselId: carousel"
-        >
-        </a-entity>
-
       </a-marker>
     </a-scene>
 
@@ -321,5 +213,35 @@
     <div id="overlay" class="hide">
       <iframe id="viewer" src="/viewer.html" frameborder="0"></iframe>
     </div>
+
+    <footer>
+      <script type="text/javascript">
+        function addEntity(nameEntity, rotYEntity=0, posXEntity=0, posZEntity=0, scaleEntity=0.05){
+          var marker = document.querySelector("a-marker");
+          var entity = document.createElement("a-entity");
+
+          entity.setAttribute('id', 'nameEntity');
+          entity.setAttribute('position', {x: posXEntity, y: 0, z: posZEntity});
+          entity.setAttribute('rotation', {x: 0, y: rotYEntity, z: 0});
+          entity.setAttribute('scale', {x: scaleEntity, y: scaleEntity, z: scaleEntity});
+          entity.setAttribute('gltf-model', '#' + nameEntity + '-asset');
+          entity.setAttribute('class', 'collidable');
+          entity.setAttribute('animation-mixer', {clip: 'closed'});
+          entity.setAttribute('box', {carouselId: 'carousel'});
+
+          marker.appendChild(entity);
+        };
+
+        addEntity('house', -90, 0, 0, 6);
+        addEntity('cha', -90, 2, 0);
+        addEntity('af', -90, -2, 0);
+        addEntity('af2', -90, 0, -2);
+        addEntity('ag', -90, 0, 2);
+        addEntity('ah', -90, 2, 2);
+        addEntity('alice', -90, 2, 4);
+        addEntity('bg', -90, 6, 4);
+
+      </script>
+    </footer>
   </body>
 </html>
