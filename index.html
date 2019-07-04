@@ -75,7 +75,7 @@
       stats
     >
       <a-assets>
-        <!-- <a-asset-item id="house-asset" src="assets/house.gltf"></a-asset-item> -->
+        <a-asset-item id="house-asset" src="assets/house.gltf"></a-asset-item>
         <a-asset-item id="af-asset" src="assets/af.gltf"></asset-item>
         <a-asset-item id="af2-asset" src="assets/af2.gltf"></asset-item>
         <a-asset-item id="ag-asset" src="assets/ag.gltf"></asset-item>
@@ -180,10 +180,10 @@
           scale="4 4 4"
           gltf-model="#signpost-asset"
         >
-        </a-entity>
+        </a-entity> -->
 
 
-        <a-entity
+        <!-- <a-entity
           rotation="90 0 90"
           id="carousel"
           position="0 0.9 -0.25"
@@ -241,58 +241,103 @@
 
     <footer>
       <script type="text/javascript">
-        function addEntity(nameEntity, rotYEntity=0, posXEntity=0, posZEntity=0, scaleEntity=0.05){
+        function addHouse(nameHouse, rotYHouse=0, posXHouse=0, posZHouse=0, scaleHouse=0.05, nameCarousel, rotXCarousel=0, rotZCarousel=0, posXCarousel=0, posYCarousel=0, posZCarousel=0, scaleCarousel=0.25, radiusCarousel=1, thicknessCarousel=0.25, itemRadiusCarousel=1, nbObjects=0, idObject1=null, scaleObject1=1.2, idObject2=null, scaleObject2=1.2, idObject3=null, scaleObject3=1.2, idObject4=null, scaleObject4=1.2){
           var marker = document.querySelector("a-marker");
-          var entity = document.createElement("a-entity");
+          var house = document.createElement("a-entity");
 
-          entity.setAttribute('id', 'nameEntity');
-          entity.setAttribute('position', {x: posXEntity, y: 0, z: posZEntity});
-          entity.setAttribute('rotation', {x: 0, y: rotYEntity, z: 0});
-          entity.setAttribute('scale', {x: scaleEntity, y: scaleEntity, z: scaleEntity});
-          entity.setAttribute('gltf-model', '#' + nameEntity + '-asset');
-          entity.setAttribute('class', 'collidable');
-          entity.setAttribute('animation-mixer', {clip: 'closed'});
-          entity.setAttribute('box', {carouselId: 'carousel'});
+          house.setAttribute('id', nameHouse);
+          house.setAttribute('position', {x: posXHouse, y: 0, z: posZHouse});
+          house.setAttribute('rotation', {x: 0, y: rotYHouse, z: 0});
+          house.setAttribute('scale', {x: scaleHouse, y: scaleHouse, z: scaleHouse});
+          house.setAttribute('gltf-model', '#' + nameHouse + '-asset');
+          house.setAttribute('class', 'collidable');
+          house.setAttribute('animation-mixer', {clip: 'closed'});
+          house.setAttribute('box', {carouselId: 'carousel'});
 
-          marker.appendChild(entity);
+          marker.appendChild(house);
+          addCarousel(nameCarousel, rotXCarousel, rotZCarousel, posXCarousel, posYCarousel, posZCarousel, scaleCarousel, radiusCarousel, thicknessCarousel, itemRadiusCarousel, nbObjects, idObject1, scaleObject1, idObject2, scaleObject2, idObject3, scaleObject3, idObject4, scaleObject4);
         };
-        addEntity('cha', -90, -4, 5);
-        addEntity('af', 0, -3.5, 2.5);
-        addEntity('af2', -90, -2, 2);
-        addEntity('ag', 90, -0.5, 3.5);
-        addEntity('ah', 0, 2.5, 1);
-        addEntity('alice', -90, -0.5, 3);
-        addEntity('bg', -120, 4.5, -1);
-        addEntity('ct', -90, -1.5, 3);
-        addEntity('dls', 0, -1, 2.5);
-        addEntity('eb', 0, -0.5, 0.5);
-        addEntity('fc', 180, 3.5, 0);
-        addEntity('fh', 0, 0.5, 4);
-        addEntity('fs', 0, 0.5, 4.5);
-        addEntity('ga', -90, -2, -1);
-        addEntity('jd', 180, 4, 5);
-        addEntity('lb', -90, -3, 3.5);
-        addEntity('lk', -90, 1, 3.5);
-        addEntity('lp', 180, 1, 3);
-        addEntity('ls', 90, 1.5, 2.5);
-        addEntity('lt', 180, 3.5, 4.5);
-        addEntity('ma', 180, 4, 1);
-        addEntity('md', -90, 2.5, 0);
-        addEntity('nl', -90, 2, 0);
-        addEntity('ollie', 0, -4, 2);
-        addEntity('pb', -90, -3, -1);
-        addEntity('rc', 90, -2, 1.5);
-        addEntity('rmj', 0, -2.5, 2);
-        addEntity('rw', -90, 2, 3);
-        addEntity('ss', 0, -1, 4);
-        addEntity('za', 180, 3, 4);
-        addEntity('aw', 180, 4.5, 5.5);
-        addEntity('ef', -90, -3.5, 4);
 
+      function addCarousel(nameCarousel, rotXCarousel=0, rotZCarousel=0, posXCarousel=0, posYCarousel=0, posZCarousel=0, scaleCarousel=0.25, radiusCarousel=1, thicknessCarousel=0.25, itemRadiusCarousel=1, nbObjects=0, idObject1=null, scaleObject1=1.2, idObject2=null, scaleObject2=1.2, idObject3=null, scaleObject3=1.2, idObject4=null, scaleObject4=1.2) {
+          if (nbObjects>0) {
 
+            var subCarousel = document.createElement("a-entity");
+            subCarousel.setAttribute('carousel', {radius: radiusCarousel, thickness: thicknessCarousel, ringVisible: true, itemRadius: itemRadiusCarousel});
 
+            var objects = new Array(nbObjects);
+            var idObjects = [idObject1, idObject2, idObject3, idObject4];
+            var scaleObjects = [scaleObject1, scaleObject2, scaleObject3, scaleObject4];
 
+            for (var i = 0; i < nbObjects; i++) {
+              objects[i] = createObject(idObjects[i], scaleObjects[i]);
+              subCarousel.appendChild(objects[i]);
+            };
 
+            var marker = document.querySelector("a-marker");
+
+            // alert(objects[0].getAttribute('position').x);
+            // marker.appendChild(objects[0]);
+
+            var carousel = document.createElement("a-entity");
+            carrousel.setAttribute('id', nameCarousel + '-carousel');
+            carrousel.setAttribute('rotation', {x: rotXCarousel, y: 0, z: rotZCarousel});
+            carrousel.setAttribute('position', {x: posXCarousel, y: posYCarousel, z: posZCarousel});
+            carrousel.setAttribute('scale', {x: scaleCarousel, y: scaleCarousel, z: scaleCarousel});
+            carrousel.appendChild(subCarousel);
+          };
+      };
+
+      function createObject(idObject, scaleObject=1.2) {
+        // alert(idObject);
+        var object = document.createElement("a-entity");
+        object.setAttribute('id', idObject);
+        // object.object3D.gltf-model.set('#' + idObject + '-asset')
+        object.setAttribute('gltf-model', '#' + idObject + '-asset');
+        // object.setAttribute('scale', {x: scaleObject, y: scaleObject, z:scaleObject});
+        object.object3D.scale.set(3,3,3);
+        // object.setAttribute('scale', {x: 3, y: 3, z:3});
+
+        object.object3D.position.set(2,2,2);
+        // object.setAttribute('position', {x: 2, y: 2, z: 2});
+        // alert(object.getAttribute('gltf-model'));
+
+        return object;
+      };
+
+        addHouse('house', -90, 0, 0, 6, "carousel", 90, 90, 0, 0.9, 0, 0.25, 0.4, 0.01, 0.1, 4, 'lettre', 1.2, 'cat-walking', 1.2, 'cat-sitting', 1.2, 'signpost', 3);
+        // don't forget scaleHouse
+        // addHouse('cha', -90, -4, 5);
+        // addHouse('af', 0, -3.5, 2.5);
+        // addHouse('af2', -90, -2, 2);
+        // addHouse('ag', 90, -0.5, 3.5);
+        // addHouse('ah', 0, 2.5, 1);
+        // addHouse('alice', -90, -0.5, 3);
+        // addHouse('bg', -120, 4.5, -1);
+        // addHouse('ct', -90, -1.5, 3);
+        // addHouse('dls', 0, -1, 2.5);
+        // addHouse('eb', 0, -0.5, 0.5);
+        // addHouse('fc', 180, 3.5, 0);
+        // addHouse('fh', 0, 0.5, 4);
+        // addHouse('fs', 0, 0.5, 4.5);
+        // addHouse('ga', -90, -2, -1);
+        // addHouse('jd', 180, 4, 5);
+        // addHouse('lb', -90, -3, 3.5);
+        // addHouse('lk', -90, 1, 3.5);
+        // addHouse('lp', 180, 1, 3);
+        // addHouse('ls', 90, 1.5, 2.5);
+        // addHouse('lt', 180, 3.5, 4.5);
+        // addHouse('ma', 180, 4, 1);
+        // addHouse('md', -90, 2.5, 0);
+        // addHouse('nl', -90, 2, 0);
+        // addHouse('ollie', 0, -4, 2);
+        // addHouse('pb', -90, -3, -1);
+        // addHouse('rc', 90, -2, 1.5);
+        // addHouse('rmj', 0, -2.5, 2);
+        // addHouse('rw', -90, 2, 3);
+        // addHouse('ss', 0, -1, 4);
+        // addHouse('za', 180, 3, 4);
+        // addHouse('aw', 180, 4.5, 5.5);
+        // addHouse('ef', -90, -3.5, 4);
 
       </script>
     </footer>
