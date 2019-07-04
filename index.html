@@ -161,7 +161,7 @@
           intensity="1"
         ></a-light>
 
-       
+
 
         <!-- <a-entity
           position="-1 0 -0.25"
@@ -248,7 +248,7 @@
           house.setAttribute('class', 'collidable');
           house.setAttribute('animation-mixer', {clip: 'closed'});
           house.setAttribute('box', {carouselId: 'carousel'});
-
+          // alert(house.getAttribute('rotation').y);
           marker.appendChild(house);
           addCarousel(nameCarousel, rotXCarousel, rotZCarousel, posXCarousel, posYCarousel, posZCarousel, scaleCarousel, radiusCarousel, thicknessCarousel, itemRadiusCarousel, nbObjects, idObject1, scaleObject1, idObject2, scaleObject2, idObject3, scaleObject3, idObject4, scaleObject4);
         };
@@ -265,16 +265,16 @@
 
             for (var i = 0; i < nbObjects; i++) {
               objects[i] = createObject(idObjects[i], scaleObjects[i]);
+              // alert(objects[i].getAttribute('gltf-model'));
               subCarousel.appendChild(objects[i]);
             };
 
             var marker = document.querySelector("a-marker");
 
-            // alert(objects[0].getAttribute('position').x);
             // marker.appendChild(objects[0]);
 
             var carousel = document.createElement("a-entity");
-            carrousel.setAttribute('id', nameCarousel + '-carousel');
+            carrousel.setAttribute('id', nameCarousel);
             carrousel.setAttribute('rotation', {x: rotXCarousel, y: 0, z: rotZCarousel});
             carrousel.setAttribute('position', {x: posXCarousel, y: posYCarousel, z: posZCarousel});
             carrousel.setAttribute('scale', {x: scaleCarousel, y: scaleCarousel, z: scaleCarousel});
@@ -288,13 +288,14 @@
         object.setAttribute('id', idObject);
         // object.object3D.gltf-model.set('#' + idObject + '-asset')
         object.setAttribute('gltf-model', '#' + idObject + '-asset');
+
         // object.setAttribute('scale', {x: scaleObject, y: scaleObject, z:scaleObject});
         object.object3D.scale.set(3,3,3);
         // object.setAttribute('scale', {x: 3, y: 3, z:3});
 
         object.object3D.position.set(2,2,2);
         // object.setAttribute('position', {x: 2, y: 2, z: 2});
-        // alert(object.getAttribute('gltf-model'));
+        alert(object.getAttribute('gltf-model'));
 
         return object;
       };
