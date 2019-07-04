@@ -241,14 +241,21 @@
           var house = document.createElement("a-entity");
 
           house.setAttribute('id', nameHouse);
-          house.setAttribute('position', {x: posXHouse, y: 0, z: posZHouse});
-          house.setAttribute('rotation', {x: 0, y: rotYHouse, z: 0});
-          house.setAttribute('scale', {x: scaleHouse, y: scaleHouse, z: scaleHouse});
+          // house.setAttribute('position', {x: posXHouse, y: 0, z: posZHouse});
+          house.object3D.position.set(posXHouse, 0, posZHouse);
+          // house.setAttribute('rotation', {x: 0, y: rotYHouse, z: 0});
+          house.object3D.rotation.set(
+            THREE.Math.degToRad(0),
+            THREE.Math.degToRad(rotYHouse),
+            THREE.Math.degToRad(0)
+          );
+          // house.setAttribute('scale', {x: scaleHouse, y: scaleHouse, z: scaleHouse});
+          house.object3D.scale.set(scaleHouse, scaleHouse, scaleHouse);
           house.setAttribute('gltf-model', '#' + nameHouse + '-asset');
           house.setAttribute('class', 'collidable');
           house.setAttribute('animation-mixer', {clip: 'closed'});
           house.setAttribute('box', {carouselId: 'carousel'});
-          // alert(house.getAttribute('rotation').y);
+          alert(house.getAttribute('animation-mixer').clip);
           marker.appendChild(house);
           addCarousel(nameCarousel, rotXCarousel, rotZCarousel, posXCarousel, posYCarousel, posZCarousel, scaleCarousel, radiusCarousel, thicknessCarousel, itemRadiusCarousel, nbObjects, idObject1, scaleObject1, idObject2, scaleObject2, idObject3, scaleObject3, idObject4, scaleObject4);
         };
@@ -274,11 +281,11 @@
             // marker.appendChild(objects[0]);
 
             var carousel = document.createElement("a-entity");
-            carrousel.setAttribute('id', nameCarousel);
-            carrousel.setAttribute('rotation', {x: rotXCarousel, y: 0, z: rotZCarousel});
-            carrousel.setAttribute('position', {x: posXCarousel, y: posYCarousel, z: posZCarousel});
-            carrousel.setAttribute('scale', {x: scaleCarousel, y: scaleCarousel, z: scaleCarousel});
-            carrousel.appendChild(subCarousel);
+            carousel.setAttribute('id', nameCarousel);
+            carousel.setAttribute('rotation', {x: rotXCarousel, y: 0, z: rotZCarousel});
+            carousel.setAttribute('position', {x: posXCarousel, y: posYCarousel, z: posZCarousel});
+            carousel.setAttribute('scale', {x: scaleCarousel, y: scaleCarousel, z: scaleCarousel});
+            carousel.appendChild(subCarousel);
           };
       };
 
@@ -295,7 +302,7 @@
 
         object.object3D.position.set(2,2,2);
         // object.setAttribute('position', {x: 2, y: 2, z: 2});
-        alert(object.getAttribute('gltf-model'));
+        // alert(object.getAttribute('gltf-model'));
 
         return object;
       };
