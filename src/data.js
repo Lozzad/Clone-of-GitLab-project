@@ -1,4 +1,4 @@
-let house = [
+let houses = [
         { 
         "id": "af", 
         "posX": -3.5, "posY": 0, "posZ": 2.5, 
@@ -324,8 +324,10 @@ let house = [
     }
 ]
 
+let objects = []
+
 function addHouses() {
-    house.forEach(houseData => {
+    houses.forEach(houseData => {
         let marker = document.querySelector("a-marker");
         let house = document.createElement("a-entity");
 
