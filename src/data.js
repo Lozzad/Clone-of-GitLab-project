@@ -1,5 +1,5 @@
-{"houses":[
-    { 
+let house = [
+        { 
         "id": "af", 
         "posX": -3.5, "posY": 0, "posZ": 2.5, 
         "rotX": 0, "rotY": 0, "rotZ": 0, 
@@ -322,4 +322,30 @@
             {"id": "za1"}
         ]
     }
-]}
+]
+
+function addHouses() {
+    house.forEach(houseData => {
+        let marker = document.querySelector("a-marker");
+        let house = document.createElement("a-entity");
+
+        house.setAttribute('id', houseData.id);
+        house.object3D.position.set(houseData.posX, houseData.posY, houseData.posZ);
+        house.object3D.rotation.set(
+            THREE.Math.degToRad(houseData.rotX),
+            THREE.Math.degToRad(houseData.rotY),
+            THREE.Math.degToRad(houseData.rotZ)
+        );
+        house.object3D.scale.set(houseData.scale, houseData.scale, houseData.scale);
+        house.setAttribute('gltf-model', '/assets/' + houseData.id + '.gltf');
+        if (houseData.collidable) { 
+            house.setAttribute('class', 'collidable');
+            house.setAttribute('animation-mixer', {clip: 'closed'});
+            house.setAttribute('box', {carouselId: 'carousel'});
+        }
+        marker.appendChild(house);
+        
+    });
+}
+
+addHouses();
