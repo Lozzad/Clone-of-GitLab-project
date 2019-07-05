@@ -161,6 +161,16 @@
           intensity="1"
         ></a-light>
 
+        <a-entity
+          id="house"
+          class="collidable"
+          animation-mixer="clip: closed"
+          rotation="0 0 0"
+          position="0 0 0"
+          scale="6 6 6"
+          gltf-model="#house-asset"
+          box="carouselId: carousel">
+        </a-entity>
 
 
         <!-- <a-entity
@@ -178,7 +188,7 @@
         </a-entity> -->
 
 
-        <!-- <a-entity
+        <a-entity
           rotation="90 0 90"
           id="carousel"
           position="0 0.9 -0.25"
@@ -213,7 +223,7 @@
             >
             </a-entity>
           </a-entity>
-        </a-entity> -->
+        </a-entity>
 
       </a-marker>
     </a-scene>
@@ -234,7 +244,7 @@
       <iframe id="viewer" src="/viewer.html" frameborder="0"></iframe>
     </div>
 
-    <footer>
+    <!-- <footer>
       <script type="text/javascript">
         function addHouse(nameHouse, rotYHouse=0, posXHouse=0, posZHouse=0, scaleHouse=0.05, nameCarousel, rotXCarousel=0, rotZCarousel=0, posXCarousel=0, posYCarousel=0, posZCarousel=0, scaleCarousel=0.25, radiusCarousel=1, thicknessCarousel=0.25, itemRadiusCarousel=1, nbObjects=0, idObject1=null, scaleObject1=1.2, idObject2=null, scaleObject2=1.2, idObject3=null, scaleObject3=1.2, idObject4=null, scaleObject4=1.2){
           var marker = document.querySelector("a-marker");
@@ -343,6 +353,6 @@
         // addHouse('ef', -90, -3.5, 4);
 
       </script>
-    </footer>
+    </footer> -->
   </body>
 </html>

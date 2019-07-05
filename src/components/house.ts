@@ -16,7 +16,7 @@ export default AFRAME.registerComponent("house", {
     init() {
         this.bindMethods();
         this.addEventListeners();
-        this.createHouse();
+        this.createHouse();      
     },
 
     bindMethods() {
@@ -34,7 +34,8 @@ export default AFRAME.registerComponent("house", {
     },
 
     createHouse() {
-
+        this.el!.setAttribute('gltf-model', 'assets/' + this.id + '.gltf');
+        
     },
 
 
