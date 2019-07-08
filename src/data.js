@@ -358,12 +358,8 @@ function addHouses() {
         );
         house.object3D.scale.set(houseData.scale, houseData.scale, houseData.scale);
         house.setAttribute('gltf-model', '/assets/' + houseData.id + '.gltf');
-<<<<<<< HEAD
         if (houseData.collidable) {
-=======
-        house.setAttribute('animation-mixer', {clip: 'closed'});
-        if (houseData.collidable) { 
->>>>>>> 15fb489ffa62bf38c43dd743ea8cf39444d7f72c
+            house.setAttribute('animation-mixer', {clip: 'closed'});
             house.setAttribute('class', 'collidable');
             house.setAttribute('box', {carouselId: 'carousel'});
         }
