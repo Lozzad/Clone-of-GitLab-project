@@ -1,7 +1,6 @@
 let houses = [
         {
         "id": "af",
-        "markerId": 0,
         "posX": -3.5, "posY": 0, "posZ": 2.5,
         "rotX": 0, "rotY": 0, "rotZ": 0,
         "scale": 0.05,
@@ -12,7 +11,6 @@ let houses = [
     },
     {
         "id": "af2",
-        "markerId": 1,
         "posX": -2, "posY": 0, "posZ": 2,
         "rotX": 0, "rotY": -90, "rotZ": 0,
         "scale": 0.05,
@@ -21,7 +19,6 @@ let houses = [
     },
     {
         "id": "ag",
-        "markerId": 2,
         "posX": -0.5, "posY": 0, "posZ": 3.5,
         "rotX": 0, "rotY": 90, "rotZ": 0,
         "scale": 0.05,
@@ -33,7 +30,6 @@ let houses = [
     },
     {
         "id": "ah",
-        "markerId": 1,
         "posX": 2.5, "posY": 0, "posZ": 1,
         "rotX": 0, "rotY": 0, "rotZ": 0,
         "scale": 0.05,
@@ -44,7 +40,6 @@ let houses = [
     },
     {
         "id": "alice",
-        "markerId": 2,
         "posX": -0.5, "posY": 0, "posZ": 3,
         "rotX": 0, "rotY": -90, "rotZ": 0,
         "scale": 0.05,
@@ -53,7 +48,6 @@ let houses = [
     },
     {
         "id": "aw",
-        "markerId": 3,
         "posX": 4.5, "posY": 0, "posZ": 5.5,
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.05,
@@ -64,7 +58,6 @@ let houses = [
     },
     {
         "id": "bg",
-        "markerId": 1,
         "posX": 4.5, "posY": 0, "posZ": -1,
         "rotX": 0, "rotY": -120, "rotZ": 0,
         "scale": 0.05,
@@ -75,7 +68,6 @@ let houses = [
     },
     {
         "id": "cha",
-        "markerId": 2,
         "posX": -4, "posY": 0, "posZ": 5,
         "rotX": 0, "rotY": -90, "rotZ": 0,
         "scale": 0.05,
@@ -89,7 +81,6 @@ let houses = [
     },
     {
         "id": "ct",
-        "markerId": 0,
         "posX": -1.5, "posY": 0, "posZ": 3,
         "rotX": 0, "rotY": -90, "rotZ": 0,
         "scale": 0.05,
@@ -101,7 +92,6 @@ let houses = [
     },
     {
         "id": "dls",
-        "markerId": 0,
         "posX": -1, "posY": 0, "posZ": 2.5,
         "rotX": 0, "rotY": 0, "rotZ": 0,
         "scale": 0.05,
@@ -113,7 +103,6 @@ let houses = [
     },
     {
         "id": "eb",
-        "markerId": 0,
         "posX": -0.5, "posY": 0, "posZ": 0.5,
         "rotX": 0, "rotY": 0, "rotZ": 0,
         "scale": 0.05,
@@ -125,7 +114,6 @@ let houses = [
     },
     {
         "id": "ef",
-        "markerId": 2,
         "posX": -3.5, "posY": 0, "posZ": 4,
         "rotX": 0, "rotY": -90, "rotZ": 0,
         "scale": 0.05,
@@ -136,7 +124,6 @@ let houses = [
     },
     {
         "id": "fc",
-        "markerId": 1,
         "posX": 3.5, "posY": 0, "posZ": 0,
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.05,
@@ -147,7 +134,6 @@ let houses = [
     },
     {
         "id": "fh",
-        "markerId": 2,
         "posX": 0.5, "posY": 0, "posZ": 4,
         "rotX": 0, "rotY": 0, "rotZ": 0,
         "scale": 0.05,
@@ -158,7 +144,6 @@ let houses = [
     },
     {
         "id": "fs",
-        "markerId": 2,
         "posX": 0.5, "posY": 0, "posZ": 4.5,
         "rotX": 0, "rotY": 0, "rotZ": 0,
         "scale": 0.05,
@@ -169,7 +154,6 @@ let houses = [
     },
     {
         "id": "ga",
-        "markerId": 0,
         "posX": -2, "posY": 0, "posZ": -1,
         "rotX": 0, "rotY": -90, "rotZ": 0,
         "scale": 0.05,
@@ -182,7 +166,6 @@ let houses = [
     },
     {
         "id": "jd",
-        "markerId": 3,
         "posX": 4, "posY": 0, "posZ": 5,
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.05,
@@ -193,7 +176,6 @@ let houses = [
     },
     {
         "id": "lb",
-        "markerId": 2,
         "posX": -3, "posY": 0, "posZ": 3.5,
         "rotX": 0, "rotY": -90, "rotZ": 0,
         "scale": 0.05,
@@ -204,7 +186,6 @@ let houses = [
     },
     {
         "id": "lk",
-        "markerId": 3,
         "posX": 1, "posY": 0, "posZ":3.5 ,
         "rotX": 0, "rotY": -90, "rotZ": 0,
         "scale": 0.05,
@@ -215,7 +196,6 @@ let houses = [
     },
     {
         "id": "lp",
-        "markerId": 3,
         "posX": 1, "posY": 0, "posZ": 3,
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.05,
@@ -227,7 +207,6 @@ let houses = [
     },
     {
         "id": "ls",
-        "markerId": 3,
         "posX": 1.5, "posY": 0, "posZ": 2.5,
         "rotX": 0, "rotY": 90, "rotZ": 0,
         "scale": 0.05,
@@ -239,7 +218,6 @@ let houses = [
     },
     {
         "id": "lt",
-        "markerId": 3,
         "posX": 3.5, "posY": 0, "posZ": 4.5,
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.05,
@@ -250,7 +228,6 @@ let houses = [
     },
     {
         "id": "ma",
-        "markerId": 3,
         "posX": 4, "posY": 0, "posZ": 1,
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.05,
@@ -261,7 +238,6 @@ let houses = [
     },
     {
         "id": "md",
-        "markerId": 1,
         "posX": 2.5, "posY": 0, "posZ": 0,
         "rotX": 0, "rotY": -90, "rotZ": 0,
         "scale": 0.05,
@@ -273,7 +249,6 @@ let houses = [
     },
     {
         "id": "nl",
-        "markerId": 1,
         "posX": 2, "posY": 0, "posZ": 0,
         "rotX": 0, "rotY": -90, "rotZ": 0,
         "scale": 0.05,
@@ -284,7 +259,6 @@ let houses = [
     },
     {
         "id": "ollie",
-        "markerId": 0,
         "posX": -4, "posY": 0, "posZ": 2,
         "rotX": 0, "rotY": 0, "rotZ": 0,
         "scale": 0.05,
@@ -296,7 +270,6 @@ let houses = [
     },
     {
         "id": "pb",
-        "markerId": 0,
         "posX": -3, "posY": 0, "posZ": -1,
         "rotX": 0, "rotY": -90, "rotZ": 0,
         "scale": 0.05,
@@ -305,7 +278,6 @@ let houses = [
     },
     {
         "id": "rc",
-        "markerId": 0,
         "posX": -2, "posY": 0, "posZ": 1.5,
         "rotX": 0, "rotY": 90, "rotZ": 0,
         "scale": 0.05,
@@ -314,7 +286,6 @@ let houses = [
     },
     {
         "id": "rmj",
-        "markerId": 0,
         "posX": -2.5, "posY": 0, "posZ": 2,
         "rotX": 0, "rotY": 0, "rotZ": 0,
         "scale": 0.05,
@@ -325,7 +296,6 @@ let houses = [
     },
     {
         "id": "rw",
-        "markerId": 3,
         "posX": 2, "posY": 0, "posZ": 3,
         "rotX": 0, "rotY": -90, "rotZ": 0,
         "scale": 0.05,
@@ -336,7 +306,6 @@ let houses = [
     },
     {
         "id": "ss",
-        "markerId": 2,
         "posX": -1, "posY": 0, "posZ": 4,
         "rotX": 0, "rotY": 0, "rotZ": 0,
         "scale": 0.05,
@@ -347,7 +316,6 @@ let houses = [
     },
     {
         "id": "za",
-        "markerId": 3,
         "posX": 3, "posY": 0, "posZ": 4,
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.05,
@@ -380,7 +348,7 @@ let objects = [
 
 function addHouses() {
     houses.forEach(houseData => {
-        let marker = document.getElementById("marker" + houseData.markerId); //id
+        let marker = document.querySelector("a-marker");
         let house = document.createElement("a-entity");
 
         house.setAttribute('id', houseData.id);
