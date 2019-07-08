@@ -73,7 +73,10 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "cha0"}
+            {"id": "cha0"},
+            {"id": "cha1"},
+            {"id": "cha2"},
+            {"id": "cha3"}
         ]
     },
     {
@@ -361,14 +364,39 @@ function addHouses() {
         if (houseData.collidable) {
             house.setAttribute('class', 'collidable');
             house.setAttribute('box', {carouselId: houseData.id});
-            //createCarousel()
+            house.appendChild(createCarousel(houseData.id, houseData.childIds));
         }
         marker.appendChild(house);
 
     });
 }
-function createCarousel(id) {
+function createCarousel(id, childIds) {
+    //make the carousel
+    let carousel = document.createElement("a-entity");
+    carousel.object3D.rotation.set(
+        THREE.Math.degToRad(90),
+        THREE.Math.degToRad(0),
+        THREE.Math.degToRad(90)
+    );
+    carousel.setAttribute('id', id);
+    carousel.object3D.position.set(0, 1, -0.25);
+    carousel.object3D.scale.set(0.25, 0.25, 0.25);
 
+    let carouselChild = document.createElement("a-entity");
+    carouselChild.setAttribute('carousel', {radius: 0.4, thickness: 0.01, ringVisible: true, itemRadius: 0.1});
+
+    childIds.forEach(child => {
+        //create the carousel item
+        let object = document.createElement("a-entity");
+        object.setAttribute("id", child.id);
+        object.setAttribute("gltf-model", "/assets/objects/" + child.id + ".gltf");
+        object.object3D.scale.set(1, 1, 1);
+        carouselChild.appendChild(object);        
+    });
+
+    carousel.appendChild(carouselChild);
+
+    return carousel;
 }
 
 addHouses();
