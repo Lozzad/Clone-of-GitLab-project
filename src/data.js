@@ -322,9 +322,8 @@ let houses = [
             {"id": "za1"}
         ]
     }
-]
+];
 
-//les identifiants de childIDs ne devraient pas être ceux des objets ?
 let objects = [
   {
     "id": "letter",
@@ -333,16 +332,16 @@ let objects = [
   {
     "id": "cat-walking",
     "scale": 1.2
-  }
+  },
   {
     "id": "cat-sitting",
     "scale": 1.2
-  }
+  },
   {
     "id": "signpost",
     "scale": 3
   }
-]
+];
 
 function addHouses() {
     houses.forEach(houseData => {
@@ -361,11 +360,15 @@ function addHouses() {
         house.setAttribute('animation-mixer', {clip: 'closed'});
         if (houseData.collidable) {
             house.setAttribute('class', 'collidable');
-            house.setAttribute('box', {carouselId: 'carousel'});
+            house.setAttribute('box', {carouselId: houseData.id});
+            //createCarousel()
         }
         marker.appendChild(house);
 
     });
+}
+function createCarousel(id) {
+
 }
 
 addHouses();

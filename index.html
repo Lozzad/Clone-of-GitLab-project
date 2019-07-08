@@ -6,7 +6,7 @@
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.js"></script>
     <script src="https://unpkg.com/xstate@4.5.0/dist/xstate.js"></script>
     <script src="/build/app.js"></script>
-    
+
 
 		<link rel="stylesheet" href="/styles.css">
 
@@ -170,7 +170,44 @@
           position="0 0 0"
           scale="6 6 6"
           gltf-model="#house-asset"
-          box="carouselId: carousel">
+          box="carouselId: carousel"
+          >
+          <a-entity
+            rotation="90 0 90"
+            id="carousel"
+            position="0 0.9 -0.25"
+            scale="0.25 0.25 0.25"
+          >
+            <a-entity
+              carousel="radius: 0.4; thickness: 0.01; ringVisible: true; itemRadius: 0.1;"
+            >
+              animation="property: rotation; from: '90 0 0'; to: '90 0 360'; dur: 30000; loop: true; easing: linear; autoplay: true;"
+  						<a-entity
+  							id="letter"
+  							gltf-model="#letter-asset"
+  							scale="1.2 1.2 1.2"
+  						>
+              </a-entity>
+              <a-entity
+                id="cat-walking"
+  							gltf-model="#cat-walking-asset"
+  							scale="1.2 1.2 1.2"
+              >
+              </a-entity>
+              <a-entity
+                id="cat-sitting"
+  							gltf-model="#cat-sitting-asset"
+  							scale="1.2 1.2 1.2"
+              >
+  						</a-entity>
+  						<a-entity
+                id="signpost"
+  							gltf-model="#signpost-asset"
+  							scale="3 3 3"
+              >
+              </a-entity>
+            </a-entity>
+          </a-entity>
         </a-entity> -->
 
 
@@ -189,42 +226,7 @@
         </a-entity> -->
 
 
-        <!-- <a-entity
-          rotation="90 0 90"
-          id="carousel"
-          position="0 0.9 -0.25"
-          scale="0.25 0.25 0.25"
-        >
-          <a-entity
-            carousel="radius: 0.4; thickness: 0.01; ringVisible: true; itemRadius: 0.1;"
-          >
-            animation="property: rotation; from: '90 0 0'; to: '90 0 360'; dur: 30000; loop: true; easing: linear; autoplay: true;"
-						<a-entity
-							id="letter"
-							gltf-model="#letter-asset"
-							scale="1.2 1.2 1.2"
-						>
-            </a-entity>
-            <a-entity
-              id="cat-walking"
-							gltf-model="#cat-walking-asset"
-							scale="1.2 1.2 1.2"
-            >
-            </a-entity>
-            <a-entity
-              id="cat-sitting"
-							gltf-model="#cat-sitting-asset"
-							scale="1.2 1.2 1.2"
-            >
-						</a-entity>
-						<a-entity
-              id="signpost"
-							gltf-model="#signpost-asset"
-							scale="3 3 3"
-            >
-            </a-entity>
-          </a-entity>
-        </a-entity> -->
+
 
       </a-marker>
     </a-scene>
