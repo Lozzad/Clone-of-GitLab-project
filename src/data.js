@@ -340,9 +340,9 @@ function addHouses() {
         );
         house.object3D.scale.set(houseData.scale, houseData.scale, houseData.scale);
         house.setAttribute('gltf-model', '/assets/' + houseData.id + '.gltf');
+        house.setAttribute('animation-mixer', {clip: 'closed'});
         if (houseData.collidable) { 
             house.setAttribute('class', 'collidable');
-            house.setAttribute('animation-mixer', {clip: 'closed'});
             house.setAttribute('box', {carouselId: 'carousel'});
         }
         marker.appendChild(house);
