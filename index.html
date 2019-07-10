@@ -75,63 +75,6 @@
       loading-screen="dotsColor: white; backgroundColor: black"
       stats
     >
-      <!-- <a-assets>
-        <a-asset-item id="house-asset" src="assets/house.gltf"></a-asset-item>
-        <a-asset-item id="af-asset" src="assets/af.gltf"></asset-item>
-        <a-asset-item id="af2-asset" src="assets/af2.gltf"></asset-item>
-        <a-asset-item id="ag-asset" src="assets/ag.gltf"></asset-item>
-        <a-asset-item id="ah-asset" src="assets/ah.gltf"></asset-item>
-        <a-asset-item id="alice-asset" src="assets/alice.gltf"></asset-item>
-        <a-asset-item id="aw-asset" src="assets/aw.gltf"></asset-item>
-        <a-asset-item id="bg-asset" src="assets/bg.gltf"></asset-item>
-        <a-asset-item id="cha-asset" src="assets/cha.gltf"></a-asset-item>
-        <a-asset-item id="ct-asset" src="assets/ct.gltf"></a-asset-item>
-        <a-asset-item id="dls-asset" src="assets/dls.gltf"></a-asset-item>
-        <a-asset-item id="eb-asset" src="assets/eb.gltf"></a-asset-item>
-        <a-asset-item id="ef-asset" src="assets/ef.gltf"></a-asset-item>
-        <a-asset-item id="fc-asset" src="assets/fc.gltf"></a-asset-item>
-        <a-asset-item id="fh-asset" src="assets/fh.gltf"></a-asset-item>
-        <a-asset-item id="fs-asset" src="assets/fs.gltf"></a-asset-item>
-        <a-asset-item id="ga-asset" src="assets/ga.gltf"></a-asset-item>
-        <a-asset-item id="jd-asset" src="assets/jd.gltf"></a-asset-item>
-        <a-asset-item id="lb-asset" src="assets/lb.gltf"></a-asset-item>
-        <a-asset-item id="lk-asset" src="assets/lk.gltf"></a-asset-item>
-        <a-asset-item id="lp-asset" src="assets/lp.gltf"></a-asset-item>
-        <a-asset-item id="ls-asset" src="assets/ls.gltf"></a-asset-item>
-        <a-asset-item id="lt-asset" src="assets/lt.gltf"></a-asset-item>
-        <a-asset-item id="ma-asset" src="assets/ma.gltf"></a-asset-item>
-        <a-asset-item id="md-asset" src="assets/md.gltf"></a-asset-item>
-        <a-asset-item id="nl-asset" src="assets/nl.gltf"></a-asset-item>
-        <a-asset-item id="ollie-asset" src="assets/ollie.gltf"></a-asset-item>
-        <a-asset-item id="pb-asset" src="assets/pb.gltf"></a-asset-item>
-        <a-asset-item id="rc-asset" src="assets/rc.gltf"></a-asset-item>
-        <a-asset-item id="rmj-asset" src="assets/rmj.gltf"></a-asset-item>
-        <a-asset-item id="rw-asset" src="assets/rw.gltf"></a-asset-item>
-        <a-asset-item id="ss-asset" src="assets/ss.gltf"></a-asset-item>
-        <a-asset-item id="za-asset" src="assets/za.gltf"></a-asset-item>
-        <a-asset-item
-          id="letter-asset"
-          src="https://pbn.netlify.com/assets/letter.gltf"
-        ></a-asset-item>
-        <a-asset-item
-          id="cat-sitting-asset"
-          src="https://pbn.netlify.com/assets/cat-sitting.gltf"
-        ></a-asset-item>
-        <a-asset-item
-          id="cat-walking-asset"
-          src="https://pbn.netlify.com/assets/cat-walking.gltf"
-        ></a-asset-item>
-        <a-asset-item
-          id="man-asset"
-          src="https://pbn.netlify.com/assets/man.gltf"
-        ></a-asset-item>
-        <a-asset-item
-          id="signpost-asset"
-          src="https://pbn.netlify.com/assets/signpost.gltf"
-        ></a-asset-item>
-        <a-asset-item id="speech-bubble" src=""></a-asset-item>
-      </a-assets> -->
-
       <a-entity camera>
         <a-entity
           raycaster="objects: .collidable"
@@ -140,7 +83,7 @@
         </a-entity>
       </a-entity>
 
-      <a-marker type="pattern" url="assets/markers/logo.patt">
+      <a-marker type="pattern" url="assets/markers/marker.patt">
         <a-light
           type="ambient"
           color="#fff"
@@ -161,73 +104,6 @@
           rotation="0 0 0"
           intensity="1"
         ></a-light>
-
-         <!-- <a-entity
-          id="house"
-          class="collidable"
-          animation-mixer="clip: closed"
-          rotation="0 0 0"
-          position="0 0 0"
-          scale="6 6 6"
-          gltf-model="#house-asset"
-          box="carouselId: carousel"
-          >
-          <a-entity
-            rotation="90 0 90"
-            id="carousel"
-            position="0 0.9 -0.25"
-            scale="0.25 0.25 0.25"
-          >
-            <a-entity
-              carousel="radius: 0.4; thickness: 0.01; ringVisible: true; itemRadius: 0.1;"
-            >
-               animation="property: rotation; from: '90 0 0'; to: '90 0 360'; dur: 30000; loop: true; easing: linear; autoplay: true;"
-  						<a-entity
-  							id="letter"
-  							gltf-model="#letter-asset"
-  							scale="1.2 1.2 1.2"
-  						>
-              </a-entity>
-              <a-entity
-                id="cat-walking"
-  							gltf-model="#cat-walking-asset"
-  							scale="1.2 1.2 1.2"
-              >
-              </a-entity>
-              <a-entity
-                id="cat-sitting"
-  							gltf-model="#cat-sitting-asset"
-  							scale="1.2 1.2 1.2"
-              >
-  						</a-entity>
-  						<a-entity
-                id="signpost"
-  							gltf-model="#signpost-asset"
-  							scale="3 3 3"
-              >
-              </a-entity>
-            </a-entity>
-          </a-entity>
-        </a-entity> -->
-
-
-        <!-- <a-entity
-          position="-1 0 -0.25"
-          scale="4 4 4"
-          gltf-model="#man-asset"
-        >
-        </a-entity>
-
-        <a-entity
-          position="1 0 -0.25"
-          scale="4 4 4"
-          gltf-model="#signpost-asset"
-        >
-        </a-entity> -->
-
-
-
-
       </a-marker>
     </a-scene>
 
@@ -249,89 +125,8 @@
 
     <footer>
       <script src="src/data.js">
-      // function addCarousel(nameCarousel, rotXCarousel=0, rotZCarousel=0, posXCarousel=0, posYCarousel=0, posZCarousel=0, scaleCarousel=0.25, radiusCarousel=1, thicknessCarousel=0.25, itemRadiusCarousel=1, nbObjects=0, idObject1=null, scaleObject1=1.2, idObject2=null, scaleObject2=1.2, idObject3=null, scaleObject3=1.2, idObject4=null, scaleObject4=1.2) {
-      //     if (nbObjects>0) {
-
-      //       var subCarousel = document.createElement("a-entity");
-      //       subCarousel.setAttribute('carousel', {radius: radiusCarousel, thickness: thicknessCarousel, ringVisible: true, itemRadius: itemRadiusCarousel});
-
-      //       var objects = new Array(nbObjects);
-      //       var idObjects = [idObject1, idObject2, idObject3, idObject4];
-      //       var scaleObjects = [scaleObject1, scaleObject2, scaleObject3, scaleObject4];
-
-      //       for (var i = 0; i < nbObjects; i++) {
-      //         objects[i] = createObject(idObjects[i], scaleObjects[i]);
-      //         // alert(objects[i].getAttribute('gltf-model'));
-      //         subCarousel.appendChild(objects[i]);
-      //       };
-
-      //       var marker = document.querySelector("a-marker");
-
-      //       // marker.appendChild(objects[0]);
-
-      //       var carousel = document.createElement("a-entity");
-      //       carousel.setAttribute('id', nameCarousel);
-      //       carousel.setAttribute('rotation', {x: rotXCarousel, y: 0, z: rotZCarousel});
-      //       carousel.setAttribute('position', {x: posXCarousel, y: posYCarousel, z: posZCarousel});
-      //       carousel.setAttribute('scale', {x: scaleCarousel, y: scaleCarousel, z: scaleCarousel});
-      //       carousel.appendChild(subCarousel);
-      //     };
-      // };
-
-      // function createObject(idObject, scaleObject=1.2) {
-      //   // alert(idObject);
-      //   var object = document.createElement("a-entity");
-      //   object.setAttribute('id', idObject);
-      //   // object.object3D.gltf-model.set('#' + idObject + '-asset')
-      //   object.setAttribute('gltf-model', '#' + idObject + '-asset');
-
-      //   // object.setAttribute('scale', {x: scaleObject, y: scaleObject, z:scaleObject});
-      //   object.object3D.scale.set(3,3,3);
-      //   // object.setAttribute('scale', {x: 3, y: 3, z:3});
-
-      //   object.object3D.position.set(2,2,2);
-      //   // object.setAttribute('position', {x: 2, y: 2, z: 2});
-      //   // alert(object.getAttribute('gltf-model'));
-
-      //   return object;
-      // };
-
-        // addHouse('house', -90, 0, 0, 6, "carousel", 90, 90, 0, 0.9, 0, 0.25, 0.4, 0.01, 0.1, 4, 'lettre', 1.2, 'cat-walking', 1.2, 'cat-sitting', 1.2, 'signpost', 3);
-        // don't forget scaleHouse
-        // addHouse('cha', -90, -4, 5);
-        // addHouse('af', 0, -3.5, 2.5);
-        // addHouse('af2', -90, -2, 2);
-        // addHouse('ag', 90, -0.5, 3.5);
-        // addHouse('ah', 0, 2.5, 1);
-        // addHouse('alice', -90, -0.5, 3);
-        // addHouse('bg', -120, 4.5, -1);
-        // addHouse('ct', -90, -1.5, 3);
-        // addHouse('dls', 0, -1, 2.5);
-        // addHouse('eb', 0, -0.5, 0.5);
-        // addHouse('fc', 180, 3.5, 0);
-        // addHouse('fh', 0, 0.5, 4);
-        // addHouse('fs', 0, 0.5, 4.5);
-        // addHouse('ga', -90, -2, -1);
-        // addHouse('jd', 180, 4, 5);
-        // addHouse('lb', -90, -3, 3.5);
-        // addHouse('lk', -90, 1, 3.5);
-        // addHouse('lp', 180, 1, 3);
-        // addHouse('ls', 90, 1.5, 2.5);
-        // addHouse('lt', 180, 3.5, 4.5);
-        // addHouse('ma', 180, 4, 1);
-        // addHouse('md', -90, 2.5, 0);
-        // addHouse('nl', -90, 2, 0);
-        // addHouse('ollie', 0, -4, 2);
-        // addHouse('pb', -90, -3, -1);
-        // addHouse('rc', 90, -2, 1.5);
-        // addHouse('rmj', 0, -2.5, 2);
-        // addHouse('rw', -90, 2, 3);
-        // addHouse('ss', 0, -1, 4);
-        // addHouse('za', 180, 3, 4);
-        // addHouse('aw', 180, 4.5, 5.5);
-        // addHouse('ef', -90, -3.5, 4);
-
       </script>
     </footer>
+
   </body>
 </html>

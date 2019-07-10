@@ -161,6 +161,7 @@ export default AFRAME.registerComponent("box", {
 
   clicked(ev: CustomEvent) {
     ev.preventDefault();
+    console.log("clicked");
     switch (this.state) {
       case BoxState.CLOSED:
         this.animationStateService.send(BoxTransition.OPEN);

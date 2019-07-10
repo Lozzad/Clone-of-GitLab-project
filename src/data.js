@@ -6,7 +6,7 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "af0"}
+            //{"id": "af0"}
         ]
     },
     {
@@ -24,8 +24,8 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "ag0"},
-            {"id": "ag1"}
+           // {"id": "ag0"},
+           // {"id": "ag1"}
         ]
     },
     {
@@ -35,7 +35,7 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "ah0"}
+            //{"id": "ah0"}
         ]
     },
     {
@@ -53,7 +53,7 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "aw0"}
+            //{"id": "aw0"}
         ]
     },
     {
@@ -63,12 +63,12 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "bg0"}
+            //{"id": "bg0"}
         ]
     },
     {
         "id": "cha",
-        "posX": -4, "posY": 0, "posZ": 5,
+        "posX": 0, "posY": 0, "posZ": 0,
         "rotX": 0, "rotY": -90, "rotZ": 0,
         "scale": 0.05,
         "collidable": true,
@@ -86,8 +86,8 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "ct0"},
-            {"id": "ct1"}
+            //{"id": "ct0"},
+            //{"id": "ct1"}
         ]
     },
     {
@@ -97,8 +97,8 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "dls0"},
-            {"id": "dls1"}
+            //{"id": "dls0"},
+           //{"id": "dls1"}
         ]
     },
     {
@@ -108,8 +108,8 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "eb0"},
-            {"id": "eb1"}
+            //{"id": "eb0"},
+            //{"id": "eb1"}
         ]
     },
     {
@@ -119,7 +119,7 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "ef0"}
+            //{"id": "ef0"}
         ]
     },
     {
@@ -129,7 +129,7 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "fc0"}
+            //{"id": "fc0"}
         ]
     },
     {
@@ -139,7 +139,7 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "fh0"}
+            //{"id": "fh0"}
         ]
     },
     {
@@ -149,7 +149,7 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "fs0"}
+            //{"id": "fs0"}
         ]
     },
     {
@@ -159,9 +159,9 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "ga0"},
-            {"id": "ga1"},
-            {"id": "ga2"}
+            //{"id": "ga0"},
+            //{"id": "ga1"},
+            //{"id": "ga2"}
         ]
     },
     {
@@ -171,7 +171,7 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "jd0"}
+            //{"id": "jd0"}
         ]
     },
     {
@@ -181,7 +181,7 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "lb0"}
+            //{"id": "lb0"}
         ]
     },
     {
@@ -191,7 +191,7 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "lk0"}
+           // {"id": "lk0"}
         ]
     },
     {
@@ -201,8 +201,8 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "lp0"},
-            {"id": "lp1"}
+            //{"id": "lp0"},
+            //{"id": "lp1"}
         ]
     },
     {
@@ -212,8 +212,8 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "ls0"},
-            {"id": "ls1"}
+            //{"id": "ls0"},
+            //{"id": "ls1"}
         ]
     },
     {
@@ -223,7 +223,7 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "lt0"}
+            //{"id": "lt0"}
         ]
     },
     {
@@ -233,7 +233,7 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "ma0"}
+            //{"id": "ma0"}
         ]
     },
     {
@@ -243,8 +243,8 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "md0"},
-            {"id": "md1"}
+           // {"id": "md0"},
+           // {"id": "md1"}
         ]
     },
     {
@@ -254,7 +254,7 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "nl0"}
+            //{"id": "nl0"}
         ]
     },
     {
@@ -264,8 +264,8 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "ollie0"},
-            {"id": "ollie1"}
+           // {"id": "ollie0"},
+            //{"id": "ollie1"}
         ]
     },
     {
@@ -291,7 +291,7 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "rmj0"}
+            //{"id": "rmj0"}
         ]
     },
     {
@@ -301,7 +301,7 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "rw0"}
+           // {"id": "rw0"}
         ]
     },
     {
@@ -311,7 +311,7 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "ss0"}
+            //{"id": "ss0"}
         ]
     },
     {
@@ -321,8 +321,8 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "za0"},
-            {"id": "za1"}
+            //{"id": "za0"},
+            //{"id": "za1"}
         ]
     }
 ];
@@ -363,14 +363,14 @@ function addHouses() {
         house.setAttribute('animation-mixer', {clip: 'closed'});
         if (houseData.collidable) {
             house.setAttribute('class', 'collidable');
-            house.setAttribute('box', {carouselId: houseData.id + "-carousel"});
             let carousel = createCarousel(houseData.id, houseData.childIds);
             house.appendChild(carousel);
+            house.setAttribute('box', {carouselId: houseData.id + "-carousel"});
         }
         marker.appendChild(house);
-
     });
 }
+
 function createCarousel(id, childIds) {
     //make the carousel
     let carousel = document.createElement("a-entity");
@@ -396,6 +396,7 @@ function createCarousel(id, childIds) {
     });
 
     carousel.appendChild(carouselChild);
+    console.log("created carousel:" + carousel);
 
     return carousel;
 }
