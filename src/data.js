@@ -329,19 +329,19 @@ let houses = [
 
 let objects = [
   {
-    "id": "letter",
+    "id": "cha0",
     "scale": 1.2
   },
   {
-    "id": "cat-walking",
+    "id": "cha1",
     "scale": 1.2
   },
   {
-    "id": "cat-sitting",
+    "id": "cha2",
     "scale": 1.2
   },
   {
-    "id": "signpost",
+    "id": "cha3",
     "scale": 3
   }
 ];
@@ -354,6 +354,12 @@ function addAssets() {
         asset.setAttribute('src', '/assets/' + house.id + '.gltf')
         assetParent.appendChild(asset);
     });
+    objects.forEach(object => {
+        let asset = document.createElement("a-asset-item");
+        asset.setAttribute('id', object.id + "-asset");
+        asset.setAttribute('src', '/assets/objects/' + object.id + '.gltf')
+        assetParent.appendChild(asset);
+    })
 }
 
 function addHouses() {
@@ -400,7 +406,7 @@ function createCarousel(id, childIds) {
         //create the carousel item
         let object = document.createElement("a-entity");
         object.setAttribute("id", child.id);
-        object.setAttribute("gltf-model", "/assets/objects/" + child.id + ".gltf");
+        object.setAttribute("gltf-model", '#' + child.id + '-asset');
         object.object3D.scale.set(1, 1, 1);
         carouselChild.appendChild(object);        
     });

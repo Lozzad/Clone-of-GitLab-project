@@ -1,9 +1,8 @@
 import { BaseComponent } from "../BaseComponent";
 
 interface ImageViewerComponent extends BaseComponent {
-    currentSide: number;
+    currentSide: number | null;
 
-    sceneLoaded: () => void;
     flipImage: () => void;
 }
 
@@ -12,6 +11,31 @@ export default AFRAME.registerComponent("imageViewer", {
         imageId: { type: "string" }
     },
 
-    image: null,
+    currentSide: null,
 
+    init() {
+        this.currentSide = 0;
+    },
+    
+    flipImage() {
+
+    },
+
+    addEventListeners() {
+
+    },
+
+    removeEventListeners() {
+
+    },
+
+    bindMethods() {
+
+    },
+
+    tick() {},
+
+    remove() {
+
+    }
 } as ImageViewerComponent);
