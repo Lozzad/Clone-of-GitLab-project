@@ -346,6 +346,16 @@ let objects = [
   }
 ];
 
+function addAssets() {
+    let assetParent = document.querySelector("a-assets");
+    houses.forEach(house => {
+        let asset = document.createElement("a-asset-item");
+        asset.setAttribute('id', house.id + "-asset");
+        asset.setAttribute('src', '/assets/' + house.id + '.gltf')
+        assetParent.appendChild(asset);
+    });
+}
+
 function addHouses() {
     houses.forEach(houseData => {
         let marker = document.querySelector("a-marker");
@@ -359,7 +369,7 @@ function addHouses() {
             THREE.Math.degToRad(houseData.rotZ)
         );
         house.object3D.scale.set(houseData.scale, houseData.scale, houseData.scale);
-        house.setAttribute('gltf-model', '/assets/' + houseData.id + '.gltf');
+        house.setAttribute('gltf-model', '#' + houseData.id + '-asset');
         house.setAttribute('animation-mixer', {clip: 'closed'});
         if (houseData.collidable) {
             house.setAttribute('class', 'collidable');
@@ -401,4 +411,5 @@ function createCarousel(id, childIds) {
     return carousel;
 }
 
+addAssets();
 addHouses();

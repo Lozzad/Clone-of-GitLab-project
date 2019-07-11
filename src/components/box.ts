@@ -38,9 +38,9 @@ export default AFRAME.registerComponent("box", {
     carouselId: { type: "string" },
     carouselAnimationDuration: { type: "string", default: "2000" },
     carouselScaleSmall: { type: "string", default: "0.25 0.25 0.25" },
-    carouselPositionSmall: { type: "string", default: "0 0.9 -0.25" },
-    carouselScaleLarge: { type: "string", default: "2 2 2" },
-    carouselPositionLarge: { type: "string", default: "0 1.5 -0.25" }
+    carouselPositionSmall: { type: "string", default: "0 5 -0.25" },
+    carouselScaleLarge: { type: "string", default: "20 20 20" },
+    carouselPositionLarge: { type: "string", default: "0 10 -0.25" }
   },
 
   carousel: null,

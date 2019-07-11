@@ -148,7 +148,7 @@ export default AFRAME.registerComponent("carousel", {
       // Add sphere when model is loaded
       child.addEventListener("model-loaded", () => {
         // Get the radius of the child's bounding sphere
-        //var model = ev.detail.model;
+        // var model = ev.detail.model;
         // Compute the bounding sphere radius of the scene
         // var box3 = new THREE.Box3();
         // box3.setFromObject(model);
