@@ -73,10 +73,7 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "cha0"},
-            {"id": "cha1"},
-            {"id": "cha2"},
-            {"id": "cha3"}
+           
         ]
     },
     {
@@ -108,6 +105,10 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
+            {"id": "cha0"},
+            {"id": "cha1"},
+            {"id": "cha2"},
+            {"id": "cha3"}
             //{"id": "eb0"},
             //{"id": "eb1"}
         ]
