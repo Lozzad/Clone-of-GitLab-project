@@ -351,7 +351,8 @@ let objects = new Map([
   ["cha0", 1.2],
   ["cha1", 1.2],
   ["cha2", 1.2],
-  ["cha3", 3]
+  ["cha3", 3],
+  ["cha4", 0.025]
 ]);
 
 function addAssets() {
