@@ -76,7 +76,8 @@ let houses = [
           {"id": "cha0"},
           {"id": "cha1"},
           {"id": "cha2"},
-          {"id": "cha3"}
+          {"id": "cha3"},
+          {"id": "cha4"}
         ]
     },
     {
