@@ -73,7 +73,10 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-           
+          {"id": "cha0"},
+          {"id": "cha1"},
+          {"id": "cha2"},
+          {"id": "cha3"}
         ]
     },
     {
@@ -105,10 +108,6 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-            {"id": "cha0"},
-            {"id": "cha1"},
-            {"id": "cha2"},
-            {"id": "cha3"}
             //{"id": "eb0"},
             //{"id": "eb1"}
         ]
@@ -328,24 +327,31 @@ let houses = [
     }
 ];
 
-let objects = [
-  {
-    "id": "cha0",
-    "scale": 1.2
-  },
-  {
-    "id": "cha1",
-    "scale": 1.2
-  },
-  {
-    "id": "cha2",
-    "scale": 1.2
-  },
-  {
-    "id": "cha3",
-    "scale": 3
-  }
-];
+// let objects = [
+//   {
+//     "id": "cha0",
+//     "scale": 1.2
+//   },
+//   {
+//     "id": "cha1",
+//     "scale": 1.2
+//   },
+//   {
+//     "id": "cha2",
+//     "scale": 1.2
+//   },
+//   {
+//     "id": "cha3",
+//     "scale": 3
+//   }
+// ];
+
+let objects = new Map([
+  ["cha0", 1.2],
+  ["cha1", 1.2],
+  ["cha2", 1.2],
+  ["cha3", 3]
+]);
 
 function addAssets() {
     let assetParent = document.querySelector("a-assets");
@@ -355,10 +361,10 @@ function addAssets() {
         asset.setAttribute('src', '/assets/' + house.id + '.gltf')
         assetParent.appendChild(asset);
     });
-    objects.forEach(object => {
+    Array.from(objects.keys()).forEach(id => {
         let asset = document.createElement("a-asset-item");
-        asset.setAttribute('id', object.id + "-asset");
-        asset.setAttribute('src', '/assets/objects/' + object.id + '.gltf')
+        asset.setAttribute('id', id + "-asset");
+        asset.setAttribute('src', '/assets/objects/' + id + '.gltf')
         assetParent.appendChild(asset);
     })
 }
@@ -408,8 +414,9 @@ function createCarousel(id, childIds) {
         let object = document.createElement("a-entity");
         object.setAttribute("id", child.id);
         object.setAttribute("gltf-model", '#' + child.id + '-asset');
-        object.object3D.scale.set(1, 1, 1);
-        carouselChild.appendChild(object);        
+        let objectScale = objects.get(child.id);
+        object.object3D.scale.set(objectScale, objectScale, objectScale);
+        carouselChild.appendChild(object);
     });
 
     carousel.appendChild(carouselChild);
