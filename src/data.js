@@ -327,25 +327,6 @@ let houses = [
     }
 ];
 
-// let objects = [
-//   {
-//     "id": "cha0",
-//     "scale": 1.2
-//   },
-//   {
-//     "id": "cha1",
-//     "scale": 1.2
-//   },
-//   {
-//     "id": "cha2",
-//     "scale": 1.2
-//   },
-//   {
-//     "id": "cha3",
-//     "scale": 3
-//   }
-// ];
-
 let objects = new Map([
   ["cha0", 1.2],
   ["cha1", 1.2],
@@ -355,6 +336,7 @@ let objects = new Map([
   ["ollie0", 1]
 ]);
 
+//add the assets to the html to preload them
 function addAssets() {
     let assetParent = document.querySelector("a-assets");
     houses.forEach(house => {
@@ -371,6 +353,7 @@ function addAssets() {
     })
 }
 
+//creates the house entities
 function addHouses() {
     houses.forEach(houseData => {
         let marker = document.querySelector("a-marker");
@@ -396,8 +379,8 @@ function addHouses() {
     });
 }
 
+//creates the carousel entities and sub entities
 function createCarousel(id, childIds) {
-    //make the carousel
     let carousel = document.createElement("a-entity");
     carousel.object3D.rotation.set(
         THREE.Math.degToRad(90),
