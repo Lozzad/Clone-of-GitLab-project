@@ -1,4 +1,4 @@
-//storing  the house
+//storing the houses
 let houses = [
         {
         "id": "af",
