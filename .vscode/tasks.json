@@ -1,20 +1,43 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558 
-    // for the documentation about the tasks.json format
     "version": "2.0.0",
+
     "tasks": [
         {
-            "type": "npm",
-            "script": "build",
-            "group": "build"
-        },
-        {
+            "label": "Four",
             "type": "npm",
             "script": "start:ssl",
+            "dependsOrder": "sequence",
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
+            },
+            "dependsOn": [
+                "One",
+                "Two",
+                "Three"
+            ]
+        },
+        {
+            "label": "Three",
+            "type": "npm",
+            "script": "install",
+            "dependsOrder": "sequence",
+            "group": "build"
+        },
+        {
+            "label": "Two",
+            "type": "npm",
+            "script": "build",
+            "dependsOrder": "sequence",
+            "group": "build"
+        },
+        {
+            "label": "One",
+            "type": "npm",
+            "script": "clean ",
+            "dependsOrder": "sequence",
+            "group": "build"
         }
     ]
+
 }

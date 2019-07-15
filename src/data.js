@@ -333,7 +333,7 @@ let objects = new Map([
   ["cha2", 1.2],
   ["cha3", 3],
   ["cha4", 0.025],
-  ["ollie0", 1]
+  ["ollie0", 0.1]
 ]);
 
 //add the assets to the html to preload them
