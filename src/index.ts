@@ -9,8 +9,11 @@ var scene,
   carouselMenu,
   prevButton,
   nextButton,
-  itemButton;
-
+  itemButton,
+  raycaster,
+  mark;
+  // test;
+   
 interface AppState {
 	selectedItem: string | null;
 	boxOpened: boolean;
@@ -44,6 +47,7 @@ window.addEventListener("resize", function() {
 function render() {
   video = document.querySelector("video");
 
+
   if (state.selectedItem) {
     scene.classList.add("hide");
     video.classList.add("hide");
@@ -71,17 +75,20 @@ window.addEventListener("DOMContentLoaded", function() {
   scene = document.querySelector("a-scene");
   overlay = document.getElementById("overlay");
   viewer = document.getElementById("viewer");
+  raycaster = document.querySelector('[ar-raycaster]');
+  mark = document.querySelector('#cursor');
+  // test = document.querySelector('#cube');
+  
   carouselMenu = document.getElementById("carousel-menu");
   prevButton = document.getElementById("carousel-prev-button");
   itemButton = document.getElementById("carousel-item-button");
   nextButton = document.getElementById("carousel-next-button");
 
 	scene.addEventListener("loaded", () => {
-		
 	});
 
 	scene.addEventListener("box-opened", () => {
-		state.boxOpened = true;
+    state.boxOpened = true;
 		render();
 	}, false);
 
@@ -140,6 +147,37 @@ window.addEventListener("DOMContentLoaded", function() {
     },
     false
   );
+  raycaster.addEventListener("raycaster-intersection", (evt: CustomEvent) => {
+    // Turn the mark green and move it to the intersection point.
+console.log("hit one "+evt.detail.intersections[0]);
+    mark.setAttribute('color', 'yellow');
+    // FIXME: lerp position
+    mark.setAttribute('position', evt.detail.intersections[0].point);
+    mark.setAttribute('visible', 'true');
+  });
+  raycaster.addEventListener("raycaster-intersection-cleared", () => {
+  // Turn the mark red.  FIXME: lerp position
+  mark.setAttribute('color', 'red');
+  mark.setAttribute('visible', 'false');
+  });
 
+  // //this does not check the ray caster, only if the screen has been clicked
+  // test.addEventListener(
+  //   "click",
+  //   () => {
+  //     console.log('I was clickexxxxxxd!');
+  //     test.setAttribute('material', 'color', 'green');
+  //   },
+  //   false
+  // );
+
+  // test.addEventListener('click', function () {
+  //   // test.setAttribute('material', 'color', 'green');
+  //   console.log('I was clickexxxxxxd!');
+  // });
+  
   resize();
+
 });
+
+     

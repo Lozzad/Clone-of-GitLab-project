@@ -78,15 +78,20 @@
     <a-assets>
       <img id="image" src = "assets/nl-img.jpg">
     </a-assets>
-      <a-entity camera>
+    <a-entity camera ar-raycaster>
         <a-entity
           raycaster="objects: .collidable"
           cursor="fuse: false; rayOrigin: mouse"
         >
-        </a-entity>
+        <!-- <a-ring id="cursor" radius-inner="0.1" radius-outer="0.2"  
+      color="black" position="0 -0.8 -8" rotation="0 0 0" visible="false">  -->
+      <a-sphere id="cursor"  color="green" radius="0.1" visible="false"></a-sphere> 
       </a-entity>
 
+  
+
       <a-marker type="pattern" url="assets/markers/logo.patt">
+        <!-- <a-box id="cube" position='0 0.5 0' material='color: red;'></a-box> -->
       </a-marker>
     </a-scene>
 
