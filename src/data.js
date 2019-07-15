@@ -1,3 +1,4 @@
+//storing  the house
 let houses = [
         {
         "id": "af",
