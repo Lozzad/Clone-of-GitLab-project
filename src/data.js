@@ -265,8 +265,7 @@ let houses = [
         "scale": 0.05,
         "collidable": true,
         "childIds": [
-           // {"id": "ollie0"},
-            //{"id": "ollie1"}
+            {"id": "ollie0"}
         ]
     },
     {
@@ -352,7 +351,8 @@ let objects = new Map([
   ["cha1", 1.2],
   ["cha2", 1.2],
   ["cha3", 3],
-  ["cha4", 0.025]
+  ["cha4", 0.025],
+  ["ollie0", 1]
 ]);
 
 function addAssets() {
