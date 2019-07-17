@@ -49,7 +49,7 @@ let houses = [
     },
     {
         "id": "aw",
-        "posX": -1.2, "posY": 0, "posZ": -3.5,
+        "posX": -1, "posY": 0, "posZ": -3.5,
         "rotX": 0, "rotY": 90, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
@@ -361,7 +361,7 @@ function addHouses() {
         let house = document.createElement("a-entity");
 
         house.setAttribute('id', houseData.id);
-        house.object3D.position.set(houseData.posX, houseData.posY, houseData.posZ);
+        house.object3D.position.set(houseData.posX - 0.3, houseData.posY, houseData.posZ - 2);
         house.object3D.rotation.set(
             THREE.Math.degToRad(houseData.rotX),
             THREE.Math.degToRad(houseData.rotY),
