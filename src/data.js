@@ -104,17 +104,17 @@ let houses = [
             {"id": "dls1"}
         ]
     },
-    // {
-    //     "id": "eb",
-    //     "posX": 0.9, "posY": 0, "posZ": 0.6,
-    //     "rotX": 0, "rotY": 180, "rotZ": 0,
-    //     "scale": 0.04,
-    //     "collidable": true,
-    //     "childIds": [
-    //         //{"id": "eb0"},
-    //         //{"id": "eb1"}
-    //     ]
-    // },
+    {
+        "id": "eb",
+        "posX": 0.9, "posY": 0, "posZ": 0.6,
+        "rotX": 0, "rotY": 180, "rotZ": 0,
+        "scale": 0.04,
+        "collidable": true,
+        "childIds": [
+            {"id": "eb0"},
+            //{"id": "eb1"}
+        ]
+    },
     // {
     //     "id": "ef",
     //     "posX": -1.2, "posY": 0, "posZ":2.7,
@@ -125,58 +125,58 @@ let houses = [
     //         //{"id": "ef0"}
     //     ]
     // },
-    // {
-    //     "id": "fc",
-    //     "posX": 1.2, "posY": 0, "posZ": -2,
-    //     "rotX": 0, "rotY": 90, "rotZ": 0,
-    //     "scale": 0.04,
-    //     "collidable": true,
-    //     "childIds": [
-    //         //{"id": "fc0"}
-    //     ]
-    // },
-    // {
-    //     "id": "fh",
-    //     "posX": -1.3, "posY": 0, "posZ": -0.3,
-    //     "rotX": 0, "rotY": -90, "rotZ": 0,
-    //     "scale": 0.04,
-    //     "collidable": true,
-    //     "childIds": [
-    //         //{"id": "fh0"}
-    //     ]
-    // },
-    // {
-    //     "id": "fs",
-    //     "posX": -1.8, "posY": 0, "posZ": -0.3,
-    //     "rotX": 0, "rotY": -90, "rotZ": 0,
-    //     "scale": 0.04,
-    //     "collidable": true,
-    //     "childIds": [
-    //         //{"id": "fs0"}
-    //     ]
-    // },
-    // {
-    //     "id": "ga",
-    //     "posX":2.4, "posY": 0, "posZ": 2.4,
-    //     "rotX": 0, "rotY": 180, "rotZ": 0,
-    //     "scale": 0.04,
-    //     "collidable": true,
-    //     "childIds": [
-    //         //{"id": "ga0"},
-    //         //{"id": "ga1"},
-    //         //{"id": "ga2"}
-    //     ]
-    // },
-    // {
-    //     "id": "jd",
-    //     "posX": -0.9, "posY": 0, "posZ": -3,
-    //     "rotX": 0, "rotY": 90, "rotZ": 0,
-    //     "scale": 0.04,
-    //     "collidable": true,
-    //     "childIds": [
-    //         //{"id": "jd0"}
-    //     ]
-    // },
+    {
+        "id": "fc",
+        "posX": 1.2, "posY": 0, "posZ": -2,
+        "rotX": 0, "rotY": 90, "rotZ": 0,
+        "scale": 0.04,
+        "collidable": true,
+        "childIds": [
+            {"id": "fc0"}
+        ]
+    },
+    {
+        "id": "fh",
+        "posX": -1.3, "posY": 0, "posZ": -0.3,
+        "rotX": 0, "rotY": -90, "rotZ": 0,
+        "scale": 0.04,
+        "collidable": true,
+        "childIds": [
+            {"id": "fh0"}
+        ]
+    },
+    {
+        "id": "fs",
+        "posX": -1.8, "posY": 0, "posZ": -0.3,
+        "rotX": 0, "rotY": -90, "rotZ": 0,
+        "scale": 0.04,
+        "collidable": true,
+        "childIds": [
+            {"id": "fs0"}
+        ]
+    },
+    {
+        "id": "ga",
+        "posX":2.4, "posY": 0, "posZ": 2.4,
+        "rotX": 0, "rotY": 180, "rotZ": 0,
+        "scale": 0.04,
+        "collidable": true,
+        "childIds": [
+            {"id": "ga0"},
+            //{"id": "ga1"},
+            //{"id": "ga2"}
+        ]
+    },
+    {
+        "id": "jd",
+        "posX": -0.9, "posY": 0, "posZ": -3,
+        "rotX": 0, "rotY": 90, "rotZ": 0,
+        "scale": 0.04,
+        "collidable": true,
+        "childIds": [
+            {"id": "jd0"}
+        ]
+    },
     // {
     //     "id": "lb",
     //     "posX": -0.9, "posY": 0, "posZ": 2.4,
@@ -197,28 +197,28 @@ let houses = [
     //        // {"id": "lk0"}
     //     ]
     // },
-    // {
-    //     "id": "lp",
-    //     "posX": -0.1, "posY": 0, "posZ": -0.6,
-    //     "rotX": 0, "rotY": 90, "rotZ": 0,
-    //     "scale": 0.04,
-    //     "collidable": true,
-    //     "childIds": [
-    //         //{"id": "lp0"},
-    //         //{"id": "lp1"}
-    //     ]
-    // },
-    // {
-    //     "id": "ls",
-    //     "posX": 0.2, "posY": 0, "posZ": -1.2,
-    //     "rotX": 0, "rotY": 0, "rotZ": 0,
-    //     "scale": 0.04,
-    //     "collidable": true,
-    //     "childIds": [
-    //         //{"id": "ls0"},
-    //         //{"id": "ls1"}
-    //     ]
-    // },
+    {
+        "id": "lp",
+        "posX": -0.1, "posY": 0, "posZ": -0.6,
+        "rotX": 0, "rotY": 90, "rotZ": 0,
+        "scale": 0.04,
+        "collidable": true,
+        "childIds": [
+            {"id": "lp0"},
+            //{"id": "lp1"}
+        ]
+    },
+    {
+        "id": "ls",
+        "posX": 0.2, "posY": 0, "posZ": -1.2,
+        "rotX": 0, "rotY": 0, "rotZ": 0,
+        "scale": 0.04,
+        "collidable": true,
+        "childIds": [
+            {"id": "ls0"},
+            {"id": "ls1"}
+        ]
+    },
     // {
     //     "id": "lt",
     //     "posX": -0.6, "posY": 0, "posZ": -2.1,
@@ -343,6 +343,15 @@ let objects = new Map([
   ["cha5", 0.1],
   ["dls0", 0.1],
   ["dls1", 0.1],
+  ["eb0", 0.1],
+  ["fc0", 0.1],
+  ["fh0", 0.1],
+  ["fs0", 0.1],
+  ["ga0", 0.1],
+  ["jd0", 0.1],
+  ["lp0", 0.1],
+  ["ls0", 0.1],
+  ["ls1", 0.1],
   ["ollie0", 0.1]
 ]);
 
