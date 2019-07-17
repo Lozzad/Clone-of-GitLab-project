@@ -93,7 +93,8 @@ window.addEventListener("DOMContentLoaded", function() {
 	scene.addEventListener("carousel-item-selected", (ev: CustomEvent) => {
 		const id: string = ev.detail.id;
 
-		var asset: HTMLElement | null = document.getElementById(id + "-asset");
+    var asset: HTMLElement | null = document.getElementById(id + "-asset");
+    console.log(asset);
 
 		if (asset) {
 			state.selectedItem = asset.getAttribute("src") as string;
