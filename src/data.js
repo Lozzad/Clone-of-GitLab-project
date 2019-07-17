@@ -7,7 +7,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "af0"}
+            {"id": "af0"}
         ]
     },
     {
@@ -25,7 +25,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-           // {"id": "ag0"},
+           {"id": "ag0"}//,
            // {"id": "ag1"}
         ]
     },
@@ -36,7 +36,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "ah0"}
+            {"id": "ah0"}
         ]
     },
     {
@@ -54,7 +54,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "aw0"}
+            {"id": "aw0"}
         ]
     },
     {
@@ -64,7 +64,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "bg0"}
+            {"id": "bg0"}
         ]
     },
     {
@@ -78,7 +78,8 @@ let houses = [
           {"id": "cha1"},
           {"id": "cha2"},
           {"id": "cha3"},
-          {"id": "cha4"}
+          {"id": "cha4"},
+          {"id": "cha5"}
         ]
     },
     {
@@ -99,8 +100,8 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "dls0"},
-           //{"id": "dls1"}
+            {"id": "dls0"},
+            {"id": "dls1"}
         ]
     },
     {
@@ -329,11 +330,19 @@ let houses = [
 ];
 
 let objects = new Map([
+  ["af0", 0.1],
+  ["ag0", 0.1],
+  ["ah0", 0.1],
+  ["aw0", 0.1],
+  ["bg0", 0.1],
   ["cha0", 1.2],
   ["cha1", 1.2],
   ["cha2", 1.2],
   ["cha3", 3],
   ["cha4", 0.025],
+  ["cha5", 0.1],
+  ["dls0", 0.1],
+  ["dls1", 0.1],
   ["ollie0", 0.1]
 ]);
 
