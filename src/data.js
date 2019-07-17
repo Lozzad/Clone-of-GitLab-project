@@ -343,7 +343,7 @@ function addAssets() {
     houses.forEach(house => {
         let asset = document.createElement("a-asset-item");
         asset.setAttribute('id', house.id + "-asset");
-        asset.setAttribute('src', '/assets/' + house.id + '.gltf')
+        asset.setAttribute('src', '/assets/houses/' + house.id + '.gltf')
         assetParent.appendChild(asset);
     });
     Array.from(objects.keys()).forEach(id => {
