@@ -76,14 +76,14 @@ export default AFRAME.registerComponent("carousel", {
 		//this.el!.children[newIndex].removeAttribute("rotation");
     //this.el!.children[newIndex].setAttribute("animation__rotate", rotateObjectAnim);
 
-    this.currentRotation = newRotation;
+    // this.currentRotation = newRotation;
     this.index = newIndex;
 	},
 
 	selectItem() {
     const child  = this.el!.children[this.index];
     console.log(this.el);
-		this.el!.sceneEl!.emit("carousel-item-selected", {id: child.id, l: child.l}, false);
+		this.el!.sceneEl!.emit("carousel-item-selected", {id: child.id}, false);
 	},
 
   bindMethods() {
