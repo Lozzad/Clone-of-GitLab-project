@@ -429,7 +429,7 @@ function addHouses() {
             house.setAttribute('class', 'collidable');
             let carousel = createCarousel(houseData.id, houseData.childIds);
             house.appendChild(carousel);
-            house.setAttribute('box', {carouselId: houseData.id + "-carousel", boxID: houseData.id});
+            house.setAttribute('box', {carouselId: houseData.id + "-carousel", boxID: houseData.id, shouldOpen: "true"});
         }
 
    

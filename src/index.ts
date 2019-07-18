@@ -3,6 +3,7 @@ import "./components/look-to-camera";
 import "./components/box";
 
 var scene,
+  boxes,
   video,
   overlay,
   viewer,
@@ -15,14 +16,15 @@ var scene,
   // test;
 
 interface AppState {
-	selectedItem: string | null;
+  selectedItem: string | null;
+  houseID: string | null;
 	boxOpened: boolean;
 }
 
 var state = {
 	selectedItem: null,
-  boxOpened: false
-  // houseID: null
+  boxOpened: false,
+  houseID: null
 } as AppState;
 
 function resize() {
@@ -44,6 +46,20 @@ function resize() {
 window.addEventListener("resize", function() {
   resize();
 });
+function disableBoxes(){
+//   console.log("I am here");
+//   console.log(boxes);
+
+//   Array.from(document.getElementsByClassName("collidable")).forEach(
+//     function(element) {
+//       console.log(element);
+
+//     }
+// );
+}
+function enableBoxes(){
+  
+}
 
 function render() {
   video = document.querySelector("video");
@@ -68,13 +84,16 @@ function render() {
 	if (state.boxOpened) {
     // console.log(state.boxOpened);
 		// carouselMenu.classList.remove("hide");
-	} else {
-		// carouselMenu.classList.add("hide");
+    disableBoxes();
+    } else {
+    // carouselMenu.classList.add("hide");
+    enableBoxes();
 	}
 }
 
 window.addEventListener("DOMContentLoaded", function() {
   scene = document.querySelector("a-scene");
+  boxes = document.getElementsByClassName("collidable");
   overlay = document.getElementById("overlay");
   viewer = document.getElementById("viewer");
   raycaster = document.querySelector('[ar-raycaster]');
@@ -101,6 +120,12 @@ window.addEventListener("DOMContentLoaded", function() {
 		state.boxOpened = false;
 		render();
   }, false);
+
+  scene.addEventListener("box-id-selected", (ev: CustomEvent) => {
+    const id: string = ev.detail.id;
+    state.houseID = id;
+    console.log("I got the message: "+id);
+  });
   
   scene.addEventListener("carousel-item-selected", (ev: CustomEvent) => {
 		const id: string = ev.detail.id;
