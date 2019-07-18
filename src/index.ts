@@ -9,7 +9,10 @@ var scene,
   carouselMenu,
   prevButton,
   nextButton,
-  itemButton;
+  itemButton,
+  raycaster,
+  mark;  
+  // test;
 
 interface AppState {
 	selectedItem: string | null;
@@ -18,7 +21,8 @@ interface AppState {
 
 var state = {
 	selectedItem: null,
-	boxOpened: false
+  boxOpened: false
+  // houseID: null
 } as AppState;
 
 function resize() {
@@ -44,6 +48,7 @@ window.addEventListener("resize", function() {
 function render() {
   video = document.querySelector("video");
 
+
   if (state.selectedItem) {
     scene.classList.add("hide");
     video.classList.add("hide");
@@ -61,9 +66,10 @@ function render() {
 	}
 	
 	if (state.boxOpened) {
-		carouselMenu.classList.remove("hide");
+    // console.log(state.boxOpened);
+		// carouselMenu.classList.remove("hide");
 	} else {
-		carouselMenu.classList.add("hide");
+		// carouselMenu.classList.add("hide");
 	}
 }
 
@@ -71,30 +77,35 @@ window.addEventListener("DOMContentLoaded", function() {
   scene = document.querySelector("a-scene");
   overlay = document.getElementById("overlay");
   viewer = document.getElementById("viewer");
+  raycaster = document.querySelector('[ar-raycaster]');
+  mark = document.querySelector('#cursor');
+  // test = document.querySelector('#cube');
+  
   carouselMenu = document.getElementById("carousel-menu");
   prevButton = document.getElementById("carousel-prev-button");
   itemButton = document.getElementById("carousel-item-button");
   nextButton = document.getElementById("carousel-next-button");
 
 	scene.addEventListener("loaded", () => {
-		
 	});
 
 	scene.addEventListener("box-opened", () => {
-		state.boxOpened = true;
+    state.boxOpened = true;
+    // console.log(state.selectedItem);
+
 		render();
-	}, false);
+  }, false);
+
 
 	scene.addEventListener("box-closing", () => {
 		state.boxOpened = false;
 		render();
-	}, false);
-
-	scene.addEventListener("carousel-item-selected", (ev: CustomEvent) => {
+  }, false);
+  
+  scene.addEventListener("carousel-item-selected", (ev: CustomEvent) => {
 		const id: string = ev.detail.id;
 
     var asset: HTMLElement | null = document.getElementById(id + "-asset");
-    console.log(asset);
 
 		if (asset) {
 			state.selectedItem = asset.getAttribute("src") as string;
@@ -141,6 +152,37 @@ window.addEventListener("DOMContentLoaded", function() {
     },
     false
   );
+  raycaster.addEventListener("raycaster-intersection", (evt: CustomEvent) => {
+    // Turn the mark green and move it to the intersection point.
+    console.log("hit one "+evt.detail.intersections[0]);
+    mark.setAttribute('color', 'yellow');
+    mark.setAttribute('position', evt.detail.intersections[0].point);
+    mark.setAttribute('visible', 'true');
 
+  });
+  raycaster.addEventListener("raycaster-intersection-cleared", () => {
+  // Turn the mark red. 
+  // mark.setAttribute('color', 'red');
+  mark.setAttribute('visible', 'false');
+  });
+
+  // //this does not check the ray caster, only if the screen has been clicked
+  // test.addEventListener(
+  //   "click",
+  //   () => {
+  //     console.log('I was clickexxxxxxd!');
+  //     test.setAttribute('material', 'color', 'green');
+  //   },
+  //   false
+  // );
+
+  // test.addEventListener('click', function () {
+  //   // test.setAttribute('material', 'color', 'green');
+  //   console.log('I was clickexxxxxxd!');
+  // });
+  
   resize();
+
 });
+
+     

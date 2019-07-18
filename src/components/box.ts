@@ -35,12 +35,15 @@ enum BoxTransition {
 
 export default AFRAME.registerComponent("box", {
   schema: {
+    boxID: { type: "string" },
     carouselId: { type: "string" },
     carouselAnimationDuration: { type: "string", default: "2000" },
     carouselScaleSmall: { type: "string", default: "0.25 0.25 0.25" },
     carouselPositionSmall: { type: "string", default: "0 5 -0.25" },
     carouselScaleLarge: { type: "string", default: "20 20 20" },
-    carouselPositionLarge: { type: "string", default: "0 10 -0.25" }
+    carouselPositionLarge: { type: "string", default: "0 10 -0.25" },
+    shouldOpen: { type: 'boolean', default: "true" },
+    target: {type: 'selector'}  
   },
 
   carousel: null,
@@ -54,8 +57,9 @@ export default AFRAME.registerComponent("box", {
   init() {
     this.bindMethods();
     this.addEventListeners();
-
+    this.data.counter = 0; 
     this.carousel = document.getElementById(this.data.carouselId);
+
     this.state = BoxState.CLOSED;
 
     this.carouselScaleSmallToLargeAnimation = this.getAnimationString(
@@ -150,8 +154,9 @@ export default AFRAME.registerComponent("box", {
     switch (this.state) {
       case BoxState.OPENING:
 		this.animationStateService.send(BoxTransition.OPENED);
-		this.el!.sceneEl!.emit("box-opened", this, false);
-        break;
+    this.el!.sceneEl!.emit("box-opened", this, false);
+    this.el!.sceneEl!.emit("box-id-selected", {id: this.data.boxID}, false);
+    break;
       case BoxState.CLOSING:
 		this.animationStateService.send(BoxTransition.CLOSED);
 		this.el!.sceneEl!.emit("box-closed", this, false);
@@ -161,7 +166,7 @@ export default AFRAME.registerComponent("box", {
 
   clicked(ev: CustomEvent) {
     ev.preventDefault();
-    console.log("clicked");
+    console.log("clicked: "+this.data.boxID);
     switch (this.state) {
       case BoxState.CLOSED:
         this.animationStateService.send(BoxTransition.OPEN);
@@ -198,10 +203,17 @@ export default AFRAME.registerComponent("box", {
     this.clicked = this.clicked.bind(this);
   },
 
-  tick() {},
+  tick() {
+
+  },
 
   remove() {
     this.el!.removeObject3D("mesh");
     this.removeEventListeners();
+  },
+
+  test(){
+    console.log("yes this works!");
   }
+
 } as BoxComponent);
