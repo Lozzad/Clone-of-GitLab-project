@@ -3,7 +3,7 @@ import "./components/look-to-camera";
 import "./components/box";
 
 var scene,
-  //boxes,
+  boxes,
   video,
   overlay,
   viewer,
@@ -93,7 +93,7 @@ function render() {
 
 window.addEventListener("DOMContentLoaded", function() {
   scene = document.querySelector("a-scene");
-  //boxes = document.getElementsByClassName("collidable");
+  boxes = document.getElementsByClassName("collidable");
   overlay = document.getElementById("overlay");
   viewer = document.getElementById("viewer");
   raycaster = document.querySelector('[ar-raycaster]');

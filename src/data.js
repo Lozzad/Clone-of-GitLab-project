@@ -6,9 +6,9 @@ let houses = [
         "rotX": 0, "rotY": -90, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-            {"id": "af0"}
-        ],
+        // "childIds": [
+        //     {"id": "af0"}
+        // ],
         "link": "http://www.google.com"
     },
     {
@@ -17,7 +17,7 @@ let houses = [
         "rotX": 0, "rotY": 90, "rotZ": 0,
         "scale": 0.04,
         "collidable": false,
-        "childIds": []
+        // "childIds": []
     },
     {
         "id": "ag",
@@ -25,10 +25,10 @@ let houses = [
         "rotX": 0, "rotY": 0, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-           {"id": "ag0"}//,
-           // {"id": "ag1"}
-        ]
+        // "childIds": [
+        //    {"id": "ag0"}//,
+        //    // {"id": "ag1"}
+        // ]
     },
     {
         "id": "ah",
@@ -36,9 +36,9 @@ let houses = [
         "rotX": 0, "rotY": -90, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-            {"id": "ah0"}
-        ]
+        // "childIds": [
+        //     {"id": "ah0"}
+        // ]
     },
     {
         "id": "alice",
@@ -46,7 +46,7 @@ let houses = [
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.025,
         "collidable": false,
-        "childIds": []
+        // "childIds": []
     },
     {
         "id": "aw",
@@ -54,9 +54,9 @@ let houses = [
         "rotX": 0, "rotY": 90, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-            {"id": "aw0"}
-        ]
+        // "childIds": [
+        //     {"id": "aw0"}
+        // ]
     },
     {
         "id": "bg",
@@ -64,9 +64,9 @@ let houses = [
         "rotX": 0, "rotY": -120, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-            {"id": "bg0"}
-        ]
+        // "childIds": [
+        //     {"id": "bg0"}
+        // ]
     },
     {
         "id": "cha",
@@ -74,9 +74,9 @@ let houses = [
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-          {"id": "cha0"}
-        ]
+        // "childIds": [
+        //   {"id": "cha0"}
+        // ]
     },
     {
         "id": "ct",
@@ -84,10 +84,10 @@ let houses = [
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.04,
         "collidable": false,
-        "childIds": [
-            //{"id": "ct0"},
-            //{"id": "ct1"}
-        ]
+        // "childIds": [
+        //     //{"id": "ct0"},
+        //     //{"id": "ct1"}
+        // ]
     },
     {
         "id": "dls",
@@ -95,10 +95,10 @@ let houses = [
         "rotX": 0, "rotY": -90, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-            {"id": "dls0"},
-           //{"id": "dls1"}
-        ]
+        // "childIds": [
+        //     {"id": "dls0"},
+        //    //{"id": "dls1"}
+        // ]
     },
     {
         "id": "eb",
@@ -106,10 +106,10 @@ let houses = [
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-            {"id": "eb0"},
-            //{"id": "eb1"}
-        ]
+        // "childIds": [
+        //     {"id": "eb0"},
+        //     //{"id": "eb1"}
+        // ]
     },
     {
         "id": "ef",
@@ -117,9 +117,9 @@ let houses = [
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.04,
         "collidable": false,
-        "childIds": [
-            //{"id": "ef0"}
-        ]
+        // "childIds": [
+        //     //{"id": "ef0"}
+        // ]
     },
     {
         "id": "fc",
@@ -127,9 +127,9 @@ let houses = [
         "rotX": 0, "rotY": 90, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-            {"id": "fc0"}
-        ]
+        // "childIds": [
+        //     {"id": "fc0"}
+        // ]
     },
     {
         "id": "fh",
@@ -137,9 +137,9 @@ let houses = [
         "rotX": 0, "rotY": -90, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-            {"id": "fh0"}
-        ]
+        // "childIds": [
+        //     {"id": "fh0"}
+        // ]
     },
     {
         "id": "fs",
@@ -147,9 +147,9 @@ let houses = [
         "rotX": 0, "rotY": -90, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-            {"id": "fs0"}
-        ]
+        // "childIds": [
+        //     {"id": "fs0"}
+        // ]
     },
     {
         "id": "ga",
@@ -157,11 +157,11 @@ let houses = [
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-            {"id": "ga0"}
-            //{"id": "ga1"},
-            //{"id": "ga2"}
-        ]
+        // "childIds": [
+        //     {"id": "ga0"}
+        //     //{"id": "ga1"},
+        //     //{"id": "ga2"}
+        // ]
     },
     {
         "id": "jd",
@@ -169,9 +169,9 @@ let houses = [
         "rotX": 0, "rotY": 90, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-            {"id": "jd0"}
-        ]
+        // "childIds": [
+        //     {"id": "jd0"}
+        // ]
     },
     {
         "id": "lb",
@@ -179,9 +179,9 @@ let houses = [
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.04,
         "collidable": false,
-        "childIds": [
-            //{"id": "lb0"}
-        ]
+        // "childIds": [
+        //     //{"id": "lb0"}
+        // ]
     },
     {
         "id": "lk",
@@ -189,9 +189,9 @@ let houses = [
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.04,
         "collidable": false,
-        "childIds": [
-           // {"id": "lk0"}
-        ]
+        // "childIds": [
+        //    // {"id": "lk0"}
+        // ]
     },
     {
         "id": "lp",
@@ -199,10 +199,10 @@ let houses = [
         "rotX": 0, "rotY": 90, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-            {"id": "lp0"},
-            //{"id": "lp1"}
-        ]
+        // "childIds": [
+        //     {"id": "lp0"},
+        //     //{"id": "lp1"}
+        // ]
     },
     {
         "id": "ls",
@@ -210,10 +210,10 @@ let houses = [
         "rotX": 0, "rotY": 0, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-            {"id": "ls0"},
-            //{"id": "ls1"}
-        ]
+        // "childIds": [
+        //     {"id": "ls0"},
+        //     //{"id": "ls1"}
+        // ]
     },
     {
         "id": "lt",
@@ -221,9 +221,9 @@ let houses = [
         "rotX": 0, "rotY": 90, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-            {"id": "lt0"}
-        ]
+        // "childIds": [
+        //     {"id": "lt0"}
+        // ]
     },
     {
         "id": "ma",
@@ -231,9 +231,9 @@ let houses = [
         "rotX": 0, "rotY": 90, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-            {"id": "ma0"}
-        ]
+        // "childIds": [
+        //     {"id": "ma0"}
+        // ]
     },
     {
         "id": "md",
@@ -241,10 +241,10 @@ let houses = [
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-            {"id": "md0"},
-           // {"id": "md1"}
-        ]
+        // "childIds": [
+        //     {"id": "md0"},
+        //    // {"id": "md1"}
+        // ]
     },
     {
         "id": "nl",
@@ -252,9 +252,9 @@ let houses = [
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-            {"id": "nl0"}
-        ]
+        // "childIds": [
+        //     {"id": "nl0"}
+        // ]
     },
     {
         "id": "ollie",
@@ -262,9 +262,9 @@ let houses = [
         "rotX": 0, "rotY": -90, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-            {"id": "ollie0"}
-        ]
+        // "childIds": [
+        //     {"id": "ollie0"}
+        // ]
     },
     {
         "id": "pb",
@@ -272,7 +272,7 @@ let houses = [
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.04,
         "collidable": false,
-        "childIds": []
+        // "childIds": []
     },
     {
         "id": "rc",
@@ -280,7 +280,7 @@ let houses = [
         "rotX": 0, "rotY": 0, "rotZ": 0,
         "scale": 0.04,
         "collidable": false,
-        "childIds": []
+        // "childIds": []
     },
     {
         "id": "rmj",
@@ -288,9 +288,9 @@ let houses = [
         "rotX": 0, "rotY": -90, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-            {"id": "rmj0"}
-        ]
+        // "childIds": [
+        //     {"id": "rmj0"}
+        // ]
     },
     {
         "id": "rw",
@@ -298,9 +298,9 @@ let houses = [
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-           {"id": "rw0"}
-        ]
+        // "childIds": [
+        //    {"id": "rw0"}
+        // ]
     },
     {
         "id": "ss",
@@ -308,9 +308,9 @@ let houses = [
         "rotX": 0, "rotY": -90, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-            {"id": "ss0"}
-        ]
+        // "childIds": [
+        //     {"id": "ss0"}
+        // ]
     },
     {
         "id": "za",
@@ -318,10 +318,10 @@ let houses = [
         "rotX": 0, "rotY": 90, "rotZ": 0,
         "scale": 0.04,
         "collidable": true,
-        "childIds": [
-            {"id": "za0"},
-            //{"id": "za1"}
-        ]
+        // "childIds": [
+        //     {"id": "za0"},
+        //     //{"id": "za1"}
+        // ]
     }
 ];
 
@@ -424,9 +424,9 @@ function addHouses() {
 
         if (houseData.collidable) {
             house.setAttribute('class', 'collidable');
-            let carousel = createCarousel(houseData.id, houseData.childIds);
-            house.appendChild(carousel);
-            house.setAttribute('box', {carouselId: houseData.id + "-carousel", boxID: houseData.id, });
+            // let carousel = createCarousel(houseData.id, houseData.childIds);
+            // house.appendChild(carousel);
+            house.setAttribute('box', {carouselId: houseData.id + "-carousel", boxID: houseData.id});
             house.setAttribute('l', houseData.link);
         }
 
