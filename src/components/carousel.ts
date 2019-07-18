@@ -25,7 +25,7 @@ export default AFRAME.registerComponent("carousel", {
 
   numChildren: 0,
   interval: 0,
-  currentRotation: -90,
+  currentRotation: 0,
   index: 0,
   ringGeometry: null,
   ringMaterial: null,
