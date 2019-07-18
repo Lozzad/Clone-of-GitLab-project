@@ -83,7 +83,7 @@ export default AFRAME.registerComponent("carousel", {
 	selectItem() {
     const child  = this.el!.children[this.index];
     console.log(this.el);
-		this.el!.sceneEl!.emit("carousel-item-selected", {id: child.id, l: child.l}, false);
+		this.el!.sceneEl!.emit("carousel-item-selected", {id: child.id}, false);
 	},
 
   bindMethods() {

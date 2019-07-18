@@ -9,14 +9,14 @@ let houses = [
         "childIds": [
             {"id": "af0"}
         ],
-        "l": "http://www.google.com"
+        "link": "http://www.google.com"
     },
     {
         "id": "af2",
         "posX": 0.9, "posY": 0, "posZ": -2.5,
         "rotX": 0, "rotY": 90, "rotZ": 0,
         "scale": 0.04,
-        "collidable": true,
+        "collidable": false,
         "childIds": []
     },
     {
@@ -37,7 +37,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "ah0"}
+            {"id": "ah0"}
         ]
     },
     {
@@ -45,7 +45,7 @@ let houses = [
         "posX": -0.6, "posY": 0, "posZ": 0.3,
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.025,
-        "collidable": true,
+        "collidable": false,
         "childIds": []
     },
     {
@@ -55,7 +55,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "aw0"}
+            {"id": "aw0"}
         ]
     },
     {
@@ -65,7 +65,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "bg0"}
+            {"id": "bg0"}
         ]
     },
     {
@@ -75,11 +75,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-          {"id": "cha0"},
-          {"id": "cha1"},
-          {"id": "cha2"},
-          {"id": "cha3"},
-          {"id": "cha4"}
+          {"id": "cha0"}
         ]
     },
     {
@@ -425,12 +421,12 @@ function addHouses() {
         house.object3D.scale.set(houseData.scale, houseData.scale, houseData.scale);
         house.setAttribute('gltf-model', '#' + houseData.id + '-asset');
         house.setAttribute('animation-mixer', {clip: 'closed'});
-        // house.setAttribute('light', "type: ambient; intensity: 1.0");
+
         if (houseData.collidable) {
             house.setAttribute('class', 'collidable');
             let carousel = createCarousel(houseData.id, houseData.childIds);
             house.appendChild(carousel);
-            house.setAttribute('box', {carouselId: houseData.id + "-carousel", boxID: houseData.id});
+            house.setAttribute('box', {carouselId: houseData.id + "-carousel", boxID: houseData.id, });
             house.setAttribute('l', houseData.link);
         }
 

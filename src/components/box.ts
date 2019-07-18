@@ -36,6 +36,7 @@ enum BoxTransition {
 export default AFRAME.registerComponent("box", {
   schema: {
     boxID: { type: "string" },
+    link: { type: "string" },
     carouselId: { type: "string" },
     carouselAnimationDuration: { type: "string", default: "2000" },
     carouselScaleSmall: { type: "string", default: "0.25 0.25 0.25" },
