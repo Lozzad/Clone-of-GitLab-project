@@ -83,7 +83,7 @@ let houses = [
         "posX": -0.6, "posY": 0, "posZ": 1.2,
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.04,
-        "collidable": true,
+        "collidable": false,
         "childIds": [
             //{"id": "ct0"},
             //{"id": "ct1"}
@@ -96,7 +96,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "dls0"},
+            {"id": "dls0"},
            //{"id": "dls1"}
         ]
     },
@@ -107,7 +107,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "eb0"},
+            {"id": "eb0"},
             //{"id": "eb1"}
         ]
     },
@@ -116,7 +116,7 @@ let houses = [
         "posX": -1.2, "posY": 0, "posZ":2.7,
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.04,
-        "collidable": true,
+        "collidable": false,
         "childIds": [
             //{"id": "ef0"}
         ]
@@ -128,7 +128,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "fc0"}
+            {"id": "fc0"}
         ]
     },
     {
@@ -138,7 +138,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "fh0"}
+            {"id": "fh0"}
         ]
     },
     {
@@ -148,7 +148,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "fs0"}
+            {"id": "fs0"}
         ]
     },
     {
@@ -158,7 +158,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "ga0"},
+            {"id": "ga0"}
             //{"id": "ga1"},
             //{"id": "ga2"}
         ]
@@ -170,7 +170,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "jd0"}
+            {"id": "jd0"}
         ]
     },
     {
@@ -178,7 +178,7 @@ let houses = [
         "posX": -0.9, "posY": 0, "posZ": 2.4,
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.04,
-        "collidable": true,
+        "collidable": false,
         "childIds": [
             //{"id": "lb0"}
         ]
@@ -188,7 +188,7 @@ let houses = [
         "posX": -0.7, "posY": 0, "posZ": -0.6,
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.04,
-        "collidable": true,
+        "collidable": false,
         "childIds": [
            // {"id": "lk0"}
         ]
@@ -200,7 +200,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "lp0"},
+            {"id": "lp0"},
             //{"id": "lp1"}
         ]
     },
@@ -211,7 +211,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "ls0"},
+            {"id": "ls0"},
             //{"id": "ls1"}
         ]
     },
@@ -222,7 +222,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "lt0"}
+            {"id": "lt0"}
         ]
     },
     {
@@ -232,7 +232,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "ma0"}
+            {"id": "ma0"}
         ]
     },
     {
@@ -242,7 +242,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-           // {"id": "md0"},
+            {"id": "md0"},
            // {"id": "md1"}
         ]
     },
@@ -253,7 +253,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "nl0"}
+            {"id": "nl0"}
         ]
     },
     {
@@ -271,7 +271,7 @@ let houses = [
         "posX": 2.4, "posY": 0, "posZ": 3.5,
         "rotX": 0, "rotY": 180, "rotZ": 0,
         "scale": 0.04,
-        "collidable": true,
+        "collidable": false,
         "childIds": []
     },
     {
@@ -279,7 +279,7 @@ let houses = [
         "posX": 0.3, "posY": 0, "posZ": 1.5,
         "rotX": 0, "rotY": 0, "rotZ": 0,
         "scale": 0.04,
-        "collidable": true,
+        "collidable": false,
         "childIds": []
     },
     {
@@ -289,7 +289,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "rmj0"}
+            {"id": "rmj0"}
         ]
     },
     {
@@ -299,7 +299,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-           // {"id": "rw0"}
+           {"id": "rw0"}
         ]
     },
     {
@@ -309,7 +309,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "ss0"}
+            {"id": "ss0"}
         ]
     },
     {
@@ -319,7 +319,7 @@ let houses = [
         "scale": 0.04,
         "collidable": true,
         "childIds": [
-            //{"id": "za0"},
+            {"id": "za0"},
             //{"id": "za1"}
         ]
     }
@@ -332,13 +332,13 @@ let objects = new Map([
   ["aw0", 0.1],
   ["bg0", 0.1],
   ["cha0", 1.2],
-  ["cha1", 1.2],
-  ["cha2", 1.2],
-  ["cha3", 3],
-  ["cha4", 0.005],
-  ["cha5", 0.1],
+//   ["cha1", 1.2],
+//   ["cha2", 1.2],
+//   ["cha3", 3],
+//   ["cha4", 0.005],
+//   ["cha5", 0.1],
   ["dls0", 0.1],
-  ["dls1", 0.1],
+//   ["dls1", 0.1],
   ["eb0", 0.1],
   ["fc0", 0.1],
   ["fh0", 0.1],
@@ -347,7 +347,7 @@ let objects = new Map([
   ["jd0", 0.1],
   ["lp0", 0.1],
   ["ls0", 0.1],
-  ["ls1", 0.1],
+//   ["ls1", 0.1],
   ["ollie0", 0.1]
 ]);
 
