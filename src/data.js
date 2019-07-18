@@ -8,7 +8,8 @@ let houses = [
         "collidable": true,
         "childIds": [
             {"id": "af0"}
-        ]
+        ],
+        "l": "http://www.google.com"
     },
     {
         "id": "af2",
@@ -28,7 +29,7 @@ let houses = [
            {"id": "ag0"}//,
            // {"id": "ag1"}
         ]
-    },    
+    },
     {
         "id": "ah",
         "posX": 0.6, "posY": 0, "posZ": -1.2,
@@ -408,7 +409,7 @@ function addHouses() {
     //     }
 
     // marker.appendChild(house);
-  
+
 
     houses.forEach(houseData => {
         let marker = document.querySelector("a-marker");
@@ -429,10 +430,11 @@ function addHouses() {
             house.setAttribute('class', 'collidable');
             let carousel = createCarousel(houseData.id, houseData.childIds);
             house.appendChild(carousel);
-            house.setAttribute('box', {carouselId: houseData.id + "-carousel", boxID: houseData.id});
+            house.setAttribute('box', {carouselId: houseData.id + "-carousel"});
+            house.setAttribute('l', houseData.link);
         }
 
-   
+
         marker.appendChild(house);
         // //add a Listener to make the object clickable
         // var houseLis = document.querySelector('#'+houseData.id);
@@ -483,7 +485,7 @@ addHouses();
 
 // var raycaster = document.querySelector('[ar-raycaster]');
 // var mark = document.querySelector('#cursor');
-      
+
 // raycaster.addEventListener('raycaster-intersection', function (evt) {
 // // Turn the mark green and move it to the intersection point.
 // mark.setAttribute('color', 'green');
@@ -491,7 +493,7 @@ addHouses();
 // mark.setAttribute('position', evt.detail.intersections[0].point);
 // mark.setAttribute('visible', 'true');
 // });
-      
+
 // raycaster.addEventListener('raycaster-intersection-cleared', function (evt) {
 // // Turn the mark red.  FIXME: lerp position
 // mark.setAttribute('color', 'red');

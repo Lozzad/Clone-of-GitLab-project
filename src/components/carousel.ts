@@ -39,7 +39,7 @@ export default AFRAME.registerComponent("carousel", {
 
     this.numChildren = this.el!.children!.length;
 		this.interval = 360 / this.numChildren;
-	
+
   },
 
   updateAnimation(ev: CustomEvent) {
@@ -79,10 +79,11 @@ export default AFRAME.registerComponent("carousel", {
     this.currentRotation = newRotation;
     this.index = newIndex;
 	},
-	
+
 	selectItem() {
-		const child  = this.el!.children[this.index];
-		this.el!.sceneEl!.emit("carousel-item-selected", {id: child.id}, false);
+    const child  = this.el!.children[this.index];
+    console.log(this.el);
+		this.el!.sceneEl!.emit("carousel-item-selected", {id: child.id, l: child.l}, false);
 	},
 
   bindMethods() {
