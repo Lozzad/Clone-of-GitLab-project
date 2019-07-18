@@ -35,13 +35,14 @@ enum BoxTransition {
 
 export default AFRAME.registerComponent("box", {
   schema: {
-    counter: { type: "number", default: "0" },
+    boxID: { type: "string" },
     carouselId: { type: "string" },
     carouselAnimationDuration: { type: "string", default: "2000" },
     carouselScaleSmall: { type: "string", default: "0.25 0.25 0.25" },
     carouselPositionSmall: { type: "string", default: "0 5 -0.25" },
     carouselScaleLarge: { type: "string", default: "20 20 20" },
     carouselPositionLarge: { type: "string", default: "0 10 -0.25" },
+    shouldOpen: { type: 'boolean', default: "true" },
     target: {type: 'selector'}  
   },
 
@@ -56,8 +57,9 @@ export default AFRAME.registerComponent("box", {
   init() {
     this.bindMethods();
     this.addEventListeners();
-    this.data.counter = 0;
+    this.data.counter = 0; 
     this.carousel = document.getElementById(this.data.carouselId);
+
     this.state = BoxState.CLOSED;
 
     this.carouselScaleSmallToLargeAnimation = this.getAnimationString(
@@ -101,31 +103,6 @@ export default AFRAME.registerComponent("box", {
         this.animationStateChanged(state.value as BoxState)
       )
       .start();
-  },
-
-  update(
-  ):void{
-      // var currentPosition = this.el.object3D.position;
-  // var currentPosition = this.el.object3D.position;
-  console.log(this.data.counter);
- 
-  // var mesh = this.el!.getObject3D('mesh');
-  
-  // mesh.traverse(function(node) {
-  //   if (node.geometry) { /* ... */ }
-  // });
-//}
-//}
-// Go over the submeshes and modify materials we want.
-  // obj.traverse(node => {
-  //   if (node.name == 'uuid') {
-  //     console.log(node.name);
-  //   }
-  // });
-
-  // obj.rotateOnAxis(new THREE.Vector3(1.0,0.0,0.0),THREE.Math.degToRad(this.data.counter));
-  this.data.counter = this.data.counter + 1;
-   
   },
 
   getAnimationString(
@@ -177,8 +154,9 @@ export default AFRAME.registerComponent("box", {
     switch (this.state) {
       case BoxState.OPENING:
 		this.animationStateService.send(BoxTransition.OPENED);
-		this.el!.sceneEl!.emit("box-opened", this, false);
-        break;
+    this.el!.sceneEl!.emit("box-opened", this, false);
+    this.el!.sceneEl!.emit("box-id-selected", {id: this.data.boxID}, false);
+    break;
       case BoxState.CLOSING:
 		this.animationStateService.send(BoxTransition.CLOSED);
 		this.el!.sceneEl!.emit("box-closed", this, false);
@@ -188,8 +166,7 @@ export default AFRAME.registerComponent("box", {
 
   clicked(ev: CustomEvent) {
     ev.preventDefault();
-    console.log("clicked");
-    parent.postMessage("Hello","https://www.google.com");
+    console.log("clicked: "+this.data.boxID);
     switch (this.state) {
       case BoxState.CLOSED:
         this.animationStateService.send(BoxTransition.OPEN);
@@ -227,18 +204,16 @@ export default AFRAME.registerComponent("box", {
   },
 
   tick() {
-    // // const obj = this.el!.getObject3D("mesh");
-    // console.log(this.el!.sceneEl.getObject3D("mesh"));
-    // obj.traverse(node =>{
-    //   console.log(node);
-
-    // })
 
   },
 
   remove() {
     this.el!.removeObject3D("mesh");
     this.removeEventListeners();
+  },
+
+  test(){
+    console.log("yes this works!");
   }
 
 } as BoxComponent);

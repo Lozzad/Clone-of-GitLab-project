@@ -11,9 +11,9 @@ var scene,
   nextButton,
   itemButton,
   raycaster,
-  mark;
+  mark;  
   // test;
-   
+
 interface AppState {
 	selectedItem: string | null;
 	boxOpened: boolean;
@@ -21,7 +21,8 @@ interface AppState {
 
 var state = {
 	selectedItem: null,
-	boxOpened: false
+  boxOpened: false
+  // houseID: null
 } as AppState;
 
 function resize() {
@@ -65,9 +66,10 @@ function render() {
 	}
 	
 	if (state.boxOpened) {
-		carouselMenu.classList.remove("hide");
+    // console.log(state.boxOpened);
+		// carouselMenu.classList.remove("hide");
 	} else {
-		carouselMenu.classList.add("hide");
+		// carouselMenu.classList.add("hide");
 	}
 }
 
@@ -89,18 +91,21 @@ window.addEventListener("DOMContentLoaded", function() {
 
 	scene.addEventListener("box-opened", () => {
     state.boxOpened = true;
+    // console.log(state.selectedItem);
+
 		render();
-	}, false);
+  }, false);
+
 
 	scene.addEventListener("box-closing", () => {
 		state.boxOpened = false;
 		render();
-	}, false);
-
-	scene.addEventListener("carousel-item-selected", (ev: CustomEvent) => {
+  }, false);
+  
+  scene.addEventListener("carousel-item-selected", (ev: CustomEvent) => {
 		const id: string = ev.detail.id;
 
-		var asset: HTMLElement | null = document.getElementById(id + "-asset");
+    var asset: HTMLElement | null = document.getElementById(id + "-asset");
 
 		if (asset) {
 			state.selectedItem = asset.getAttribute("src") as string;
@@ -149,15 +154,15 @@ window.addEventListener("DOMContentLoaded", function() {
   );
   raycaster.addEventListener("raycaster-intersection", (evt: CustomEvent) => {
     // Turn the mark green and move it to the intersection point.
-console.log("hit one "+evt.detail.intersections[0]);
+    console.log("hit one "+evt.detail.intersections[0]);
     mark.setAttribute('color', 'yellow');
-    // FIXME: lerp position
     mark.setAttribute('position', evt.detail.intersections[0].point);
     mark.setAttribute('visible', 'true');
+
   });
   raycaster.addEventListener("raycaster-intersection-cleared", () => {
-  // Turn the mark red.  FIXME: lerp position
-  mark.setAttribute('color', 'red');
+  // Turn the mark red. 
+  // mark.setAttribute('color', 'red');
   mark.setAttribute('visible', 'false');
   });
 
