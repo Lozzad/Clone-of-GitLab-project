@@ -155,8 +155,8 @@ export default AFRAME.registerComponent("box", {
       case BoxState.OPENING:
 		this.animationStateService.send(BoxTransition.OPENED);
     this.el!.sceneEl!.emit("box-opened", {id: this.data.boxID}, false);
-    //this.el!.sceneEl!.emit("box-id-selected", , false);
-    break;
+    this.el!.sceneEl!.emit("box-id-selected", {id: this.data.boxID}, false);
+        break;
       case BoxState.CLOSING:
 		this.animationStateService.send(BoxTransition.CLOSED);
 		this.el!.sceneEl!.emit("box-closed", this, false);

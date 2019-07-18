@@ -47,8 +47,8 @@ window.addEventListener("resize", function() {
   resize();
 });
 function disableBoxes(){
-//   console.log("I am here");
-//   console.log(boxes);
+  console.log("I am here");
+  console.log(boxes);
 
 //   Array.from(document.getElementsByClassName("collidable")).forEach(
 //     function(element) {
