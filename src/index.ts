@@ -89,9 +89,17 @@ window.addEventListener("DOMContentLoaded", function() {
 	scene.addEventListener("loaded", () => {
 	});
 
-	scene.addEventListener("box-opened", () => {
+	scene.addEventListener("box-opened", (ev: CustomEvent) => {
+    const id: string = ev.detail.id;
+
+    var asset: HTMLElement | null = document.getElementById(id + "0-asset");
+
+		if (asset) {
+			state.selectedItem = asset.getAttribute("src") as string;
+		}
+   
     state.boxOpened = true;
-    // console.log(state.selectedItem);
+
 
 		render();
   }, false);
