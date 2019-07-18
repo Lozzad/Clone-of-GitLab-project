@@ -19,6 +19,6 @@
         ]
     },
     "include": [
-        "src/**/*"
+        "src/**/*", "build/data.js"
     ]
 }

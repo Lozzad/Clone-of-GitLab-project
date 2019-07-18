@@ -445,36 +445,36 @@ function addHouses() {
 }
 
 //creates the carousel entities and sub entities
-function createCarousel(id, childIds) {
+// function createCarousel(id, childIds) {
 
-    let carousel = document.createElement("a-entity");
-    carousel.object3D.rotation.set(
-        THREE.Math.degToRad(90),
-        THREE.Math.degToRad(0),
-        THREE.Math.degToRad(90)
-    );
-    carousel.setAttribute('id', id + "-carousel");
-    carousel.object3D.position.set(0, 1, -0.25);
-    carousel.object3D.scale.set(0.25, 0.25, 0.25);
+//     let carousel = document.createElement("a-entity");
+//     carousel.object3D.rotation.set(
+//         THREE.Math.degToRad(90),
+//         THREE.Math.degToRad(0),
+//         THREE.Math.degToRad(90)
+//     );
+//     carousel.setAttribute('id', id + "-carousel");
+//     carousel.object3D.position.set(0, 1, -0.25);
+//     carousel.object3D.scale.set(0.25, 0.25, 0.25);
 
-    let carouselChild = document.createElement("a-entity");
-    carouselChild.setAttribute('carousel', {radius: 0.4, thickness: 0.01, ringVisible: true, itemRadius: 0.1});
+//     let carouselChild = document.createElement("a-entity");
+//     carouselChild.setAttribute('carousel', {radius: 0.4, thickness: 0.01, ringVisible: true, itemRadius: 0.1});
 
-    childIds.forEach(child => {
-        //create the carousel item
-        let object = document.createElement("a-entity");
-        object.setAttribute("id", child.id);
-        object.setAttribute("gltf-model", '#' + child.id + '-asset');
-        let objectScale = objects.get(child.id);
-        object.object3D.scale.set(objectScale, objectScale, objectScale);
-        carouselChild.appendChild(object);
-    });
+//     childIds.forEach(child => {
+//         //create the carousel item
+//         let object = document.createElement("a-entity");
+//         object.setAttribute("id", child.id);
+//         object.setAttribute("gltf-model", '#' + child.id + '-asset');
+//         let objectScale = objects.get(child.id);
+//         object.object3D.scale.set(objectScale, objectScale, objectScale);
+//         carouselChild.appendChild(object);
+//     });
 
-    carousel.appendChild(carouselChild);
-    console.log("created carousel:" + carousel);
+//     carousel.appendChild(carouselChild);
+//     console.log("created carousel:" + carousel);
 
-    return carousel;
-}
+//     return carousel;
+// }
 
 addAssets();
 addHouses();
