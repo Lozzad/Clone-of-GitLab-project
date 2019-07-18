@@ -8,7 +8,8 @@ let houses = [
         "collidable": true,
         "childIds": [
             {"id": "af0"}
-        ]
+        ],
+        "l": "http://www.google.com"
     },
     // {
     //     "id": "af2",
@@ -18,165 +19,165 @@ let houses = [
     //     "collidable": false,
     //     "childIds": []
     // },
-    {
-        "id": "ag",
-        "posX": -1.2, "posY": 0, "posZ": 0.3,
-        "rotX": 0, "rotY": 0, "rotZ": 0,
-        "scale": 0.04,
-        "collidable": true,
-        "childIds": [
-           {"id": "ag0"}//,
-           // {"id": "ag1"}
-        ]
-    },
-    {
-        "id": "ah",
-        "posX": 0.6, "posY": 0, "posZ": -1.2,
-        "rotX": 0, "rotY": -90, "rotZ": 0,
-        "scale": 0.04,
-        "collidable": true,
-        "childIds": [
-            {"id": "ah0"}
-        ]
-    },
     // {
-    //     "id": "alice",
-    //     "posX": -0.6, "posY": 0, "posZ": 0.3,
-    //     "rotX": 0, "rotY": 180, "rotZ": 0,
-    //     "scale": 0.025,
-    //     "collidable": false,
-    //     "childIds": []
+    //     "id": "ag",
+    //     "posX": -1.2, "posY": 0, "posZ": 0.3,
+    //     "rotX": 0, "rotY": 0, "rotZ": 0,
+    //     "scale": 0.04,
+    //     "collidable": true,
+    //     "childIds": [
+    //        {"id": "ag0"}//,
+    //        // {"id": "ag1"}
+    //     ]
     // },
-    {
-        "id": "aw",
-        "posX": -1, "posY": 0, "posZ": -3.5,
-        "rotX": 0, "rotY": 90, "rotZ": 0,
-        "scale": 0.04,
-        "collidable": true,
-        "childIds": [
-            {"id": "aw0"}
-        ]
-    },
-    {
-        "id": "bg",
-        "posX": 2.1, "posY": 0, "posZ": -3.5,
-        "rotX": 0, "rotY": -120, "rotZ": 0,
-        "scale": 0.04,
-        "collidable": true,
-        "childIds": [
-            {"id": "bg0"}
-        ]
-    },
-    {
-        "id": "cha",
-        "posX": -1.5, "posY": 0, "posZ": 3.5,
-        "rotX": 0, "rotY": 180, "rotZ": 0,
-        "scale": 0.04,
-        "collidable": true,
-        "childIds": [
-          {"id": "cha0"},
-          {"id": "cha1"},
-          {"id": "cha2"},
-          {"id": "cha3"},
-          {"id": "cha4"},
-          {"id": "cha5"}
-        ]
-    },
     // {
-    //     "id": "ct",
-    //     "posX": -0.6, "posY": 0, "posZ": 1.2,
+    //     "id": "ah",
+    //     "posX": 0.6, "posY": 0, "posZ": -1.2,
+    //     "rotX": 0, "rotY": -90, "rotZ": 0,
+    //     "scale": 0.04,
+    //     "collidable": true,
+    //     "childIds": [
+    //         {"id": "ah0"}
+    //     ]
+    // },
+    // // {
+    // //     "id": "alice",
+    // //     "posX": -0.6, "posY": 0, "posZ": 0.3,
+    // //     "rotX": 0, "rotY": 180, "rotZ": 0,
+    // //     "scale": 0.025,
+    // //     "collidable": false,
+    // //     "childIds": []
+    // // },
+    // {
+    //     "id": "aw",
+    //     "posX": -1, "posY": 0, "posZ": -3.5,
+    //     "rotX": 0, "rotY": 90, "rotZ": 0,
+    //     "scale": 0.04,
+    //     "collidable": true,
+    //     "childIds": [
+    //         {"id": "aw0"}
+    //     ]
+    // },
+    // {
+    //     "id": "bg",
+    //     "posX": 2.1, "posY": 0, "posZ": -3.5,
+    //     "rotX": 0, "rotY": -120, "rotZ": 0,
+    //     "scale": 0.04,
+    //     "collidable": true,
+    //     "childIds": [
+    //         {"id": "bg0"}
+    //     ]
+    // },
+    // {
+    //     "id": "cha",
+    //     "posX": -1.5, "posY": 0, "posZ": 3.5,
     //     "rotX": 0, "rotY": 180, "rotZ": 0,
     //     "scale": 0.04,
     //     "collidable": true,
     //     "childIds": [
-    //         //{"id": "ct0"},
-    //         //{"id": "ct1"}
+    //       {"id": "cha0"},
+    //       {"id": "cha1"},
+    //       {"id": "cha2"},
+    //       {"id": "cha3"},
+    //       {"id": "cha4"},
+    //       {"id": "cha5"}
     //     ]
     // },
-    {
-        "id": "dls",
-        "posX":  -0.3, "posY": 0, "posZ":0.9,
-        "rotX": 0, "rotY": -90, "rotZ": 0,
-        "scale": 0.04,
-        "collidable": true,
-        "childIds": [
-            {"id": "dls0"},
-            {"id": "dls1"}
-        ]
-    },
-    {
-        "id": "eb",
-        "posX": 0.9, "posY": 0, "posZ": 0.6,
-        "rotX": 0, "rotY": 180, "rotZ": 0,
-        "scale": 0.04,
-        "collidable": true,
-        "childIds": [
-            {"id": "eb0"},
-            //{"id": "eb1"}
-        ]
-    },
+    // // {
+    // //     "id": "ct",
+    // //     "posX": -0.6, "posY": 0, "posZ": 1.2,
+    // //     "rotX": 0, "rotY": 180, "rotZ": 0,
+    // //     "scale": 0.04,
+    // //     "collidable": true,
+    // //     "childIds": [
+    // //         //{"id": "ct0"},
+    // //         //{"id": "ct1"}
+    // //     ]
+    // // },
     // {
-    //     "id": "ef",
-    //     "posX": -1.2, "posY": 0, "posZ":2.7,
+    //     "id": "dls",
+    //     "posX":  -0.3, "posY": 0, "posZ":0.9,
+    //     "rotX": 0, "rotY": -90, "rotZ": 0,
+    //     "scale": 0.04,
+    //     "collidable": true,
+    //     "childIds": [
+    //         {"id": "dls0"},
+    //         {"id": "dls1"}
+    //     ]
+    // },
+    // {
+    //     "id": "eb",
+    //     "posX": 0.9, "posY": 0, "posZ": 0.6,
     //     "rotX": 0, "rotY": 180, "rotZ": 0,
     //     "scale": 0.04,
     //     "collidable": true,
     //     "childIds": [
-    //         //{"id": "ef0"}
+    //         {"id": "eb0"},
+    //         //{"id": "eb1"}
     //     ]
     // },
-    {
-        "id": "fc",
-        "posX": 1.2, "posY": 0, "posZ": -2,
-        "rotX": 0, "rotY": 90, "rotZ": 0,
-        "scale": 0.04,
-        "collidable": true,
-        "childIds": [
-            {"id": "fc0"}
-        ]
-    },
-    {
-        "id": "fh",
-        "posX": -1.3, "posY": 0, "posZ": -0.3,
-        "rotX": 0, "rotY": -90, "rotZ": 0,
-        "scale": 0.04,
-        "collidable": true,
-        "childIds": [
-            {"id": "fh0"}
-        ]
-    },
-    {
-        "id": "fs",
-        "posX": -1.8, "posY": 0, "posZ": -0.3,
-        "rotX": 0, "rotY": -90, "rotZ": 0,
-        "scale": 0.04,
-        "collidable": true,
-        "childIds": [
-            {"id": "fs0"}
-        ]
-    },
-    {
-        "id": "ga",
-        "posX":2.4, "posY": 0, "posZ": 2.4,
-        "rotX": 0, "rotY": 180, "rotZ": 0,
-        "scale": 0.04,
-        "collidable": true,
-        "childIds": [
-            {"id": "ga0"},
-            //{"id": "ga1"},
-            //{"id": "ga2"}
-        ]
-    },
-    {
-        "id": "jd",
-        "posX": -0.9, "posY": 0, "posZ": -3,
-        "rotX": 0, "rotY": 90, "rotZ": 0,
-        "scale": 0.04,
-        "collidable": true,
-        "childIds": [
-            {"id": "jd0"}
-        ]
-    },
+    // // {
+    // //     "id": "ef",
+    // //     "posX": -1.2, "posY": 0, "posZ":2.7,
+    // //     "rotX": 0, "rotY": 180, "rotZ": 0,
+    // //     "scale": 0.04,
+    // //     "collidable": true,
+    // //     "childIds": [
+    // //         //{"id": "ef0"}
+    // //     ]
+    // // },
+    // {
+    //     "id": "fc",
+    //     "posX": 1.2, "posY": 0, "posZ": -2,
+    //     "rotX": 0, "rotY": 90, "rotZ": 0,
+    //     "scale": 0.04,
+    //     "collidable": true,
+    //     "childIds": [
+    //         {"id": "fc0"}
+    //     ]
+    // },
+    // {
+    //     "id": "fh",
+    //     "posX": -1.3, "posY": 0, "posZ": -0.3,
+    //     "rotX": 0, "rotY": -90, "rotZ": 0,
+    //     "scale": 0.04,
+    //     "collidable": true,
+    //     "childIds": [
+    //         {"id": "fh0"}
+    //     ]
+    // },
+    // {
+    //     "id": "fs",
+    //     "posX": -1.8, "posY": 0, "posZ": -0.3,
+    //     "rotX": 0, "rotY": -90, "rotZ": 0,
+    //     "scale": 0.04,
+    //     "collidable": true,
+    //     "childIds": [
+    //         {"id": "fs0"}
+    //     ]
+    // },
+    // {
+    //     "id": "ga",
+    //     "posX":2.4, "posY": 0, "posZ": 2.4,
+    //     "rotX": 0, "rotY": 180, "rotZ": 0,
+    //     "scale": 0.04,
+    //     "collidable": true,
+    //     "childIds": [
+    //         {"id": "ga0"},
+    //         //{"id": "ga1"},
+    //         //{"id": "ga2"}
+    //     ]
+    // },
+    // {
+    //     "id": "jd",
+    //     "posX": -0.9, "posY": 0, "posZ": -3,
+    //     "rotX": 0, "rotY": 90, "rotZ": 0,
+    //     "scale": 0.04,
+    //     "collidable": true,
+    //     "childIds": [
+    //         {"id": "jd0"}
+    //     ]
+    // },
     // {
     //     "id": "lb",
     //     "posX": -0.9, "posY": 0, "posZ": 2.4,
@@ -197,28 +198,28 @@ let houses = [
     //        // {"id": "lk0"}
     //     ]
     // },
-    {
-        "id": "lp",
-        "posX": -0.1, "posY": 0, "posZ": -0.6,
-        "rotX": 0, "rotY": 90, "rotZ": 0,
-        "scale": 0.04,
-        "collidable": true,
-        "childIds": [
-            {"id": "lp0"},
-            //{"id": "lp1"}
-        ]
-    },
-    {
-        "id": "ls",
-        "posX": 0.2, "posY": 0, "posZ": -1.2,
-        "rotX": 0, "rotY": 0, "rotZ": 0,
-        "scale": 0.04,
-        "collidable": true,
-        "childIds": [
-            {"id": "ls0"},
-            {"id": "ls1"}
-        ]
-    },
+    // {
+    //     "id": "lp",
+    //     "posX": -0.1, "posY": 0, "posZ": -0.6,
+    //     "rotX": 0, "rotY": 90, "rotZ": 0,
+    //     "scale": 0.04,
+    //     "collidable": true,
+    //     "childIds": [
+    //         {"id": "lp0"},
+    //         //{"id": "lp1"}
+    //     ]
+    // },
+    // {
+    //     "id": "ls",
+    //     "posX": 0.2, "posY": 0, "posZ": -1.2,
+    //     "rotX": 0, "rotY": 0, "rotZ": 0,
+    //     "scale": 0.04,
+    //     "collidable": true,
+    //     "childIds": [
+    //         {"id": "ls0"},
+    //         {"id": "ls1"}
+    //     ]
+    // },
     // {
     //     "id": "lt",
     //     "posX": -0.6, "posY": 0, "posZ": -2.1,
@@ -260,16 +261,16 @@ let houses = [
     //         //{"id": "nl0"}
     //     ]
     // },
-    {
-        "id": "ollie",
-        "posX": 0, "posY": 0, "posZ": 3.5,
-        "rotX": 0, "rotY": -90, "rotZ": 0,
-        "scale": 0.04,
-        "collidable": true,
-        "childIds": [
-            {"id": "ollie0"}
-        ]
-    },
+    // {
+    //     "id": "ollie",
+    //     "posX": 0, "posY": 0, "posZ": 3.5,
+    //     "rotX": 0, "rotY": -90, "rotZ": 0,
+    //     "scale": 0.04,
+    //     "collidable": true,
+    //     "childIds": [
+    //         {"id": "ollie0"}
+    //     ]
+    // },
     // {
     //     "id": "pb",
     //     "posX": 2.4, "posY": 0, "posZ": 3.5,
@@ -393,6 +394,7 @@ function addHouses() {
             let carousel = createCarousel(houseData.id, houseData.childIds);
             house.appendChild(carousel);
             house.setAttribute('box', {carouselId: houseData.id + "-carousel"});
+            house.setAttribute('l', houseData.link);
         }
         marker.appendChild(house);
     });

@@ -29,19 +29,23 @@
 
     <div id="menu">
         <button id="close">close</button>
-        <button id="info">info</button>
+        <input type="button" id="info" value="info" onclick="">info</input>
+        <!-- <input type="button" id="info" value="info" onclick="self.location.href='https://www.w3schools.com/tags/tag_button.asp'">info</input> -->
     </div>
 
     <script>
-    
-        var al, close;
+
+        var al, close, link;
 
         window.addEventListener("DOMContentLoaded", (event) => {
             al = document.querySelector("uv-aleph");
             close = document.querySelector("#close");
 
+
             window.addEventListener("message", function(event) {
                 al.load(event.data.src);
+                link = event.data.l;
+                console.log(event.data.l);
             }, false);
 
             close.addEventListener("click", function() {
@@ -52,7 +56,13 @@
             // }, false);
         });
 
-        
+        function Foo() {
+          info = document.querySelector("#info");
+          info.setAttribute("onclick", "window.open(" + link + ");");
+          // return "http://www.google.com";
+        }
+        Foo();
+
     </script>
 </body>
 </html>
