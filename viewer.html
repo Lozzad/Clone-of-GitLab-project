@@ -29,11 +29,11 @@
 
     <div id="menu">
         <button id="close">close</button>
-        <button id="info">info</button>
+        <input type="button" id="info" value="info" onclick="">info</input>
     </div>
 
     <script>
-    
+
         var al, close;
 
         window.addEventListener("DOMContentLoaded", (event) => {
@@ -42,6 +42,8 @@
 
             window.addEventListener("message", function(event) {
                 al.load(event.data.src);
+                link = event.data.l;
+                console.log(event.data.l);
             }, false);
 
             close.addEventListener("click", function() {
@@ -51,8 +53,13 @@
             //     al.load(location.hash.substr(1));
             // }, false);
         });
+        function Foo() {
+          info = document.querySelector("#info");
+          info.setAttribute("onclick", "window.open(" + link + ");");
+          // return "http://www.google.com";
+        }
+        Foo();
 
-        
     </script>
 </body>
 </html>
