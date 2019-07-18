@@ -15,7 +15,7 @@
       #vid-overlay {
         position: absolute;
       }
-
+      
       #carousel-menu {
         position: absolute;
         -ms-box-orient: horizontal;
@@ -77,6 +77,7 @@
       vr-mode-ui="enabled: false"
 			renderer="colorManagement: true; logarithmicDepthBuffer: true;"
       loading-screen="dotsColor: white; backgroundColor: black"
+      stats
     >
     <a-assets>
     </a-assets>
@@ -85,12 +86,12 @@
           raycaster="objects: .collidable"
           cursor="fuse: false; rayOrigin: mouse"
         >
-        <!-- <a-ring id="cursor" radius-inner="0.1" radius-outer="0.2"
+        <!-- <a-ring id="cursor" radius-inner="0.1" radius-outer="0.2"  
       color="black" position="0 -0.8 -8" rotation="0 0 0" visible="false">  -->
-      <a-sphere id="cursor"  color="green" radius="0.1" visible="false"></a-sphere>
+      <a-sphere id="cursor"  color="green" radius="0.1" visible="false"></a-sphere> 
       </a-entity>
 
-
+  
 
       <a-marker type="pattern" url="assets/markers/logo.patt">
         <!-- <a-box id="cube" position='0 0.5 0' material='color: red;'></a-box> -->
@@ -118,7 +119,7 @@
     </div>
 
     <footer>
-      <script>
+      <script type="text/javascript">
         //storing the houses
 let houses = [
         {
