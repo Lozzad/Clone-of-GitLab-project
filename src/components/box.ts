@@ -2,11 +2,11 @@ import { BaseComponent } from "../BaseComponent";
 
 interface BoxComponent extends BaseComponent {
   animationStateService: any; // todo: type
-  carousel: HTMLElement | null;
-  carouselPositionLargeToSmallAnimation: string | null;
-  carouselPositionSmallToLargeAnimation: string | null;
-  carouselScaleLargeToSmallAnimation: string | null;
-  carouselScaleSmallToLargeAnimation: string | null;
+  // carousel: HTMLElement | null;
+  // carouselPositionLargeToSmallAnimation: string | null;
+  // carouselPositionSmallToLargeAnimation: string | null;
+  // carouselScaleLargeToSmallAnimation: string | null;
+  // carouselScaleSmallToLargeAnimation: string | null;
   state: BoxState | null;
   animationFinished: () => void;
   getAnimationString: (
@@ -37,56 +37,56 @@ export default AFRAME.registerComponent("box", {
   schema: {
     boxID: { type: "string" },
     link: { type: "string" },
-    carouselId: { type: "string" },
-    carouselAnimationDuration: { type: "string", default: "2000" },
-    carouselScaleSmall: { type: "string", default: "0.25 0.25 0.25" },
-    carouselPositionSmall: { type: "string", default: "0 5 -0.25" },
-    carouselScaleLarge: { type: "string", default: "20 20 20" },
-    carouselPositionLarge: { type: "string", default: "0 10 -0.25" },
+    // carouselId: { type: "string" },
+    // carouselAnimationDuration: { type: "string", default: "2000" },
+    // carouselScaleSmall: { type: "string", default: "0.25 0.25 0.25" },
+    // carouselPositionSmall: { type: "string", default: "0 5 -0.25" },
+    // carouselScaleLarge: { type: "string", default: "20 20 20" },
+    // carouselPositionLarge: { type: "string", default: "0 10 -0.25" },
     shouldOpen: { type: 'boolean', default: "true" },
     target: {type: 'selector'}  
   },
 
-  carousel: null,
+  // carousel: null,
   animationStateService: null,
-  carouselPositionLargeToSmallAnimation: null,
-  carouselPositionSmallToLargeAnimation: null,
-  carouselScaleLargeToSmallAnimation: null,
-  carouselScaleSmallToLargeAnimation: null,
+  // carouselPositionLargeToSmallAnimation: null,
+  // carouselPositionSmallToLargeAnimation: null,
+  // carouselScaleLargeToSmallAnimation: null,
+  // carouselScaleSmallToLargeAnimation: null,
   state: null,
 
   init() {
     this.bindMethods();
     this.addEventListeners();
     this.data.counter = 0; 
-    this.carousel = document.getElementById(this.data.carouselId);
+    // this.carousel = document.getElementById(this.data.carouselId);
 
     this.state = BoxState.CLOSED;
 
-    this.carouselScaleSmallToLargeAnimation = this.getAnimationString(
-      "scale",
-      this.data.carouselScaleSmall,
-      this.data.carouselScaleLarge,
-      this.data.carouselAnimationDuration
-    );
-    this.carouselScaleLargeToSmallAnimation = this.getAnimationString(
-      "scale",
-      this.data.carouselScaleLarge,
-      this.data.carouselScaleSmall,
-      this.data.carouselAnimationDuration
-    );
-    this.carouselPositionSmallToLargeAnimation = this.getAnimationString(
-      "position",
-      this.data.carouselPositionSmall,
-      this.data.carouselPositionLarge,
-      this.data.carouselAnimationDuration
-    );
-    this.carouselPositionLargeToSmallAnimation = this.getAnimationString(
-      "position",
-      this.data.carouselPositionLarge,
-      this.data.carouselPositionSmall,
-      this.data.carouselAnimationDuration
-    );
+    // this.carouselScaleSmallToLargeAnimation = this.getAnimationString(
+    //   "scale",
+    //   this.data.carouselScaleSmall,
+    //   this.data.carouselScaleLarge,
+    //   this.data.carouselAnimationDuration
+    // );
+    // this.carouselScaleLargeToSmallAnimation = this.getAnimationString(
+    //   "scale",
+    //   this.data.carouselScaleLarge,
+    //   this.data.carouselScaleSmall,
+    //   this.data.carouselAnimationDuration
+    // );
+    // this.carouselPositionSmallToLargeAnimation = this.getAnimationString(
+    //   "position",
+    //   this.data.carouselPositionSmall,
+    //   this.data.carouselPositionLarge,
+    //   this.data.carouselAnimationDuration
+    // );
+    // this.carouselPositionLargeToSmallAnimation = this.getAnimationString(
+    //   "position",
+    //   this.data.carouselPositionLarge,
+    //   this.data.carouselPositionSmall,
+    //   this.data.carouselAnimationDuration
+    // );
 
     const stateMachine = XState.Machine({
       id: "box",
@@ -123,14 +123,14 @@ export default AFRAME.registerComponent("box", {
           "animation-mixer",
           "clip: opening; clampWhenFinished: true; loop: once;"
         );
-        this.carousel!.setAttribute(
-          "animation__scale",
-          this.carouselScaleSmallToLargeAnimation!
-        );
-        this.carousel!.setAttribute(
-          "animation__position",
-          this.carouselPositionSmallToLargeAnimation!
-		);
+        // this.carousel!.setAttribute(
+        //   "animation__scale",
+        //   this.carouselScaleSmallToLargeAnimation!
+        // );
+    //     this.carousel!.setAttribute(
+    //       "animation__position",
+    //       this.carouselPositionSmallToLargeAnimation!
+		// );
 		this.el!.sceneEl!.emit("box-opening", this, false);
         break;
       case BoxState.CLOSING:
@@ -138,14 +138,14 @@ export default AFRAME.registerComponent("box", {
           "animation-mixer",
           "clip: closing; clampWhenFinished: true; loop: once;"
         );
-        this.carousel!.setAttribute(
-          "animation__scale",
-          this.carouselScaleLargeToSmallAnimation!
-        );
-        this.carousel!.setAttribute(
-          "animation__position",
-          this.carouselPositionLargeToSmallAnimation!
-		);
+    //     this.carousel!.setAttribute(
+    //       "animation__scale",
+    //       this.carouselScaleLargeToSmallAnimation!
+    //     );
+    //     this.carousel!.setAttribute(
+    //       "animation__position",
+    //       this.carouselPositionLargeToSmallAnimation!
+		// );
 		this.el!.sceneEl!.emit("box-closing", this, false);
         break;
     }
@@ -212,9 +212,5 @@ export default AFRAME.registerComponent("box", {
     this.el!.removeObject3D("mesh");
     this.removeEventListeners();
   },
-
-  test(){
-    console.log("yes this works!");
-  }
 
 } as BoxComponent);
