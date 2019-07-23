@@ -34,7 +34,9 @@
 
     <script>
 
-        var al, close, link;
+        var al, close, link, scene;
+
+        scene = document.querySelector("a-scene");
 
         window.addEventListener("DOMContentLoaded", (event) => {
             al = document.querySelector("uv-aleph");
@@ -48,17 +50,12 @@
 
             close.addEventListener("click", function() {
                 window.parent.postMessage("close", window.location.href);
+                scene.emit("closed-viewer");
             });
             // window.addEventListener("hashchange", function() {
             //     al.load(location.hash.substr(1));
             // }, false);
         });
-        function Foo() {
-          info = document.querySelector("#info");
-          info.setAttribute("onclick", "window.open(" + link + ");");
-          // return "http://www.google.com";
-        }
-        Foo();
 
     </script>
 </body>
