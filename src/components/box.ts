@@ -185,6 +185,13 @@ export default AFRAME.registerComponent("box", {
       false
     );
     this.el!.addEventListener("click", this.clicked, false);
+    
+    this.el!.addEventListener(
+      "closed-viewer",
+      this.animationStateService.send(BoxTransition.CLOSE),
+      false
+    );
+    //this.el!.addEventListener("click", this.clicked, false);
   },
 
   removeEventListeners() {
@@ -194,6 +201,12 @@ export default AFRAME.registerComponent("box", {
       false
     );
     this.el!.removeEventListener("click", this.clicked, false);
+    this.el!.removeEventListener(
+      "closed-viewer",
+      this.animationStateService.send(BoxTransition.CLOSE),
+      false
+    );
+    //this.el!.addEventListener("click", this.clicked, false);
   },
 
   bindMethods() {
