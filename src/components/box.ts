@@ -44,7 +44,7 @@ export default AFRAME.registerComponent("box", {
     // carouselScaleLarge: { type: "string", default: "20 20 20" },
     // carouselPositionLarge: { type: "string", default: "0 10 -0.25" },
     shouldOpen: { type: 'boolean', default: "true" },
-    target: {type: 'selector'}  
+    target: {type: 'selector'}
   },
 
   // carousel: null,
@@ -58,7 +58,7 @@ export default AFRAME.registerComponent("box", {
   init() {
     this.bindMethods();
     this.addEventListeners();
-    this.data.counter = 0; 
+    this.data.counter = 0;
     // this.carousel = document.getElementById(this.data.carouselId);
 
     this.state = BoxState.CLOSED;
@@ -185,13 +185,13 @@ export default AFRAME.registerComponent("box", {
       false
     );
     this.el!.addEventListener("click", this.clicked, false);
-    
-    this.el!.addEventListener(
-      "closed-viewer",
-      this.animationStateService.send(BoxTransition.CLOSE),
-      false
-    );
-    //this.el!.addEventListener("click", this.clicked, false);
+
+    // this.el!.addEventListener(
+    //   "closed-viewer",
+    //   this.animationStateService.send(BoxTransition.CLOSE),
+    //   false
+    // );
+    this.el!.addEventListener("click", this.clicked, false);
   },
 
   removeEventListeners() {
@@ -201,12 +201,12 @@ export default AFRAME.registerComponent("box", {
       false
     );
     this.el!.removeEventListener("click", this.clicked, false);
-    this.el!.removeEventListener(
-      "closed-viewer",
-      this.animationStateService.send(BoxTransition.CLOSE),
-      false
-    );
-    //this.el!.addEventListener("click", this.clicked, false);
+    // this.el!.removeEventListener(
+    //   "closed-viewer",
+    //   this.animationStateService.send(BoxTransition.CLOSE),
+    //   false
+    // );
+    this.el!.addEventListener("click", this.clicked, false);
   },
 
   bindMethods() {
