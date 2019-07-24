@@ -185,6 +185,7 @@ window.addEventListener("DOMContentLoaded", function() {
     },
     false
   );
+  
   raycaster.addEventListener("raycaster-intersection", (evt: CustomEvent) => {
     // Turn the mark green and move it to the intersection point.
     console.log("hit one "+evt.detail.intersections[0]);
