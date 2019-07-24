@@ -3,14 +3,13 @@ import "./components/look-to-camera";
 import "./components/box";
 
 var scene,
-  boxes,
   video,
   overlay,
   viewer,
   carouselMenu,
-  prevButton,
-  nextButton,
-  itemButton,
+  // prevButton,
+  // nextButton,
+  // itemButton,
   raycaster,
   mark;  
   // test;
@@ -46,20 +45,6 @@ function resize() {
 window.addEventListener("resize", function() {
   resize();
 });
-function disableBoxes(){
-  console.log("I am here");
-  console.log(boxes);
-
-//   Array.from(document.getElementsByClassName("collidable")).forEach(
-//     function(element) {
-//       console.log(element);
-
-//     }
-// );
-}
-function enableBoxes(){
-  
-}
 
 function render() {
   video = document.querySelector("video");
@@ -84,26 +69,23 @@ function render() {
 	if (state.boxOpened) {
     // console.log(state.boxOpened);
 		// carouselMenu.classList.remove("hide");
-    disableBoxes();
     } else {
     // carouselMenu.classList.add("hide");
-    enableBoxes();
 	}
 }
 
 window.addEventListener("DOMContentLoaded", function() {
   scene = document.querySelector("a-scene");
-  boxes = document.getElementsByClassName("collidable");
   overlay = document.getElementById("overlay");
   viewer = document.getElementById("viewer");
   raycaster = document.querySelector('[ar-raycaster]');
   mark = document.querySelector('#cursor');
   // test = document.querySelector('#cube');
   
-  carouselMenu = document.getElementById("carousel-menu");
-  prevButton = document.getElementById("carousel-prev-button");
-  itemButton = document.getElementById("carousel-item-button");
-  nextButton = document.getElementById("carousel-next-button");
+  // carouselMenu = document.getElementById("carousel-menu");
+  // prevButton = document.getElementById("carousel-prev-button");
+  // itemButton = document.getElementById("carousel-item-button");
+  // nextButton = document.getElementById("carousel-next-button");
 
 	scene.addEventListener("loaded", () => {
 	});
@@ -152,39 +134,41 @@ window.addEventListener("DOMContentLoaded", function() {
     (event) => {
       if (event.data === "close") {
         state.selectedItem = null;
+        console.log("viewer closed");
+        scene.emit("closed-viewer");
         render();
       }
     },
     false
   );
 
-  prevButton.addEventListener(
-    "click",
-    () => {
-      scene.emit("rotate-carousel", {
-        direction: -1
-      });
-    },
-    false
-  );
+  // prevButton.addEventListener(
+  //   "click",
+  //   () => {
+  //     scene.emit("rotate-carousel", {
+  //       direction: -1
+  //     });
+  //   },
+  //   false
+  // );
 
-  itemButton.addEventListener(
-    "click",
-    () => {
-      scene.emit("select-carousel-item");
-    },
-    false
-  );
+  // itemButton.addEventListener(
+  //   "click",
+  //   () => {
+  //     scene.emit("select-carousel-item");
+  //   },
+  //   false
+  // );
 
-  nextButton.addEventListener(
-    "click",
-    () => {
-      scene.emit("rotate-carousel", {
-        direction: 1
-      });
-    },
-    false
-  );
+  // nextButton.addEventListener(
+  //   "click",
+  //   () => {
+  //     scene.emit("rotate-carousel", {
+  //       direction: 1
+  //     });
+  //   },
+  //   false
+  // );
   
   raycaster.addEventListener("raycaster-intersection", (evt: CustomEvent) => {
     // Turn the mark green and move it to the intersection point.
