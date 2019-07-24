@@ -50,13 +50,13 @@
 
             close.addEventListener("click", function() {
                 window.parent.postMessage("close", window.location.href);
-                scene.emit("closed-viewer");
+                // scene.emit("closed-viewer");
             });
             // window.addEventListener("hashchange", function() {
             //     al.load(location.hash.substr(1));
             // }, false);
         });
-        
+
         // function Foo() {
         //   info = document.querySelector("#info");
         //   info.setAttribute("onclick", "window.open(" + link + ");");

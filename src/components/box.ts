@@ -191,7 +191,7 @@ export default AFRAME.registerComponent("box", {
     //   this.animationStateService.send(BoxTransition.CLOSE),
     //   false
     // );
-    this.el!.addEventListener("click", this.clicked, false);
+    // this.el!.addEventListener("click", this.clicked, false);
   },
 
   removeEventListeners() {
@@ -206,7 +206,7 @@ export default AFRAME.registerComponent("box", {
     //   this.animationStateService.send(BoxTransition.CLOSE),
     //   false
     // );
-    this.el!.addEventListener("click", this.clicked, false);
+    // this.el!.adsdEventListener("click", this.clicked, false);
   },
 
   bindMethods() {
