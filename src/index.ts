@@ -16,12 +16,14 @@ var scene,
 
 interface AppState {
   selectedItem: string | null;
+  selectedUrl: string | null;
   houseID: string | null;
 	boxOpened: boolean;
 }
 
 var state = {
 	selectedItem: null,
+	selectedUrl: null,
   boxOpened: false,
   houseID: null
 } as AppState;
@@ -56,7 +58,8 @@ function render() {
 		overlay.classList.remove("hide");
 		viewer.contentWindow.postMessage(
 			{
-				src: state.selectedItem
+        src: state.selectedItem,
+        href: state.selectedUrl
 			},
 			window.location.href
 		);
@@ -92,6 +95,13 @@ window.addEventListener("DOMContentLoaded", function() {
 
 	scene.addEventListener("box-opened", (ev: CustomEvent) => {
     const id: string = ev.detail.id;
+    const url: string = ev.detail.url;
+
+    if (url) {
+      state.selectedUrl = url;
+    } else {
+      state.selectedUrl = null;
+    }
 
     var asset: HTMLElement | null = document.getElementById(id + "0-asset");
 
