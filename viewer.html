@@ -29,8 +29,12 @@
 
     <div id="menu">
         <button id="close">close</button>
+<<<<<<< HEAD
         <input type="button" id="info" value="info" onclick="">info</input>
         <input type="button" id="nextImage" value="next image" onclick="">next image</input>
+=======
+        <input type="button" id="info" value="info" onclick="" class="hide">info</input>
+>>>>>>> eb14dd7b7977286a5e3fde07f6814d5542af88e3
     </div>
 
     <script>
@@ -48,13 +52,19 @@
                 url = event.data.href;
                 if (url != null) {
                     //unhide the info button
+                    info.classList.remove("hide");
+                } else {
+                    info.classList.add("hide");
                 }
 
+<<<<<<< HEAD
                 nextImage.addEventListener("click", function() {
                   // console.log(event.data.src2);
                   al.load(event.data.src2);
                 });
 
+=======
+>>>>>>> eb14dd7b7977286a5e3fde07f6814d5542af88e3
             }, false);
 
             close.addEventListener("click", function() {
