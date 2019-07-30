@@ -29,7 +29,7 @@
 
     <div id="menu">
         <button id="close">close</button>
-        <input type="button" id="info" value="info" onclick="">info</input>
+        <input type="button" id="info" value="info" onclick="" class="hide">info</input>
     </div>
 
     <script>
@@ -46,7 +46,11 @@
                 url = event.data.href;
                 if (url != null) {
                     //unhide the info button
+                    info.classList.remove("hide");
+                } else {
+                    info.classList.add("hide");
                 }
+
             }, false);
 
             close.addEventListener("click", function() {
