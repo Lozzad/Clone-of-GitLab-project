@@ -30,16 +30,18 @@
     <div id="menu">
         <button id="close">close</button>
         <input type="button" id="info" value="info" onclick="">info</input>
+        <input type="button" id="nextImage" value="next image" onclick="">next image</input>
     </div>
 
     <script>
 
-        var al, info, close, url;
+        var al, info, close, url, nextImage;
 
         window.addEventListener("DOMContentLoaded", (event) => {
             al = document.querySelector("uv-aleph");
             close = document.querySelector("#close");
             info = document.querySelector("#info");
+            nextImage = document.querySelector("#nextImage");
 
             window.addEventListener("message", function(event) {
                 al.load(event.data.src);
@@ -47,6 +49,12 @@
                 if (url != null) {
                     //unhide the info button
                 }
+
+                nextImage.addEventListener("click", function() {
+                  // console.log(event.data.src2);
+                  al.load(event.data.src2);
+                });
+
             }, false);
 
             close.addEventListener("click", function() {
