@@ -1,6 +1,7 @@
 import "./components/carousel";
 import "./components/look-to-camera";
 import "./components/box";
+import "../viewer.html";
 
 var scene,
   video,
@@ -84,7 +85,7 @@ window.addEventListener("DOMContentLoaded", function() {
   viewer = document.getElementById("viewer");
   raycaster = document.querySelector('[ar-raycaster]');
   mark = document.querySelector('#cursor');
-  nextImage = document.getElementById('nextImage');
+  nextImage = viewer.contentDocument.querySelector('#nextImage');
   // test = document.querySelector('#cube');
 
   // carouselMenu = document.getElementById("carousel-menu");
