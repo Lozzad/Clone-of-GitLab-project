@@ -501,7 +501,7 @@ function addHouses() {
     let house = document.createElement("a-entity");
 
     house.setAttribute('id', houseData.id);
-    house.object3D.position.set(houseData.posX - 0.3, houseData.posY, houseData.posZ - 2);
+    house.object3D.position.set(houseData.posX - 0.3, houseData.posY, -1 * houseData.posZ - 1.5);
     house.object3D.rotation.set(
         THREE.Math.degToRad(houseData.rotX),
         THREE.Math.degToRad(houseData.rotY),
