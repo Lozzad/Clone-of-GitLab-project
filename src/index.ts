@@ -1,7 +1,6 @@
 import "./components/carousel";
 import "./components/look-to-camera";
 import "./components/box";
-import "../viewer.html";
 
 var scene,
   video,
@@ -12,9 +11,9 @@ var scene,
   // nextButton,
   // itemButton,
   raycaster,
-  mark,
+  mark;
   // test,
-  nextImage;
+  // nextImage;
 
 interface AppState {
   selectedItem: string | null;
@@ -85,7 +84,7 @@ window.addEventListener("DOMContentLoaded", function() {
   viewer = document.getElementById("viewer");
   raycaster = document.querySelector('[ar-raycaster]');
   mark = document.querySelector('#cursor');
-  nextImage = viewer.contentDocument.querySelector('#nextImage');
+  // nextImage = viewer.contentDocument.querySelector('#nextImage');
   // test = document.querySelector('#cube');
 
   // carouselMenu = document.getElementById("carousel-menu");
@@ -118,18 +117,17 @@ window.addEventListener("DOMContentLoaded", function() {
 		render();
   }, false);
 
-  console.log(nextImage);
-  nextImage.addEventListener("click", (ev:CustomEvent) => {
-    const id: string = ev.detail.id;
-
-    var asset2: HTMLElement | null = document.getElementById(id + "1-asset");
-    console.log(asset2);
-    if (asset2) {
-      state.selectedItem = asset2.getAttribute("src") as string;
-    };
-
-    render();
-  }, false);
+  // nextImage.addEventListener("click", (ev:CustomEvent) => {
+  //   const id: string = ev.detail.id;
+  //
+  //   var asset2: HTMLElement | null = document.getElementById(id + "1-asset");
+  //   console.log(asset2);
+  //   if (asset2) {
+  //     state.selectedItem = asset2.getAttribute("src") as string;
+  //   };
+  //
+  //   render();
+  // }, false);
 
 
 	scene.addEventListener("box-closing", () => {

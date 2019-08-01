@@ -29,19 +29,19 @@
 
     <div id="menu">
         <button id="close">close</button>
-        <input type="button" id="info" value="info" onclick="">info</input>
-        <input type="button" id="nextImage" value="next image" onclick="">next image</input>
+        <button id="info">info</button>
+        <!-- <button id="nextImage">next image</button> -->
     </div>
 
     <script>
 
-        var al, info, close, url, nextImage;
+        var al, info, close, url; //, nextImage;
 
         window.addEventListener("DOMContentLoaded", (event) => {
             al = document.querySelector("uv-aleph");
             close = document.querySelector("#close");
             info = document.querySelector("#info");
-            nextImage = document.querySelector("#nextImage");
+            // nextImage = document.querySelector("#nextImage");
 
             window.addEventListener("message", function(event) {
                 al.load(event.data.src);
@@ -53,24 +53,6 @@
                     info.classList.add("hide");
                 }
 
-                if (event.data.src2 == null){
-                  nextImage.classList.add("hide");
-                }else{
-                  nextImage.classList.remove("hide");
-                  nextImage.addEventListener("click", function() {
-                    // const id = event.detail.id;
-                    // console.log(id);
-                    // var asset2 = document.getElementById(id + "1-asset");
-                    // console.log(asset2);
-                    // if (asset2) {
-                    //   state.selectedItem = asset2.getAttribute("src");
-                    // };
-                    // console.log(event.data.src2);
-                    al.load(event.data.src2);
-                  });
-                }
-
-
             }, false);
 
             close.addEventListener("click", function() {
@@ -80,6 +62,17 @@
             info.addEventListener("click", function() {
                 window.open(url);
             });
+
+            // nextImage.addEventListener("click", function(event) {
+            //   al.load(event.data.src2);
+            //
+            //   if (event.data.src2 == null){
+            //     nextImage.classList.add("hide");
+            //   }else{
+            //     nextImage.classList.remove("hide");
+            //   }
+            //
+            // }, false);
         });
     </script>
 </body>
