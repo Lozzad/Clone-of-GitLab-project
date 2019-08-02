@@ -29,6 +29,7 @@ var state = {
   houseID: null
 } as AppState;
 
+// enable to resize all the scene when we move the marker on the camera
 function resize() {
   if (overlay) {
     overlay.width = window.innerWidth;
@@ -51,8 +52,7 @@ window.addEventListener("resize", function() {
 
 function render() {
   video = document.querySelector("video");
-
-
+ // if an item is selected, the scene should be hode in order to display the viewer
   if (state.selectedItem) {
     scene.classList.add("hide");
     video.classList.add("hide");
@@ -70,6 +70,7 @@ function render() {
     overlay.classList.add("hide");
 	}
 
+  // usefull for the carrousel
 	if (state.boxOpened) {
     // console.log(state.boxOpened);
 		// carouselMenu.classList.remove("hide");
@@ -84,9 +85,11 @@ window.addEventListener("DOMContentLoaded", function() {
   viewer = document.getElementById("viewer");
   raycaster = document.querySelector('[ar-raycaster]');
   mark = document.querySelector('#cursor');
-  // nextImage = viewer.contentDocument.querySelector('#nextImage');
+  // nextImage = viewer.contentDocument.querySelector('#nextImage');  // usefull for add an other image in the viewer (not successfull)
   // test = document.querySelector('#cube');
 
+
+  // usefull for the carrousel
   // carouselMenu = document.getElementById("carousel-menu");
   // prevButton = document.getElementById("carousel-prev-button");
   // itemButton = document.getElementById("carousel-item-button");
@@ -95,6 +98,8 @@ window.addEventListener("DOMContentLoaded", function() {
 	scene.addEventListener("loaded", () => {
 	});
 
+
+  // when the house is open, must display the object inside (the map for know)
 	scene.addEventListener("box-opened", (ev: CustomEvent) => {
     const id: string = ev.detail.id;
     const url: string = ev.detail.url;
@@ -113,10 +118,11 @@ window.addEventListener("DOMContentLoaded", function() {
 
     state.boxOpened = true;
 
-
 		render();
   }, false);
 
+
+  // usefull for displayed an other image (not successfull for now)
   // nextImage.addEventListener("click", (ev:CustomEvent) => {
   //   const id: string = ev.detail.id;
   //
@@ -135,24 +141,27 @@ window.addEventListener("DOMContentLoaded", function() {
 		render();
   }, false);
 
+  // tool for debugin in the console
   scene.addEventListener("box-id-selected", (ev: CustomEvent) => {
     const id: string = ev.detail.id;
     state.houseID = id;
     console.log("I got the message: "+id);
   });
 
-  scene.addEventListener("carousel-item-selected", (ev: CustomEvent) => {
-		const id: string = ev.detail.id;
+  // usefull for the carrousel
+  // scene.addEventListener("carousel-item-selected", (ev: CustomEvent) => {
+	// 	const id: string = ev.detail.id;
+  //
+  //   var asset: HTMLElement | null = document.getElementById(id + "-asset");
+  //
+	// 	if (asset) {
+	// 		state.selectedItem = asset.getAttribute("src") as string;
+	// 	}
+  //
+	// 	render();
+	// }, false);
 
-    var asset: HTMLElement | null = document.getElementById(id + "-asset");
-
-		if (asset) {
-			state.selectedItem = asset.getAttribute("src") as string;
-		}
-
-		render();
-	}, false);
-
+  // when we click on the button close in the viewer the house should be closed in the same mouve
   window.addEventListener(
     "message",
     (event) => {
@@ -166,6 +175,7 @@ window.addEventListener("DOMContentLoaded", function() {
     false
   );
 
+  // usefull in the viewer for the carrousel to go to the previous object on the house
   // prevButton.addEventListener(
   //   "click",
   //   () => {
@@ -176,6 +186,7 @@ window.addEventListener("DOMContentLoaded", function() {
   //   false
   // );
 
+  // usefull in the viewer for the carrousel to display the object selected
   // itemButton.addEventListener(
   //   "click",
   //   () => {
@@ -184,6 +195,7 @@ window.addEventListener("DOMContentLoaded", function() {
   //   false
   // );
 
+  // usefull in the viewer for the carrousel to go to the next object on the house
   // nextButton.addEventListener(
   //   "click",
   //   () => {
@@ -196,12 +208,12 @@ window.addEventListener("DOMContentLoaded", function() {
 
   raycaster.addEventListener("raycaster-intersection", (evt: CustomEvent) => {
     // Turn the mark green and move it to the intersection point.
-    console.log("hit one "+evt.detail.intersections[0]);
+    console.log("hit one " + evt.detail.intersections[0]);
     mark.setAttribute('color', 'yellow');
     mark.setAttribute('position', evt.detail.intersections[0].point);
     mark.setAttribute('visible', 'true');
-
   });
+
   raycaster.addEventListener("raycaster-intersection-cleared", () => {
   // Turn the mark red.
   // mark.setAttribute('color', 'red');

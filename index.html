@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- web site home page -->
 <html>
   <head>
     <title>place-based narratives</title>
@@ -87,13 +88,16 @@
         cursor="fuse: false; rayOrigin: mouse"
         >
       </a-entity>
+          <!-- usefull were there was the carousel -->
           <!-- <a-ring id="cursor" radius-inner="0.1" radius-outer="0.2"
       color="black" position="0 -0.8 -8" rotation="0 0 0" visible="false">  -->
+
+      <!-- raycaster (enable to know wich house will be clicked) -->
       <a-sphere id="cursor"  color="green" radius="0.1" visible="false"></a-sphere>
     </a-entity>
 
 
-
+      <!-- the marker save in assets/markers/ choosen to desplay the houses -->
       <a-marker type="pattern" url="assets/markers/logo.patt">
         <!-- <a-box id="cube" position='0 0.5 0' material='color: red;'></a-box> -->
       </a-marker>
@@ -103,7 +107,8 @@
       <p>Click on the houses!</p>
     </div>
 
-    <div id="carousel-menu" class="hide">
+    <!-- usefull for the carousel, enable to add button to view objects and go to the next or previous object inside the house -->
+    <!-- <div id="carousel-menu" class="hide">
       <div class="col prev">
         <button id="carousel-prev-button">&lt;</button>
       </div>
@@ -113,8 +118,11 @@
       <div class="col next">
         <button id="carousel-next-button">&gt;</button>
       </div>
-    </div>
+    </div> -->
 
+
+    <!-- The viewer enable to see properly the objets inside the houses.
+    It's were we can access to more informations on the object and rotate  -->
     <div id="overlay" class="hide">
       <iframe id="viewer" src="/viewer.html" ></iframe>
     </div>
@@ -361,9 +369,10 @@ let houses = [
   }
 ];
 
+//storing the objects with their id and the scale of each of them
 let objects = new Map([
 ["af0", 0.1],
-// ["af1", 0.1],
+// ["af1", 0.1], // a test for added more than one object per house but not successfull
 ["ag0", 0.1],
 ["ah0", 0.1],
 ["aw0", 0.1],
@@ -392,22 +401,25 @@ let objects = new Map([
 //add the assets to the html to preload them
 function addAssets() {
   let assetParent = document.querySelector("a-assets");
+  // for each house create an item in the balise a-assets with an id and the link for the gltf file
   houses.forEach(house => {
     let asset = document.createElement("a-asset-item");
     asset.setAttribute('id', house.id + "-asset");
     asset.setAttribute('src', '/assets/houses/' + house.id + '.gltf')
     assetParent.appendChild(asset);
   });
+
+  // for each object create an item with the id and the link for the gtf file
   Array.from(objects.keys()).forEach(id => {
     let asset = document.createElement("a-asset-item");
     asset.setAttribute('id', id + "-asset");
     asset.setAttribute('src', '/assets/objects/' + id + '.gltf')
-
     assetParent.appendChild(asset);
   })
 }
 
 //creates the house entities
+//enable to display the houses in the right location on the map thanks to the positions and rotations of each house
 function addHouses() {
   houses.forEach(houseData => {
     let marker = document.querySelector("a-marker");
@@ -429,13 +441,8 @@ function addHouses() {
         // let carousel = createCarousel(houseData.id, houseData.childIds);
         // house.appendChild(carousel);
         let url = null;
-
         house.setAttribute('box', {boxID: houseData.id, boxURL: houseData.url});
-
-
     }
-
-
     marker.appendChild(house);
   });
 }
@@ -443,9 +450,7 @@ function addHouses() {
 addAssets();
 addHouses();
 
-
       </script>
     </footer>
-
   </body>
 </html>

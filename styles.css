@@ -16,7 +16,7 @@ body {
     display: none !important;
 }
 
-button,input {
+button {
     margin: 1rem;
     padding: 0.75rem 1rem 0.75rem 1rem;
     color: #000;
