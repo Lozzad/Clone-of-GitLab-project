@@ -3,7 +3,7 @@
 <html>
   <head>
     <title>place-based narratives</title>
-    <script src="https://aframe.io/releases/0.9.1/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.js"></script>
     <script src="https://unpkg.com/xstate@4.5.0/dist/xstate.js"></script>
@@ -129,6 +129,17 @@
 
     <footer>
       <script>
+
+    //storing the sculptures
+    let sculptures = [
+    {
+    "id": "juggler",
+    "posX":-2, "posY": 0, "posZ": -3.4,
+    "rotX": 0, "rotY": -90, "rotZ": 0,
+    "scale": 0.07,
+    "collidable": true,
+    "url": "http://www.publicsculpturesofsussex.co.uk/object?id=36"
+    }];
         //storing the houses
 let houses = [
     {
@@ -409,6 +420,14 @@ function addAssets() {
     assetParent.appendChild(asset);
   });
 
+    // for each sculptures create an item in the balise a-assets with an id and the link for the gltf file
+  sculptures.forEach(sculpture => {
+    let asset = document.createElement("a-asset-item");
+    asset.setAttribute('id', sculpture.id + "-asset");
+    asset.setAttribute('src', '/assets/sculptures/' + sculpture.id + '.gltf')
+    assetParent.appendChild(asset);
+  });
+
   // for each object create an item with the id and the link for the gtf file
   Array.from(objects.keys()).forEach(id => {
     let asset = document.createElement("a-asset-item");
@@ -416,6 +435,8 @@ function addAssets() {
     asset.setAttribute('src', '/assets/objects/' + id + '.gltf')
     assetParent.appendChild(asset);
   })
+
+  
 }
 
 //creates the house entities
@@ -447,8 +468,45 @@ function addHouses() {
   });
 }
 
+function addSculptures() {
+  sculptures.forEach(sculptureData => {
+    let marker = document.querySelector("a-marker");
+    let sculpture = document.createElement("a-entity");
+
+    sculpture.setAttribute('id', sculptureData.id);
+    sculpture.object3D.position.set(sculptureData.posX - 0.3, sculptureData.posY, -1 * sculptureData.posZ - 1.5);
+    sculpture.object3D.rotation.set(
+        THREE.Math.degToRad(sculptureData.rotX),
+        THREE.Math.degToRad(sculptureData.rotY),
+        THREE.Math.degToRad(sculptureData.rotZ)
+    );
+    sculpture.object3D.scale.set(sculptureData.scale, sculptureData.scale, sculptureData.scale);
+    sculpture.setAttribute('gltf-model', '#' + sculptureData.id + '-asset');
+    //let texturl = "href: "+sculpture.url+"; title: My Homepage; image: #homeThumbnail";
+    let texturl = "href: "+sculptureData.url+"; title: My Homepage; image: #homeThumbnail";
+    console.log(texturl);
+    sculpture.setAttribute('link', texturl);
+
+  
+    sculpture.setAttribute('class', 'collidable');
+    // if (sculpture.collidable) {
+    //   sculpture.setAttribute('class', 'collidable');
+    //     // let carousel = createCarousel(houseData.id, houseData.childIds);
+    //     // house.appendChild(carousel);
+    //     let url = null;
+    //     sculpture.setAttribute('box', {boxID: sculpture.id, boxURL: sculpture.url});
+    // }
+    marker.appendChild(sculpture);
+  });
+
+
+}
+
+
 addAssets();
 addHouses();
+addSculptures();
+
 
       </script>
     </footer>
