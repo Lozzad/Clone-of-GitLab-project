@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Viewer</title>
-    <script src="https://aframe.io/releases/0.9.1/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
     <script src="https://unpkg.com/three@0.102.1/examples/js/controls/OrbitControls.js"></script>
     <script src="https://unpkg.com/@universalviewer/aleph@0.0.1-pre.21/dist/aleph.js"></script>
     <link rel="stylesheet" href="styles.css">
@@ -18,35 +18,65 @@
     #close{
         float: right;
     }
+    #info{
+        float:left;
+    }
     </style>
 </head>
 <body>
 
     <uv-aleph width="100%" height="100%"></uv-aleph>
 
-    <div id="menu"><button id="close">close</button></div>
+    <div id="menu">
+        <button id="close">close</button> <!-- button to close the viewer -->
+        <button id="info">info</button> <!-- button to have more informations on the map -->
+        <!-- <button id="nextImage">next image</button> --> <!-- button to load the next image (not successful)-->
+    </div>
 
     <script>
-    
-        var al, close;
+
+        var al, info, close, url; //, nextImage;
 
         window.addEventListener("DOMContentLoaded", (event) => {
             al = document.querySelector("uv-aleph");
             close = document.querySelector("#close");
+            info = document.querySelector("#info");
+            // nextImage = document.querySelector("#nextImage");
 
             window.addEventListener("message", function(event) {
                 al.load(event.data.src);
+                url = event.data.href;
+                if (url != null) {
+                    //unhide the info button
+                    info.classList.remove("hide");
+                } else {
+                    info.classList.add("hide");
+                }
+
             }, false);
 
+            // give a function to the close button which is close the viewer and go back to the home page
             close.addEventListener("click", function() {
                 window.parent.postMessage("close", window.location.href);
             });
-            // window.addEventListener("hashchange", function() {
-            //     al.load(location.hash.substr(1));
+
+            // give a function to the info button which is open a new window with the complementive information on the map
+            info.addEventListener("click", function() {
+                window.open(url);
+            });
+
+            // give a function to the next image button which is display an other map (not successful for now)
+            // nextImage.addEventListener("click", function(event) {
+            //   al.load(event.data.src2);
+            //
+            //   if (event.data.src2 == null){
+            //     nextImage.classList.add("hide");
+            //   }else{
+            //     nextImage.classList.remove("hide");
+            //   }
+            //
             // }, false);
         });
-
-        
     </script>
-</body>
+  </body>
 </html>

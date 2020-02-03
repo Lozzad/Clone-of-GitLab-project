@@ -1,12 +1,7 @@
 import { BaseComponent } from "../BaseComponent";
 
 interface BoxComponent extends BaseComponent {
-  animationStateService: any; // todo: type
-  carousel: HTMLElement | null;
-  carouselPositionLargeToSmallAnimation: string | null;
-  carouselPositionSmallToLargeAnimation: string | null;
-  carouselScaleLargeToSmallAnimation: string | null;
-  carouselScaleSmallToLargeAnimation: string | null;
+  animationStateService: any; 
   state: BoxState | null;
   animationFinished: () => void;
   getAnimationString: (
@@ -35,53 +30,19 @@ enum BoxTransition {
 
 export default AFRAME.registerComponent("box", {
   schema: {
-    carouselId: { type: "string" },
-    carouselAnimationDuration: { type: "string", default: "2000" },
-    carouselScaleSmall: { type: "string", default: "0.25 0.25 0.25" },
-    carouselPositionSmall: { type: "string", default: "0 0.9 -0.25" },
-    carouselScaleLarge: { type: "string", default: "2 2 2" },
-    carouselPositionLarge: { type: "string", default: "0 1.5 -0.25" }
+    boxID: { type: "string" },
+    link: { type: "string" },
   },
 
-  carousel: null,
   animationStateService: null,
-  carouselPositionLargeToSmallAnimation: null,
-  carouselPositionSmallToLargeAnimation: null,
-  carouselScaleLargeToSmallAnimation: null,
-  carouselScaleSmallToLargeAnimation: null,
   state: null,
 
   init() {
     this.bindMethods();
     this.addEventListeners();
+    this.data.counter = 0;
 
-    this.carousel = document.getElementById(this.data.carouselId);
     this.state = BoxState.CLOSED;
-
-    this.carouselScaleSmallToLargeAnimation = this.getAnimationString(
-      "scale",
-      this.data.carouselScaleSmall,
-      this.data.carouselScaleLarge,
-      this.data.carouselAnimationDuration
-    );
-    this.carouselScaleLargeToSmallAnimation = this.getAnimationString(
-      "scale",
-      this.data.carouselScaleLarge,
-      this.data.carouselScaleSmall,
-      this.data.carouselAnimationDuration
-    );
-    this.carouselPositionSmallToLargeAnimation = this.getAnimationString(
-      "position",
-      this.data.carouselPositionSmall,
-      this.data.carouselPositionLarge,
-      this.data.carouselAnimationDuration
-    );
-    this.carouselPositionLargeToSmallAnimation = this.getAnimationString(
-      "position",
-      this.data.carouselPositionLarge,
-      this.data.carouselPositionSmall,
-      this.data.carouselAnimationDuration
-    );
 
     const stateMachine = XState.Machine({
       id: "box",
@@ -118,30 +79,14 @@ export default AFRAME.registerComponent("box", {
           "animation-mixer",
           "clip: opening; clampWhenFinished: true; loop: once;"
         );
-        this.carousel!.setAttribute(
-          "animation__scale",
-          this.carouselScaleSmallToLargeAnimation!
-        );
-        this.carousel!.setAttribute(
-          "animation__position",
-          this.carouselPositionSmallToLargeAnimation!
-		);
-		this.el!.sceneEl!.emit("box-opening", this, false);
+        this.el!.sceneEl!.emit("box-opening", this, false);
         break;
       case BoxState.CLOSING:
         this.el!.setAttribute(
           "animation-mixer",
           "clip: closing; clampWhenFinished: true; loop: once;"
         );
-        this.carousel!.setAttribute(
-          "animation__scale",
-          this.carouselScaleLargeToSmallAnimation!
-        );
-        this.carousel!.setAttribute(
-          "animation__position",
-          this.carouselPositionLargeToSmallAnimation!
-		);
-		this.el!.sceneEl!.emit("box-closing", this, false);
+    		this.el!.sceneEl!.emit("box-closing", this, false);
         break;
     }
   },
@@ -149,18 +94,20 @@ export default AFRAME.registerComponent("box", {
   animationFinished() {
     switch (this.state) {
       case BoxState.OPENING:
-		this.animationStateService.send(BoxTransition.OPENED);
-		this.el!.sceneEl!.emit("box-opened", this, false);
+		    this.animationStateService.send(BoxTransition.OPENED);
+        this.el!.sceneEl!.emit("box-opened", {id: this.data.boxID, url: this.data.boxURL}, false);
+        this.el!.sceneEl!.emit("box-id-selected", {id: this.data.boxID}, false);
         break;
       case BoxState.CLOSING:
-		this.animationStateService.send(BoxTransition.CLOSED);
-		this.el!.sceneEl!.emit("box-closed", this, false);
+		    this.animationStateService.send(BoxTransition.CLOSED);
+		    this.el!.sceneEl!.emit("box-closed", this, false);
         break;
     }
   },
 
   clicked(ev: CustomEvent) {
     ev.preventDefault();
+    console.log("clicked: "+this.data.boxID);
     switch (this.state) {
       case BoxState.CLOSED:
         this.animationStateService.send(BoxTransition.OPEN);
@@ -178,6 +125,15 @@ export default AFRAME.registerComponent("box", {
       false
     );
     this.el!.addEventListener("click", this.clicked, false);
+    this.el!.sceneEl!.addEventListener(
+      "closed-viewer",
+      () => {
+        if (this.state == BoxState.OPENED) {
+          this.animationStateService.send(BoxTransition.CLOSE);
+        }
+      },
+      true
+    );
   },
 
   removeEventListeners() {
@@ -186,6 +142,7 @@ export default AFRAME.registerComponent("box", {
       this.animationFinished,
       false
     );
+  
     this.el!.removeEventListener("click", this.clicked, false);
   },
 
@@ -197,10 +154,13 @@ export default AFRAME.registerComponent("box", {
     this.clicked = this.clicked.bind(this);
   },
 
-  tick() {},
+  tick() {
+
+  },
 
   remove() {
     this.el!.removeObject3D("mesh");
     this.removeEventListeners();
-  }
+  },
+
 } as BoxComponent);
