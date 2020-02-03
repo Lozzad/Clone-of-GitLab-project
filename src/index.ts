@@ -1,14 +1,14 @@
-import "./components/carousel";
-import "./components/look-to-camera";
+//import "./components/carousel";
+//import "./components/look-to-camera";
 import "./components/box";
 
 var scene,
   video,
   overlay,
   viewer,
-  carouselMenu,
-  raycaster,
-  mark;
+  carouselMenu;
+//raycaster,
+//mark;
 
 
 interface AppState {
@@ -79,8 +79,8 @@ window.addEventListener("DOMContentLoaded", function () {
   scene = document.querySelector("a-scene");
   overlay = document.getElementById("overlay");
   viewer = document.getElementById("viewer");
-  raycaster = document.querySelector('[ar-raycaster]');
-  mark = document.querySelector('#cursor');
+  //raycaster = document.querySelector('[ar-raycaster]');
+  //mark = document.querySelector('#cursor');
 
   scene.addEventListener("loaded", () => {
   });

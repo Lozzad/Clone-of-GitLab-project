@@ -7,10 +7,7 @@
             "type": "npm",
             "script": "start:ssl",
             "dependsOrder": "sequence",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
+            "group": "build",
             "dependsOn": [
                 "One",
                 "Two",
@@ -29,7 +26,10 @@
             "type": "npm",
             "script": "build",
             "dependsOrder": "sequence",
-            "group": "build"
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         },
         {
             "label": "One",
