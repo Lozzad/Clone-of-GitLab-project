@@ -1,17 +1,17 @@
-import { BaseComponent } from "../BaseComponent";
+// import { BaseComponent } from "../BaseComponent";
 
-export default AFRAME.registerComponent("look-to-camera", {
-  schema: {},
+// export default AFRAME.registerComponent("look-to-camera", {
+//   schema: {},
 
-  init() {},
+//   init() {},
 
-  addEventListeners() {},
+//   addEventListeners() {},
 
-  removeEventListeners() {},
+//   removeEventListeners() {},
 
-  bindMethods() {},
+//   bindMethods() {},
 
-  tick() {
-    this.el!.object3D!.lookAt(this.el!.sceneEl!.camera.position);
-  }
-} as BaseComponent);
+//   tick() {
+//     this.el!.object3D!.lookAt(this.el!.sceneEl!.camera.position);
+//   }
+// } as BaseComponent);
