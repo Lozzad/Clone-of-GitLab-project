@@ -35,8 +35,8 @@ export default AFRAME.registerComponent("housebuilder", {
             model.setAttribute('animation-mixer', { clip: 'closed' });
 
             if (house.collidable) {
-                house.setAttribute('class', 'collidable');
-                house.setAttribute('box', { boxID: house.id });
+                model.setAttribute('class', 'collidable');
+                model.setAttribute('box', { boxID: house.id });
             }
             marker.appendChild(house);
         });
