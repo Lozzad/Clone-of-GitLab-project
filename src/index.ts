@@ -2,7 +2,7 @@
 //import "./components/look-to-camera";
 import "./components/houseBuilder";
 import "./components/box";
-import houseDataArray from "./houseData.json";
+import houseDataArray from "./houseDataArray.json";
 
 var scene,
   video,
