@@ -9,9 +9,11 @@ export default AFRAME.registerComponent("housebuilder", {
         //property: {type: '', default: x}
     },
     //multiple: false,
+
     init: function () {
-        console.log("Housebuilder");
+        console.log("Housebuilder init");
     },
+
     addEventListeners() { },
     removeEventListeners() { },
     bindMethods() { },

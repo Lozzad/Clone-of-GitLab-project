@@ -2,6 +2,7 @@
 //import "./components/look-to-camera";
 import "./components/houseBuilder";
 import "./components/box";
+import houseData from "./houseData.json";
 
 var scene,
   video,
@@ -85,7 +86,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
   scene.addEventListener("loaded", () => {
     //here for when content has fully loaded 
-
+    console.log(houseData);
   });
 
 

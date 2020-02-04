@@ -1,9 +1,14 @@
 {
     "compilerOptions": {
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "declaration": false,
         "forceConsistentCasingInFileNames": true,
-        "lib": [ "es6", "dom" ],
+        "lib": [
+            "es6",
+            "dom"
+        ],
         "moduleResolution": "node",
         "noImplicitAny": false,
         "noImplicitReturns": true,
