@@ -9,8 +9,8 @@ var scene,
   overlay,
   viewer,
   carouselMenu,
-  raycaster,
-  mark,
+  //raycaster,
+  //mark,
   houseEl;
 
 interface AppState {
@@ -81,8 +81,8 @@ window.addEventListener("DOMContentLoaded", function () {
   scene = document.querySelector("a-scene");
   overlay = document.getElementById("overlay");
   viewer = document.getElementById("viewer");
-  raycaster = document.querySelector('[ar-raycaster]');
-  mark = document.querySelector('#cursor');
+  //raycaster = document.querySelector('[ar-raycaster]');
+  //mark = document.querySelector('#cursor');
   houseEl = document.getElementById("houses");
 
   //make this better
@@ -151,11 +151,11 @@ window.addEventListener("DOMContentLoaded", function () {
   //   mark.setAttribute('visible', 'true');
   // });
 
-  raycaster.addEventListener("raycaster-intersection-cleared", () => {
-    // Turn the mark red.
-    // mark.setAttribute('color', 'red');
-    mark.setAttribute('visible', 'false');
-  });
+  // raycaster.addEventListener("raycaster-intersection-cleared", () => {
+  //   // Turn the mark red.
+  //   // mark.setAttribute('color', 'red');
+  //   mark.setAttribute('visible', 'false');
+  // });
 
 
   //window.addEventListener();
