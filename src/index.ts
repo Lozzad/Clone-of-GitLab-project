@@ -2,7 +2,7 @@
 //import "./components/look-to-camera";
 import "./components/houseBuilder";
 import "./components/box";
-import houseData from "./houseData.json";
+import houseDataArray from "./houseData.json";
 
 var scene,
   video,
@@ -10,8 +10,8 @@ var scene,
   viewer,
   carouselMenu,
   raycaster,
-  mark;
-
+  mark,
+  houseEl;
 
 interface AppState {
   selectedItem: string | null;
@@ -83,10 +83,15 @@ window.addEventListener("DOMContentLoaded", function () {
   viewer = document.getElementById("viewer");
   raycaster = document.querySelector('[ar-raycaster]');
   mark = document.querySelector('#cursor');
+  houseEl = document.getElementById("houses");
+
+  //make this better
+  houseEl.setAttribute('housebuilder', { houseData: houseDataArray });
+
 
   scene.addEventListener("loaded", () => {
     //here for when content has fully loaded 
-    console.log(houseData);
+    console.log("loaded");
   });
 
 
