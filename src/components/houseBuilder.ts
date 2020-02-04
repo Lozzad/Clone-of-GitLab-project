@@ -4,7 +4,7 @@ interface HouseBuilderComponent extends BaseComponent {
 
 }
 
-export default AFRAME.registerComponent("houseBuilder", {
+export default AFRAME.registerComponent("housebuilder", {
     schema: {
         //property: {type: '', default: x}
     },
