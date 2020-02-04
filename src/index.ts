@@ -143,13 +143,13 @@ window.addEventListener("DOMContentLoaded", function () {
     console.log("I got the message: " + id);
   });
 
-  raycaster.addEventListener("raycaster-intersection", (evt: CustomEvent) => {
-    // Turn the mark green and move it to the intersection point.
-    console.log("hit one " + evt.detail.intersections[0]);
-    mark.setAttribute('color', 'yellow');
-    mark.setAttribute('position', evt.detail.intersections[0].point);
-    mark.setAttribute('visible', 'true');
-  });
+  // raycaster.addEventListener("raycaster-intersection", (evt: CustomEvent) => {
+  //   // Turn the mark green and move it to the intersection point.
+  //   console.log("hit one " + evt.detail.intersections[0]);
+  //   mark.setAttribute('color', 'yellow');
+  //   mark.setAttribute('position', evt.detail.intersections[0].point);
+  //   mark.setAttribute('visible', 'true');
+  // });
 
   raycaster.addEventListener("raycaster-intersection-cleared", () => {
     // Turn the mark red.
