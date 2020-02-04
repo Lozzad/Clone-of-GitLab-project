@@ -1,5 +1,4 @@
 import { BaseComponent } from "../BaseComponent";
-import { Object3D } from "three";
 
 interface HouseBuilderComponent extends BaseComponent {
     buildHouses: () => void;
