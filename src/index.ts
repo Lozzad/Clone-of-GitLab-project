@@ -86,9 +86,7 @@ window.addEventListener("DOMContentLoaded", function () {
   houseEl = document.getElementById("houses");
 
   //make this better
-  console.log(houseEl);
   houseEl.setAttribute('housebuilder', { houseData: houses });
-  console.log(houseEl);
 
   scene.addEventListener("loaded", () => {
     //here for when content has fully loaded 
