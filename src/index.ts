@@ -1,5 +1,6 @@
 //import "./components/carousel";
 //import "./components/look-to-camera";
+import "./components/houseBuilder";
 import "./components/box";
 
 var scene,
