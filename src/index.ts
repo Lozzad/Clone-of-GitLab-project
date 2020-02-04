@@ -2,7 +2,7 @@
 //import "./components/look-to-camera";
 import "./components/houseBuilder";
 import "./components/box";
-import houseDataArray from "./houseDataArray.json";
+import houses from "./houseData.json";
 
 var scene,
   video,
@@ -87,7 +87,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
   //make this better
   console.log(houseEl);
-  houseEl.setAttribute('housebuilder', { houseData: houseDataArray });
+  houseEl.setAttribute('housebuilder', { houseData: houses });
   console.log(houseEl);
 
   scene.addEventListener("loaded", () => {
