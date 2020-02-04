@@ -83,6 +83,8 @@ window.addEventListener("DOMContentLoaded", function () {
   mark = document.querySelector('#cursor');
 
   scene.addEventListener("loaded", () => {
+    //here for when content has fully loaded 
+
   });
 
 

@@ -79,8 +79,7 @@
     loading-screen="dotsColor: white; backgroundColor: black">
 
     <!-- this is an empty <A-assets> for the function AddAssets to attach them to-->
-    <a-assets>
-    </a-assets>
+    <a-entity houseBuilder></a-entity>
 
     <!-- <a-entity camera ar-raycaster>
       <a-entity raycaster="objects: .collidable" cursor="fuse: false; rayOrigin: mouse">
@@ -432,8 +431,6 @@
           asset.setAttribute('src', '/assets/objects/' + id + '.gltf')
           assetParent.appendChild(asset);
         })
-
-
       }
 
       //creates the house entities
@@ -483,7 +480,6 @@
           let texturl = "href: " + sculptureData.url + "; title: My Homepage; image: #homeThumbnail";
           console.log(texturl);
           sculpture.setAttribute('link', texturl);
-
 
           sculpture.setAttribute('class', 'collidable');
           // if (sculpture.collidable) {
