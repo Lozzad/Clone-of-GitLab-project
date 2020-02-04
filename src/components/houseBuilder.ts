@@ -14,7 +14,7 @@ export default AFRAME.registerComponent("housebuilder", {
 
     init: function () {
         console.log("Housebuilder init");
-        console.log(this.houseData);
+        console.log(this);
     },
 
     addEventListeners() { },
