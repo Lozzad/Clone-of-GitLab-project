@@ -13,7 +13,7 @@ export default AFRAME.registerComponent("housebuilder", {
 
     //create the house assets as children of this element, then create the model in position
     buildHouses: function () {
-        const marker = document.querySelector("a-marker");
+        let marker = document.querySelector("a-marker");
         this.data.houseData.forEach(house => {
             //create the asset
             let asset = document.createElement("a-asset-item");
@@ -38,7 +38,7 @@ export default AFRAME.registerComponent("housebuilder", {
                 model.setAttribute('class', 'collidable');
                 model.setAttribute('box', { boxID: house.id });
             }
-            marker.appendChild(house);
+            marker.appendChild(model);
         });
     },
 
