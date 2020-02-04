@@ -7,7 +7,7 @@ interface HouseBuilderComponent extends BaseComponent {
 export default AFRAME.registerComponent("housebuilder", {
     schema: {
         //property: {type: '', default: x}
-        houseData: { type: 'array' }
+        houseData: { type: 'any', default: null }
     },
     houseData: null,
     //multiple: false,
