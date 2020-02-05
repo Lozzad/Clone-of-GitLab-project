@@ -1,7 +1,5 @@
-//import "./components/carousel";
-//import "./components/look-to-camera";
 import "./components/houseBuilder";
-import "./components/box";
+import "./components/house";
 import houses from "./houseData.json";
 
 var scene,
@@ -9,21 +7,19 @@ var scene,
   overlay,
   viewer,
   carouselMenu,
-  //raycaster,
-  //mark,
-  houseEl;
+  houseBuilderEl;
 
 interface AppState {
   selectedItem: string | null;
   selectedUrl: string | null;
   houseID: string | null;
-  boxOpened: boolean;
+  houseOpened: boolean;
 }
 
 var state = {
   selectedItem: null,
   selectedUrl: null,
-  boxOpened: false,
+  houseOpened: false,
   houseID: null
 } as AppState;
 
@@ -33,12 +29,10 @@ function resize() {
     overlay.width = window.innerWidth;
     overlay.height = window.innerHeight;
   }
-
   if (viewer) {
     viewer.width = window.innerWidth;
     viewer.height = window.innerHeight;
   }
-
   if (carouselMenu) {
     carouselMenu.style.top = window.innerHeight - carouselMenu.clientHeight;
   }
@@ -67,26 +61,16 @@ function render() {
     video.classList.remove("hide");
     overlay.classList.add("hide");
   }
-
-  // usefull for the carrousel
-  // if (state.boxOpened) {
-  //   // console.log(state.boxOpened);
-  //   // carouselMenu.classList.remove("hide");
-  // } else {
-  //   // carouselMenu.classList.add("hide");
-  // }
 }
 
 window.addEventListener("DOMContentLoaded", function () {
   scene = document.querySelector("a-scene");
   overlay = document.getElementById("overlay");
   viewer = document.getElementById("viewer");
-  //raycaster = document.querySelector('[ar-raycaster]');
-  //mark = document.querySelector('#cursor');
-  houseEl = document.getElementById("houses");
+  houseBuilderEl = document.getElementById("houses");
 
-  //make this better
-  houseEl.setAttribute('housebuilder', { houseData: houses });
+  //initialise the housebuilder element with the data from the JSON
+  houseBuilderEl.setAttribute('housebuilder', { houseData: houses });
 
   scene.addEventListener("loaded", () => {
     //here for when content has fully loaded 
@@ -95,7 +79,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
 
   // when the house is open, must display the object inside (the map for know)
-  scene.addEventListener("box-opened", (ev: CustomEvent) => {
+  scene.addEventListener("house-opened", (ev: CustomEvent) => {
     const id: string = ev.detail.id;
     const url: string = ev.detail.url;
 
@@ -111,55 +95,22 @@ window.addEventListener("DOMContentLoaded", function () {
       state.selectedItem = asset.getAttribute("src") as string;
     }
 
-    state.boxOpened = true;
+    state.houseOpened = true;
 
     render();
   }, false);
 
-
-  // usefull for displayed an other image (not successfull for now)
-  // nextImage.addEventListener("click", (ev:CustomEvent) => {
-  //   const id: string = ev.detail.id;
-  //
-  //   var asset2: HTMLElement | null = document.getElementById(id + "1-asset");
-  //   console.log(asset2);
-  //   if (asset2) {
-  //     state.selectedItem = asset2.getAttribute("src") as string;
-  //   };
-  //
-  //   render();
-  // }, false);
-
-
-  scene.addEventListener("box-closing", () => {
-    state.boxOpened = false;
+  scene.addEventListener("house-closing", () => {
+    state.houseOpened = false;
     render();
   }, false);
 
   // tool for debugin in the console
-  scene.addEventListener("box-id-selected", (ev: CustomEvent) => {
+  scene.addEventListener("house-id-selected", (ev: CustomEvent) => {
     const id: string = ev.detail.id;
     state.houseID = id;
     console.log("I got the message: " + id);
   });
 
-  // raycaster.addEventListener("raycaster-intersection", (evt: CustomEvent) => {
-  //   // Turn the mark green and move it to the intersection point.
-  //   console.log("hit one " + evt.detail.intersections[0]);
-  //   mark.setAttribute('color', 'yellow');
-  //   mark.setAttribute('position', evt.detail.intersections[0].point);
-  //   mark.setAttribute('visible', 'true');
-  // });
-
-  // raycaster.addEventListener("raycaster-intersection-cleared", () => {
-  //   // Turn the mark red.
-  //   // mark.setAttribute('color', 'red');
-  //   mark.setAttribute('visible', 'false');
-  // });
-
-
-  //window.addEventListener();
-
   resize();
-
 });
