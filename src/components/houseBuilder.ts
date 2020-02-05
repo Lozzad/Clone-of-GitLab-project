@@ -46,7 +46,7 @@ export default AFRAME.registerComponent("housebuilder", {
             let asset = document.createElement("a-asset-item");
             asset.setAttribute('id', house.id + "-asset");
             asset.setAttribute('src', '/assets/houses/' + house.id + '.gltf');
-            this.el?.appendChild(asset);
+            this.el!.appendChild(asset);
         });
     },
 
@@ -55,7 +55,12 @@ export default AFRAME.registerComponent("housebuilder", {
         this.buildHouses();
     },
 
-    addEventListeners() { },
+    addEventListeners() {
+        this.el!.sceneEl!.addEventListener("loaded", () => {
+            this.positionHouses();
+        });
+    },
+
     removeEventListeners() { },
     bindMethods() { },
 } as HouseBuilderComponent);

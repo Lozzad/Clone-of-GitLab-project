@@ -78,7 +78,7 @@ window.addEventListener("DOMContentLoaded", function () {
   });
 
 
-  // when the house is open, must display the object inside (the map for know)
+  // when the house is open, must display the object inside (the map for now) - func removed at the moment
   scene.addEventListener("house-opened", (ev: CustomEvent) => {
     const id: string = ev.detail.id;
     const url: string = ev.detail.url;
