@@ -37,6 +37,7 @@ export default AFRAME.registerComponent("housebuilder", {
                 model.setAttribute('house', { houseID: house.id });
             }
             marker.appendChild(model);
+            console.log(model);
         });
     },
 
