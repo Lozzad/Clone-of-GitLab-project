@@ -3,6 +3,7 @@ import { BaseComponent } from "../BaseComponent";
 interface HouseBuilderComponent extends BaseComponent {
     buildHouses: () => void;
     positionHouses: () => void;
+
 }
 
 export default AFRAME.registerComponent("housebuilder", {
@@ -56,7 +57,8 @@ export default AFRAME.registerComponent("housebuilder", {
     },
 
     addEventListeners() {
-        this.el!.sceneEl!.addEventListener("loaded", () => {
+        let scene = document.querySelector("a-scene");
+        scene.addEventListener("loaded", () => {
             console.log("positioning the houses!")
             this.positionHouses();
         });
