@@ -57,6 +57,7 @@ export default AFRAME.registerComponent("housebuilder", {
 
     addEventListeners() {
         this.el!.sceneEl!.addEventListener("loaded", () => {
+            console.log("positioning the houses!")
             this.positionHouses();
         });
     },
