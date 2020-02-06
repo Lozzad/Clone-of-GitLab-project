@@ -19,6 +19,7 @@ export default AFRAME.registerComponent("housebuilder", {
     positionHouses: function () {
         let marker = document.getElementById("marker");
         if (marker != null) {
+            console.log("found marker");
             this.data.houseData.forEach(house => {
                 let model = document.createElement("a-entity");
                 model.setAttribute('id', house.id);
