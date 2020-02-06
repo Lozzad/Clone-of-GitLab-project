@@ -22,7 +22,7 @@ export default AFRAME.registerComponent("housebuilder", {
             let model = document.createElement("a-entity");
             model.setAttribute('id', house.id);
 
-            model.object3D.position.set(house.posX - 0.3, house.posY, -1 * house.posZ - 1.5);
+            model.object3D.position.set(house.posX, house.posY, house.posZ);
             model.object3D.rotation.set(
                 THREE.Math.degToRad(house.rotX),
                 THREE.Math.degToRad(house.rotY),
