@@ -58,10 +58,16 @@ export default AFRAME.registerComponent("housebuilder", {
 
     addEventListeners() {
         let scene = document.querySelector("a-scene");
-        scene.addEventListener("loaded", () => {
-            console.log("positioning the houses!")
+
+        if (scene.hasLoaded) {
+            console.log("Loaded: positioning houses");
             this.positionHouses();
-        });
+        } else {
+            scene.addEventListener("loaded", () => {
+                console.log("positioning the houses!")
+                this.positionHouses();
+            });
+        }
     },
 
     removeEventListeners() { },
