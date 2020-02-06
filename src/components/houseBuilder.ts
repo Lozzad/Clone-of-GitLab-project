@@ -53,6 +53,8 @@ export default AFRAME.registerComponent("housebuilder", {
 
     //initialise the component
     init: function () {
+        this.bindMethods();
+        this.addEventListeners();
         this.buildHouses();
     },
 
@@ -70,6 +72,15 @@ export default AFRAME.registerComponent("housebuilder", {
         }
     },
 
-    removeEventListeners() { },
-    bindMethods() { },
+    removeEventListeners() {
+    },
+
+    bindMethods() {
+        this.addEventListeners = this.addEventListeners.bind(this);
+        this.removeEventListeners = this.removeEventListeners.bind(this);
+    },
+
+    remove() {
+        this.removeEventListeners();
+    }
 } as HouseBuilderComponent);
