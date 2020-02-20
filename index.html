@@ -76,16 +76,16 @@
   <!--setup for the a-scene-->
   <a-scene embedded arjs="patternRatio: 0.5; sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false"
     renderer="colorManagement: true; logarithmicDepthBuffer: true;"
-    loading-screen="dotsColor: white; backgroundColor: black" artoolkit>
+    loading-screen="dotsColor: white; backgroundColor: black">
 
     <!-- this is an empty <A-entity> for the function AddAssets to attach them to-->
     <a-entity id="houses"></a-entity>
 
 
     <!-- the marker saved in assets/markers/ chosen to display the houses -->
-    <a-marker-camera id="marker" type="pattern" url="assets/markers/logo.patt" size="0.05" smooth="false">
+    <a-marker id="marker" type="pattern" url="assets/markers/logo.patt" size="0.05" smooth="true" emitevents="true">
       <!-- <a-box id="cube" position='0 0.5 0' material='color: red;'></a-box> -->
-    </a-marker-camera>
+    </a-marker>
   </a-scene>
 
   <div id="vid-overlay">
