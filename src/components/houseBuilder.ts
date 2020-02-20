@@ -31,6 +31,7 @@ export default AFRAME.registerComponent("housebuilder", {
                 //     THREE.Math.degToRad(house.rotZ)
                 // );
                 model.object3D.scale.set(house.scale, house.scale, house.scale);
+                //model.offsetHeight = 0;
 
                 model.setAttribute('gltf-model', '#' + house.id + '-asset');
                 model.setAttribute('animation-mixer', { clip: 'closed' });
