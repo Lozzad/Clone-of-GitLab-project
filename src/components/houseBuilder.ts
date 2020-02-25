@@ -26,7 +26,7 @@ export default AFRAME.registerComponent("housebuilder", {
 
 
                 console.log(house.posX + " " + house.posY + " " + house.posZ);
-                console.log("AAAAAAAAA " + house);
+                console.log("AAAAAAAAA " + house.id);
 
                 model.object3D.position.set(house.posX, house.posY, house.posZ);
                 // model.object3D.rotation.set(
