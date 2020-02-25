@@ -24,6 +24,10 @@ export default AFRAME.registerComponent("housebuilder", {
                 let model = document.createElement("a-entity");
                 model.setAttribute('id', house.id);
 
+
+                console.log(house.posX + " " + house.posY + " " + house.posZ);
+                console.log("AAAAAAAAA " + house);
+
                 model.object3D.position.set(house.posX, house.posY, house.posZ);
                 // model.object3D.rotation.set(
                 //     THREE.Math.degToRad(house.rotX),
