@@ -51,7 +51,7 @@ export default AFRAME.registerComponent("housebuilder", {
 
     createModel: function (house) {
         let model = document.createElement("a-entity");
-        model.setAttribute('id', house.id + "-model");
+        model.setAttribute('id', house.id);
         model.setAttribute('gltf-model', '#' + house.id + '-asset');
         model.setAttribute('animation-mixer', { clip: 'closed' });
         if (house.collidable) {
@@ -71,7 +71,9 @@ export default AFRAME.registerComponent("housebuilder", {
             asset.setAttribute('position', house.posX + " " + house.posY + " " + house.posZ);
             asset.setAttribute('rotation', house.rotX + " " + house.rotY + " " + house.rotZ);
             asset.setAttribute('scale', house.scale + " " + house.scale + " " + house.scale)
-            asset.appendChild(this.createModel(house));
+            var model = this.createModel(house);
+            console.log(model);
+            asset.appendChild(model);
             this.el!.appendChild(asset);
         });
     },
