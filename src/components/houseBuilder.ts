@@ -76,7 +76,7 @@ export default AFRAME.registerComponent("housebuilder", {
             asset.setAttribute('rotation', house.rotX + " " + house.rotY + " " + house.rotZ);
             asset.setAttribute('scale', house.scale + " " + house.scale + " " + house.scale)
 
-            var model = this.createModel(house);
+            let model = this.createModel(house);
             console.log(model);
             modelParent!.appendChild(model);
             this.el!.appendChild(asset);
