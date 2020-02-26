@@ -18,37 +18,35 @@ export default AFRAME.registerComponent("housebuilder", {
     //position the house models
     positionHouses: function () {
         let marker = document.getElementById("marker");
-        if (marker != null) {
-            console.log("found marker");
-            this.data.houseData.forEach(house => {
-                let model = document.createElement("a-entity");
-                model.setAttribute('id', house.id);
-
-
-                console.log(house.posX + " " + house.posY + " " + house.posZ);
-                console.log("AAAAAAAAA " + house.id);
-
-                model.object3D.position.set(house.posX, house.posY, house.posZ);
-                // model.object3D.rotation.set(
-                //     THREE.Math.degToRad(house.rotX),
-                //     THREE.Math.degToRad(house.rotY),
-                //     THREE.Math.degToRad(house.rotZ)
-                // );
-                model.object3D.scale.set(house.scale, house.scale, house.scale);
-                //model.offsetHeight = 0;
-
-                model.setAttribute('gltf-model', '#' + house.id + '-asset');
-                model.setAttribute('animation-mixer', { clip: 'closed' });
-                if (house.collidable) {
-                    model.setAttribute('class', 'collidable');
-                    model.setAttribute('house', { houseID: house.id });
-                }
-                marker?.appendChild(model);
-                console.log(model);
-            });
-        } else {
-            console.log("ERROR: MARKER NOT FOUND");
+        if (marker == null) {
+            console.error("marker not found in html");
         }
+        this.data.houseData.forEach(house => {
+            let model = document.createElement("a-entity");
+            model.setAttribute('id', house.id);
+
+
+            console.log(house.posX + " " + house.posY + " " + house.posZ);
+            console.log("AAAAAAAAA " + house.id);
+
+            //model.object3D.position.set(house.posX, house.posY, house.posZ);
+            // model.object3D.rotation.set(
+            //     THREE.Math.degToRad(house.rotX),
+            //     THREE.Math.degToRad(house.rotY),
+            //     THREE.Math.degToRad(house.rotZ)
+            // );
+            model.object3D.scale.set(house.scale, house.scale, house.scale);
+
+            model.setAttribute('gltf-model', '#' + house.id + '-asset');
+            model.setAttribute('animation-mixer', { clip: 'closed' });
+            if (house.collidable) {
+                model.setAttribute('class', 'collidable');
+                model.setAttribute('house', { houseID: house.id });
+            }
+            marker?.appendChild(model);
+            console.log(model);
+        });
+
     },
 
     //create the house assets as children of this element, then create the model in position
