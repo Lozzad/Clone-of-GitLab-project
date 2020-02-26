@@ -78,7 +78,7 @@ export default AFRAME.registerComponent("housebuilder", {
 
             let model = this.createModel(house);
             console.log(model);
-            modelParent!.appendChild(model);
+            //modelParent!.appendChild(model);
             this.el!.appendChild(asset);
         });
     },
