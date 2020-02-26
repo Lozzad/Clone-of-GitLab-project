@@ -73,9 +73,9 @@ export default AFRAME.registerComponent("housebuilder", {
             let asset = document.createElement("a-asset-item");
             asset.setAttribute('id', house.id + "-asset");
             asset.setAttribute('src', '/assets/houses/' + house.id + '.gltf');
-            asset.setAttribute('position', house.posX + " " + house.posY + " " + house.posZ);
-            asset.setAttribute('rotation', house.rotX + " " + house.rotY + " " + house.rotZ);
-            asset.setAttribute('scale', house.scale + " " + house.scale + " " + house.scale)
+            //asset.setAttribute('position', house.posX + " " + house.posY + " " + house.posZ);
+            //asset.setAttribute('rotation', house.rotX + " " + house.rotY + " " + house.rotZ);
+            //asset.setAttribute('scale', house.scale + " " + house.scale + " " + house.scale)
             assetParent.appendChild(asset);
             //important that thi comes after the asset is appended
             modelParent!.appendChild(this.createModel(house));
