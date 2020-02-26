@@ -58,6 +58,13 @@ export default AFRAME.registerComponent("housebuilder", {
             model.setAttribute('class', 'collidable');
             model.setAttribute('house', { houseID: house.id });
         }
+        model.object3D.position.set(house.posX, house.posY, house.posZ);
+        model.object3D.rotation.set(
+            THREE.Math.degToRad(house.rotX),
+            THREE.Math.degToRad(house.rotY),
+            THREE.Math.degToRad(house.rotZ)
+        );
+        model.object3D.scale.set(house.scale, house.scale, house.scale);
         return model;
     },
 
