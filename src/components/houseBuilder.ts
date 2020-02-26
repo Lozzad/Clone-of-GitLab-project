@@ -76,11 +76,11 @@ export default AFRAME.registerComponent("housebuilder", {
             asset.setAttribute('position', house.posX + " " + house.posY + " " + house.posZ);
             asset.setAttribute('rotation', house.rotX + " " + house.rotY + " " + house.rotZ);
             asset.setAttribute('scale', house.scale + " " + house.scale + " " + house.scale)
+            assetParent.appendChild(asset);
 
             let model = this.createModel(house);
             console.log(model);
             modelParent!.appendChild(model);
-            assetParent.appendChild(asset);
         });
     },
 
