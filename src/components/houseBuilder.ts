@@ -63,6 +63,7 @@ export default AFRAME.registerComponent("housebuilder", {
 
     //create the house assets as children of this element, then create the model in position
     buildHouses: function () {
+        let assetParent = document.querySelector("a-assets");
         let modelParent = document.getElementById("house models");
         if (modelParent == null) {
             console.error("no model parent found");
@@ -79,12 +80,13 @@ export default AFRAME.registerComponent("housebuilder", {
             let model = this.createModel(house);
             console.log(model);
             modelParent!.appendChild(model);
-            this.el!.appendChild(asset);
+            assetParent.appendChild(asset);
         });
     },
 
     //initialise the component
     init: function () {
+        console.log("init housebuilder");
         this.bindMethods();
         this.addEventListeners();
         this.buildHouses();

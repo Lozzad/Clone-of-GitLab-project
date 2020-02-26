@@ -6,8 +6,7 @@ var scene,
   video,
   overlay,
   viewer,
-  carouselMenu,
-  houseBuilderEl;
+  carouselMenu;
 
 interface AppState {
   selectedItem: string | null;
@@ -67,10 +66,9 @@ window.addEventListener("DOMContentLoaded", function () {
   scene = document.querySelector("a-scene");
   overlay = document.getElementById("overlay");
   viewer = document.getElementById("viewer");
-  houseBuilderEl = document.getElementById("house assets");
 
   //initialise the housebuilder element with the data from the JSON
-  houseBuilderEl.setAttribute('housebuilder', { houseData: houses });
+  scene.setAttribute('housebuilder', { houseData: houses });
 
   scene.addEventListener("loaded", () => {
     //here for when content has fully loaded 
