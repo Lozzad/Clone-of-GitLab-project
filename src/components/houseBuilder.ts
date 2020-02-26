@@ -54,16 +54,19 @@ export default AFRAME.registerComponent("housebuilder", {
         model.setAttribute('id', house.id);
         model.setAttribute('gltf-model', '#' + house.id + '-asset');
         model.setAttribute('animation-mixer', { clip: 'closed' });
+        model.setAttribute('position', house.posX + " " + house.posY + " " + house.posZ)
         if (house.collidable) {
             model.setAttribute('class', 'collidable');
             model.setAttribute('house', { houseID: house.id });
         }
-        model.object3D.position.set(house.posX, house.posY, house.posZ);
-        model.object3D.rotation.set(
-            THREE.Math.degToRad(house.rotX),
-            THREE.Math.degToRad(house.rotY),
-            THREE.Math.degToRad(house.rotZ)
-        );
+        //model.object3D.position.set(house.posX, house.posY, house.posZ);
+        console.log(house.posX + " " + house.posY + " " + house.posZ);
+        console.log(model.object3D.position);
+        // model.object3D.rotation.set(
+        //     THREE.Math.degToRad(house.rotX),
+        //     THREE.Math.degToRad(house.rotY),
+        //     THREE.Math.degToRad(house.rotZ)
+        // );
         model.object3D.scale.set(house.scale, house.scale, house.scale);
         return model;
     },
