@@ -2,7 +2,7 @@ import { BaseComponent } from "../BaseComponent";
 
 interface HouseBuilderComponent extends BaseComponent {
     buildHouses: () => void;
-    createModel: (house: any) => HTMLElement | any;
+    createModel: (house: any) => HTMLElement;
     //positionHouses: (parent: HTMLElement) => void;
 
 }
@@ -63,6 +63,10 @@ export default AFRAME.registerComponent("housebuilder", {
 
     //create the house assets as children of this element, then create the model in position
     buildHouses: function () {
+        let modelParent = document.getElementById("house models");
+        if (modelParent == null) {
+            console.error("no model parent found");
+        }
         this.data.houseData.forEach(house => {
             //create the asset
             let asset = document.createElement("a-asset-item");
@@ -71,9 +75,10 @@ export default AFRAME.registerComponent("housebuilder", {
             asset.setAttribute('position', house.posX + " " + house.posY + " " + house.posZ);
             asset.setAttribute('rotation', house.rotX + " " + house.rotY + " " + house.rotZ);
             asset.setAttribute('scale', house.scale + " " + house.scale + " " + house.scale)
+
             var model = this.createModel(house);
             console.log(model);
-            asset.appendChild(model);
+            modelParent!.appendChild(model);
             this.el!.appendChild(asset);
         });
     },
