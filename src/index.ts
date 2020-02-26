@@ -67,7 +67,7 @@ window.addEventListener("DOMContentLoaded", function () {
   scene = document.querySelector("a-scene");
   overlay = document.getElementById("overlay");
   viewer = document.getElementById("viewer");
-  houseBuilderEl = document.getElementById("houses");
+  houseBuilderEl = document.getElementById("house assets");
 
   //initialise the housebuilder element with the data from the JSON
   houseBuilderEl.setAttribute('housebuilder', { houseData: houses });

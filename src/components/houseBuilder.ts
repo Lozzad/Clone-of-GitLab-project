@@ -63,7 +63,7 @@ export default AFRAME.registerComponent("housebuilder", {
 
     //create the house assets as children of this element, then create the model in position
     buildHouses: function () {
-        let modelParent = document.getElementById("h");
+        let modelParent = document.getElementById("house models");
         if (modelParent == null) {
             console.error("no model parent found");
         }
