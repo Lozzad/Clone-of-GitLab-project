@@ -20,16 +20,17 @@
   },
   "homepage": "https://gitlab.com/mnemoscene/place-based-narratives-web#readme",
   "devDependencies": {
-    "@types/aframe": "^0.8.3",
+    "@types/aframe": "^0.8.4",
     "@types/three": "^0.103.2",
     "awesome-typescript-loader": "5.2.1",
     "rimraf": "2.6.2",
-    "typescript": "^3.7.5",
+    "typescript": "^3.8.3",
     "webpack": "4.28.3",
     "webpack-cli": "3.1.2"
   },
   "dependencies": {
-    "http-server": "^0.11.1",
-    "xstate": "^4.5.0"
+    "http-server": "^0.12.1",
+    "three": "^0.114.0",
+    "xstate": "^4.7.8"
   }
 }
