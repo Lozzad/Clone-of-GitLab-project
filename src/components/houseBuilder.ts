@@ -100,7 +100,7 @@ export default AFRAME.registerComponent("housebuilder", {
         console.log("init housebuilder");
         this.bindMethods();
         this.addEventListeners();
-        //this.buildHouses();
+        this.buildHouses();
     },
 
     addEventListeners() {
