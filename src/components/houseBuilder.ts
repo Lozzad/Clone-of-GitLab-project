@@ -52,7 +52,7 @@ export default AFRAME.registerComponent("housebuilder", {
     createModel: function (house) {
 
         //look into confi1.html 
-        
+
         let model = document.createElement("a-entity");
         model.setAttribute('id', house.id);
         model.setAttribute('gltf-model', '#' + house.id + '-asset');
@@ -100,7 +100,7 @@ export default AFRAME.registerComponent("housebuilder", {
         console.log("init housebuilder");
         this.bindMethods();
         this.addEventListeners();
-        this.buildHouses();
+        //this.buildHouses();
     },
 
     addEventListeners() {
