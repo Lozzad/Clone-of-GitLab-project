@@ -50,6 +50,9 @@ export default AFRAME.registerComponent("housebuilder", {
     // },
 
     createModel: function (house) {
+
+        //look into confi1.html 
+        
         let model = document.createElement("a-entity");
         model.setAttribute('id', house.id);
         model.setAttribute('gltf-model', '#' + house.id + '-asset');
