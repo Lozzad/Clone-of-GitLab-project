@@ -5,6 +5,8 @@
   <title>place-based narratives</title>
   <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
   <script src="https://raw.githack.com/jeromeetienne/AR.js/2.2.2/aframe/build/aframe-ar.js"></script>
+  <script
+    src="https://rawgit.com/andreasplesch/aframe-meshline-component/master/dist/aframe-meshline-component.min.js"></script>
   <!-- <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.js"></script> -->
   <script src="/build/app.js"></script>
 
@@ -85,6 +87,7 @@
       <a-entity id="house models"></a-entity>
       <a-entity line="start: 0, 1, 0; end: 2 0 0; color: red" line__2="start: 2, 0, 0; end: 3 4 0; color: blue">
       </a-entity>
+      <a-entity meshline="lineWidth: 20; path: -2 -1 0, 0 -2 0, 2 -1; color: #E20049"></a-entity>
     </a-marker-camera>
   </a-scene>
 
