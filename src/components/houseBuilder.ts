@@ -77,9 +77,9 @@ export default AFRAME.registerComponent("housebuilder", {
 
     drawLine: function (posX, posY) {
         let line = document.createElement("a-entity");
-        line.setAttribute("start", "0, 0, 0");
-        line.setAttribute("end", posX + " 0 " + posY);
-        line.setAttribute("color", "red");
+        line.setAttribute("line", "start: 0, 0, 0;" +
+            "end: " + posX + " 0 " + posY + "; " +
+            "color: " + "red;");
         return line;
     },
 
