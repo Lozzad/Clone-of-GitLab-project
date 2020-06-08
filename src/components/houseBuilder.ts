@@ -3,6 +3,7 @@ import { BaseComponent } from "../BaseComponent";
 interface HouseBuilderComponent extends BaseComponent {
     buildHouses: () => void;
     createModel: (house: any) => HTMLElement;
+    drawLine: (posX: number, posY: number) => HTMLElement;
     //positionHouses: (parent: HTMLElement) => void;
 
 }
@@ -74,6 +75,14 @@ export default AFRAME.registerComponent("housebuilder", {
         return model;
     },
 
+    drawLine: function (posX, posY) {
+        let line = document.createElement("a-entity");
+        line.setAttribute("start", "0, 0, 0");
+        line.setAttribute("end", posX + " 0 " + posY);
+        line.setAttribute("color", "red");
+        return line;
+    },
+
     //create the house assets as children of this element, then create the model in position
     buildHouses: function () {
         let assetParent = document.querySelector("a-assets");
@@ -94,7 +103,7 @@ export default AFRAME.registerComponent("housebuilder", {
             asset.setAttribute('scale', house.scale + " " + house.scale + " " + house.scale)
             assetParent.appendChild(asset);
             //important that thi comes after the asset is appended
-            modelParent!.appendChild(this.createModel(house));
+            modelParent!.appendChild(this.createModel(house)).appendChild(this.drawLine(house.posX, house.posY));
             count++;
         });
         console.log("spawned " + count + "houses!");
