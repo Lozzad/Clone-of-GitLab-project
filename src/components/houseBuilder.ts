@@ -81,6 +81,9 @@ export default AFRAME.registerComponent("housebuilder", {
         if (modelParent == null) {
             console.error("no model parent found");
         }
+
+        var count = 0;
+
         this.data.houseData.forEach(house => {
             //create the asset
             let asset = document.createElement("a-asset-item");
@@ -92,7 +95,9 @@ export default AFRAME.registerComponent("housebuilder", {
             assetParent.appendChild(asset);
             //important that thi comes after the asset is appended
             modelParent!.appendChild(this.createModel(house));
+            count++;
         });
+        console.log("spawned " + count + "houses!");
     },
 
     //initialise the component
