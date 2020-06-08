@@ -1,6 +1,6 @@
 import "./components/houseBuilder";
 import "./components/house";
-import houses from "./houseData.json";
+import houses from "./newHouseData.json";
 
 var scene,
   video,
